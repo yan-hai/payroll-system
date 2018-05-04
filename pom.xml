@@ -6,6 +6,7 @@
 
     <groupId>com.nobodyhub</groupId>
     <artifactId>payroll-system</artifactId>
+    <packaging>pom</packaging>
     <version>0.1-SNAPSHOT</version>
 
     <name>A Item-based Payroll System</name>
@@ -14,5 +15,9 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+
+    <modules>
+        <module>calc-core</module>
+    </modules>
 
 </project>
