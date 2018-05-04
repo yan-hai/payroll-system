@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.abstr;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Base class for all kinds of items used in payroll system
@@ -9,17 +10,18 @@ import lombok.Getter;
  * @since 2018-05-04.
  */
 @Getter
+@RequiredArgsConstructor
 public abstract class Item<T> {
     /**
      * Unique item id
      */
-    protected String itemId;
+    protected final String itemId;
     /**
-     * Name of item
+     * Item name
      */
-    protected String itemName;
+    protected final String itemName;
     /**
      * Raw value of item
      */
-    protected T rawValue;
+    protected T value;
 }
