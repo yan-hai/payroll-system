@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.abstr;
 
 import java.math.BigDecimal;
+import java.time.Period;
 
 /**
  * Formula applied to PayItems in order to get numeric value
@@ -17,6 +18,15 @@ public abstract class Formula {
      * Name of formula
      */
     protected String formulaName;
+    /**
+     * Valid Period
+     */
+    protected Period validPeriod;
 
+    /**
+     * Calculate the result value of applying the formula
+     *
+     * @return
+     */
     public abstract BigDecimal evaluate();
 }
