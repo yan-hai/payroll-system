@@ -1,7 +1,7 @@
 package com.nobodyhub.payroll.core.formula.map;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.formula.common.ItemComparator;
+import com.nobodyhub.payroll.core.formula.common.Comparator;
 import com.nobodyhub.payroll.core.item.abstr.Item;
 
 /**
@@ -10,7 +10,7 @@ import com.nobodyhub.payroll.core.item.abstr.Item;
  */
 public abstract class FormulaCondition<T extends Comparable<T>> {
     protected Item<T> item;
-    protected ItemComparator comparator;
+    protected Comparator comparator;
     protected T lower;
     protected T higher;
 

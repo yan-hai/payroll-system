@@ -9,7 +9,7 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.COMP
  * @author yan_h
  * @since 2018-05-04.
  */
-public enum ItemComparator {
+public enum Comparator {
     /**
      * No comparator will be applied
      */
