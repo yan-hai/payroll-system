@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.item.ItemContext;
+import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
@@ -35,17 +36,21 @@ public class MapFormula extends Formula {
     protected final BigDecimal defaultValue;
 
     @Override
-    public BigDecimal evaluate(ItemContext context) throws PayrollCoreException {
+    public PaymentItem evaluate(ItemContext context) throws PayrollCoreException {
+        BigDecimal result = defaultValue;
         for (FormulaCase formulaCase : cases) {
             if (formulaCase.evaluate(context)) {
-                return formulaCase.getValue();
+                result = formulaCase.getValue();
+                break;
             }
         }
-        return defaultValue;
+        PaymentItem item = createPaymentItem();
+        item.setValue(result);
+        return item;
     }
 
     @Override
-    public Set<String> getRequiredItems() throws PayrollCoreException {
+    public Set<String> getRequiredItems() {
         Set<String> itemIds = Sets.newHashSet();
         for (FormulaCase formulaCase : cases) {
             formulaCase.getRequiredItems(itemIds);
