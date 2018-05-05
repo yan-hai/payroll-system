@@ -15,4 +15,9 @@ public class HrDateItem extends Item<LocalDate> {
     public HrDateItem(String itemId, String itemName) {
         super(itemId, itemName);
     }
+
+    @Override
+    public LocalDate getDefaultValue() {
+        return LocalDate.now();
+    }
 }

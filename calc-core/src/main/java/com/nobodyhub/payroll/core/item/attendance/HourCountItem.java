@@ -15,4 +15,10 @@ public class HourCountItem extends Item<BigDecimal> {
     public HourCountItem(String itemId, String itemName) {
         super(itemId, itemName);
     }
+
+    @Override
+    public BigDecimal getDefaultValue() {
+        return BigDecimal.ZERO;
+    }
+
 }

@@ -34,4 +34,10 @@ public abstract class Item<T> {
         this.value = value;
         this.valueCls = (Class<T>) value.getClass();
     }
+
+    /**
+     * provide default value for the item
+     * @return
+     */
+    public abstract T getDefaultValue();
 }

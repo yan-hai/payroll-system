@@ -15,4 +15,9 @@ public class DayCountItem extends Item<BigDecimal> {
     public DayCountItem(String itemId, String itemName) {
         super(itemId, itemName);
     }
+
+    @Override
+    public BigDecimal getDefaultValue() {
+        return BigDecimal.ZERO;
+    }
 }

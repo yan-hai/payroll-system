@@ -17,4 +17,9 @@ public class PaymentItem extends Item<BigDecimal> {
         super(itemId, itemName);
         this.paymentType = paymentType;
     }
+
+    @Override
+    public BigDecimal getDefaultValue() {
+        return BigDecimal.ZERO;
+    }
 }

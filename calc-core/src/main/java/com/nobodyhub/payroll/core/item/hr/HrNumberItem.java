@@ -15,4 +15,9 @@ public class HrNumberItem extends Item<BigDecimal> {
     public HrNumberItem(String itemId, String itemName) {
         super(itemId, itemName);
     }
+
+    @Override
+    public BigDecimal getDefaultValue() {
+        return BigDecimal.ZERO;
+    }
 }

@@ -49,7 +49,7 @@ public class ItemContext {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("{ \"name\": ItemContext(size: " + context.size() + "), context: { ");
+        StringBuilder sb = new StringBuilder("{ \"name\": \"ItemContext(size: " + context.size() + ")\", context: { ");
         for (Item item : context.values()) {
             sb.append("\t\"" + item.getItemId() + "\" : \"" + item.getValue().toString() + "\"");
         }

@@ -15,4 +15,9 @@ public class FrequencyCountItem extends Item<BigDecimal> {
     public FrequencyCountItem(String itemId, String itemName) {
         super(itemId, itemName);
     }
+
+    @Override
+    public BigDecimal getDefaultValue() {
+        return BigDecimal.ZERO;
+    }
 }

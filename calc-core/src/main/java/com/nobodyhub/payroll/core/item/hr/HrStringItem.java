@@ -13,4 +13,9 @@ public class HrStringItem extends Item<String> {
     public HrStringItem(String itemId, String itemName) {
         super(itemId, itemName);
     }
+
+    @Override
+    public String getDefaultValue() {
+        return "";
+    }
 }

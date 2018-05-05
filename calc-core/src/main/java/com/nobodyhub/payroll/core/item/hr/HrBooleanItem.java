@@ -13,4 +13,9 @@ public class HrBooleanItem extends Item<Boolean> {
     public HrBooleanItem(String itemId, String itemName) {
         super(itemId, itemName);
     }
+
+    @Override
+    public Boolean getDefaultValue() {
+        return false;
+    }
 }
