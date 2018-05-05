@@ -10,14 +10,19 @@ import java.time.LocalDateTime;
  * @author yan_h
  * @since 2018-05-04.
  */
-public class HrDateTimeItem extends Item<LocalDateTime> {
+public class HrDateTimeItem extends Item<LocalDateTime, HrDateTimeItem> {
 
-    public HrDateTimeItem(String itemId, String itemName) {
-        super(itemId, itemName);
+    public HrDateTimeItem(String itemId) {
+        super(itemId);
     }
 
     @Override
     public LocalDateTime getDefaultValue() {
         return LocalDateTime.now();
+    }
+
+    @Override
+    public HrDateTimeItem build() {
+        return new HrDateTimeItem(itemId);
     }
 }

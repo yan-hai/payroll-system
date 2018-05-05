@@ -1,7 +1,7 @@
 package com.nobodyhub.payroll.core.formula.common;
 
-import com.nobodyhub.payroll.core.item.abstr.Item;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.item.abstr.Item;
 
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.COMPARATOR_UNIMPLEMENTED;
 
@@ -39,7 +39,7 @@ public enum Comparator {
      */
     INTERVAL_C_C;
 
-    public <T extends Comparable<T>> boolean apply(Item<T> item, T lower, T higher) throws PayrollCoreException {
+    public <T extends Comparable<T>> boolean apply(Item<T, ?> item, T lower, T higher) throws PayrollCoreException {
         T itemVal = item.getValue();
         switch (this) {
             case NA: {

@@ -6,38 +6,37 @@ import lombok.RequiredArgsConstructor;
 /**
  * Base class for all kinds of items used in payroll system
  *
+ * @param <VT> value type of the item
+ * @param <IT> the type of subclass
  * @author yan_h
  * @since 2018-05-04.
  */
 @Getter
 @RequiredArgsConstructor
-public abstract class Item<T> {
+public abstract class Item<VT, IT> implements ItemBuilder<IT> {
     /**
      * Unique item id
      */
     protected final String itemId;
     /**
-     * Item name
-     */
-    protected final String itemName;
-    /**
      * The class of value
      */
-    protected Class<T> valueCls;
+    protected Class<VT> valueCls;
     /**
      * Raw value of item
      */
-    protected T value;
+    protected VT value;
 
     @SuppressWarnings("unchecked")
-    public void setValue(T value) {
+    public void setValue(VT value) {
         this.value = value;
-        this.valueCls = (Class<T>) value.getClass();
+        this.valueCls = (Class<VT>) value.getClass();
     }
 
     /**
      * provide default value for the item
+     *
      * @return
      */
-    public abstract T getDefaultValue();
+    public abstract VT getDefaultValue();
 }

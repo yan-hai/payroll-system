@@ -10,14 +10,19 @@ import java.math.BigDecimal;
  * @author yan_h
  * @since 2018-05-04.
  */
-public class FrequencyCountItem extends Item<BigDecimal> {
+public class FrequencyCountItem extends Item<BigDecimal, FrequencyCountItem> {
 
-    public FrequencyCountItem(String itemId, String itemName) {
-        super(itemId, itemName);
+    public FrequencyCountItem(String itemId) {
+        super(itemId);
     }
 
     @Override
     public BigDecimal getDefaultValue() {
         return BigDecimal.ZERO;
+    }
+
+    @Override
+    public FrequencyCountItem build() {
+        return new FrequencyCountItem(itemId);
     }
 }

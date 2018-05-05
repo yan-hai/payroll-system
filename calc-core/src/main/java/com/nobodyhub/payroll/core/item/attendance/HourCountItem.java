@@ -10,10 +10,10 @@ import java.math.BigDecimal;
  * @author yan_h
  * @since 2018-05-04.
  */
-public class HourCountItem extends Item<BigDecimal> {
+public class HourCountItem extends Item<BigDecimal, HourCountItem> {
 
-    public HourCountItem(String itemId, String itemName) {
-        super(itemId, itemName);
+    public HourCountItem(String itemId) {
+        super(itemId);
     }
 
     @Override
@@ -21,4 +21,8 @@ public class HourCountItem extends Item<BigDecimal> {
         return BigDecimal.ZERO;
     }
 
+    @Override
+    public HourCountItem build() {
+        return new HourCountItem(itemId);
+    }
 }

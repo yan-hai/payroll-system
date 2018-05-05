@@ -10,14 +10,19 @@ import java.math.BigDecimal;
  * @author yan_h
  * @since 2018-05-04.
  */
-public class DayCountItem extends Item<BigDecimal> {
+public class DayCountItem extends Item<BigDecimal, DayCountItem> {
 
-    public DayCountItem(String itemId, String itemName) {
-        super(itemId, itemName);
+    public DayCountItem(String itemId) {
+        super(itemId);
     }
 
     @Override
     public BigDecimal getDefaultValue() {
         return BigDecimal.ZERO;
+    }
+
+    @Override
+    public DayCountItem build() {
+        return new DayCountItem(itemId);
     }
 }

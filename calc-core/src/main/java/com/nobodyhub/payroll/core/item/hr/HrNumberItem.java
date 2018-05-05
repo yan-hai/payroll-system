@@ -10,14 +10,19 @@ import java.math.BigDecimal;
  * @author yan_h
  * @since 2018-05-04.
  */
-public class HrNumberItem extends Item<BigDecimal> {
+public class HrNumberItem extends Item<BigDecimal, HrNumberItem> {
 
-    public HrNumberItem(String itemId, String itemName) {
-        super(itemId, itemName);
+    public HrNumberItem(String itemId) {
+        super(itemId);
     }
 
     @Override
     public BigDecimal getDefaultValue() {
         return BigDecimal.ZERO;
+    }
+
+    @Override
+    public HrNumberItem build() {
+        return new HrNumberItem(itemId);
     }
 }

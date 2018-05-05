@@ -8,14 +8,19 @@ import com.nobodyhub.payroll.core.item.abstr.Item;
  * @author yan_h
  * @since 2018-05-04.
  */
-public class HrStringItem extends Item<String> {
+public class HrStringItem extends Item<String, HrStringItem> {
 
-    public HrStringItem(String itemId, String itemName) {
-        super(itemId, itemName);
+    public HrStringItem(String itemId) {
+        super(itemId);
     }
 
     @Override
     public String getDefaultValue() {
         return "";
+    }
+
+    @Override
+    public HrStringItem build() {
+        return new HrStringItem(itemId);
     }
 }

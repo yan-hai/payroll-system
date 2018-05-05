@@ -19,7 +19,7 @@ public class FormulaExpression {
     private FormulaExpression anotherOperand;
 
     public BigDecimal evaluate(ItemContext context) throws PayrollCoreException {
-        Item<BigDecimal> operand = context.get(operandId, BigDecimal.class);
+        Item<BigDecimal, ?> operand = context.get(operandId);
         if (operator == null || anotherOperand == null) {
             return operand.getValue();
         }
