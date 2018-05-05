@@ -3,10 +3,11 @@ package com.nobodyhub.payroll.core.item;
 import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.abstr.Item;
+import com.nobodyhub.payroll.core.item.abstr.ItemBuilder;
 
 import java.util.Map;
 
-import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.*;
+import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACTORY_NOT_FOUND;
 
 /**
  * The factory class that is responsible for generating
@@ -14,29 +15,15 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.*;
  * @author Ryan
  */
 public abstract class ItemFactory {
-    private Map<String, Class<?>> itemClassMap = Maps.newHashMap();
+    private Map<String, ItemBuilder> itemBuilders = Maps.newHashMap();
 
-    public Item getItem(String itemId, Class valueCls) throws PayrollCoreException {
-        Class<?> itemCls = itemClassMap.get(itemId);
-        if (itemCls == null) {
+    public Item getItem(String itemId) throws PayrollCoreException {
+        ItemBuilder builder = itemBuilders.get(itemId);
+        if (builder == null) {
             throw new PayrollCoreException(FACTORY_NOT_FOUND)
-                    .addValue("itemId", itemId)
-                    .addValue("cls", valueCls);
+                    .addValue("itemId", itemId);
         }
-        try {
-            Item item = (Item) itemCls.getDeclaredConstructor(String.class).newInstance(itemId);
-            if (item.getValueCls() == valueCls) {
-                throw new PayrollCoreException(FACTORY_INCOMPATIBLE)
-                        .addValue("itemId", itemId)
-                        .addValue("cls", valueCls);
-            }
-            return item;
-        } catch (Exception e) {
-            throw new PayrollCoreException(FACTORY_NO_REQUIRED_CONSTRUCTOR)
-                    .addValue("itemId", itemId)
-                    .addValue("cls", valueCls)
-                    .addMessage(e.getMessage());
-        }
+        return (Item) builder.build();
     }
 
     public abstract void initItemClassMap();

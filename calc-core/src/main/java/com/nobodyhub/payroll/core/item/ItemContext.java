@@ -1,12 +1,13 @@
 package com.nobodyhub.payroll.core.item;
 
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.abstr.Item;
 
 import java.util.Map;
+import java.util.Set;
 
-import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONTEXT_INCOMPATIBLE;
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONTEXT_NOT_FOUND;
 
 /**
@@ -21,25 +22,22 @@ public class ItemContext {
     }
 
     public <T> void add(String itemId, T value) throws PayrollCoreException {
-        Item item = factory.getItem(itemId, value.getClass());
+        Item item = factory.getItem(itemId);
         item.setValue(value);
         context.put(item.getItemId(), item);
     }
 
-    @SuppressWarnings("unchecked")
-    public <T> Item<T> get(String itemId, Class<T> clazz) throws PayrollCoreException {
+    public Item get(String itemId) throws PayrollCoreException {
         Item item = context.get(itemId);
         if (item == null) {
             throw new PayrollCoreException(CONTEXT_NOT_FOUND)
-                    .addValue("itemId", itemId)
-                    .addValue("clazz", clazz);
+                    .addValue("itemId", itemId);
         }
-        if (item.getValueCls() == clazz) {
-            return (Item<T>) item;
-        }
-        throw new PayrollCoreException(CONTEXT_INCOMPATIBLE)
-                .addValue("itemId", itemId)
-                .addValue("clazz", clazz);
+        return item;
+    }
+
+    public Set<String> getAllItemIds() {
+        return Sets.newHashSet(context.keySet());
     }
 
     /**
