@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.formula.common;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.item.ItemContext;
 
 import java.math.BigDecimal;
 import java.time.Period;
@@ -28,7 +29,8 @@ public abstract class Formula {
     /**
      * Calculate the result value of applying the formula
      *
-     * @return
+     * @param context context contains all items
+     * @return result value of formula evaluated in the <code>context</code>
      */
-    public abstract BigDecimal evaluate() throws PayrollCoreException;
+    public abstract BigDecimal evaluate(ItemContext context) throws PayrollCoreException;
 }

@@ -24,7 +24,13 @@ public enum PayrollCoreExceptionCode {
     /**
      * Can not find required item in the context
      */
-    CONTEXT_NOT_FOUND(ItemContext.class, "");
+    CONTEXT_NOT_FOUND(ItemContext.class, ""),
+    /**
+     * Item found in the context is incompatible with required
+     */
+    CONTEXT_INCOMPATIBLE(ItemContext.class, ""),
+
+    ;
 
     /**
      * The class which throws the exception

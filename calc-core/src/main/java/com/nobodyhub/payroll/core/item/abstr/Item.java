@@ -21,6 +21,10 @@ public abstract class Item<T> {
      */
     protected final String itemName;
     /**
+     * The class of value
+     */
+    protected Class<T> valueCls;
+    /**
      * Raw value of item
      */
     protected T value;

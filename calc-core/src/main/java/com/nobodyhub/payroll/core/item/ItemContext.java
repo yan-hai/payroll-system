@@ -6,6 +6,7 @@ import com.nobodyhub.payroll.core.item.abstr.Item;
 
 import java.util.Map;
 
+import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONTEXT_INCOMPATIBLE;
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONTEXT_NOT_FOUND;
 
 /**
@@ -18,13 +19,20 @@ public class ItemContext {
         context.put(item.getItemId(), item);
     }
 
-    public Item get(String itemId) throws PayrollCoreException {
+    @SuppressWarnings("unchecked")
+    public <T> Item<T> get(String itemId, Class<T> clazz) throws PayrollCoreException {
         Item item = context.get(itemId);
         if (item == null) {
             throw new PayrollCoreException(CONTEXT_NOT_FOUND)
-                    .addValue("itemId", itemId);
+                    .addValue("itemId", itemId)
+                    .addValue("clazz", clazz);
         }
-        return item;
+        if (item.getValueCls() == clazz) {
+            return (Item<T>) item;
+        }
+        throw new PayrollCoreException(CONTEXT_INCOMPATIBLE)
+                .addValue("itemId", itemId)
+                .addValue("clazz", clazz);
     }
 
     /**

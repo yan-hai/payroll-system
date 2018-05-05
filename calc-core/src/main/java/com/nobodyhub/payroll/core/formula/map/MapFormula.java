@@ -3,6 +3,7 @@ package com.nobodyhub.payroll.core.formula.map;
 import com.google.common.collect.Lists;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
+import com.nobodyhub.payroll.core.item.ItemContext;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
@@ -32,9 +33,9 @@ public class MapFormula extends Formula {
     protected final BigDecimal defaultValue;
 
     @Override
-    public BigDecimal evaluate() throws PayrollCoreException {
+    public BigDecimal evaluate(ItemContext context) throws PayrollCoreException {
         for (FormulaCase formulaCase : cases) {
-            if (formulaCase.evaluate()) {
+            if (formulaCase.evaluate(context)) {
                 return formulaCase.getValue();
             }
         }
