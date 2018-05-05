@@ -1,6 +1,6 @@
 package com.nobodyhub.payroll.core.item.hr;
 
-import com.nobodyhub.payroll.core.abstr.Item;
+import com.nobodyhub.payroll.core.item.abstr.Item;
 
 import java.time.LocalDateTime;
 
