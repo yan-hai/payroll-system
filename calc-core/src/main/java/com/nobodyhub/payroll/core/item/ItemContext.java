@@ -13,9 +13,16 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONT
  * @author Ryan
  */
 public class ItemContext {
-    private final Map<String, Item> context = Maps.newHashMap();
+    private Map<String, Item> context = Maps.newHashMap();
+    private ItemFactory factory;
 
     public void add(Item item) {
+        context.put(item.getItemId(), item);
+    }
+
+    public <T> void add(String itemId, T value) throws PayrollCoreException {
+        Item item = factory.getItem(itemId, value.getClass());
+        item.setValue(value);
         context.put(item.getItemId(), item);
     }
 

@@ -28,4 +28,10 @@ public abstract class Item<T> {
      * Raw value of item
      */
     protected T value;
+
+    @SuppressWarnings("unchecked")
+    public void setValue(T value) {
+        this.value = value;
+        this.valueCls = (Class<T>) value.getClass();
+    }
 }
