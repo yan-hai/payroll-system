@@ -4,11 +4,13 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Comparator;
 import com.nobodyhub.payroll.core.item.ItemContext;
 import com.nobodyhub.payroll.core.item.abstr.Item;
+import lombok.Getter;
 
 /**
  * @author yan_h
  * @since 2018-05-04.
  */
+@Getter
 public abstract class FormulaCondition<T extends Comparable<T>> {
     protected Class<T> clazz;
     protected String itemId;

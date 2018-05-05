@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.formula.map;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.item.ItemContext;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A Map form of formula, it maps the conditions to a given value.
@@ -40,5 +42,14 @@ public class MapFormula extends Formula {
             }
         }
         return defaultValue;
+    }
+
+    @Override
+    public Set<String> getRequiredItems() throws PayrollCoreException {
+        Set<String> itemIds = Sets.newHashSet();
+        for (FormulaCase formulaCase : cases) {
+            formulaCase.getRequiredItems(itemIds);
+        }
+        return itemIds;
     }
 }

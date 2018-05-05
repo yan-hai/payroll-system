@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Each CASE of a {@link MapFormula}
@@ -38,6 +39,12 @@ public class FormulaCase implements Comparable<FormulaCase> {
             result = result && condition.evaluate(context);
         }
         return result;
+    }
+
+    public void getRequiredItems(Set<String> itemIds) {
+        for (FormulaCondition condition : conditions) {
+            itemIds.add(condition.getItemId());
+        }
     }
 
     @Override

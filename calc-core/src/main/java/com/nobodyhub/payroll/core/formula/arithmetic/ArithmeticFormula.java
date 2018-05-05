@@ -1,10 +1,12 @@
 package com.nobodyhub.payroll.core.formula.arithmetic;
 
+import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.item.ItemContext;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * A Formula formed by Arithmetic Expressions
@@ -12,14 +14,19 @@ import java.math.BigDecimal;
  * @author Ryan
  */
 public class ArithmeticFormula extends Formula {
-
-    private String itemId;
     private FormulaExpression expression;
 
     @Override
     public BigDecimal evaluate(ItemContext context) throws PayrollCoreException {
         BigDecimal result = expression.evaluate(context);
-        context.add(itemId, result);
+        context.add(targetItemId, result);
         return result;
+    }
+
+    @Override
+    public Set<String> getRequiredItems() throws PayrollCoreException {
+        Set<String> itemIds = Sets.newHashSet();
+        expression.getRequiredItems(itemIds);
+        return itemIds;
     }
 }
