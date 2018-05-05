@@ -1,7 +1,10 @@
 package com.nobodyhub.payroll.core.exception;
 
-import com.nobodyhub.payroll.core.formula.common.ItemComparator;
+import com.nobodyhub.payroll.core.formula.common.Comparator;
+import com.nobodyhub.payroll.core.formula.common.Operator;
 import lombok.Getter;
+
+import java.math.BigDecimal;
 
 /**
  * @author yan_h
@@ -10,9 +13,14 @@ import lombok.Getter;
 @Getter
 public enum PayrollCoreExceptionCode {
     /**
-     * Unimplemented handler for {@link ItemComparator}
+     * Unimplemented handler for {@link Comparator}
      */
-    COMPARATOR_UNIMPLEMENTED(ItemComparator.class, "");
+    COMPARATOR_UNIMPLEMENTED(Comparator.class, ""),
+    /**
+     * Unimplemented handler for {@link Operator}
+     */
+    OPERATOR_UNIMPLEMENTED(Operator.class, ""),
+    ;
 
     private Class<?> clazz;
     private String msgId;
