@@ -1,8 +1,9 @@
-package com.nobodyhub.payroll.core.formula;
+package com.nobodyhub.payroll.core.formula.common;
+
+import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 
 import java.math.BigDecimal;
 import java.time.Period;
-import java.util.List;
 
 /**
  * Formula applied to PayItems in order to get numeric value
@@ -24,12 +25,10 @@ public abstract class Formula {
      */
     protected Period validPeriod;
 
-    protected List<FormulaCase> cases;
-
     /**
      * Calculate the result value of applying the formula
      *
      * @return
      */
-    public abstract BigDecimal evaluate();
+    public abstract BigDecimal evaluate() throws PayrollCoreException;
 }

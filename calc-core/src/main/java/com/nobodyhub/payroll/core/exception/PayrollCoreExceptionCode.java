@@ -1,6 +1,6 @@
 package com.nobodyhub.payroll.core.exception;
 
-import com.nobodyhub.payroll.core.formula.ItemComparator;
+import com.nobodyhub.payroll.core.formula.common.ItemComparator;
 import lombok.Getter;
 
 /**

@@ -1,6 +1,7 @@
-package com.nobodyhub.payroll.core.formula;
+package com.nobodyhub.payroll.core.formula.map;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.formula.common.ItemComparator;
 import com.nobodyhub.payroll.core.item.abstr.Item;
 
 /**
