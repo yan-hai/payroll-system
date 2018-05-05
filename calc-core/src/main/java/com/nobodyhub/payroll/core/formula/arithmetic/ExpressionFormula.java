@@ -8,17 +8,20 @@ import com.nobodyhub.payroll.core.item.abstr.Item;
 import java.math.BigDecimal;
 
 /**
- * A
+ * A Formula formed by Arithmetic Expressions
  *
  * @author Ryan
  */
-public class ArithmeticFormula extends Formula {
+public class ExpressionFormula extends Formula {
     private Operator operator;
     private Item<BigDecimal> operand;
-    private ArithmeticFormula anotherOperand;
+    private ExpressionFormula anotherOperand;
 
     @Override
     public BigDecimal evaluate() throws PayrollCoreException {
+        if (operator == null || anotherOperand == null) {
+            return operand.getValue();
+        }
         return operator.apply(operand.getValue(), anotherOperand.evaluate());
     }
 }
