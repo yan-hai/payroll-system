@@ -1,14 +1,24 @@
 package com.nobodyhub.payroll.core.task;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.item.ItemContext;
+import lombok.Getter;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
+ * Need to be Thread-Safe
+ *
  * @author Ryan
  */
-public abstract class TaskInstance {
+@Getter
+public abstract class Task {
+    protected String taskId;
     protected TaskContext taskContext;
+    private ExecutionCallback callback;
+
+    private ExecutorService executorService = Executors.newFixedThreadPool(5);
 
     public void beforeExec() {
         taskContext.getFormulaContext().prioritize();
@@ -16,9 +26,8 @@ public abstract class TaskInstance {
 
     public void execute(ItemContext itemContext) throws PayrollCoreException {
         itemContext.setTaskContext(taskContext);
-        for (Formula formula : taskContext.getFormulaContext().getFormulas()) {
-            itemContext.add(formula.evaluate(itemContext));
-        }
+        TaskExecution execution = new TaskExecution(itemContext, callback);
+        executorService.execute(execution);
     }
 
     public void afterExec() {
