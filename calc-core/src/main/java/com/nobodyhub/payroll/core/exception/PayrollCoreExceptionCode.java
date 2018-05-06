@@ -4,6 +4,7 @@ import com.nobodyhub.payroll.core.formula.common.Comparator;
 import com.nobodyhub.payroll.core.formula.common.Operator;
 import com.nobodyhub.payroll.core.item.ItemContext;
 import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.payment.PaymentType;
 import lombok.Getter;
 
 /**
@@ -41,7 +42,11 @@ public enum PayrollCoreExceptionCode {
     /**
      * Item does not have the required constructor(with one String parameter, as itemId)
      */
-    FACTORY_NO_REQUIRED_CONSTRUCTOR(ItemFactory.class, ""),;
+    FACTORY_NO_REQUIRED_CONSTRUCTOR(ItemFactory.class, ""),
+    /**
+     * Unimplemented handler for {@link PaymentType}
+     */
+    PAYMENTTYPE_UNIMPLEMENTED(PaymentType.class, ""),;
 
     /**
      * The class which throws the exception
