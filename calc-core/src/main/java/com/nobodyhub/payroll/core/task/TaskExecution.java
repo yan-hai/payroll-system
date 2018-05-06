@@ -3,6 +3,7 @@ package com.nobodyhub.payroll.core.task;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.FormulaContext;
 import com.nobodyhub.payroll.core.formula.common.Formula;
+import com.nobodyhub.payroll.core.task.callback.Callback;
 import lombok.Getter;
 
 /**
@@ -11,9 +12,9 @@ import lombok.Getter;
 @Getter
 public class TaskExecution implements Runnable {
     private final ExecutionContext executionContext;
-    private final ExecutionCallback callback;
+    private final Callback callback;
 
-    public TaskExecution(ExecutionContext executionContext, ExecutionCallback callback) {
+    public TaskExecution(ExecutionContext executionContext, Callback callback) {
         this.executionContext = executionContext;
         this.callback = callback;
     }
