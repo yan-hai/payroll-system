@@ -17,11 +17,11 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONT
 /**
  * @author Ryan
  */
-public abstract class ExecutionContext {
+public class ExecutionContext {
     /**
      * the context contains all items
      */
-    protected Map<String, Item> context = Maps.newHashMap();
+    protected Map<String, Item> items = Maps.newHashMap();
     /**
      * the context of the belonging task
      */
@@ -38,18 +38,18 @@ public abstract class ExecutionContext {
     protected ItemFactory factory;
 
     public void add(Item item) {
-        context.put(item.getItemId(), item);
+        items.put(item.getItemId(), item);
     }
 
     @SuppressWarnings("unchecked")
     public <T> void add(String itemId, T value) throws PayrollCoreException {
         Item item = factory.getItem(itemId);
         item.setValue(value);
-        context.put(item.getItemId(), item);
+        items.put(item.getItemId(), item);
     }
 
     public Item get(String itemId) throws PayrollCoreException {
-        Item item = context.get(itemId);
+        Item item = items.get(itemId);
         if (item == null) {
             throw new PayrollCoreException(CONTEXT_NOT_FOUND)
                     .addValue("itemId", itemId);
@@ -58,7 +58,7 @@ public abstract class ExecutionContext {
     }
 
     public Set<String> getAllItemIds() {
-        return Sets.newHashSet(context.keySet());
+        return Sets.newHashSet(items.keySet());
     }
 
     public MathContext getMathContext() {
@@ -72,8 +72,8 @@ public abstract class ExecutionContext {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("{ \"name\": \"ExecutionContext(size: " + context.size() + ")\", context: { ");
-        for (Item item : context.values()) {
+        StringBuilder sb = new StringBuilder("{ \"name\": \"ExecutionContext(size: " + items.size() + ")\", context: { ");
+        for (Item item : items.values()) {
             sb.append("\t\"" + item.getItemId() + "\" : \"" + item.getValue().toString() + "\"");
         }
         sb.append("}}");
