@@ -10,6 +10,6 @@ import java.math.MathContext;
  */
 @Builder
 @Getter
-public class TaskContext {
-    private MathContext mathContext;
+public abstract class TaskContext {
+    protected MathContext mathContext;
 }

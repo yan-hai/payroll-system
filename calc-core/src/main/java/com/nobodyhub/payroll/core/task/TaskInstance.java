@@ -8,7 +8,7 @@ import com.nobodyhub.payroll.core.item.ItemContext;
 /**
  * @author Ryan
  */
-public class TaskInstance {
+public abstract class TaskInstance {
     protected TaskContext taskContext;
     protected FormulaContext formulaContext;
 

@@ -16,20 +16,20 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONT
 /**
  * @author Ryan
  */
-public class ItemContext {
+public abstract class ItemContext {
     /**
      * the context contains all items
      */
-    private Map<String, Item> context = Maps.newHashMap();
+    protected Map<String, Item> context = Maps.newHashMap();
     /**
      * the context of the belonging task
      */
     @Setter
-    private TaskContext taskContext;
+    protected TaskContext taskContext;
     /**
      * the factory of all items
      */
-    private ItemFactory factory;
+    protected ItemFactory factory;
 
     public void add(Item item) {
         context.put(item.getItemId(), item);

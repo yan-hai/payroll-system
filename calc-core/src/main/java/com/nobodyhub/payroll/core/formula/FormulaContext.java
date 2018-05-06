@@ -16,16 +16,16 @@ import java.util.Set;
  * @author Ryan
  */
 @Getter
-public class FormulaContext {
+public abstract class FormulaContext {
     /**
      * full formula list involved in this context
      */
-    private List<Formula> formulas = Lists.newLinkedList();
+    protected List<Formula> formulas = Lists.newLinkedList();
     /**
      * Map from target item id to formula
      * several formulas could be applied to the same items id in different period
      */
-    private Map<String, List<Formula>> formulaMap = Maps.newHashMap();
+    protected Map<String, List<Formula>> formulaMap = Maps.newHashMap();
 
     /**
      * assign different priority to formula according to inter-dependencies on items
