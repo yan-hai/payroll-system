@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.abstr.Item;
+import com.nobodyhub.payroll.core.task.TaskContext;
 
 import java.util.Map;
 import java.util.Set;
@@ -14,7 +15,17 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONT
  * @author Ryan
  */
 public class ItemContext {
+    /**
+     * the context contains all items
+     */
     private Map<String, Item> context = Maps.newHashMap();
+    /**
+     * the context of the belonging task
+     */
+    private TaskContext taskContext;
+    /**
+     * the factory of all items
+     */
     private ItemFactory factory;
 
     public void add(Item item) {
