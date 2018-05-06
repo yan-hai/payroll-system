@@ -12,16 +12,32 @@
     <name>A Item-based Payroll System</name>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <payroll-system.version>0.1-SNAPSHOT</payroll-system.version>
     </properties>
 
     <modules>
         <module>calc-core</module>
+        <module>calc-core-sg</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <!--self-modules-->
+            <dependency>
+                <groupId>com.nobodyhub</groupId>
+                <artifactId>calc-core</artifactId>
+                <version>${payroll-system.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nobodyhub</groupId>
+                <artifactId>calc-core-sg</artifactId>
+                <version>${payroll-system.version}</version>
+            </dependency>
+
+            <!--3rd party-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
