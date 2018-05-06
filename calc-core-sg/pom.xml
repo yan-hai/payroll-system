@@ -12,5 +12,11 @@
     <artifactId>calc-core-sg</artifactId>
     <name>Singapore Extension of Calculation Core</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.nobodyhub</groupId>
+            <artifactId>calc-core</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

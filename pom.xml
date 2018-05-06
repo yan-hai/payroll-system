@@ -25,7 +25,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!--self-modules-->
+            <!--own-modules-->
             <dependency>
                 <groupId>com.nobodyhub</groupId>
                 <artifactId>calc-core</artifactId>
