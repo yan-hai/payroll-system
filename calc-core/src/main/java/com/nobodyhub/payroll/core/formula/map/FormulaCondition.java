@@ -18,6 +18,7 @@ public abstract class FormulaCondition<T extends Comparable<T>> {
     protected T lower;
     protected T higher;
 
+    @SuppressWarnings("unchecked")
     public boolean evaluate(ItemContext context) throws PayrollCoreException {
         Item<T, ?> item = context.get(itemId);
         return comparator.apply(item, lower, higher);

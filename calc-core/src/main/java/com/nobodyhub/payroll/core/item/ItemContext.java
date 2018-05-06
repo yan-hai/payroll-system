@@ -35,6 +35,7 @@ public class ItemContext {
         context.put(item.getItemId(), item);
     }
 
+    @SuppressWarnings("unchecked")
     public <T> void add(String itemId, T value) throws PayrollCoreException {
         Item item = factory.getItem(itemId);
         item.setValue(value);
