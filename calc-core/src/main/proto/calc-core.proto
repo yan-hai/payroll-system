@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_package = "com.nobodyhub.payroll.core.service.proto";
+option java_outer_classname = "CalculationCoreProtocol";
+
+package payroll.core.service.proto;
+
+message Request {
+    string taskId = 1;
+    map<string, string> values = 2;
+}
+
+message Response {
+    int32 statusCode = 1;
+    string message = 2;
+    map<string, string> values = 3;
+}
+
+service CalculationCoreService {
+    rpc doCalc (stream Request) returns (stream Response);
+}
