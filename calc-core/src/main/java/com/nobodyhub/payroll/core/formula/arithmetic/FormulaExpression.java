@@ -18,12 +18,13 @@ public class FormulaExpression {
     private String operandId;
     private FormulaExpression anotherOperand;
 
+    @SuppressWarnings("unchecked")
     public BigDecimal evaluate(ItemContext context) throws PayrollCoreException {
         Item<BigDecimal, ?> operand = context.get(operandId);
         if (operator == null || anotherOperand == null) {
             return operand.getValue();
         }
-        return operator.apply(operand.getValue(), anotherOperand.evaluate(context));
+        return operator.apply(context.getMathContext(), operand.getValue(), anotherOperand.evaluate(context));
     }
 
     public void getRequiredItems(Set<String> itemIds) {

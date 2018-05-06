@@ -6,6 +6,7 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.abstr.Item;
 import com.nobodyhub.payroll.core.task.TaskContext;
 
+import java.math.MathContext;
 import java.util.Map;
 import java.util.Set;
 
@@ -49,6 +50,10 @@ public class ItemContext {
 
     public Set<String> getAllItemIds() {
         return Sets.newHashSet(context.keySet());
+    }
+
+    public MathContext getMathContext() {
+        return taskContext.getMathContext();
     }
 
     /**
