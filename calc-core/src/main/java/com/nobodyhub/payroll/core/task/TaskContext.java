@@ -3,7 +3,7 @@ package com.nobodyhub.payroll.core.task;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.math.RoundingMode;
+import java.math.MathContext;
 
 /**
  * @author Ryan
@@ -11,6 +11,5 @@ import java.math.RoundingMode;
 @Builder
 @Getter
 public class TaskContext {
-    private RoundingMode roundingMode;
-    private TaskCalendar calender;
+    private MathContext mathContext;
 }
