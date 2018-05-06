@@ -16,8 +16,13 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
     private final PaymentType paymentType;
 
     public PaymentItem(String itemId, PaymentType paymentType) {
-        super(itemId);
+        super(itemId, BigDecimal.class);
         this.paymentType = paymentType;
+    }
+
+    @Override
+    public void setStringValue(String value) {
+        this.value = new BigDecimal(value);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.item.hr;
 
 import com.nobodyhub.payroll.core.item.common.Item;
+import com.nobodyhub.payroll.core.util.DateFormatUtils;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +14,12 @@ import java.time.LocalDateTime;
 public class HrDateTimeItem extends Item<LocalDateTime, HrDateTimeItem> {
 
     public HrDateTimeItem(String itemId) {
-        super(itemId);
+        super(itemId, LocalDateTime.class);
+    }
+
+    @Override
+    public void setStringValue(String value) {
+        this.value = DateFormatUtils.parseDateTime(value);
     }
 
     @Override

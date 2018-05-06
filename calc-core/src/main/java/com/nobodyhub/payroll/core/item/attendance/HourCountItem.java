@@ -13,7 +13,12 @@ import java.math.BigDecimal;
 public class HourCountItem extends Item<BigDecimal, HourCountItem> {
 
     public HourCountItem(String itemId) {
-        super(itemId);
+        super(itemId, BigDecimal.class);
+    }
+
+    @Override
+    public void setStringValue(String value) {
+        this.value = new BigDecimal(value);
     }
 
     @Override

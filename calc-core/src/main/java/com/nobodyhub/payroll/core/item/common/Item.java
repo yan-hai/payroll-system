@@ -21,7 +21,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
     /**
      * The class of value
      */
-    protected Class<VT> valueCls;
+    protected final Class<VT> valueCls;
     /**
      * Raw value of item
      */
@@ -30,8 +30,14 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
     @SuppressWarnings("unchecked")
     public void setValue(VT value) {
         this.value = value;
-        this.valueCls = (Class<VT>) value.getClass();
     }
+
+    /**
+     * parse the value from its string form
+     *
+     * @param value the string form of the value
+     */
+    public abstract void setStringValue(String value);
 
     public VT getValue() {
         return value != null ? value : getDefaultValue();
