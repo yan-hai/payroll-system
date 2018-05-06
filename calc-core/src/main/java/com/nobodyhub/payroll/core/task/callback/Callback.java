@@ -1,11 +1,13 @@
-package com.nobodyhub.payroll.core.task;
+package com.nobodyhub.payroll.core.task.callback;
+
+import com.nobodyhub.payroll.core.task.ExecutionContext;
 
 /**
  * Callbacks for the execution
  *
  * @author Ryan
  */
-public interface ExecutionCallback {
+public interface Callback {
     /**
      * Before execution start
      */
