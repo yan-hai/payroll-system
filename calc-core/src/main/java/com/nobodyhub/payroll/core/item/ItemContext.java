@@ -4,7 +4,9 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.common.Item;
+import com.nobodyhub.payroll.core.task.ExecutionStatus;
 import com.nobodyhub.payroll.core.task.TaskContext;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.math.MathContext;
@@ -25,7 +27,12 @@ public abstract class ItemContext {
      * the context of the belonging task
      */
     @Setter
+    @Getter
     protected TaskContext taskContext;
+    /**
+     * Execution Status
+     */
+    protected ExecutionStatus executionStatus = new ExecutionStatus();
     /**
      * the factory of all items
      */
