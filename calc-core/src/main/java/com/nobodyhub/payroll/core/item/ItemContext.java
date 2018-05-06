@@ -3,7 +3,7 @@ package com.nobodyhub.payroll.core.item;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.abstr.Item;
+import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.task.TaskContext;
 import lombok.Setter;
 

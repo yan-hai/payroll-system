@@ -3,7 +3,7 @@ package com.nobodyhub.payroll.core.formula.arithmetic;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Operator;
 import com.nobodyhub.payroll.core.item.ItemContext;
-import com.nobodyhub.payroll.core.item.abstr.Item;
+import com.nobodyhub.payroll.core.item.common.Item;
 
 import java.math.BigDecimal;
 import java.util.Set;

@@ -1,7 +1,7 @@
 package com.nobodyhub.payroll.core.formula.common;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.abstr.Item;
+import com.nobodyhub.payroll.core.item.common.Item;
 
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.COMPARATOR_UNIMPLEMENTED;
 

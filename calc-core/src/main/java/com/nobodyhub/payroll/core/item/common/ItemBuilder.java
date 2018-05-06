@@ -1,4 +1,4 @@
-package com.nobodyhub.payroll.core.item.abstr;
+package com.nobodyhub.payroll.core.item.common;
 
 /**
  * @author Ryan

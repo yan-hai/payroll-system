@@ -1,6 +1,6 @@
 package com.nobodyhub.payroll.core.item.attendance;
 
-import com.nobodyhub.payroll.core.item.abstr.Item;
+import com.nobodyhub.payroll.core.item.common.Item;
 
 import java.math.BigDecimal;
 

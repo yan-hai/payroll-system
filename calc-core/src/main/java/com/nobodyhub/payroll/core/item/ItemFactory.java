@@ -2,8 +2,8 @@ package com.nobodyhub.payroll.core.item;
 
 import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.abstr.Item;
-import com.nobodyhub.payroll.core.item.abstr.ItemBuilder;
+import com.nobodyhub.payroll.core.item.common.Item;
+import com.nobodyhub.payroll.core.item.common.ItemBuilder;
 
 import java.util.Map;
 

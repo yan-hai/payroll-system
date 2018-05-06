@@ -1,4 +1,4 @@
-package com.nobodyhub.payroll.core.item.abstr;
+package com.nobodyhub.payroll.core.item.common;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
