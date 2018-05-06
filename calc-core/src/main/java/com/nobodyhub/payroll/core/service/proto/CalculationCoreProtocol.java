@@ -855,9 +855,14 @@ public final class CalculationCoreProtocol {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int32 statusCode = 1;</code>
+     * <code>string statusCode = 1;</code>
      */
-    int getStatusCode();
+    java.lang.String getStatusCode();
+    /**
+     * <code>string statusCode = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getStatusCodeBytes();
 
     /**
      * <code>string message = 2;</code>
@@ -916,7 +921,7 @@ public final class CalculationCoreProtocol {
       super(builder);
     }
     private Response() {
-      statusCode_ = 0;
+      statusCode_ = "";
       message_ = "";
     }
 
@@ -951,9 +956,10 @@ public final class CalculationCoreProtocol {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              statusCode_ = input.readInt32();
+              statusCode_ = s;
               break;
             }
             case 18: {
@@ -1012,12 +1018,37 @@ public final class CalculationCoreProtocol {
 
     private int bitField0_;
     public static final int STATUSCODE_FIELD_NUMBER = 1;
-    private int statusCode_;
+    private volatile java.lang.Object statusCode_;
     /**
-     * <code>int32 statusCode = 1;</code>
+     * <code>string statusCode = 1;</code>
      */
-    public int getStatusCode() {
-      return statusCode_;
+    public java.lang.String getStatusCode() {
+      java.lang.Object ref = statusCode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        statusCode_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string statusCode = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getStatusCodeBytes() {
+      java.lang.Object ref = statusCode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        statusCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int MESSAGE_FIELD_NUMBER = 2;
@@ -1142,8 +1173,8 @@ public final class CalculationCoreProtocol {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (statusCode_ != 0) {
-        output.writeInt32(1, statusCode_);
+      if (!getStatusCodeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, statusCode_);
       }
       if (!getMessageBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
@@ -1162,9 +1193,8 @@ public final class CalculationCoreProtocol {
       if (size != -1) return size;
 
       size = 0;
-      if (statusCode_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, statusCode_);
+      if (!getStatusCodeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, statusCode_);
       }
       if (!getMessageBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
@@ -1195,8 +1225,8 @@ public final class CalculationCoreProtocol {
       com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol.Response other = (com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol.Response) obj;
 
       boolean result = true;
-      result = result && (getStatusCode()
-          == other.getStatusCode());
+      result = result && getStatusCode()
+          .equals(other.getStatusCode());
       result = result && getMessage()
           .equals(other.getMessage());
       result = result && internalGetValues().equals(
@@ -1213,7 +1243,7 @@ public final class CalculationCoreProtocol {
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + STATUSCODE_FIELD_NUMBER;
-      hash = (53 * hash) + getStatusCode();
+      hash = (53 * hash) + getStatusCode().hashCode();
       hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
       hash = (53 * hash) + getMessage().hashCode();
       if (!internalGetValues().getMap().isEmpty()) {
@@ -1371,7 +1401,7 @@ public final class CalculationCoreProtocol {
       }
       public Builder clear() {
         super.clear();
-        statusCode_ = 0;
+        statusCode_ = "";
 
         message_ = "";
 
@@ -1446,8 +1476,9 @@ public final class CalculationCoreProtocol {
 
       public Builder mergeFrom(com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol.Response other) {
         if (other == com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol.Response.getDefaultInstance()) return this;
-        if (other.getStatusCode() != 0) {
-          setStatusCode(other.getStatusCode());
+        if (!other.getStatusCode().isEmpty()) {
+          statusCode_ = other.statusCode_;
+          onChanged();
         }
         if (!other.getMessage().isEmpty()) {
           message_ = other.message_;
@@ -1483,28 +1514,71 @@ public final class CalculationCoreProtocol {
       }
       private int bitField0_;
 
-      private int statusCode_ ;
+      private java.lang.Object statusCode_ = "";
       /**
-       * <code>int32 statusCode = 1;</code>
+       * <code>string statusCode = 1;</code>
        */
-      public int getStatusCode() {
-        return statusCode_;
+      public java.lang.String getStatusCode() {
+        java.lang.Object ref = statusCode_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          statusCode_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>int32 statusCode = 1;</code>
+       * <code>string statusCode = 1;</code>
        */
-      public Builder setStatusCode(int value) {
-        
+      public com.google.protobuf.ByteString
+          getStatusCodeBytes() {
+        java.lang.Object ref = statusCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          statusCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string statusCode = 1;</code>
+       */
+      public Builder setStatusCode(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         statusCode_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int32 statusCode = 1;</code>
+       * <code>string statusCode = 1;</code>
        */
       public Builder clearStatusCode() {
         
-        statusCode_ = 0;
+        statusCode_ = getDefaultInstance().getStatusCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string statusCode = 1;</code>
+       */
+      public Builder setStatusCodeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        statusCode_ = value;
         onChanged();
         return this;
       }
@@ -1783,7 +1857,7 @@ public final class CalculationCoreProtocol {
       "ues\030\002 \003(\0132/.payroll.core.service.proto.R" +
       "equest.ValuesEntry\032-\n\013ValuesEntry\022\013\n\003key" +
       "\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\240\001\n\010Response\022\022" +
-      "\n\nstatusCode\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\022@\n\006v" +
+      "\n\nstatusCode\030\001 \001(\t\022\017\n\007message\030\002 \001(\t\022@\n\006v" +
       "alues\030\003 \003(\01320.payroll.core.service.proto" +
       ".Response.ValuesEntry\032-\n\013ValuesEntry\022\013\n\003" +
       "key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\0012q\n\026Calculat" +
