@@ -23,6 +23,11 @@ public class HrTimeItem extends Item<LocalTime, HrTimeItem> {
     }
 
     @Override
+    public String getValueAsString() {
+        return DateFormatUtils.convertDate(this.value);
+    }
+
+    @Override
     public LocalTime getDefaultValue() {
         return LocalTime.now();
     }

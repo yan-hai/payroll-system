@@ -39,6 +39,15 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      */
     public abstract void setStringValue(String value);
 
+    /**
+     * return string form of the value
+     *
+     * @return
+     */
+    public String getValueAsString() {
+        return value.toString();
+    }
+
     public VT getValue() {
         return value != null ? value : getDefaultValue();
     }
