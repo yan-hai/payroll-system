@@ -5,8 +5,8 @@ import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.common.Item;
+import com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.math.MathContext;
 import java.util.Map;
@@ -17,33 +17,59 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONT
 /**
  * @author Ryan
  */
+@Getter
 public class ExecutionContext {
     /**
      * the context contains all items
      */
-    protected Map<String, Item> items = Maps.newHashMap();
+    protected final Map<String, Item> items = Maps.newHashMap();
     /**
      * the context of the belonging task
      */
-    @Setter
-    @Getter
-    protected TaskContext taskContext;
+    protected final TaskContext taskContext;
     /**
      * Execution Status
      */
-    protected ExecutionStatus executionStatus = new ExecutionStatus();
+    protected final ExecutionStatus executionStatus = new ExecutionStatus();
     /**
      * the factory of all items
      */
-    protected ItemFactory factory;
+    protected final ItemFactory itemFactory;
+
+    public ExecutionContext(TaskContext taskContext) {
+        this.taskContext = taskContext;
+        this.itemFactory = taskContext.getItemFactory();
+    }
+
 
     public void add(Item item) {
         items.put(item.getItemId(), item);
     }
 
+    public void addAll(Map<String, String> valueMap) throws PayrollCoreException {
+        for (Map.Entry<String, String> entry : valueMap.entrySet()) {
+            String itemId = entry.getKey();
+            String value = entry.getValue();
+            Item item = itemFactory.getItem(itemId);
+            item.setStringValue(value);
+        }
+    }
+
+    public CalculationCoreProtocol.Response toResponse() {
+        Map<String, String> values = Maps.newHashMap();
+        for (Item item : items.values()) {
+            values.put(item.getItemId(), item.getValueAsString());
+        }
+        return CalculationCoreProtocol.Response.newBuilder()
+                .setStatusCode(executionStatus.getStatusCode().toString())
+                .setMessage(executionStatus.getMessage())
+                .putAllValues(values)
+                .build();
+    }
+
     @SuppressWarnings("unchecked")
     public <T> void add(String itemId, T value) throws PayrollCoreException {
-        Item item = factory.getItem(itemId);
+        Item item = itemFactory.getItem(itemId);
         item.setValue(value);
         items.put(item.getItemId(), item);
     }
