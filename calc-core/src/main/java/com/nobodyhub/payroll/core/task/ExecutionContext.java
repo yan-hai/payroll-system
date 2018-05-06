@@ -1,11 +1,10 @@
-package com.nobodyhub.payroll.core.item;
+package com.nobodyhub.payroll.core.task;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.common.Item;
-import com.nobodyhub.payroll.core.task.ExecutionStatus;
-import com.nobodyhub.payroll.core.task.TaskContext;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +17,7 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONT
 /**
  * @author Ryan
  */
-public abstract class ItemContext {
+public abstract class ExecutionContext {
     /**
      * the context contains all items
      */
@@ -73,7 +72,7 @@ public abstract class ItemContext {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("{ \"name\": \"ItemContext(size: " + context.size() + ")\", context: { ");
+        StringBuilder sb = new StringBuilder("{ \"name\": \"ExecutionContext(size: " + context.size() + ")\", context: { ");
         for (Item item : context.values()) {
             sb.append("\t\"" + item.getItemId() + "\" : \"" + item.getValue().toString() + "\"");
         }

@@ -4,8 +4,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
-import com.nobodyhub.payroll.core.item.ItemContext;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
+import com.nobodyhub.payroll.core.task.ExecutionContext;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
@@ -36,7 +36,7 @@ public class MapFormula extends Formula {
     protected final BigDecimal defaultValue;
 
     @Override
-    public PaymentItem evaluate(ItemContext context) throws PayrollCoreException {
+    public PaymentItem evaluate(ExecutionContext context) throws PayrollCoreException {
         BigDecimal result = defaultValue;
         for (FormulaCase formulaCase : cases) {
             if (formulaCase.evaluate(context)) {

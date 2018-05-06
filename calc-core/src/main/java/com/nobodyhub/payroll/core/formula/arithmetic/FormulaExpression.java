@@ -2,8 +2,8 @@ package com.nobodyhub.payroll.core.formula.arithmetic;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Operator;
-import com.nobodyhub.payroll.core.item.ItemContext;
 import com.nobodyhub.payroll.core.item.common.Item;
+import com.nobodyhub.payroll.core.task.ExecutionContext;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -19,7 +19,7 @@ public class FormulaExpression {
     private FormulaExpression anotherOperand;
 
     @SuppressWarnings("unchecked")
-    public BigDecimal evaluate(ItemContext context) throws PayrollCoreException {
+    public BigDecimal evaluate(ExecutionContext context) throws PayrollCoreException {
         Item<BigDecimal, ?> operand = context.get(operandId);
         if (operator == null || anotherOperand == null) {
             return operand.getValue();

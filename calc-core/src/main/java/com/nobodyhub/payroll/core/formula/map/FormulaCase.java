@@ -1,7 +1,7 @@
 package com.nobodyhub.payroll.core.formula.map;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.ItemContext;
+import com.nobodyhub.payroll.core.task.ExecutionContext;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -33,7 +33,7 @@ public class FormulaCase implements Comparable<FormulaCase> {
     @Getter
     private final BigDecimal value;
 
-    public boolean evaluate(ItemContext context) throws PayrollCoreException {
+    public boolean evaluate(ExecutionContext context) throws PayrollCoreException {
         boolean result = true;
         for (FormulaCondition condition : conditions) {
             result = result && condition.evaluate(context);

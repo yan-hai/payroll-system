@@ -3,9 +3,9 @@ package com.nobodyhub.payroll.core.formula.proration;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
-import com.nobodyhub.payroll.core.item.ItemContext;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
+import com.nobodyhub.payroll.core.task.ExecutionContext;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -20,7 +20,7 @@ public class ProrationFormula extends Formula {
 
     @Override
     @SuppressWarnings("unchecked")
-    public PaymentItem evaluate(ItemContext context) throws PayrollCoreException {
+    public PaymentItem evaluate(ExecutionContext context) throws PayrollCoreException {
         Item<BigDecimal, ?> part = itemFactory.getItem(partItemId);
         Item<BigDecimal, ?> total = itemFactory.getItem(totalItemId);
         Item<BigDecimal, ?> payment = itemFactory.getItem(paymentItemId);

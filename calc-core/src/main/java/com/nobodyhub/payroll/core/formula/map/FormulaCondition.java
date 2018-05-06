@@ -2,8 +2,8 @@ package com.nobodyhub.payroll.core.formula.map;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Comparator;
-import com.nobodyhub.payroll.core.item.ItemContext;
 import com.nobodyhub.payroll.core.item.common.Item;
+import com.nobodyhub.payroll.core.task.ExecutionContext;
 import lombok.Getter;
 
 /**
@@ -19,7 +19,7 @@ public abstract class FormulaCondition<T extends Comparable<T>> {
     protected T higher;
 
     @SuppressWarnings("unchecked")
-    public boolean evaluate(ItemContext context) throws PayrollCoreException {
+    public boolean evaluate(ExecutionContext context) throws PayrollCoreException {
         Item<T, ?> item = context.get(itemId);
         return comparator.apply(item, lower, higher);
     }

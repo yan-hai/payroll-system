@@ -3,8 +3,8 @@ package com.nobodyhub.payroll.core.formula.aggregation;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
-import com.nobodyhub.payroll.core.item.ItemContext;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
+import com.nobodyhub.payroll.core.task.ExecutionContext;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -18,7 +18,7 @@ public class AggregationFormula extends Formula {
 
     @Override
     @SuppressWarnings("unchecked")
-    public PaymentItem evaluate(ItemContext context) throws PayrollCoreException {
+    public PaymentItem evaluate(ExecutionContext context) throws PayrollCoreException {
         BigDecimal rst = BigDecimal.ZERO;
         for (String itemId : aggregatedItemIds) {
             PaymentItem item = (PaymentItem) context.get(itemId);

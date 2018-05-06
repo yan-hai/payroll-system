@@ -2,9 +2,9 @@ package com.nobodyhub.payroll.core.exception;
 
 import com.nobodyhub.payroll.core.formula.common.Comparator;
 import com.nobodyhub.payroll.core.formula.common.Operator;
-import com.nobodyhub.payroll.core.item.ItemContext;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.payment.PaymentType;
+import com.nobodyhub.payroll.core.task.ExecutionContext;
 import lombok.Getter;
 
 /**
@@ -26,11 +26,11 @@ public enum PayrollCoreExceptionCode {
     /**
      * Can not find required item in the context
      */
-    CONTEXT_NOT_FOUND(ItemContext.class, ""),
+    CONTEXT_NOT_FOUND(ExecutionContext.class, ""),
     /**
      * Item found in the context is incompatible with required
      */
-    CONTEXT_INCOMPATIBLE(ItemContext.class, ""),
+    CONTEXT_INCOMPATIBLE(ExecutionContext.class, ""),
     /**
      * Can not find Item class
      */

@@ -3,7 +3,6 @@ package com.nobodyhub.payroll.core.task;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.FormulaContext;
 import com.nobodyhub.payroll.core.formula.common.Formula;
-import com.nobodyhub.payroll.core.item.ItemContext;
 import lombok.Getter;
 
 /**
@@ -11,25 +10,25 @@ import lombok.Getter;
  */
 @Getter
 public class TaskExecution implements Runnable {
-    private final ItemContext itemContext;
+    private final ExecutionContext executionContext;
     private final ExecutionCallback callback;
 
-    public TaskExecution(ItemContext itemContext, ExecutionCallback callback) {
-        this.itemContext = itemContext;
+    public TaskExecution(ExecutionContext executionContext, ExecutionCallback callback) {
+        this.executionContext = executionContext;
         this.callback = callback;
     }
 
     @Override
     public void run() {
         callback.onStart();
-        FormulaContext formulaContext = itemContext.getTaskContext().getFormulaContext();
+        FormulaContext formulaContext = executionContext.getTaskContext().getFormulaContext();
         for (Formula formula : formulaContext.getFormulas()) {
             try {
-                itemContext.add(formula.evaluate(itemContext));
+                executionContext.add(formula.evaluate(executionContext));
             } catch (PayrollCoreException e) {
-                callback.onError(e, itemContext);
+                callback.onError(e, executionContext);
             }
         }
-        callback.onComplete(itemContext);
+        callback.onComplete(executionContext);
     }
 }

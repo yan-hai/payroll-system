@@ -1,7 +1,6 @@
 package com.nobodyhub.payroll.core.task;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.ItemContext;
 import lombok.Getter;
 
 import java.util.concurrent.ExecutorService;
@@ -24,9 +23,9 @@ public abstract class Task {
         taskContext.getFormulaContext().prioritize();
     }
 
-    public void execute(ItemContext itemContext) throws PayrollCoreException {
-        itemContext.setTaskContext(taskContext);
-        TaskExecution execution = new TaskExecution(itemContext, callback);
+    public void execute(ExecutionContext executionContext) throws PayrollCoreException {
+        executionContext.setTaskContext(taskContext);
+        TaskExecution execution = new TaskExecution(executionContext, callback);
         executorService.execute(execution);
     }
 

@@ -1,9 +1,9 @@
 package com.nobodyhub.payroll.core.formula.common;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.ItemContext;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
+import com.nobodyhub.payroll.core.task.ExecutionContext;
 import lombok.Data;
 
 import java.time.Period;
@@ -53,7 +53,7 @@ public abstract class Formula implements Comparable<Formula> {
      * @return result value of formula evaluated in the <code>context</code>
      * @throws PayrollCoreException
      */
-    public abstract PaymentItem evaluate(ItemContext context) throws PayrollCoreException;
+    public abstract PaymentItem evaluate(ExecutionContext context) throws PayrollCoreException;
 
     /**
      * create a new instance of PaymentItem to store the evaluate result
