@@ -9,7 +9,6 @@ import com.nobodyhub.payroll.core.item.ItemContext;
  * @author Ryan
  */
 public class TaskInstance {
-    //TODO: take consider of job context
     protected TaskContext taskContext;
     protected FormulaContext formulaContext;
 
@@ -18,6 +17,7 @@ public class TaskInstance {
     }
 
     public void execute(ItemContext itemContext) throws PayrollCoreException {
+        itemContext.setTaskContext(taskContext);
         for (Formula formula : formulaContext.getFormulas()) {
             itemContext.add(formula.evaluate(itemContext));
         }
@@ -26,6 +26,4 @@ public class TaskInstance {
     public void afterExec() {
         //empty implementation
     }
-
-
 }
