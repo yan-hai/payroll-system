@@ -33,6 +33,10 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
         this.valueCls = (Class<VT>) value.getClass();
     }
 
+    public VT getValue() {
+        return value != null ? value : getDefaultValue();
+    }
+
     /**
      * provide default value for the item
      *
