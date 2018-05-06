@@ -1,8 +1,10 @@
 package com.nobodyhub.payroll.core.item.payment;
 
+import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.abstr.Item;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * Payment item
@@ -26,5 +28,15 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
     @Override
     public PaymentItem build() {
         return new PaymentItem(itemId, paymentType);
+    }
+
+    /**
+     * add {@link this#value} to the <code>toAggregate</code>
+     *
+     * @param mathContext
+     * @param toAggregate
+     */
+    public BigDecimal aggregate(MathContext mathContext, BigDecimal toAggregate) throws PayrollCoreException {
+        return paymentType.aggregate(mathContext, value, toAggregate);
     }
 }
