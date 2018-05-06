@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.formula.common.Formula;
-import com.nobodyhub.payroll.core.item.ItemContext;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -29,22 +28,14 @@ public class FormulaContext {
     private Map<String, List<Formula>> formulaMap = Maps.newHashMap();
 
     /**
-     * Based on the given <code>itemContext</code>
-     * <p>
-     * assign different priority to formula according to inter-dependencies
-     *
-     * @param itemContext the initial context of items
+     * assign different priority to formula according to inter-dependencies on items
      */
-    public void prioritize(ItemContext itemContext) {
-        Set<String> initialItems = itemContext.getAllItemIds();
+    public void prioritize() {
         Map<String, Node> nodes = Maps.newHashMap();
-
         for (Formula curFormula : formulas) {
             Node curNode = new Node(curFormula);
             nodes.put(curFormula.getFormulaId(), curNode);
-
             Set<String> requiredItems = curFormula.getRequiredItems();
-            requiredItems.removeAll(initialItems);
             for (String itemId : requiredItems) {
                 List<Formula> precedeFormulas = formulaMap.get(itemId);
                 for (Formula preFormula : precedeFormulas) {

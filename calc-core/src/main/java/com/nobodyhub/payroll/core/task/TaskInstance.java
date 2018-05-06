@@ -10,13 +10,22 @@ import com.nobodyhub.payroll.core.item.ItemContext;
  */
 public class TaskInstance {
     //TODO: take consider of job context
-    private TaskContext taskContext;
-    private FormulaContext formulaContext;
+    protected TaskContext taskContext;
+    protected FormulaContext formulaContext;
+
+    public void beforeExec() {
+        formulaContext.prioritize();
+    }
 
     public void execute(ItemContext itemContext) throws PayrollCoreException {
-        formulaContext.prioritize(itemContext);
         for (Formula formula : formulaContext.getFormulas()) {
             itemContext.add(formula.evaluate(itemContext));
         }
     }
+
+    public void afterExec() {
+        //empty implementation
+    }
+
+
 }
