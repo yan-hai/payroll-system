@@ -1,8 +1,8 @@
-package com.nobodyhub.payroll.core.formula.proration;
+package com.nobodyhub.payroll.core.formula.normal.proration;
 
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.formula.common.Formula;
+import com.nobodyhub.payroll.core.formula.normal.Formula;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.ExecutionContext;

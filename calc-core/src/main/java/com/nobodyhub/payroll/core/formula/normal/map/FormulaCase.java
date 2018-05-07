@@ -1,4 +1,4 @@
-package com.nobodyhub.payroll.core.formula.map;
+package com.nobodyhub.payroll.core.formula.normal.map;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.task.ExecutionContext;

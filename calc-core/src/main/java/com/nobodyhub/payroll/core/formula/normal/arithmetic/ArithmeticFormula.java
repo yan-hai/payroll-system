@@ -1,8 +1,8 @@
-package com.nobodyhub.payroll.core.formula.arithmetic;
+package com.nobodyhub.payroll.core.formula.normal.arithmetic;
 
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.formula.common.Formula;
+import com.nobodyhub.payroll.core.formula.normal.Formula;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.ExecutionContext;
 

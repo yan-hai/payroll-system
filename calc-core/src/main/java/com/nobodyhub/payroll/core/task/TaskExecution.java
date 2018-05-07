@@ -2,7 +2,7 @@ package com.nobodyhub.payroll.core.task;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.FormulaContext;
-import com.nobodyhub.payroll.core.formula.common.Formula;
+import com.nobodyhub.payroll.core.formula.normal.Formula;
 import com.nobodyhub.payroll.core.task.callback.Callback;
 import lombok.Getter;
 

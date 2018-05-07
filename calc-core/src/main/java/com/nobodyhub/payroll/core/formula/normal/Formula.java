@@ -1,4 +1,4 @@
-package com.nobodyhub.payroll.core.formula.common;
+package com.nobodyhub.payroll.core.formula.normal;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;

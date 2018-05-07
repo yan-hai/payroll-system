@@ -1,9 +1,9 @@
-package com.nobodyhub.payroll.core.formula.map;
+package com.nobodyhub.payroll.core.formula.normal.map;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.formula.common.Formula;
+import com.nobodyhub.payroll.core.formula.normal.Formula;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.ExecutionContext;
 import lombok.RequiredArgsConstructor;
