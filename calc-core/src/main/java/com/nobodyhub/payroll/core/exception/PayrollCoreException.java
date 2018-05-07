@@ -36,7 +36,7 @@ public final class PayrollCoreException extends Exception {
     }
 
     public PayrollCoreException addValue(String key, Object value) {
-        return addValue(key, value.toString());
+        return addValue(key, convertToString(value));
     }
 
     public PayrollCoreException addMessage(String message) {
@@ -60,5 +60,30 @@ public final class PayrollCoreException extends Exception {
             sb.append("\t[" + entry.getKey() + "]=[" + entry.getValue() + "]\n");
         }
         return sb.toString();
+    }
+
+    /**
+     * handle Object and nested collection/map, e.g., List<Map<String,Set<String>>>
+     *
+     * @param object
+     * @return
+     */
+    private String convertToString(Object object) {
+        if (object instanceof Iterable) {
+            Iterable iterable = (Iterable) object;
+            StringBuilder sb = new StringBuilder();
+            for (Object val : iterable) {
+                sb.append(convertToString(val) + ",");
+            }
+            return sb.toString();
+        } else if (object instanceof Map) {
+            Map map = (Map) object;
+            StringBuilder sb = new StringBuilder();
+            for (Object key : map.keySet()) {
+                sb.append(convertToString(key) + ":" + convertToString(map.get(key)) + ",");
+            }
+            return sb.toString();
+        }
+        return object.toString();
     }
 }
