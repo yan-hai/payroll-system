@@ -6,6 +6,14 @@ option java_outer_classname = "PayrollCoreProtocol";
 package payroll.core.service.proto;
 
 /*
+ * History value for the past
+ */
+message PastValue {
+    string itemId = 1;
+    repeated string value = 2;
+}
+
+/*
  * Request sent for calculation, each per employee
  */
 message Request {
@@ -21,6 +29,10 @@ message Request {
      * the data identified by the <code>dataId</code>
      */
     map<string, string> values = 3;
+    /*
+     * list of history values
+     */
+    repeated PastValue pastValues = 4;
 }
 
 /*
