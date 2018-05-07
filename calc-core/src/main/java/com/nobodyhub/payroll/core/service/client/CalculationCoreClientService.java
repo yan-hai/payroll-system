@@ -10,6 +10,7 @@ import lombok.Getter;
 
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author yan_h
@@ -39,7 +40,7 @@ public class CalculationCoreClientService {
      * @param beforeVals
      * @return
      */
-    public Map<String, Map<String, String>> doCalc(String taskId, Map<String, Map<String, String>> beforeVals) throws InterruptedException {
+    public Map<String, Map<String, String>> calculate(String taskId, Map<String, Map<String, String>> beforeVals) throws InterruptedException {
         final CountDownLatch finishLatch = new CountDownLatch(1);
         Map<String, Map<String, String>> afterVals = Maps.newHashMap();
         StreamObserver<CalculationCoreProtocol.Response> response = new StreamObserver<CalculationCoreProtocol.Response>() {
@@ -71,5 +72,9 @@ public class CalculationCoreClientService {
         request.onCompleted();
         finishLatch.await();
         return afterVals;
+    }
+
+    public void close() throws Exception {
+        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
     }
 }
