@@ -26,7 +26,7 @@ public abstract class Task {
             = Executors.newFixedThreadPool(5);
 
     public void setup() {
-        taskContext.getFormulaContext().prioritize();
+        taskContext.getNormalFormulaContext().prioritize();
     }
 
     public void execute(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
