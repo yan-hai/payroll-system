@@ -19,7 +19,7 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.RETR
 /**
  * @author Ryan
  */
-public class RetroactiveFormula extends Formula {
+public class RetroFormula extends Formula {
     protected Set<String> relatedItemIds = Sets.newHashSet();
 
     public PaymentItem evaluate(List<ExecutionContext> newHistoryValues, List<Map<String, String>> valueMap) throws PayrollCoreException {

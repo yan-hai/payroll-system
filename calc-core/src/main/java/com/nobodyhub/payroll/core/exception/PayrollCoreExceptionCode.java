@@ -2,7 +2,7 @@ package com.nobodyhub.payroll.core.exception;
 
 import com.nobodyhub.payroll.core.formula.common.Comparator;
 import com.nobodyhub.payroll.core.formula.common.Operator;
-import com.nobodyhub.payroll.core.formula.retro.RetroactiveFormula;
+import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.payment.PaymentType;
 import com.nobodyhub.payroll.core.task.ExecutionContext;
@@ -51,7 +51,7 @@ public enum PayrollCoreExceptionCode {
     /**
      * Retroactive formula fail to apply
      */
-    RETRO_FORMULA_FAIL(RetroactiveFormula.class, ""),
+    RETRO_FORMULA_FAIL(RetroFormula.class, ""),
 
     /**
      * TODO: add more codes
