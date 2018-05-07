@@ -24,9 +24,7 @@ public class AggregationFormula extends NormalFormula {
             PaymentItem item = (PaymentItem) context.get(itemId);
             item.aggregate(context.getMathContext(), rst);
         }
-        PaymentItem item = (PaymentItem) getRequiredItems();
-        item.setValue(rst);
-        return item;
+        return createPaymentItem(rst);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 
+import java.math.BigDecimal;
 import java.time.Period;
 import java.util.Set;
 
@@ -46,8 +47,10 @@ public abstract class Formula implements Comparable<NormalFormula>{
      * @return
      * @throws PayrollCoreException
      */
-    protected PaymentItem createPaymentItem() throws PayrollCoreException {
-        return (PaymentItem) itemFactory.getItem(targetItemId);
+    protected PaymentItem createPaymentItem(BigDecimal value) throws PayrollCoreException {
+        PaymentItem item = (PaymentItem) itemFactory.getItem(targetItemId);
+        item.setValue(value);
+        return item;
     }
 
     /**

@@ -44,9 +44,7 @@ public class MapFormula extends NormalFormula {
                 break;
             }
         }
-        PaymentItem item = createPaymentItem();
-        item.setValue(result);
-        return item;
+        return createPaymentItem(result);
     }
 
     @Override

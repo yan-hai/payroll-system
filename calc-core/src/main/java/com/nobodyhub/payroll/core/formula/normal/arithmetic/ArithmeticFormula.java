@@ -21,9 +21,7 @@ public class ArithmeticFormula extends NormalFormula {
     public PaymentItem evaluate(ExecutionContext context) throws PayrollCoreException {
         BigDecimal result = expression.evaluate(context);
         context.add(targetItemId, result);
-        PaymentItem item = createPaymentItem();
-        item.setValue(result);
-        return item;
+        return createPaymentItem(result);
     }
 
     @Override

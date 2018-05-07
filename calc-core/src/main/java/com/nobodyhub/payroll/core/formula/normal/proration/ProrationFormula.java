@@ -26,9 +26,7 @@ public class ProrationFormula extends NormalFormula {
         Item<BigDecimal, ?> payment = itemFactory.getItem(paymentItemId);
 
         BigDecimal rst = part.getValue().multiply(payment.getValue()).divide(total.getValue(), context.getMathContext());
-        PaymentItem item = createPaymentItem();
-        item.setValue(rst);
-        return item;
+        return createPaymentItem(rst);
     }
 
     @Override
