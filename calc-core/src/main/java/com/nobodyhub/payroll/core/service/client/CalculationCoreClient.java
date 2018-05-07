@@ -8,7 +8,7 @@ import java.util.Map;
  * @author yan_h
  * @since 2018-05-07.
  */
-public abstract class CalculationCoreClient {
+public class CalculationCoreClient {
     private final String taskId;
     private final CalculationCoreClientService service;
 
