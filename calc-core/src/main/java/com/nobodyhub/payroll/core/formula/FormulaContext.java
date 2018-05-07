@@ -3,7 +3,7 @@ package com.nobodyhub.payroll.core.formula;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.nobodyhub.payroll.core.formula.normal.Formula;
+import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -20,25 +20,25 @@ public abstract class FormulaContext {
     /**
      * full formula list involved in this context
      */
-    protected List<Formula> formulas = Lists.newLinkedList();
+    protected List<NormalFormula> formulas = Lists.newLinkedList();
     /**
      * Map from target item id to formula
      * several formulas could be applied to the same items id in different period
      */
-    protected Map<String, List<Formula>> formulaMap = Maps.newHashMap();
+    protected Map<String, List<NormalFormula>> formulaMap = Maps.newHashMap();
 
     /**
      * assign different priority to formula according to inter-dependencies on items
      */
     public void prioritize() {
         Map<String, Node> nodes = Maps.newHashMap();
-        for (Formula curFormula : formulas) {
+        for (NormalFormula curFormula : formulas) {
             Node curNode = new Node(curFormula);
             nodes.put(curFormula.getFormulaId(), curNode);
             Set<String> requiredItems = curFormula.getRequiredItems();
             for (String itemId : requiredItems) {
-                List<Formula> precedeFormulas = formulaMap.get(itemId);
-                for (Formula preFormula : precedeFormulas) {
+                List<NormalFormula> precedeFormulas = formulaMap.get(itemId);
+                for (NormalFormula preFormula : precedeFormulas) {
                     Node preNode = nodes.get(preFormula.getFormulaId());
                     if (preNode == null) {
                         preNode = new Node(preFormula);
@@ -54,11 +54,11 @@ public abstract class FormulaContext {
     }
 
     /**
-     * Hash and Equals based on {@link Formula#formulaId}
+     * Hash and Equals based on {@link NormalFormula#formulaId}
      */
     @RequiredArgsConstructor
     private static class Node {
-        final Formula formula;
+        final NormalFormula formula;
         Set<Node> preNodes = Sets.newHashSet();
 
         public void moveForward() {

@@ -3,7 +3,7 @@ package com.nobodyhub.payroll.core.formula.normal.map;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.formula.normal.Formula;
+import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.ExecutionContext;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ import java.util.Set;
  * @since 2018-05-04.
  */
 @RequiredArgsConstructor
-public class MapFormula extends Formula {
+public class MapFormula extends NormalFormula {
     /**
      * Cases of the map
      */

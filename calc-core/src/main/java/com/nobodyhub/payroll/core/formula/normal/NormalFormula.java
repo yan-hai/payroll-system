@@ -10,13 +10,13 @@ import java.time.Period;
 import java.util.Set;
 
 /**
- * Formula applied to PayItems in order to get numeric value
+ * NormalFormula applied to PayItems in order to get numeric value
  *
  * @author yan_h
  * @since 2018-05-04.
  */
 @Data
-public abstract class Formula implements Comparable<Formula> {
+public abstract class NormalFormula implements Comparable<NormalFormula> {
 
     /**
      * the id of item whose value will be evaluated from this formula
@@ -73,7 +73,7 @@ public abstract class Formula implements Comparable<Formula> {
     public abstract Set<String> getRequiredItems();
 
     @Override
-    public int compareTo(Formula o) {
+    public int compareTo(NormalFormula o) {
         return this.priority - o.priority;
     }
 }

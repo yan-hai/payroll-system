@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 /**
- * A Formula formed by Arithmetic Expressions
+ * A NormalFormula formed by Arithmetic Expressions
  *
  * @author Ryan
  */

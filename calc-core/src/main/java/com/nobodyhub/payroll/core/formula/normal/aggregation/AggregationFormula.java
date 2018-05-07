@@ -2,7 +2,7 @@ package com.nobodyhub.payroll.core.formula.normal.aggregation;
 
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.formula.normal.Formula;
+import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.ExecutionContext;
 
@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * @author Ryan
  */
-public class AggregationFormula extends Formula {
+public class AggregationFormula extends NormalFormula {
     protected Set<String> aggregatedItemIds = Sets.newHashSet();
 
     @Override

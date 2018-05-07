@@ -2,7 +2,7 @@ package com.nobodyhub.payroll.core.task;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.FormulaContext;
-import com.nobodyhub.payroll.core.formula.normal.Formula;
+import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.task.callback.Callback;
 import lombok.Getter;
 
@@ -24,7 +24,7 @@ public class TaskExecution implements Runnable {
     public void run() {
         callback.onStart();
         FormulaContext formulaContext = executionContext.getTaskContext().getFormulaContext();
-        for (Formula formula : formulaContext.getFormulas()) {
+        for (NormalFormula formula : formulaContext.getFormulas()) {
             try {
                 executionContext.add(formula.evaluate(executionContext));
             } catch (PayrollCoreException e) {

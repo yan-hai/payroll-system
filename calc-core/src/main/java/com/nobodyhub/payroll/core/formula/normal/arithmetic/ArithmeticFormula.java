@@ -2,7 +2,7 @@ package com.nobodyhub.payroll.core.formula.normal.arithmetic;
 
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.formula.normal.Formula;
+import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.ExecutionContext;
 
@@ -10,11 +10,11 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 /**
- * A Formula formed by Arithmetic Expressions
+ * A NormalFormula formed by Arithmetic Expressions
  *
  * @author Ryan
  */
-public class ArithmeticFormula extends Formula {
+public class ArithmeticFormula extends NormalFormula {
     private FormulaExpression expression;
 
     @Override
