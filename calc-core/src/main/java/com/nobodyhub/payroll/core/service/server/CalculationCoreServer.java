@@ -1,6 +1,6 @@
 package com.nobodyhub.payroll.core.service.server;
 
-import com.nobodyhub.payroll.core.service.ServiceConst;
+import com.nobodyhub.payroll.core.task.TaskFactory;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
@@ -15,17 +15,9 @@ public class CalculationCoreServer {
     private final Server server;
     private final CalculationCoreServerService service;
 
-    public CalculationCoreServer() {
-        this(ServiceConst.DEFAULT_PORT);
-    }
-
-    public CalculationCoreServer(int port) {
-        this(port, new CalculationCoreServerService());
-    }
-
-    public CalculationCoreServer(int port, CalculationCoreServerService service) {
+    public CalculationCoreServer(int port, TaskFactory taskFactory) {
         this.port = port;
-        this.service = service;
+        this.service = new CalculationCoreServerService(taskFactory);
         this.server = ServerBuilder.forPort(port).addService(service).build();
     }
 
