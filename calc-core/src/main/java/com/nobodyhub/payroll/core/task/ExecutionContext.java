@@ -6,6 +6,7 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol;
+import com.nobodyhub.payroll.core.task.status.ExecutionStatus;
 import lombok.Getter;
 
 import java.math.MathContext;

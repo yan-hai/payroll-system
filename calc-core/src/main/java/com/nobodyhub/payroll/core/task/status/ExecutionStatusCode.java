@@ -1,4 +1,4 @@
-package com.nobodyhub.payroll.core.task;
+package com.nobodyhub.payroll.core.task.status;
 
 /**
  * @author Ryan
