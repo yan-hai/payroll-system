@@ -14,7 +14,7 @@ import java.util.concurrent.Phaser;
 @RequiredArgsConstructor
 public class ExecutionCallback implements Callback {
     private final StreamObserver<CalculationCoreProtocol.Response> responseObserver;
-    private final Phaser phaser = new Phaser(0);
+    private final Phaser phaser = new Phaser(1);
 
     @Override
     public void onStart() {
