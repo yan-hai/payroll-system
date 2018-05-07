@@ -19,21 +19,55 @@ public final class CalculationCoreProtocol {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <pre>
+     * the id of task to be triggerred
+     * </pre>
+     *
      * <code>string taskId = 1;</code>
      */
     java.lang.String getTaskId();
     /**
+     * <pre>
+     * the id of task to be triggerred
+     * </pre>
+     *
      * <code>string taskId = 1;</code>
      */
     com.google.protobuf.ByteString
         getTaskIdBytes();
 
     /**
-     * <code>map&lt;string, string&gt; values = 2;</code>
+     * <pre>
+     * the identifier of the &lt;code&gt;values&lt;/code&gt;
+     * </pre>
+     *
+     * <code>string dataId = 2;</code>
+     */
+    java.lang.String getDataId();
+    /**
+     * <pre>
+     * the identifier of the &lt;code&gt;values&lt;/code&gt;
+     * </pre>
+     *
+     * <code>string dataId = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getDataIdBytes();
+
+    /**
+     * <pre>
+     * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 3;</code>
      */
     int getValuesCount();
     /**
-     * <code>map&lt;string, string&gt; values = 2;</code>
+     * <pre>
+     * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 3;</code>
      */
     boolean containsValues(
         java.lang.String key);
@@ -44,25 +78,41 @@ public final class CalculationCoreProtocol {
     java.util.Map<java.lang.String, java.lang.String>
     getValues();
     /**
-     * <code>map&lt;string, string&gt; values = 2;</code>
+     * <pre>
+     * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 3;</code>
      */
     java.util.Map<java.lang.String, java.lang.String>
     getValuesMap();
     /**
-     * <code>map&lt;string, string&gt; values = 2;</code>
+     * <pre>
+     * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 3;</code>
      */
 
     java.lang.String getValuesOrDefault(
         java.lang.String key,
         java.lang.String defaultValue);
     /**
-     * <code>map&lt;string, string&gt; values = 2;</code>
+     * <pre>
+     * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 3;</code>
      */
 
     java.lang.String getValuesOrThrow(
         java.lang.String key);
   }
   /**
+   * <pre>
+   * Request sent for calculation, each per employee
+   * </pre>
+   *
    * Protobuf type {@code payroll.core.service.proto.Request}
    */
   public  static final class Request extends
@@ -76,6 +126,7 @@ public final class CalculationCoreProtocol {
     }
     private Request() {
       taskId_ = "";
+      dataId_ = "";
     }
 
     @java.lang.Override
@@ -116,10 +167,16 @@ public final class CalculationCoreProtocol {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              dataId_ = s;
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 values_ = com.google.protobuf.MapField.newMapField(
                     ValuesDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000004;
               }
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
               values__ = input.readMessage(
@@ -149,7 +206,7 @@ public final class CalculationCoreProtocol {
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 2:
+        case 3:
           return internalGetValues();
         default:
           throw new RuntimeException(
@@ -167,6 +224,10 @@ public final class CalculationCoreProtocol {
     public static final int TASKID_FIELD_NUMBER = 1;
     private volatile java.lang.Object taskId_;
     /**
+     * <pre>
+     * the id of task to be triggerred
+     * </pre>
+     *
      * <code>string taskId = 1;</code>
      */
     public java.lang.String getTaskId() {
@@ -182,6 +243,10 @@ public final class CalculationCoreProtocol {
       }
     }
     /**
+     * <pre>
+     * the id of task to be triggerred
+     * </pre>
+     *
      * <code>string taskId = 1;</code>
      */
     public com.google.protobuf.ByteString
@@ -198,7 +263,49 @@ public final class CalculationCoreProtocol {
       }
     }
 
-    public static final int VALUES_FIELD_NUMBER = 2;
+    public static final int DATAID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object dataId_;
+    /**
+     * <pre>
+     * the identifier of the &lt;code&gt;values&lt;/code&gt;
+     * </pre>
+     *
+     * <code>string dataId = 2;</code>
+     */
+    public java.lang.String getDataId() {
+      java.lang.Object ref = dataId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        dataId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * the identifier of the &lt;code&gt;values&lt;/code&gt;
+     * </pre>
+     *
+     * <code>string dataId = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDataIdBytes() {
+      java.lang.Object ref = dataId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dataId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int VALUES_FIELD_NUMBER = 3;
     private static final class ValuesDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           java.lang.String, java.lang.String> defaultEntry =
@@ -225,7 +332,11 @@ public final class CalculationCoreProtocol {
       return internalGetValues().getMap().size();
     }
     /**
-     * <code>map&lt;string, string&gt; values = 2;</code>
+     * <pre>
+     * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 3;</code>
      */
 
     public boolean containsValues(
@@ -241,14 +352,22 @@ public final class CalculationCoreProtocol {
       return getValuesMap();
     }
     /**
-     * <code>map&lt;string, string&gt; values = 2;</code>
+     * <pre>
+     * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 3;</code>
      */
 
     public java.util.Map<java.lang.String, java.lang.String> getValuesMap() {
       return internalGetValues().getMap();
     }
     /**
-     * <code>map&lt;string, string&gt; values = 2;</code>
+     * <pre>
+     * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 3;</code>
      */
 
     public java.lang.String getValuesOrDefault(
@@ -260,7 +379,11 @@ public final class CalculationCoreProtocol {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;string, string&gt; values = 2;</code>
+     * <pre>
+     * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 3;</code>
      */
 
     public java.lang.String getValuesOrThrow(
@@ -289,12 +412,15 @@ public final class CalculationCoreProtocol {
       if (!getTaskIdBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, taskId_);
       }
+      if (!getDataIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, dataId_);
+      }
       com.google.protobuf.GeneratedMessageV3
         .serializeStringMapTo(
           output,
           internalGetValues(),
           ValuesDefaultEntryHolder.defaultEntry,
-          2);
+          3);
       unknownFields.writeTo(output);
     }
 
@@ -306,6 +432,9 @@ public final class CalculationCoreProtocol {
       if (!getTaskIdBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, taskId_);
       }
+      if (!getDataIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, dataId_);
+      }
       for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
            : internalGetValues().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
@@ -314,7 +443,7 @@ public final class CalculationCoreProtocol {
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(2, values__);
+            .computeMessageSize(3, values__);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -334,6 +463,8 @@ public final class CalculationCoreProtocol {
       boolean result = true;
       result = result && getTaskId()
           .equals(other.getTaskId());
+      result = result && getDataId()
+          .equals(other.getDataId());
       result = result && internalGetValues().equals(
           other.internalGetValues());
       result = result && unknownFields.equals(other.unknownFields);
@@ -349,6 +480,8 @@ public final class CalculationCoreProtocol {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TASKID_FIELD_NUMBER;
       hash = (53 * hash) + getTaskId().hashCode();
+      hash = (37 * hash) + DATAID_FIELD_NUMBER;
+      hash = (53 * hash) + getDataId().hashCode();
       if (!internalGetValues().getMap().isEmpty()) {
         hash = (37 * hash) + VALUES_FIELD_NUMBER;
         hash = (53 * hash) + internalGetValues().hashCode();
@@ -447,6 +580,10 @@ public final class CalculationCoreProtocol {
       return builder;
     }
     /**
+     * <pre>
+     * Request sent for calculation, each per employee
+     * </pre>
+     *
      * Protobuf type {@code payroll.core.service.proto.Request}
      */
     public static final class Builder extends
@@ -462,7 +599,7 @@ public final class CalculationCoreProtocol {
       protected com.google.protobuf.MapField internalGetMapField(
           int number) {
         switch (number) {
-          case 2:
+          case 3:
             return internalGetValues();
           default:
             throw new RuntimeException(
@@ -473,7 +610,7 @@ public final class CalculationCoreProtocol {
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
         switch (number) {
-          case 2:
+          case 3:
             return internalGetMutableValues();
           default:
             throw new RuntimeException(
@@ -506,6 +643,8 @@ public final class CalculationCoreProtocol {
         super.clear();
         taskId_ = "";
 
+        dataId_ = "";
+
         internalGetMutableValues().clear();
         return this;
       }
@@ -532,6 +671,7 @@ public final class CalculationCoreProtocol {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.taskId_ = taskId_;
+        result.dataId_ = dataId_;
         result.values_ = internalGetValues();
         result.values_.makeImmutable();
         result.bitField0_ = to_bitField0_;
@@ -580,6 +720,10 @@ public final class CalculationCoreProtocol {
           taskId_ = other.taskId_;
           onChanged();
         }
+        if (!other.getDataId().isEmpty()) {
+          dataId_ = other.dataId_;
+          onChanged();
+        }
         internalGetMutableValues().mergeFrom(
             other.internalGetValues());
         this.mergeUnknownFields(other.unknownFields);
@@ -612,6 +756,10 @@ public final class CalculationCoreProtocol {
 
       private java.lang.Object taskId_ = "";
       /**
+       * <pre>
+       * the id of task to be triggerred
+       * </pre>
+       *
        * <code>string taskId = 1;</code>
        */
       public java.lang.String getTaskId() {
@@ -627,6 +775,10 @@ public final class CalculationCoreProtocol {
         }
       }
       /**
+       * <pre>
+       * the id of task to be triggerred
+       * </pre>
+       *
        * <code>string taskId = 1;</code>
        */
       public com.google.protobuf.ByteString
@@ -643,6 +795,10 @@ public final class CalculationCoreProtocol {
         }
       }
       /**
+       * <pre>
+       * the id of task to be triggerred
+       * </pre>
+       *
        * <code>string taskId = 1;</code>
        */
       public Builder setTaskId(
@@ -656,6 +812,10 @@ public final class CalculationCoreProtocol {
         return this;
       }
       /**
+       * <pre>
+       * the id of task to be triggerred
+       * </pre>
+       *
        * <code>string taskId = 1;</code>
        */
       public Builder clearTaskId() {
@@ -665,6 +825,10 @@ public final class CalculationCoreProtocol {
         return this;
       }
       /**
+       * <pre>
+       * the id of task to be triggerred
+       * </pre>
+       *
        * <code>string taskId = 1;</code>
        */
       public Builder setTaskIdBytes(
@@ -675,6 +839,95 @@ public final class CalculationCoreProtocol {
   checkByteStringIsUtf8(value);
         
         taskId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object dataId_ = "";
+      /**
+       * <pre>
+       * the identifier of the &lt;code&gt;values&lt;/code&gt;
+       * </pre>
+       *
+       * <code>string dataId = 2;</code>
+       */
+      public java.lang.String getDataId() {
+        java.lang.Object ref = dataId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          dataId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * the identifier of the &lt;code&gt;values&lt;/code&gt;
+       * </pre>
+       *
+       * <code>string dataId = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDataIdBytes() {
+        java.lang.Object ref = dataId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dataId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * the identifier of the &lt;code&gt;values&lt;/code&gt;
+       * </pre>
+       *
+       * <code>string dataId = 2;</code>
+       */
+      public Builder setDataId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        dataId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * the identifier of the &lt;code&gt;values&lt;/code&gt;
+       * </pre>
+       *
+       * <code>string dataId = 2;</code>
+       */
+      public Builder clearDataId() {
+        
+        dataId_ = getDefaultInstance().getDataId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * the identifier of the &lt;code&gt;values&lt;/code&gt;
+       * </pre>
+       *
+       * <code>string dataId = 2;</code>
+       */
+      public Builder setDataIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        dataId_ = value;
         onChanged();
         return this;
       }
@@ -706,7 +959,11 @@ public final class CalculationCoreProtocol {
         return internalGetValues().getMap().size();
       }
       /**
-       * <code>map&lt;string, string&gt; values = 2;</code>
+       * <pre>
+       * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 3;</code>
        */
 
       public boolean containsValues(
@@ -722,14 +979,22 @@ public final class CalculationCoreProtocol {
         return getValuesMap();
       }
       /**
-       * <code>map&lt;string, string&gt; values = 2;</code>
+       * <pre>
+       * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 3;</code>
        */
 
       public java.util.Map<java.lang.String, java.lang.String> getValuesMap() {
         return internalGetValues().getMap();
       }
       /**
-       * <code>map&lt;string, string&gt; values = 2;</code>
+       * <pre>
+       * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 3;</code>
        */
 
       public java.lang.String getValuesOrDefault(
@@ -741,7 +1006,11 @@ public final class CalculationCoreProtocol {
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
-       * <code>map&lt;string, string&gt; values = 2;</code>
+       * <pre>
+       * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 3;</code>
        */
 
       public java.lang.String getValuesOrThrow(
@@ -761,7 +1030,11 @@ public final class CalculationCoreProtocol {
         return this;
       }
       /**
-       * <code>map&lt;string, string&gt; values = 2;</code>
+       * <pre>
+       * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 3;</code>
        */
 
       public Builder removeValues(
@@ -780,7 +1053,11 @@ public final class CalculationCoreProtocol {
         return internalGetMutableValues().getMutableMap();
       }
       /**
-       * <code>map&lt;string, string&gt; values = 2;</code>
+       * <pre>
+       * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 3;</code>
        */
       public Builder putValues(
           java.lang.String key,
@@ -792,7 +1069,11 @@ public final class CalculationCoreProtocol {
         return this;
       }
       /**
-       * <code>map&lt;string, string&gt; values = 2;</code>
+       * <pre>
+       * the data identified by the &lt;code&gt;dataId&lt;/code&gt;
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 3;</code>
        */
 
       public Builder putAllValues(
@@ -855,31 +1136,73 @@ public final class CalculationCoreProtocol {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <pre>
+     * the status code
+     * </pre>
+     *
      * <code>string statusCode = 1;</code>
      */
     java.lang.String getStatusCode();
     /**
+     * <pre>
+     * the status code
+     * </pre>
+     *
      * <code>string statusCode = 1;</code>
      */
     com.google.protobuf.ByteString
         getStatusCodeBytes();
 
     /**
+     * <pre>
+     * the message, if any, to describe the status code
+     * </pre>
+     *
      * <code>string message = 2;</code>
      */
     java.lang.String getMessage();
     /**
+     * <pre>
+     * the message, if any, to describe the status code
+     * </pre>
+     *
      * <code>string message = 2;</code>
      */
     com.google.protobuf.ByteString
         getMessageBytes();
 
     /**
-     * <code>map&lt;string, string&gt; values = 3;</code>
+     * <pre>
+     * the identifier of the &lt;code&gt;values&lt;/code&gt;
+     * </pre>
+     *
+     * <code>string dataId = 3;</code>
+     */
+    java.lang.String getDataId();
+    /**
+     * <pre>
+     * the identifier of the &lt;code&gt;values&lt;/code&gt;
+     * </pre>
+     *
+     * <code>string dataId = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getDataIdBytes();
+
+    /**
+     * <pre>
+     * the result values
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 4;</code>
      */
     int getValuesCount();
     /**
-     * <code>map&lt;string, string&gt; values = 3;</code>
+     * <pre>
+     * the result values
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 4;</code>
      */
     boolean containsValues(
         java.lang.String key);
@@ -890,25 +1213,41 @@ public final class CalculationCoreProtocol {
     java.util.Map<java.lang.String, java.lang.String>
     getValues();
     /**
-     * <code>map&lt;string, string&gt; values = 3;</code>
+     * <pre>
+     * the result values
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 4;</code>
      */
     java.util.Map<java.lang.String, java.lang.String>
     getValuesMap();
     /**
-     * <code>map&lt;string, string&gt; values = 3;</code>
+     * <pre>
+     * the result values
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 4;</code>
      */
 
     java.lang.String getValuesOrDefault(
         java.lang.String key,
         java.lang.String defaultValue);
     /**
-     * <code>map&lt;string, string&gt; values = 3;</code>
+     * <pre>
+     * the result values
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 4;</code>
      */
 
     java.lang.String getValuesOrThrow(
         java.lang.String key);
   }
   /**
+   * <pre>
+   * Response results from calculation, each per employee
+   * </pre>
+   *
    * Protobuf type {@code payroll.core.service.proto.Response}
    */
   public  static final class Response extends
@@ -923,6 +1262,7 @@ public final class CalculationCoreProtocol {
     private Response() {
       statusCode_ = "";
       message_ = "";
+      dataId_ = "";
     }
 
     @java.lang.Override
@@ -969,10 +1309,16 @@ public final class CalculationCoreProtocol {
               break;
             }
             case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              dataId_ = s;
+              break;
+            }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
                 values_ = com.google.protobuf.MapField.newMapField(
                     ValuesDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000008;
               }
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
               values__ = input.readMessage(
@@ -1002,7 +1348,7 @@ public final class CalculationCoreProtocol {
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 3:
+        case 4:
           return internalGetValues();
         default:
           throw new RuntimeException(
@@ -1020,6 +1366,10 @@ public final class CalculationCoreProtocol {
     public static final int STATUSCODE_FIELD_NUMBER = 1;
     private volatile java.lang.Object statusCode_;
     /**
+     * <pre>
+     * the status code
+     * </pre>
+     *
      * <code>string statusCode = 1;</code>
      */
     public java.lang.String getStatusCode() {
@@ -1035,6 +1385,10 @@ public final class CalculationCoreProtocol {
       }
     }
     /**
+     * <pre>
+     * the status code
+     * </pre>
+     *
      * <code>string statusCode = 1;</code>
      */
     public com.google.protobuf.ByteString
@@ -1054,6 +1408,10 @@ public final class CalculationCoreProtocol {
     public static final int MESSAGE_FIELD_NUMBER = 2;
     private volatile java.lang.Object message_;
     /**
+     * <pre>
+     * the message, if any, to describe the status code
+     * </pre>
+     *
      * <code>string message = 2;</code>
      */
     public java.lang.String getMessage() {
@@ -1069,6 +1427,10 @@ public final class CalculationCoreProtocol {
       }
     }
     /**
+     * <pre>
+     * the message, if any, to describe the status code
+     * </pre>
+     *
      * <code>string message = 2;</code>
      */
     public com.google.protobuf.ByteString
@@ -1085,7 +1447,49 @@ public final class CalculationCoreProtocol {
       }
     }
 
-    public static final int VALUES_FIELD_NUMBER = 3;
+    public static final int DATAID_FIELD_NUMBER = 3;
+    private volatile java.lang.Object dataId_;
+    /**
+     * <pre>
+     * the identifier of the &lt;code&gt;values&lt;/code&gt;
+     * </pre>
+     *
+     * <code>string dataId = 3;</code>
+     */
+    public java.lang.String getDataId() {
+      java.lang.Object ref = dataId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        dataId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * the identifier of the &lt;code&gt;values&lt;/code&gt;
+     * </pre>
+     *
+     * <code>string dataId = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDataIdBytes() {
+      java.lang.Object ref = dataId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dataId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int VALUES_FIELD_NUMBER = 4;
     private static final class ValuesDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           java.lang.String, java.lang.String> defaultEntry =
@@ -1112,7 +1516,11 @@ public final class CalculationCoreProtocol {
       return internalGetValues().getMap().size();
     }
     /**
-     * <code>map&lt;string, string&gt; values = 3;</code>
+     * <pre>
+     * the result values
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 4;</code>
      */
 
     public boolean containsValues(
@@ -1128,14 +1536,22 @@ public final class CalculationCoreProtocol {
       return getValuesMap();
     }
     /**
-     * <code>map&lt;string, string&gt; values = 3;</code>
+     * <pre>
+     * the result values
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 4;</code>
      */
 
     public java.util.Map<java.lang.String, java.lang.String> getValuesMap() {
       return internalGetValues().getMap();
     }
     /**
-     * <code>map&lt;string, string&gt; values = 3;</code>
+     * <pre>
+     * the result values
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 4;</code>
      */
 
     public java.lang.String getValuesOrDefault(
@@ -1147,7 +1563,11 @@ public final class CalculationCoreProtocol {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;string, string&gt; values = 3;</code>
+     * <pre>
+     * the result values
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; values = 4;</code>
      */
 
     public java.lang.String getValuesOrThrow(
@@ -1179,12 +1599,15 @@ public final class CalculationCoreProtocol {
       if (!getMessageBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
       }
+      if (!getDataIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, dataId_);
+      }
       com.google.protobuf.GeneratedMessageV3
         .serializeStringMapTo(
           output,
           internalGetValues(),
           ValuesDefaultEntryHolder.defaultEntry,
-          3);
+          4);
       unknownFields.writeTo(output);
     }
 
@@ -1199,6 +1622,9 @@ public final class CalculationCoreProtocol {
       if (!getMessageBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
       }
+      if (!getDataIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, dataId_);
+      }
       for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
            : internalGetValues().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
@@ -1207,7 +1633,7 @@ public final class CalculationCoreProtocol {
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(3, values__);
+            .computeMessageSize(4, values__);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1229,6 +1655,8 @@ public final class CalculationCoreProtocol {
           .equals(other.getStatusCode());
       result = result && getMessage()
           .equals(other.getMessage());
+      result = result && getDataId()
+          .equals(other.getDataId());
       result = result && internalGetValues().equals(
           other.internalGetValues());
       result = result && unknownFields.equals(other.unknownFields);
@@ -1246,6 +1674,8 @@ public final class CalculationCoreProtocol {
       hash = (53 * hash) + getStatusCode().hashCode();
       hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
       hash = (53 * hash) + getMessage().hashCode();
+      hash = (37 * hash) + DATAID_FIELD_NUMBER;
+      hash = (53 * hash) + getDataId().hashCode();
       if (!internalGetValues().getMap().isEmpty()) {
         hash = (37 * hash) + VALUES_FIELD_NUMBER;
         hash = (53 * hash) + internalGetValues().hashCode();
@@ -1344,6 +1774,10 @@ public final class CalculationCoreProtocol {
       return builder;
     }
     /**
+     * <pre>
+     * Response results from calculation, each per employee
+     * </pre>
+     *
      * Protobuf type {@code payroll.core.service.proto.Response}
      */
     public static final class Builder extends
@@ -1359,7 +1793,7 @@ public final class CalculationCoreProtocol {
       protected com.google.protobuf.MapField internalGetMapField(
           int number) {
         switch (number) {
-          case 3:
+          case 4:
             return internalGetValues();
           default:
             throw new RuntimeException(
@@ -1370,7 +1804,7 @@ public final class CalculationCoreProtocol {
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
         switch (number) {
-          case 3:
+          case 4:
             return internalGetMutableValues();
           default:
             throw new RuntimeException(
@@ -1405,6 +1839,8 @@ public final class CalculationCoreProtocol {
 
         message_ = "";
 
+        dataId_ = "";
+
         internalGetMutableValues().clear();
         return this;
       }
@@ -1432,6 +1868,7 @@ public final class CalculationCoreProtocol {
         int to_bitField0_ = 0;
         result.statusCode_ = statusCode_;
         result.message_ = message_;
+        result.dataId_ = dataId_;
         result.values_ = internalGetValues();
         result.values_.makeImmutable();
         result.bitField0_ = to_bitField0_;
@@ -1484,6 +1921,10 @@ public final class CalculationCoreProtocol {
           message_ = other.message_;
           onChanged();
         }
+        if (!other.getDataId().isEmpty()) {
+          dataId_ = other.dataId_;
+          onChanged();
+        }
         internalGetMutableValues().mergeFrom(
             other.internalGetValues());
         this.mergeUnknownFields(other.unknownFields);
@@ -1516,6 +1957,10 @@ public final class CalculationCoreProtocol {
 
       private java.lang.Object statusCode_ = "";
       /**
+       * <pre>
+       * the status code
+       * </pre>
+       *
        * <code>string statusCode = 1;</code>
        */
       public java.lang.String getStatusCode() {
@@ -1531,6 +1976,10 @@ public final class CalculationCoreProtocol {
         }
       }
       /**
+       * <pre>
+       * the status code
+       * </pre>
+       *
        * <code>string statusCode = 1;</code>
        */
       public com.google.protobuf.ByteString
@@ -1547,6 +1996,10 @@ public final class CalculationCoreProtocol {
         }
       }
       /**
+       * <pre>
+       * the status code
+       * </pre>
+       *
        * <code>string statusCode = 1;</code>
        */
       public Builder setStatusCode(
@@ -1560,6 +2013,10 @@ public final class CalculationCoreProtocol {
         return this;
       }
       /**
+       * <pre>
+       * the status code
+       * </pre>
+       *
        * <code>string statusCode = 1;</code>
        */
       public Builder clearStatusCode() {
@@ -1569,6 +2026,10 @@ public final class CalculationCoreProtocol {
         return this;
       }
       /**
+       * <pre>
+       * the status code
+       * </pre>
+       *
        * <code>string statusCode = 1;</code>
        */
       public Builder setStatusCodeBytes(
@@ -1585,6 +2046,10 @@ public final class CalculationCoreProtocol {
 
       private java.lang.Object message_ = "";
       /**
+       * <pre>
+       * the message, if any, to describe the status code
+       * </pre>
+       *
        * <code>string message = 2;</code>
        */
       public java.lang.String getMessage() {
@@ -1600,6 +2065,10 @@ public final class CalculationCoreProtocol {
         }
       }
       /**
+       * <pre>
+       * the message, if any, to describe the status code
+       * </pre>
+       *
        * <code>string message = 2;</code>
        */
       public com.google.protobuf.ByteString
@@ -1616,6 +2085,10 @@ public final class CalculationCoreProtocol {
         }
       }
       /**
+       * <pre>
+       * the message, if any, to describe the status code
+       * </pre>
+       *
        * <code>string message = 2;</code>
        */
       public Builder setMessage(
@@ -1629,6 +2102,10 @@ public final class CalculationCoreProtocol {
         return this;
       }
       /**
+       * <pre>
+       * the message, if any, to describe the status code
+       * </pre>
+       *
        * <code>string message = 2;</code>
        */
       public Builder clearMessage() {
@@ -1638,6 +2115,10 @@ public final class CalculationCoreProtocol {
         return this;
       }
       /**
+       * <pre>
+       * the message, if any, to describe the status code
+       * </pre>
+       *
        * <code>string message = 2;</code>
        */
       public Builder setMessageBytes(
@@ -1648,6 +2129,95 @@ public final class CalculationCoreProtocol {
   checkByteStringIsUtf8(value);
         
         message_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object dataId_ = "";
+      /**
+       * <pre>
+       * the identifier of the &lt;code&gt;values&lt;/code&gt;
+       * </pre>
+       *
+       * <code>string dataId = 3;</code>
+       */
+      public java.lang.String getDataId() {
+        java.lang.Object ref = dataId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          dataId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * the identifier of the &lt;code&gt;values&lt;/code&gt;
+       * </pre>
+       *
+       * <code>string dataId = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDataIdBytes() {
+        java.lang.Object ref = dataId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dataId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * the identifier of the &lt;code&gt;values&lt;/code&gt;
+       * </pre>
+       *
+       * <code>string dataId = 3;</code>
+       */
+      public Builder setDataId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        dataId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * the identifier of the &lt;code&gt;values&lt;/code&gt;
+       * </pre>
+       *
+       * <code>string dataId = 3;</code>
+       */
+      public Builder clearDataId() {
+        
+        dataId_ = getDefaultInstance().getDataId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * the identifier of the &lt;code&gt;values&lt;/code&gt;
+       * </pre>
+       *
+       * <code>string dataId = 3;</code>
+       */
+      public Builder setDataIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        dataId_ = value;
         onChanged();
         return this;
       }
@@ -1679,7 +2249,11 @@ public final class CalculationCoreProtocol {
         return internalGetValues().getMap().size();
       }
       /**
-       * <code>map&lt;string, string&gt; values = 3;</code>
+       * <pre>
+       * the result values
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 4;</code>
        */
 
       public boolean containsValues(
@@ -1695,14 +2269,22 @@ public final class CalculationCoreProtocol {
         return getValuesMap();
       }
       /**
-       * <code>map&lt;string, string&gt; values = 3;</code>
+       * <pre>
+       * the result values
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 4;</code>
        */
 
       public java.util.Map<java.lang.String, java.lang.String> getValuesMap() {
         return internalGetValues().getMap();
       }
       /**
-       * <code>map&lt;string, string&gt; values = 3;</code>
+       * <pre>
+       * the result values
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 4;</code>
        */
 
       public java.lang.String getValuesOrDefault(
@@ -1714,7 +2296,11 @@ public final class CalculationCoreProtocol {
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
-       * <code>map&lt;string, string&gt; values = 3;</code>
+       * <pre>
+       * the result values
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 4;</code>
        */
 
       public java.lang.String getValuesOrThrow(
@@ -1734,7 +2320,11 @@ public final class CalculationCoreProtocol {
         return this;
       }
       /**
-       * <code>map&lt;string, string&gt; values = 3;</code>
+       * <pre>
+       * the result values
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 4;</code>
        */
 
       public Builder removeValues(
@@ -1753,7 +2343,11 @@ public final class CalculationCoreProtocol {
         return internalGetMutableValues().getMutableMap();
       }
       /**
-       * <code>map&lt;string, string&gt; values = 3;</code>
+       * <pre>
+       * the result values
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 4;</code>
        */
       public Builder putValues(
           java.lang.String key,
@@ -1765,7 +2359,11 @@ public final class CalculationCoreProtocol {
         return this;
       }
       /**
-       * <code>map&lt;string, string&gt; values = 3;</code>
+       * <pre>
+       * the result values
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; values = 4;</code>
        */
 
       public Builder putAllValues(
@@ -1853,19 +2451,20 @@ public final class CalculationCoreProtocol {
   static {
     java.lang.String[] descriptorData = {
       "\n\017calc-core.proto\022\032payroll.core.service." +
-      "proto\"\211\001\n\007Request\022\016\n\006taskId\030\001 \001(\t\022?\n\006val" +
-      "ues\030\002 \003(\0132/.payroll.core.service.proto.R" +
-      "equest.ValuesEntry\032-\n\013ValuesEntry\022\013\n\003key" +
-      "\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\240\001\n\010Response\022\022" +
-      "\n\nstatusCode\030\001 \001(\t\022\017\n\007message\030\002 \001(\t\022@\n\006v" +
-      "alues\030\003 \003(\01320.payroll.core.service.proto" +
-      ".Response.ValuesEntry\032-\n\013ValuesEntry\022\013\n\003" +
-      "key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\0012q\n\026Calculat" +
-      "ionCoreService\022W\n\006doCalc\022#.payroll.core." +
-      "service.proto.Request\032$.payroll.core.ser" +
-      "vice.proto.Response(\0010\001BC\n(com.nobodyhub" +
-      ".payroll.core.service.protoB\027Calculation" +
-      "CoreProtocolb\006proto3"
+      "proto\"\231\001\n\007Request\022\016\n\006taskId\030\001 \001(\t\022\016\n\006dat" +
+      "aId\030\002 \001(\t\022?\n\006values\030\003 \003(\0132/.payroll.core" +
+      ".service.proto.Request.ValuesEntry\032-\n\013Va" +
+      "luesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028" +
+      "\001\"\260\001\n\010Response\022\022\n\nstatusCode\030\001 \001(\t\022\017\n\007me" +
+      "ssage\030\002 \001(\t\022\016\n\006dataId\030\003 \001(\t\022@\n\006values\030\004 " +
+      "\003(\01320.payroll.core.service.proto.Respons" +
+      "e.ValuesEntry\032-\n\013ValuesEntry\022\013\n\003key\030\001 \001(" +
+      "\t\022\r\n\005value\030\002 \001(\t:\0028\0012q\n\026CalculationCoreS" +
+      "ervice\022W\n\006doCalc\022#.payroll.core.service." +
+      "proto.Request\032$.payroll.core.service.pro" +
+      "to.Response(\0010\001BC\n(com.nobodyhub.payroll" +
+      ".core.service.protoB\027CalculationCoreProt" +
+      "ocolb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1884,7 +2483,7 @@ public final class CalculationCoreProtocol {
     internal_static_payroll_core_service_proto_Request_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_payroll_core_service_proto_Request_descriptor,
-        new java.lang.String[] { "TaskId", "Values", });
+        new java.lang.String[] { "TaskId", "DataId", "Values", });
     internal_static_payroll_core_service_proto_Request_ValuesEntry_descriptor =
       internal_static_payroll_core_service_proto_Request_descriptor.getNestedTypes().get(0);
     internal_static_payroll_core_service_proto_Request_ValuesEntry_fieldAccessorTable = new
@@ -1896,7 +2495,7 @@ public final class CalculationCoreProtocol {
     internal_static_payroll_core_service_proto_Response_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_payroll_core_service_proto_Response_descriptor,
-        new java.lang.String[] { "StatusCode", "Message", "Values", });
+        new java.lang.String[] { "StatusCode", "Message", "DataId", "Values", });
     internal_static_payroll_core_service_proto_Response_ValuesEntry_descriptor =
       internal_static_payroll_core_service_proto_Response_descriptor.getNestedTypes().get(0);
     internal_static_payroll_core_service_proto_Response_ValuesEntry_fieldAccessorTable = new

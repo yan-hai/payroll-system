@@ -5,17 +5,49 @@ option java_outer_classname = "CalculationCoreProtocol";
 
 package payroll.core.service.proto;
 
+/*
+ * Request sent for calculation, each per employee
+ */
 message Request {
+    /*
+     * the id of task to be triggerred
+     */
     string taskId = 1;
-    map<string, string> values = 2;
-}
-
-message Response {
-    string statusCode = 1;
-    string message = 2;
+    /*
+     * the identifier of the <code>values</code>
+     */
+    string dataId = 2;
+    /*
+     * the data identified by the <code>dataId</code>
+     */
     map<string, string> values = 3;
 }
 
+/*
+ * Response results from calculation, each per employee
+ */
+message Response {
+    /*
+     * the status code
+     */
+    string statusCode = 1;
+    /*
+     * the message, if any, to describe the status code
+     */
+    string message = 2;
+    /*
+     * the identifier of the <code>values</code>
+     */
+    string dataId = 3;
+    /*
+     * the result values
+     */
+    map<string, string> values = 4;
+}
+
 service CalculationCoreService {
+    /*
+     * do calculation on requested data
+     */
     rpc doCalc (stream Request) returns (stream Response);
 }

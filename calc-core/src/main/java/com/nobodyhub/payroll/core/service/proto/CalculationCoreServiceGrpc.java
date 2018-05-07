@@ -93,6 +93,9 @@ public final class CalculationCoreServiceGrpc {
   public static abstract class CalculationCoreServiceImplBase implements io.grpc.BindableService {
 
     /**
+     * <pre>
+     * do calculation on requested data
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol.Request> doCalc(
         io.grpc.stub.StreamObserver<com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol.Response> responseObserver) {
@@ -131,6 +134,9 @@ public final class CalculationCoreServiceGrpc {
     }
 
     /**
+     * <pre>
+     * do calculation on requested data
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol.Request> doCalc(
         io.grpc.stub.StreamObserver<com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol.Response> responseObserver) {
