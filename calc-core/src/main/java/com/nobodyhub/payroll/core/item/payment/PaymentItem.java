@@ -2,6 +2,7 @@ package com.nobodyhub.payroll.core.item.payment;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.common.Item;
+import com.nobodyhub.payroll.core.item.payment.rounding.RoundingRule;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -14,10 +15,17 @@ import java.math.MathContext;
  */
 public class PaymentItem extends Item<BigDecimal, PaymentItem> {
     private final PaymentType paymentType;
+    private final boolean isRetro;
+    private final RoundingRule roundingRule;
 
-    public PaymentItem(String itemId, PaymentType paymentType) {
+    public PaymentItem(String itemId,
+                       PaymentType paymentType,
+                       boolean isRetro,
+                       RoundingRule roundingRule) {
         super(itemId, BigDecimal.class);
         this.paymentType = paymentType;
+        this.isRetro = isRetro;
+        this.roundingRule = roundingRule;
     }
 
     @Override
@@ -32,7 +40,12 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
 
     @Override
     public PaymentItem build() {
-        return new PaymentItem(itemId, paymentType);
+        return new PaymentItem(itemId, paymentType, isRetro, roundingRule);
+    }
+
+    @Override
+    public BigDecimal getValue() {
+        return roundingRule.round(super.getValue());
     }
 
     /**
