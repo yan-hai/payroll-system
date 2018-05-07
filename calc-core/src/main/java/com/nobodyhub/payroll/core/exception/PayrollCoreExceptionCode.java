@@ -2,6 +2,7 @@ package com.nobodyhub.payroll.core.exception;
 
 import com.nobodyhub.payroll.core.formula.common.Comparator;
 import com.nobodyhub.payroll.core.formula.common.Operator;
+import com.nobodyhub.payroll.core.formula.retro.RetroactiveFormula;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.payment.PaymentType;
 import com.nobodyhub.payroll.core.task.ExecutionContext;
@@ -46,7 +47,16 @@ public enum PayrollCoreExceptionCode {
     /**
      * Unimplemented handler for {@link PaymentType}
      */
-    PAYMENTTYPE_UNIMPLEMENTED(PaymentType.class, ""),;
+    PAYMENTTYPE_UNIMPLEMENTED(PaymentType.class, ""),
+    /**
+     * Retroactive formula fail to apply
+     */
+    RETRO_FORMULA_FAIL(RetroactiveFormula.class, ""),
+
+    /**
+     * TODO: add more codes
+     */
+    ;
 
     /**
      * The class which throws the exception
