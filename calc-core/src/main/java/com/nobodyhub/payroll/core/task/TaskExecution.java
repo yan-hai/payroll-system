@@ -14,6 +14,7 @@ public class TaskExecution implements Runnable {
     private final ExecutionContext executionContext;
     private final Callback callback;
 
+
     public TaskExecution(ExecutionContext executionContext, Callback callback) {
         this.executionContext = executionContext;
         this.callback = callback;
@@ -30,6 +31,6 @@ public class TaskExecution implements Runnable {
                 callback.onError(e, executionContext);
             }
         }
-        callback.onComplete(executionContext);
+        callback.onCompleted(executionContext);
     }
 }

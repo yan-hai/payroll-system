@@ -2,7 +2,7 @@ package com.nobodyhub.payroll.core.task;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.task.callback.Callback;
-import lombok.Getter;
+import lombok.Data;
 
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -13,13 +13,17 @@ import java.util.concurrent.Executors;
  *
  * @author Ryan
  */
-@Getter
+@Data
 public abstract class Task {
-    protected String taskId;
-    protected TaskContext taskContext;
+    protected final String taskId;
+    protected final TaskContext taskContext;
     private Callback callback;
 
-    private ExecutorService executorService = Executors.newFixedThreadPool(5);
+    /**
+     * TODO: use ThreadPoolExecutor instead and decide the pool size based on the # of CPUs
+     */
+    private static final ExecutorService executorService
+            = Executors.newFixedThreadPool(5);
 
     public void setup() {
         taskContext.getFormulaContext().prioritize();
