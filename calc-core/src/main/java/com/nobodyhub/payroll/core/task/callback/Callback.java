@@ -26,5 +26,5 @@ public interface Callback {
      *
      * @param context
      */
-    void onComplete(ExecutionContext context);
+    void onCompleted(ExecutionContext context);
 }
