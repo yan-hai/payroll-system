@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 option java_package = "com.nobodyhub.payroll.core.service.proto";
-option java_outer_classname = "CalculationCoreProtocol";
+option java_outer_classname = "PayrollCoreProtocol";
 
 package payroll.core.service.proto;
 
@@ -45,7 +45,7 @@ message Response {
     map<string, string> values = 4;
 }
 
-service CalculationCoreService {
+service PayrollCoreService {
     /*
      * do calculation on requested data
      */

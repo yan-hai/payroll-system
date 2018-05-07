@@ -5,7 +5,7 @@ import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.common.Item;
-import com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol;
+import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatus;
 import lombok.Getter;
 
@@ -61,12 +61,12 @@ public class ExecutionContext {
         }
     }
 
-    public CalculationCoreProtocol.Response toResponse() {
+    public PayrollCoreProtocol.Response toResponse() {
         Map<String, String> values = Maps.newHashMap();
         for (Item item : items.values()) {
             values.put(item.getItemId(), item.getValueAsString());
         }
-        return CalculationCoreProtocol.Response.newBuilder()
+        return PayrollCoreProtocol.Response.newBuilder()
                 .setStatusCode(executionStatus.getStatusCode().toString())
                 .setMessage(executionStatus.getMessage())
                 .setDataId(dataId)

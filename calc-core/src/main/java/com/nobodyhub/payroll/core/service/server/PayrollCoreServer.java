@@ -10,14 +10,14 @@ import java.io.IOException;
  * @author yan_h
  * @since 2018-05-07.
  */
-public class CalculationCoreServer {
+public class PayrollCoreServer {
     private final int port;
     private final Server server;
-    private final CalculationCoreServerService service;
+    private final PayrollCoreServerService service;
 
-    public CalculationCoreServer(int port, TaskFactory taskFactory) {
+    public PayrollCoreServer(int port, TaskFactory taskFactory) {
         this.port = port;
-        this.service = new CalculationCoreServerService(taskFactory);
+        this.service = new PayrollCoreServerService(taskFactory);
         this.server = ServerBuilder.forPort(port).addService(service).build();
     }
 
@@ -26,7 +26,7 @@ public class CalculationCoreServer {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-                CalculationCoreServer.this.stop();
+                PayrollCoreServer.this.stop();
             }
         });
     }

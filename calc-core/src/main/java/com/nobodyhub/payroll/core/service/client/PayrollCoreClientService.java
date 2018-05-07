@@ -1,8 +1,8 @@
 package com.nobodyhub.payroll.core.service.client;
 
 import com.google.common.collect.Maps;
-import com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol;
-import com.nobodyhub.payroll.core.service.proto.CalculationCoreServiceGrpc;
+import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
+import com.nobodyhub.payroll.core.service.proto.PayrollCoreServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
@@ -16,22 +16,22 @@ import java.util.concurrent.TimeUnit;
  * @author yan_h
  * @since 2018-05-07.
  */
-public class CalculationCoreClientService {
+public class PayrollCoreClientService {
     @Getter
     private final String host;
     @Getter
     private final int port;
 
     private final ManagedChannel channel;
-    private final CalculationCoreServiceGrpc.CalculationCoreServiceStub asyncStub;
+    private final PayrollCoreServiceGrpc.PayrollCoreServiceStub asyncStub;
 
 
-    public CalculationCoreClientService(String host, int port) {
+    public PayrollCoreClientService(String host, int port) {
         this.host = host;
         this.port = port;
         ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forAddress(host, port).usePlaintext();
         this.channel = channelBuilder.build();
-        this.asyncStub = CalculationCoreServiceGrpc.newStub(channel);
+        this.asyncStub = PayrollCoreServiceGrpc.newStub(channel);
     }
 
     /**
@@ -43,9 +43,9 @@ public class CalculationCoreClientService {
     public Map<String, Map<String, String>> calculate(String taskId, Map<String, Map<String, String>> beforeVals) throws InterruptedException {
         final CountDownLatch finishLatch = new CountDownLatch(1);
         Map<String, Map<String, String>> afterVals = Maps.newHashMap();
-        StreamObserver<CalculationCoreProtocol.Response> response = new StreamObserver<CalculationCoreProtocol.Response>() {
+        StreamObserver<PayrollCoreProtocol.Response> response = new StreamObserver<PayrollCoreProtocol.Response>() {
             @Override
-            public void onNext(CalculationCoreProtocol.Response value) {
+            public void onNext(PayrollCoreProtocol.Response value) {
                 afterVals.put(value.getDataId(), value.getValuesMap());
             }
 
@@ -60,9 +60,9 @@ public class CalculationCoreClientService {
             }
         };
 
-        StreamObserver<CalculationCoreProtocol.Request> request = asyncStub.doCalc(response);
+        StreamObserver<PayrollCoreProtocol.Request> request = asyncStub.doCalc(response);
         for (Map.Entry<String, Map<String, String>> entry : beforeVals.entrySet()) {
-            CalculationCoreProtocol.Request reqData = CalculationCoreProtocol.Request.newBuilder()
+            PayrollCoreProtocol.Request reqData = PayrollCoreProtocol.Request.newBuilder()
                     .setTaskId(taskId)
                     .setDataId(entry.getKey())
                     .putAllValues(entry.getValue())

@@ -1,6 +1,6 @@
 package com.nobodyhub.payroll.core.task.callback;
 
-import com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol;
+import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.ExecutionContext;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatusCode;
 import io.grpc.stub.StreamObserver;
@@ -13,7 +13,7 @@ import java.util.concurrent.Phaser;
  */
 @RequiredArgsConstructor
 public class ExecutionCallback implements Callback {
-    private final StreamObserver<CalculationCoreProtocol.Response> responseObserver;
+    private final StreamObserver<PayrollCoreProtocol.Response> responseObserver;
     private final Phaser phaser = new Phaser(1);
 
     @Override

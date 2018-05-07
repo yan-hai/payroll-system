@@ -1,8 +1,8 @@
 package com.nobodyhub.payroll.core.service.server;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.service.proto.CalculationCoreProtocol;
-import com.nobodyhub.payroll.core.service.proto.CalculationCoreServiceGrpc;
+import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
+import com.nobodyhub.payroll.core.service.proto.PayrollCoreServiceGrpc;
 import com.nobodyhub.payroll.core.task.Task;
 import com.nobodyhub.payroll.core.task.TaskFactory;
 import com.nobodyhub.payroll.core.task.callback.ExecutionCallback;
@@ -11,21 +11,21 @@ import io.grpc.stub.StreamObserver;
 /**
  * @author Ryan
  */
-public class CalculationCoreServerService extends CalculationCoreServiceGrpc.CalculationCoreServiceImplBase {
+public class PayrollCoreServerService extends PayrollCoreServiceGrpc.PayrollCoreServiceImplBase {
     protected final TaskFactory taskFactory;
 
-    public CalculationCoreServerService(TaskFactory taskFactory) {
+    public PayrollCoreServerService(TaskFactory taskFactory) {
         this.taskFactory = taskFactory;
     }
 
     @Override
-    public StreamObserver<CalculationCoreProtocol.Request> doCalc(StreamObserver<CalculationCoreProtocol.Response> responseObserver) {
+    public StreamObserver<PayrollCoreProtocol.Request> doCalc(StreamObserver<PayrollCoreProtocol.Response> responseObserver) {
         final ExecutionCallback callback = new ExecutionCallback(responseObserver);
-        return new StreamObserver<CalculationCoreProtocol.Request>() {
+        return new StreamObserver<PayrollCoreProtocol.Request>() {
             Task task = null;
 
             @Override
-            public void onNext(CalculationCoreProtocol.Request value) {
+            public void onNext(PayrollCoreProtocol.Request value) {
                 if (task == null) {
                     Task task = taskFactory.get(value.getTaskId());
                     task.setCallback(callback);

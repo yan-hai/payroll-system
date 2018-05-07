@@ -8,18 +8,18 @@ import java.util.Map;
  * @author yan_h
  * @since 2018-05-07.
  */
-public class CalculationCoreClient {
+public class PayrollCoreClient {
     private final String taskId;
-    private final CalculationCoreClientService service;
+    private final PayrollCoreClientService service;
 
 
-    public CalculationCoreClient(String taskId, String host) {
+    public PayrollCoreClient(String taskId, String host) {
         this(taskId, host, ServiceConst.DEFAULT_PORT);
     }
 
-    public CalculationCoreClient(String taskId, String host, int port) {
+    public PayrollCoreClient(String taskId, String host, int port) {
         this.taskId = taskId;
-        this.service = new CalculationCoreClientService(host, port);
+        this.service = new PayrollCoreClientService(host, port);
     }
 
     public Map<String, Map<String, String>> calculate(Map<String, Map<String, String>> beforeVals) throws InterruptedException {
