@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
+ * Checked Exception for any error within calc-core
+ *
  * @author yan_h
  * @since 2018-05-04.
  */
@@ -52,10 +54,10 @@ public final class PayrollCoreException extends Exception {
     @Override
     public String getMessage() {
         StringBuilder sb = new StringBuilder("\n");
-        sb.append("Exception happens with code: [" + code + "]\n");
+        sb.append("** Exception Code: [" + code + "]\n");
         sb.append("** Values:\n");
         for (Map.Entry<String, String> entry : values.entrySet()) {
-            sb.append("\t[" + entry.getKey() + "]=[" + entry.getValue() + "]");
+            sb.append("\t[" + entry.getKey() + "]=[" + entry.getValue() + "]\n");
         }
         return sb.toString();
     }

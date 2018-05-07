@@ -8,7 +8,7 @@ import com.nobodyhub.payroll.core.task.ExecutionContext;
 import lombok.Getter;
 
 /**
- * Error Code
+ * Error Code for different type of error
  *
  * @author yan_h
  * @since 2018-05-04.
@@ -61,5 +61,4 @@ public enum PayrollCoreExceptionCode {
         this.clazz = clazz;
         this.msgId = msgId;
     }
-
 }
