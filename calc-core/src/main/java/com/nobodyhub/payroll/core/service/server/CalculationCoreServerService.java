@@ -10,7 +10,6 @@ import com.nobodyhub.payroll.core.task.callback.ExecutionCallback;
 import io.grpc.stub.StreamObserver;
 
 import java.util.Set;
-import java.util.concurrent.Phaser;
 
 /**
  * @author Ryan
@@ -33,7 +32,7 @@ public class CalculationCoreServerService extends CalculationCoreServiceGrpc.Cal
                 Task task = taskManager.get(value.getTaskId());
                 task.setCallback(callback);
                 try {
-                    task.execute(value.getValuesMap());
+                    task.execute(value.getDataId(), value.getValuesMap());
                 } catch (PayrollCoreException e) {
                     onError(e);
                 }
@@ -47,6 +46,7 @@ public class CalculationCoreServerService extends CalculationCoreServiceGrpc.Cal
             @Override
             public void onCompleted() {
                 callback.await();
+                responseObserver.onCompleted();
                 taskManager.clear(taskIds);
             }
         };

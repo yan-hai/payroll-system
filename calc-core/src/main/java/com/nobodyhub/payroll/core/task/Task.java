@@ -29,8 +29,8 @@ public abstract class Task {
         taskContext.getFormulaContext().prioritize();
     }
 
-    public void execute(Map<String, String> valueMap) throws PayrollCoreException {
-        ExecutionContext executionContext = createExecutionContext(valueMap);
+    public void execute(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
+        ExecutionContext executionContext = createExecutionContext(dataId, valueMap);
         TaskExecution execution = new TaskExecution(executionContext, callback);
         executorService.execute(execution);
     }
@@ -39,8 +39,8 @@ public abstract class Task {
         //empty implementation
     }
 
-    private ExecutionContext createExecutionContext(Map<String, String> valueMap) throws PayrollCoreException {
-        ExecutionContext executionContext = new ExecutionContext(taskContext);
+    private ExecutionContext createExecutionContext(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
+        ExecutionContext executionContext = new ExecutionContext(dataId, taskContext);
         executionContext.addAll(valueMap);
         return executionContext;
     }

@@ -20,6 +20,10 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONT
 @Getter
 public class ExecutionContext {
     /**
+     * the identifier of the data in <code>items</code>
+     */
+    protected final String dataId;
+    /**
      * the context contains all items
      */
     protected final Map<String, Item> items = Maps.newHashMap();
@@ -36,7 +40,8 @@ public class ExecutionContext {
      */
     protected final ItemFactory itemFactory;
 
-    public ExecutionContext(TaskContext taskContext) {
+    public ExecutionContext(String dataId, TaskContext taskContext) {
+        this.dataId = dataId;
         this.taskContext = taskContext;
         this.itemFactory = taskContext.getItemFactory();
     }
@@ -63,6 +68,7 @@ public class ExecutionContext {
         return CalculationCoreProtocol.Response.newBuilder()
                 .setStatusCode(executionStatus.getStatusCode().toString())
                 .setMessage(executionStatus.getMessage())
+                .setDataId(dataId)
                 .putAllValues(values)
                 .build();
     }
