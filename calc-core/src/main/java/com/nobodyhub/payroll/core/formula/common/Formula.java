@@ -4,6 +4,7 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.Period;
@@ -12,7 +13,8 @@ import java.util.Set;
 /**
  * @author Ryan
  */
-public abstract class Formula implements Comparable<NormalFormula>{
+@Data
+public abstract class Formula implements Comparable<Formula>{
     /**
      * the id of item whose value will be evaluated from this formula
      */
@@ -61,7 +63,7 @@ public abstract class Formula implements Comparable<NormalFormula>{
     public abstract Set<String> getRequiredItems();
 
     @Override
-    public int compareTo(NormalFormula o) {
+    public int compareTo(Formula o) {
         return this.priority - o.priority;
     }
 }

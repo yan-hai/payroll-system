@@ -12,7 +12,6 @@ import lombok.Data;
  * @author yan_h
  * @since 2018-05-04.
  */
-@Data
 public abstract class NormalFormula extends Formula {
     /**
      * Calculate the result value of applying the formula
