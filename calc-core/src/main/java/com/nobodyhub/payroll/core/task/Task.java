@@ -1,6 +1,8 @@
 package com.nobodyhub.payroll.core.task;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.service.data.HistoryData;
+import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.callback.Callback;
 import lombok.Data;
 
@@ -17,29 +19,71 @@ import java.util.concurrent.Executors;
 public abstract class Task {
     protected final String taskId;
     protected final TaskContext taskContext;
-    private Callback callback;
+    protected Callback callback;
 
     /**
      * TODO: use ThreadPoolExecutor instead and decide the pool size based on the # of CPUs
      */
-    private static final ExecutorService executorService
+    protected static final ExecutorService executorService
             = Executors.newFixedThreadPool(5);
 
     public void setup() {
         taskContext.getNormalFormulaContext().prioritize();
+        taskContext.getRetroFormulaContext().prioritize();
     }
 
-    public void execute(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
-        ExecutionContext executionContext = createExecutionContext(dataId, valueMap);
-        TaskExecution execution = new TaskExecution(executionContext, callback);
+    /**
+     * Execute normal task
+     *
+     * @param dataId
+     * @param valueMap
+     * @throws PayrollCoreException
+     */
+    protected void executeNormal(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
+        TaskExecution execution = new TaskExecution(
+                createExecutionContext(dataId, valueMap),
+                callback);
         executorService.execute(execution);
+    }
+
+    /**
+     * Execute retro task
+     *
+     * @param dataId
+     * @param valueMap
+     * @param historyData
+     * @throws PayrollCoreException
+     */
+    protected void executeRetro(String dataId, Map<String, String> valueMap, HistoryData historyData) throws PayrollCoreException {
+        RetroTaskExecution execution = new RetroTaskExecution(
+                createExecutionContext(dataId, valueMap),
+                historyData,
+                callback);
+        executorService.execute(execution);
+    }
+
+    /**
+     * Execute Task
+     *
+     * @param value
+     * @throws PayrollCoreException
+     */
+    public void execute(PayrollCoreProtocol.Request value) throws PayrollCoreException {
+        HistoryData historyData = new HistoryData(value.getHistoriesMap());
+        if (!historyData.isEmpty()) {
+            //retroactive calculation
+            executeRetro(value.getDataId(), value.getValuesMap(), historyData);
+        } else {
+            //normal calculation
+            executeNormal(value.getDataId(), value.getValuesMap());
+        }
     }
 
     public void cleanup() {
         //empty implementation
     }
 
-    private ExecutionContext createExecutionContext(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
+    protected ExecutionContext createExecutionContext(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
         ExecutionContext executionContext = new ExecutionContext(dataId, taskContext);
         executionContext.addAll(valueMap);
         return executionContext;

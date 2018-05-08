@@ -31,7 +31,7 @@ public class PayrollCoreServerService extends PayrollCoreServiceGrpc.PayrollCore
                     task.setCallback(callback);
                 }
                 try {
-                    task.execute(value.getDataId(), value.getValuesMap());
+                    task.execute(value);
                 } catch (PayrollCoreException e) {
                     onError(e);
                 }
@@ -49,6 +49,4 @@ public class PayrollCoreServerService extends PayrollCoreServiceGrpc.PayrollCore
             }
         };
     }
-
-
 }
