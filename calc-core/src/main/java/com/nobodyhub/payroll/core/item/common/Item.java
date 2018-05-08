@@ -4,10 +4,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Base class for all kinds of items used in payroll system
+ * Item stands for the data that are used during the calculation
  *
- * @param <VT> value type of the item
- * @param <IT> the type of subclass
+ * @param <VT> Value Type, type of raw value of this item
+ * @param <IT> Item Type, the type of subclass
  * @author yan_h
  * @since 2018-05-04.
  */
@@ -27,7 +27,11 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      */
     protected VT value;
 
-    @SuppressWarnings("unchecked")
+    /**
+     * set the item's raw value
+     *
+     * @param value
+     */
     public void setValue(VT value) {
         this.value = value;
     }
@@ -48,6 +52,11 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
         return value.toString();
     }
 
+    /**
+     * get the raw value of item
+     *
+     * @return
+     */
     public VT getValue() {
         return value != null ? value : getDefaultValue();
     }
