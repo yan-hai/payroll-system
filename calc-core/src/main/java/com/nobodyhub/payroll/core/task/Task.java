@@ -1,9 +1,12 @@
 package com.nobodyhub.payroll.core.task;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.service.data.HistoryData;
+import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.callback.Callback;
+import com.nobodyhub.payroll.core.task.execution.context.ExecutionContext;
+import com.nobodyhub.payroll.core.task.execution.RetroTaskExecution;
+import com.nobodyhub.payroll.core.task.execution.TaskExecution;
 import lombok.Data;
 
 import java.util.Map;

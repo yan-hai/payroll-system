@@ -1,6 +1,6 @@
 package com.nobodyhub.payroll.core.task.callback;
 
-import com.nobodyhub.payroll.core.task.ExecutionContext;
+import com.nobodyhub.payroll.core.task.execution.context.ExecutionContext;
 
 /**
  * Callbacks for the execution

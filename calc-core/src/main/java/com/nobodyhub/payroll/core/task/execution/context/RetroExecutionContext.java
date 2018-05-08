@@ -1,7 +1,8 @@
-package com.nobodyhub.payroll.core.task;
+package com.nobodyhub.payroll.core.task.execution.context;
 
 import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.task.TaskContext;
 import lombok.Getter;
 
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.nobodyhub.payroll.core.service;
+package com.nobodyhub.payroll.core.service.common;
 
 /**
  * @author yan_h

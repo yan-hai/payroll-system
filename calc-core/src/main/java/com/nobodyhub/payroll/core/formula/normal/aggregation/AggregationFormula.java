@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
-import com.nobodyhub.payroll.core.task.ExecutionContext;
+import com.nobodyhub.payroll.core.task.execution.context.ExecutionContext;
 
 import java.math.BigDecimal;
 import java.util.HashSet;

@@ -1,6 +1,6 @@
 package com.nobodyhub.payroll.core.service.client;
 
-import com.nobodyhub.payroll.core.service.ServiceConst;
+import com.nobodyhub.payroll.core.service.common.ServiceConst;
 
 import java.util.Map;
 
