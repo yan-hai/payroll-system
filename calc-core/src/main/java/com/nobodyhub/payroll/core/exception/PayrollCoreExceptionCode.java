@@ -5,6 +5,7 @@ import com.nobodyhub.payroll.core.formula.common.Operator;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.payment.PaymentType;
+import com.nobodyhub.payroll.core.service.data.HistoryData;
 import com.nobodyhub.payroll.core.task.ExecutionContext;
 import lombok.Getter;
 
@@ -52,6 +53,10 @@ public enum PayrollCoreExceptionCode {
      * Retroactive formula fail to apply
      */
     RETRO_FORMULA_FAIL(RetroFormula.class, ""),
+    /**
+     * Format of History values is wrong
+     */
+    HISTORY_DATE_MALFORMED(HistoryData.class, "")
 
     /**
      * TODO: add more codes
