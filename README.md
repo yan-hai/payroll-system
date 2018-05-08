@@ -7,4 +7,4 @@ A **extensible** and **scalable** payroll system based on various kinds of items
 1. Link Fixed Salary with HR information, like position
 1. Proration based on attendence information
 1. Aggregation
-1. Retroactive (caller needs to handle)
+1. Retroactive
