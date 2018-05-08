@@ -6,7 +6,7 @@ import com.nobodyhub.payroll.core.util.DateFormatUtils;
 import java.time.LocalDateTime;
 
 /**
- * Date&Time HR item
+ * [HR] HR item with DateTime value
  *
  * @author yan_h
  * @since 2018-05-04.

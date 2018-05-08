@@ -10,13 +10,20 @@ import java.util.Map;
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACTORY_NOT_FOUND;
 
 /**
- * The factory class that is responsible for generating
+ * The factory class that is responsible for building items instances
  *
  * @author Ryan
  */
 public abstract class ItemFactory {
     private Map<String, ItemBuilder> itemBuilders = Maps.newHashMap();
 
+    /**
+     * Build item instance of given itemId
+     *
+     * @param itemId
+     * @return
+     * @throws PayrollCoreException
+     */
     public Item getItem(String itemId) throws PayrollCoreException {
         ItemBuilder builder = itemBuilders.get(itemId);
         if (builder == null) {
@@ -26,5 +33,8 @@ public abstract class ItemFactory {
         return (Item) builder.build();
     }
 
-    public abstract void initItemClassMap();
+    /**
+     * load available builders of items
+     */
+    public abstract void loadBuilders();
 }

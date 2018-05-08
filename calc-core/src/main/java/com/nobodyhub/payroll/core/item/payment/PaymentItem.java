@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 
 /**
- * Payment item
+ * [Payment] Payitem with BigDecimal type
  *
  * @author yan_h
  * @since 2018-05-04.

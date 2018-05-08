@@ -3,7 +3,7 @@ package com.nobodyhub.payroll.core.item.hr;
 import com.nobodyhub.payroll.core.item.common.Item;
 
 /**
- * String HR item
+ * [HR] HR item with String value
  *
  * @author yan_h
  * @since 2018-05-04.

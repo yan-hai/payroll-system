@@ -8,6 +8,8 @@ import java.math.MathContext;
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.PAYMENTTYPE_UNIMPLEMENTED;
 
 /**
+ * The type of payment items
+ *
  * @author yan_h
  * @since 2018-05-04.
  */

@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
+ * Rounding Rule
+ *
  * @author yan_h
  * @since 2018-05-07.
  */
@@ -24,13 +26,16 @@ public enum RoundingRule {
      */
     ;
 
-    private RoundingProcessor handler;
+    /**
+     * the processor for rounding
+     */
+    private RoundingProcessor processor;
 
-    RoundingRule(RoundingProcessor handler) {
-        this.handler = handler;
+    RoundingRule(RoundingProcessor processor) {
+        this.processor = processor;
     }
 
     public BigDecimal round(BigDecimal before) {
-        return handler.round(before);
+        return processor.round(before);
     }
 }

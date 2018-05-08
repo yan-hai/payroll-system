@@ -5,7 +5,7 @@ import com.nobodyhub.payroll.core.item.common.Item;
 import java.math.BigDecimal;
 
 /**
- * Number HR item
+ * [HR] HR item with Numeric(Integer/Decimal) value
  *
  * @author yan_h
  * @since 2018-05-04.

@@ -5,7 +5,7 @@ import com.nobodyhub.payroll.core.item.common.Item;
 import java.math.BigDecimal;
 
 /**
- * Number of times
+ * [Attendence] Number of times
  *
  * @author yan_h
  * @since 2018-05-04.
