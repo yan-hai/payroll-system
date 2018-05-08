@@ -56,7 +56,11 @@ public enum PayrollCoreExceptionCode {
     /**
      * Format of History values is wrong
      */
-    HISTORY_DATE_MALFORMED(HistoryData.class, "")
+    HISTORY_DATA_MALFORMED(HistoryData.class, ""),
+    /**
+     * Invalid History Data
+     */
+    HISTORY_DATA_INVALID(HistoryData.class, "")
 
     /**
      * TODO: add more codes
