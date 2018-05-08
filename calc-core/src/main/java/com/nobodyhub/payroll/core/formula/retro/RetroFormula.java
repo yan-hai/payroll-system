@@ -7,6 +7,7 @@ import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.ExecutionContext;
+import com.nobodyhub.payroll.core.task.RetroExecutionContext;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -22,19 +23,14 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.RETR
 public class RetroFormula extends Formula {
     protected Set<String> relatedItemIds = Sets.newHashSet();
 
-    public PaymentItem evaluate(List<ExecutionContext> newHistoryValues, List<Map<String, String>> valueMap) throws PayrollCoreException {
-        if (newHistoryValues.size() != valueMap.size()) {
-            throw new PayrollCoreException(RETRO_FORMULA_FAIL)
-                    .addValue("newHistoryValues", newHistoryValues)
-                    .addValue("valueMap", valueMap);
-        }
+    public PaymentItem evaluate(List<RetroExecutionContext> retroContexts) throws PayrollCoreException {
         Map<String, BigDecimal> diffValues = Maps.newHashMap();
-        for (int idx = 0; idx < newHistoryValues.size(); idx++) {
-            ExecutionContext newValues = newHistoryValues.get(idx);
-            Map<String, String> oldValues = valueMap.get(idx);
+        for (RetroExecutionContext retroCtx: retroContexts) {
+            Map<String, String> oldValues = retroCtx.getOriginalValues();
             for (String itemId : relatedItemIds) {
-                Item item = newValues.get(itemId);
-                if (item instanceof PaymentItem) {
+                Item item = retroCtx.get(itemId);
+                if ((item instanceof PaymentItem)
+                        && ((PaymentItem)item).isRetro()) {
                     PaymentItem paymentItem = (PaymentItem) item;
                     BigDecimal exist = diffValues.get(itemId) == null ?
                             BigDecimal.ZERO : diffValues.get(itemId);
@@ -42,7 +38,7 @@ public class RetroFormula extends Formula {
                             .subtract(new BigDecimal(oldValues.get(itemId))));
                     diffValues.put(itemId, exist);
                 } else {
-                    //TODO: log skip non-payment item
+                    //TODO: log skip non-payment item or non-retro item
                 }
             }
         }
