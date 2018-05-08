@@ -4,7 +4,6 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.ExecutionContext;
-import lombok.Data;
 
 /**
  * NormalFormula applied to PayItems in order to get numeric value
