@@ -1,6 +1,8 @@
 package com.nobodyhub.payroll.core.service.common;
 
 /**
+ * Consts used for the services
+ *
  * @author yan_h
  * @since 2018-05-07.
  */

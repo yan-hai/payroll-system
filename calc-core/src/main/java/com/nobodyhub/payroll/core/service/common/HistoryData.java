@@ -6,8 +6,8 @@ import com.google.protobuf.ProtocolStringList;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
-import com.nobodyhub.payroll.core.task.execution.context.RetroExecutionContext;
 import com.nobodyhub.payroll.core.task.TaskContext;
+import com.nobodyhub.payroll.core.task.execution.context.RetroExecutionContext;
 import lombok.Getter;
 
 import java.util.List;
@@ -15,10 +15,16 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * The history data provided for the payroll task to perform retroactive calculation
+ *
  * @author Ryan
  */
 @Getter
 public class HistoryData {
+    /**
+     * a list of history data, could be HR data, attendence data, payment data, etc.
+     * each map element contains the data for one history execution, from ItemId to its value
+     */
     private final List<Map<String, String>> histories;
 
     public HistoryData() {
@@ -29,15 +35,31 @@ public class HistoryData {
         this.histories = parseMessage(data);
     }
 
+    /**
+     * add all data for one history execution
+     *
+     * @param data
+     */
     public void addData(Map<String, String> data) {
         histories.add(data);
     }
 
+    /**
+     * whether history data is empty or not
+     *
+     * @return
+     */
     public boolean isEmpty() {
         return histories.isEmpty();
     }
 
-    private Map<String, PayrollCoreProtocol.History> toMessage() throws PayrollCoreException {
+    /**
+     * convert history data to format used in gRPC message
+     *
+     * @return
+     * @throws PayrollCoreException
+     */
+    public Map<String, PayrollCoreProtocol.History> toMessage() throws PayrollCoreException {
         Map<String, PayrollCoreProtocol.History> messages = Maps.newHashMap();
         if (histories.isEmpty()) {
             return messages;
@@ -61,6 +83,14 @@ public class HistoryData {
         return messages;
     }
 
+    /**
+     * Generate contexts for Retroactive calculation
+     *
+     * @param dataId      identifier of the owner of data to be executed
+     * @param taskContext context of the whole task
+     * @return
+     * @throws PayrollCoreException
+     */
     public List<RetroExecutionContext> toRetroContexts(String dataId, TaskContext taskContext) throws PayrollCoreException {
         List<RetroExecutionContext> contexts = Lists.newArrayList();
         for (Map<String, String> history : histories) {
@@ -71,6 +101,13 @@ public class HistoryData {
         return contexts;
     }
 
+    /**
+     * parse the contents, {@link this#histories}, from gRPC message
+     *
+     * @param data message data
+     * @return
+     * @throws PayrollCoreException
+     */
     private List<Map<String, String>> parseMessage(Map<String, PayrollCoreProtocol.History> data) throws PayrollCoreException {
         List<Map<String, String>> histories = Lists.newArrayList();
         if (isValid(data)) {
@@ -100,7 +137,8 @@ public class HistoryData {
     }
 
     /**
-     * the history values should contains the same set of items
+     * Whether current {@link this#histories} is valid or not, which means:
+     * - the history values should contains the same set of items
      *
      * @return
      */
@@ -120,7 +158,8 @@ public class HistoryData {
     }
 
     /**
-     * the size of history values for each item should be the same
+     * Whether the given message info is valid or not, which means:
+     * - the size of history values for each item should be the same
      *
      * @param data
      * @return

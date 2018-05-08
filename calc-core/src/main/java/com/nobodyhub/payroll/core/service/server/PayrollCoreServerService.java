@@ -9,9 +9,14 @@ import com.nobodyhub.payroll.core.task.callback.ExecutionCallback;
 import io.grpc.stub.StreamObserver;
 
 /**
+ * The Service provider for payroll core server
+ *
  * @author Ryan
  */
 public class PayrollCoreServerService extends PayrollCoreServiceGrpc.PayrollCoreServiceImplBase {
+    /**
+     * Factory to provide tasks
+     */
     protected final TaskFactory taskFactory;
 
     public PayrollCoreServerService(TaskFactory taskFactory) {

@@ -7,12 +7,23 @@ import io.grpc.ServerBuilder;
 import java.io.IOException;
 
 /**
+ * Payroll Core sever
+ *
  * @author yan_h
  * @since 2018-05-07.
  */
 public class PayrollCoreServer {
+    /**
+     * server port
+     */
     private final int port;
+    /**
+     * gRPC server
+     */
     private final Server server;
+    /**
+     * Service provider
+     */
     private final PayrollCoreServerService service;
 
     public PayrollCoreServer(int port, TaskFactory taskFactory) {
@@ -21,22 +32,30 @@ public class PayrollCoreServer {
         this.server = ServerBuilder.forPort(port).addService(service).build();
     }
 
+    /**
+     * Start server in a new thread
+     *
+     * @throws IOException
+     */
     public void start() throws IOException {
         server.start();
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                PayrollCoreServer.this.stop();
-            }
-        });
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> PayrollCoreServer.this.stop()));
     }
 
+    /**
+     * Stop the server
+     */
     public void stop() {
         if (server != null) {
             server.shutdown();
         }
     }
 
+    /**
+     * block the main thread from exiting
+     *
+     * @throws InterruptedException
+     */
     public void blockUntilShutdown() throws InterruptedException {
         if (server != null) {
             server.awaitTermination();
