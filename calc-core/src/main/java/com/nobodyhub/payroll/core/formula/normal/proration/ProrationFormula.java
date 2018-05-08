@@ -2,6 +2,7 @@ package com.nobodyhub.payroll.core.formula.normal.proration;
 
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.formula.common.FormulaConst;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
@@ -25,7 +26,9 @@ public class ProrationFormula extends NormalFormula {
         Item<BigDecimal, ?> total = itemFactory.getItem(totalItemId);
         Item<BigDecimal, ?> payment = itemFactory.getItem(paymentItemId);
 
-        BigDecimal rst = part.getValue().multiply(payment.getValue()).divide(total.getValue(), context.getMathContext());
+        BigDecimal rst = part.getValue()
+                .multiply(payment.getValue(), FormulaConst.MATH_CONTEXT)
+                .divide(total.getValue(), FormulaConst.MATH_CONTEXT);
         return createPaymentItem(rst);
     }
 

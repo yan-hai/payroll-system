@@ -22,7 +22,7 @@ public class AggregationFormula extends NormalFormula {
         BigDecimal rst = BigDecimal.ZERO;
         for (String itemId : aggregatedItemIds) {
             PaymentItem item = (PaymentItem) context.get(itemId);
-            item.aggregate(context.getMathContext(), rst);
+            item.aggregate(rst);
         }
         return createPaymentItem(rst);
     }

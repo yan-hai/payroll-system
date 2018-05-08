@@ -9,11 +9,19 @@ import lombok.RequiredArgsConstructor;
 import java.util.concurrent.Phaser;
 
 /**
+ * The callback for the payroll calculation execution
+ *
  * @author Ryan
  */
 @RequiredArgsConstructor
 public class ExecutionCallback implements Callback {
+    /**
+     * stream from server to client
+     */
     private final StreamObserver<PayrollCoreProtocol.Response> responseObserver;
+    /**
+     * Phaser to await all calculation to finish before reply complete the stream
+     */
     private final Phaser phaser = new Phaser(1);
 
     @Override

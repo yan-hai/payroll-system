@@ -53,10 +53,9 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
     /**
      * add {@link this#value} to the <code>toAggregate</code>
      *
-     * @param mathContext
      * @param toAggregate
      */
-    public BigDecimal aggregate(MathContext mathContext, BigDecimal toAggregate) throws PayrollCoreException {
-        return paymentType.aggregate(mathContext, value, toAggregate);
+    public BigDecimal aggregate(BigDecimal toAggregate) throws PayrollCoreException {
+        return paymentType.aggregate(value, toAggregate);
     }
 }

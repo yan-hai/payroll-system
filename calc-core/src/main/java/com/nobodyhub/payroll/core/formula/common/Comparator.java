@@ -39,6 +39,16 @@ public enum Comparator {
      */
     INTERVAL_C_C;
 
+    /**
+     * Judge whether the item value satifies the Comparation or not
+     *
+     * @param item
+     * @param lower
+     * @param higher
+     * @param <T>
+     * @return
+     * @throws PayrollCoreException
+     */
     public <T extends Comparable<T>> boolean apply(Item<T, ?> item, T lower, T higher) throws PayrollCoreException {
         T itemVal = item.getValue();
         switch (this) {

@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.item.payment;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.formula.common.FormulaConst;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -23,13 +24,13 @@ public enum PaymentType {
      */
     DEDUCTION;
 
-    public BigDecimal aggregate(MathContext mathContext, BigDecimal value, BigDecimal aggregateValue) throws PayrollCoreException {
+    public BigDecimal aggregate(BigDecimal value, BigDecimal aggregateValue) throws PayrollCoreException {
         switch (this) {
             case ALLOWANCE: {
-                return aggregateValue.add(value, mathContext);
+                return aggregateValue.add(value, FormulaConst.MATH_CONTEXT);
             }
             case DEDUCTION: {
-                return aggregateValue.add(value.negate(), mathContext);
+                return aggregateValue.subtract(value, FormulaConst.MATH_CONTEXT);
             }
             default: {
                 throw new PayrollCoreException(PAYMENTTYPE_UNIMPLEMENTED);

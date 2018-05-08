@@ -3,11 +3,12 @@ package com.nobodyhub.payroll.core.formula.common;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.OPERATOR_UNIMPLEMENTED;
 
 /**
+ * The arithmetic operations
+ *
  * @author Ryan
  */
 public enum Operator {
@@ -28,19 +29,27 @@ public enum Operator {
      */
     DIV;
 
-    public BigDecimal apply(MathContext mathContext, BigDecimal operand1, BigDecimal operand2) throws PayrollCoreException {
+    /**
+     * apply the operation, operand1 OP operand2
+     *
+     * @param operand1
+     * @param operand2
+     * @return
+     * @throws PayrollCoreException
+     */
+    public BigDecimal apply(BigDecimal operand1, BigDecimal operand2) throws PayrollCoreException {
         switch (this) {
             case ADD: {
-                return operand1.add(operand2, mathContext);
+                return operand1.add(operand2, FormulaConst.MATH_CONTEXT);
             }
             case SUB: {
-                return operand1.subtract(operand2, mathContext);
+                return operand1.subtract(operand2, FormulaConst.MATH_CONTEXT);
             }
             case MUL: {
-                return operand1.multiply(operand2, mathContext);
+                return operand1.multiply(operand2, FormulaConst.MATH_CONTEXT);
             }
             case DIV: {
-                return operand1.divide(operand2, mathContext);
+                return operand1.divide(operand2, FormulaConst.MATH_CONTEXT);
             }
             default: {
                 throw new PayrollCoreException(OPERATOR_UNIMPLEMENTED);

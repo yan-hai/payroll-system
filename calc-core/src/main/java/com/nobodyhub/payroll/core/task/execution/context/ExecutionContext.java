@@ -10,13 +10,14 @@ import com.nobodyhub.payroll.core.task.TaskContext;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatus;
 import lombok.Getter;
 
-import java.math.MathContext;
 import java.util.Map;
 import java.util.Set;
 
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONTEXT_NOT_FOUND;
 
 /**
+ * Context of the calculation execution for non-retroactive calculation
+ *
  * @author Ryan
  */
 @Getter
@@ -48,11 +49,21 @@ public class ExecutionContext {
         this.itemFactory = taskContext.getItemFactory();
     }
 
-
+    /**
+     * add new item to the context
+     *
+     * @param item
+     */
     public void add(Item item) {
         items.put(item.getItemId(), item);
     }
 
+    /**
+     * add all values as items into the context
+     *
+     * @param valueMap
+     * @throws PayrollCoreException
+     */
     public void addAll(Map<String, String> valueMap) throws PayrollCoreException {
         for (Map.Entry<String, String> entry : valueMap.entrySet()) {
             String itemId = entry.getKey();
@@ -62,6 +73,11 @@ public class ExecutionContext {
         }
     }
 
+    /**
+     * convert the content to the response to client
+     *
+     * @return
+     */
     public PayrollCoreProtocol.Response toResponse() {
         Map<String, String> values = Maps.newHashMap();
         for (Item item : items.values()) {
@@ -75,13 +91,13 @@ public class ExecutionContext {
                 .build();
     }
 
-    @SuppressWarnings("unchecked")
-    public <T> void add(String itemId, T value) throws PayrollCoreException {
-        Item item = itemFactory.getItem(itemId);
-        item.setValue(value);
-        items.put(item.getItemId(), item);
-    }
-
+    /**
+     * get item from the context for given itemId
+     *
+     * @param itemId
+     * @return
+     * @throws PayrollCoreException
+     */
     public Item get(String itemId) throws PayrollCoreException {
         Item item = items.get(itemId);
         if (item == null) {
@@ -91,12 +107,13 @@ public class ExecutionContext {
         return item;
     }
 
+    /**
+     * get ids of all items in the context
+     *
+     * @return
+     */
     public Set<String> getAllItemIds() {
         return Sets.newHashSet(items.keySet());
-    }
-
-    public MathContext getMathContext() {
-        return taskContext.getMathContext();
     }
 
     /**

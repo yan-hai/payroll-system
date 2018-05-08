@@ -24,7 +24,7 @@ public class FormulaExpression {
         if (operator == null || anotherOperand == null) {
             return operand.getValue();
         }
-        return operator.apply(context.getMathContext(), operand.getValue(), anotherOperand.evaluate(context));
+        return operator.apply(operand.getValue(), anotherOperand.evaluate(context));
     }
 
     public void getRequiredItems(Set<String> itemIds) {
