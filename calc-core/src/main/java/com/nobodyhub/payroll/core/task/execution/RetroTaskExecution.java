@@ -14,13 +14,27 @@ import com.nobodyhub.payroll.core.task.execution.context.RetroExecutionContext;
 import java.util.List;
 
 /**
+ * Execution for retroactive task
+ *
  * @author yan_h
  * @since 2018-05-08.
  */
 public class RetroTaskExecution implements Runnable {
+    /**
+     * the execution context for the related normal execution
+     */
     private final ExecutionContext executionContext;
+    /**
+     * Task context
+     */
     private final TaskContext taskContext;
+    /**
+     * The history data
+     */
     private final HistoryData historyData;
+    /**
+     * Callback to handle the execution
+     */
     private final Callback callback;
 
 
@@ -34,8 +48,8 @@ public class RetroTaskExecution implements Runnable {
     @Override
     public void run() {
         callback.onStart();
-        NormalFormulaContext normalFormulaContext =taskContext.getNormalFormulaContext();
-        RetroFormulaContext retroFormulaContext =taskContext.getRetroFormulaContext();
+        NormalFormulaContext normalFormulaContext = taskContext.getNormalFormulaContext();
+        RetroFormulaContext retroFormulaContext = taskContext.getRetroFormulaContext();
         try {
             //re-calc past data
             List<RetroExecutionContext> retroContexts = historyData.toRetroContexts(executionContext.getDataId(), taskContext);

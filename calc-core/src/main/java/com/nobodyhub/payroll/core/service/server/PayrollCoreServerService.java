@@ -33,6 +33,7 @@ public class PayrollCoreServerService extends PayrollCoreServiceGrpc.PayrollCore
             public void onNext(PayrollCoreProtocol.Request value) {
                 if (task == null) {
                     Task task = taskFactory.get(value.getTaskId());
+                    task.setup();
                     task.setCallback(callback);
                 }
                 try {
@@ -51,6 +52,7 @@ public class PayrollCoreServerService extends PayrollCoreServiceGrpc.PayrollCore
             public void onCompleted() {
                 callback.await();
                 responseObserver.onCompleted();
+                task.cleanup();
             }
         };
     }

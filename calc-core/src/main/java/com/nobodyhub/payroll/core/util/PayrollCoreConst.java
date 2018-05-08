@@ -1,4 +1,4 @@
-package com.nobodyhub.payroll.core.formula.common;
+package com.nobodyhub.payroll.core.util;
 
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 
@@ -10,8 +10,8 @@ import static java.math.MathContext.DECIMAL128;
  * @author yan_h
  * @since 2018-05-08.
  */
-public final class FormulaConst {
-    private FormulaConst() {
+public final class PayrollCoreConst {
+    private PayrollCoreConst() {
     }
 
     /**

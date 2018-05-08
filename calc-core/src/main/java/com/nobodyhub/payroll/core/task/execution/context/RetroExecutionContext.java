@@ -8,6 +8,7 @@ import lombok.Getter;
 import java.util.Map;
 
 /**
+ * The Execution Context for retroactive calculation
  * @author yan_h
  * @since 2018-05-08.
  */

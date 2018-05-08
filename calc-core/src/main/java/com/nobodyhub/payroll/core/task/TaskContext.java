@@ -12,12 +12,22 @@ import java.math.MathContext;
 import static java.math.MathContext.DECIMAL128;
 
 /**
+ * Context for task execution
  * @author Ryan
  */
 @Getter
 @RequiredArgsConstructor
 public abstract class TaskContext {
+    /**
+     * Item factory to provide the item instance
+     */
     protected final ItemFactory itemFactory;
+    /**
+     * normal formulas
+     */
     protected final NormalFormulaContext normalFormulaContext;
+    /**
+     * retroactive formulas
+     */
     protected final RetroFormulaContext retroFormulaContext;
 }

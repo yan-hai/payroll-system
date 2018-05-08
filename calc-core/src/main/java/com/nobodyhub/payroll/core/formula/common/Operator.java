@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.formula.common;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.util.PayrollCoreConst;
 
 import java.math.BigDecimal;
 
@@ -40,16 +41,16 @@ public enum Operator {
     public BigDecimal apply(BigDecimal operand1, BigDecimal operand2) throws PayrollCoreException {
         switch (this) {
             case ADD: {
-                return operand1.add(operand2, FormulaConst.MATH_CONTEXT);
+                return operand1.add(operand2, PayrollCoreConst.MATH_CONTEXT);
             }
             case SUB: {
-                return operand1.subtract(operand2, FormulaConst.MATH_CONTEXT);
+                return operand1.subtract(operand2, PayrollCoreConst.MATH_CONTEXT);
             }
             case MUL: {
-                return operand1.multiply(operand2, FormulaConst.MATH_CONTEXT);
+                return operand1.multiply(operand2, PayrollCoreConst.MATH_CONTEXT);
             }
             case DIV: {
-                return operand1.divide(operand2, FormulaConst.MATH_CONTEXT);
+                return operand1.divide(operand2, PayrollCoreConst.MATH_CONTEXT);
             }
             default: {
                 throw new PayrollCoreException(OPERATOR_UNIMPLEMENTED);

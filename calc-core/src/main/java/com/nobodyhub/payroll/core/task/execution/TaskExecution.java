@@ -12,7 +12,13 @@ import lombok.Getter;
  */
 @Getter
 public class TaskExecution implements Runnable {
+    /**
+     * Execution Context
+     */
     private final ExecutionContext executionContext;
+    /**
+     * Callback to handle the execution
+     */
     private final Callback callback;
 
 
