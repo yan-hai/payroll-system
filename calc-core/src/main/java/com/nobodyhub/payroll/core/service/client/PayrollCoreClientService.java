@@ -51,7 +51,8 @@ public class PayrollCoreClientService {
     }
 
     /**
-     * Call remote payroll calculation
+     * Synchronous interface to call remote payroll calculation
+     * <b>Note:</b> there is no guarrentee on the order of result returned from server
      *
      * @param taskId      indentifier of the task to be executed
      * @param data        the data given for the calculation
