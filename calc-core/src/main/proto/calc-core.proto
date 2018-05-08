@@ -8,7 +8,7 @@ package payroll.core.service.proto;
 /*
  * History value for the past
  */
-message PastValue {
+message History {
     string itemId = 1;
     repeated string value = 2;
 }
@@ -32,7 +32,7 @@ message Request {
     /*
      * list of history values
      */
-    repeated PastValue pastValues = 4;
+    map<string, History> histories = 4;
 }
 
 /*

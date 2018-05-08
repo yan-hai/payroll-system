@@ -14,8 +14,8 @@ public final class PayrollCoreProtocol {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface PastValueOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:payroll.core.service.proto.PastValue)
+  public interface HistoryOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:payroll.core.service.proto.History)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -52,18 +52,18 @@ public final class PayrollCoreProtocol {
    * History value for the past
    * </pre>
    *
-   * Protobuf type {@code payroll.core.service.proto.PastValue}
+   * Protobuf type {@code payroll.core.service.proto.History}
    */
-  public  static final class PastValue extends
+  public  static final class History extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:payroll.core.service.proto.PastValue)
-      PastValueOrBuilder {
+      // @@protoc_insertion_point(message_implements:payroll.core.service.proto.History)
+      HistoryOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use PastValue.newBuilder() to construct.
-    private PastValue(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use History.newBuilder() to construct.
+    private History(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private PastValue() {
+    private History() {
       itemId_ = "";
       value_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
@@ -73,7 +73,7 @@ public final class PayrollCoreProtocol {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private PastValue(
+    private History(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -131,14 +131,14 @@ public final class PayrollCoreProtocol {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.internal_static_payroll_core_service_proto_PastValue_descriptor;
+      return com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.internal_static_payroll_core_service_proto_History_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.internal_static_payroll_core_service_proto_PastValue_fieldAccessorTable
+      return com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.internal_static_payroll_core_service_proto_History_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.class, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.Builder.class);
+              com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History.class, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History.Builder.class);
     }
 
     private int bitField0_;
@@ -252,10 +252,10 @@ public final class PayrollCoreProtocol {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue)) {
+      if (!(obj instanceof com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History)) {
         return super.equals(obj);
       }
-      com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue other = (com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue) obj;
+      com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History other = (com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History) obj;
 
       boolean result = true;
       result = result && getItemId()
@@ -284,69 +284,69 @@ public final class PayrollCoreProtocol {
       return hash;
     }
 
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parseFrom(
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parseFrom(
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parseFrom(
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parseFrom(
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parseFrom(byte[] data)
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parseFrom(
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parseFrom(java.io.InputStream input)
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parseFrom(
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parseDelimitedFrom(java.io.InputStream input)
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parseDelimitedFrom(
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parseFrom(
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parseFrom(
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -358,7 +358,7 @@ public final class PayrollCoreProtocol {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue prototype) {
+    public static Builder newBuilder(com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -377,25 +377,25 @@ public final class PayrollCoreProtocol {
      * History value for the past
      * </pre>
      *
-     * Protobuf type {@code payroll.core.service.proto.PastValue}
+     * Protobuf type {@code payroll.core.service.proto.History}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:payroll.core.service.proto.PastValue)
-        com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValueOrBuilder {
+        // @@protoc_insertion_point(builder_implements:payroll.core.service.proto.History)
+        com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.HistoryOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.internal_static_payroll_core_service_proto_PastValue_descriptor;
+        return com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.internal_static_payroll_core_service_proto_History_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.internal_static_payroll_core_service_proto_PastValue_fieldAccessorTable
+        return com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.internal_static_payroll_core_service_proto_History_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.class, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.Builder.class);
+                com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History.class, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History.Builder.class);
       }
 
-      // Construct using com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.newBuilder()
+      // Construct using com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -421,23 +421,23 @@ public final class PayrollCoreProtocol {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.internal_static_payroll_core_service_proto_PastValue_descriptor;
+        return com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.internal_static_payroll_core_service_proto_History_descriptor;
       }
 
-      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue getDefaultInstanceForType() {
-        return com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.getDefaultInstance();
+      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History getDefaultInstanceForType() {
+        return com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History.getDefaultInstance();
       }
 
-      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue build() {
-        com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue result = buildPartial();
+      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History build() {
+        com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue buildPartial() {
-        com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue result = new com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue(this);
+      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History buildPartial() {
+        com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History result = new com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.itemId_ = itemId_;
@@ -478,16 +478,16 @@ public final class PayrollCoreProtocol {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue) {
-          return mergeFrom((com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue)other);
+        if (other instanceof com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History) {
+          return mergeFrom((com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue other) {
-        if (other == com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History other) {
+        if (other == com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History.getDefaultInstance()) return this;
         if (!other.getItemId().isEmpty()) {
           itemId_ = other.itemId_;
           onChanged();
@@ -515,11 +515,11 @@ public final class PayrollCoreProtocol {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue parsedMessage = null;
+        com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue) e.getUnfinishedMessage();
+          parsedMessage = (com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -703,39 +703,39 @@ public final class PayrollCoreProtocol {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:payroll.core.service.proto.PastValue)
+      // @@protoc_insertion_point(builder_scope:payroll.core.service.proto.History)
     }
 
-    // @@protoc_insertion_point(class_scope:payroll.core.service.proto.PastValue)
-    private static final com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:payroll.core.service.proto.History)
+    private static final com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue();
+      DEFAULT_INSTANCE = new com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History();
     }
 
-    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue getDefaultInstance() {
+    public static com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<PastValue>
-        PARSER = new com.google.protobuf.AbstractParser<PastValue>() {
-      public PastValue parsePartialFrom(
+    private static final com.google.protobuf.Parser<History>
+        PARSER = new com.google.protobuf.AbstractParser<History>() {
+      public History parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PastValue(input, extensionRegistry);
+        return new History(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<PastValue> parser() {
+    public static com.google.protobuf.Parser<History> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<PastValue> getParserForType() {
+    public com.google.protobuf.Parser<History> getParserForType() {
       return PARSER;
     }
 
-    public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue getDefaultInstanceForType() {
+    public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -840,44 +840,54 @@ public final class PayrollCoreProtocol {
      * list of history values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+     * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
      */
-    java.util.List<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue> 
-        getPastValuesList();
+    int getHistoriesCount();
     /**
      * <pre>
      * list of history values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+     * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
      */
-    com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue getPastValues(int index);
+    boolean containsHistories(
+        java.lang.String key);
+    /**
+     * Use {@link #getHistoriesMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History>
+    getHistories();
     /**
      * <pre>
      * list of history values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+     * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
      */
-    int getPastValuesCount();
+    java.util.Map<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History>
+    getHistoriesMap();
     /**
      * <pre>
      * list of history values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+     * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
      */
-    java.util.List<? extends com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValueOrBuilder> 
-        getPastValuesOrBuilderList();
+
+    com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History getHistoriesOrDefault(
+        java.lang.String key,
+        com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History defaultValue);
     /**
      * <pre>
      * list of history values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+     * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
      */
-    com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValueOrBuilder getPastValuesOrBuilder(
-        int index);
+
+    com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History getHistoriesOrThrow(
+        java.lang.String key);
   }
   /**
    * <pre>
@@ -898,7 +908,6 @@ public final class PayrollCoreProtocol {
     private Request() {
       taskId_ = "";
       dataId_ = "";
-      pastValues_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -959,11 +968,15 @@ public final class PayrollCoreProtocol {
             }
             case 34: {
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                pastValues_ = new java.util.ArrayList<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue>();
+                histories_ = com.google.protobuf.MapField.newMapField(
+                    HistoriesDefaultEntryHolder.defaultEntry);
                 mutable_bitField0_ |= 0x00000008;
               }
-              pastValues_.add(
-                  input.readMessage(com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.parser(), extensionRegistry));
+              com.google.protobuf.MapEntry<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History>
+              histories__ = input.readMessage(
+                  HistoriesDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              histories_.getMutableMap().put(
+                  histories__.getKey(), histories__.getValue());
               break;
             }
           }
@@ -974,9 +987,6 @@ public final class PayrollCoreProtocol {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          pastValues_ = java.util.Collections.unmodifiableList(pastValues_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -992,6 +1002,8 @@ public final class PayrollCoreProtocol {
       switch (number) {
         case 3:
           return internalGetValues();
+        case 4:
+          return internalGetHistories();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -1181,59 +1193,96 @@ public final class PayrollCoreProtocol {
       return map.get(key);
     }
 
-    public static final int PASTVALUES_FIELD_NUMBER = 4;
-    private java.util.List<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue> pastValues_;
-    /**
-     * <pre>
-     * list of history values
-     * </pre>
-     *
-     * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-     */
-    public java.util.List<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue> getPastValuesList() {
-      return pastValues_;
+    public static final int HISTORIES_FIELD_NUMBER = 4;
+    private static final class HistoriesDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History>newDefaultInstance(
+                  com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.internal_static_payroll_core_service_proto_Request_HistoriesEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                  com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History.getDefaultInstance());
+    }
+    private com.google.protobuf.MapField<
+        java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> histories_;
+    private com.google.protobuf.MapField<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History>
+    internalGetHistories() {
+      if (histories_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            HistoriesDefaultEntryHolder.defaultEntry);
+      }
+      return histories_;
+    }
+
+    public int getHistoriesCount() {
+      return internalGetHistories().getMap().size();
     }
     /**
      * <pre>
      * list of history values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+     * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
      */
-    public java.util.List<? extends com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValueOrBuilder> 
-        getPastValuesOrBuilderList() {
-      return pastValues_;
+
+    public boolean containsHistories(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetHistories().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getHistoriesMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> getHistories() {
+      return getHistoriesMap();
     }
     /**
      * <pre>
      * list of history values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+     * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
      */
-    public int getPastValuesCount() {
-      return pastValues_.size();
+
+    public java.util.Map<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> getHistoriesMap() {
+      return internalGetHistories().getMap();
     }
     /**
      * <pre>
      * list of history values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+     * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
      */
-    public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue getPastValues(int index) {
-      return pastValues_.get(index);
+
+    public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History getHistoriesOrDefault(
+        java.lang.String key,
+        com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> map =
+          internalGetHistories().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
      * <pre>
      * list of history values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+     * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
      */
-    public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValueOrBuilder getPastValuesOrBuilder(
-        int index) {
-      return pastValues_.get(index);
+
+    public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History getHistoriesOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> map =
+          internalGetHistories().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1260,9 +1309,12 @@ public final class PayrollCoreProtocol {
           internalGetValues(),
           ValuesDefaultEntryHolder.defaultEntry,
           3);
-      for (int i = 0; i < pastValues_.size(); i++) {
-        output.writeMessage(4, pastValues_.get(i));
-      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetHistories(),
+          HistoriesDefaultEntryHolder.defaultEntry,
+          4);
       unknownFields.writeTo(output);
     }
 
@@ -1287,9 +1339,15 @@ public final class PayrollCoreProtocol {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(3, values__);
       }
-      for (int i = 0; i < pastValues_.size(); i++) {
+      for (java.util.Map.Entry<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> entry
+           : internalGetHistories().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History>
+        histories__ = HistoriesDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, pastValues_.get(i));
+            .computeMessageSize(4, histories__);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1313,8 +1371,8 @@ public final class PayrollCoreProtocol {
           .equals(other.getDataId());
       result = result && internalGetValues().equals(
           other.internalGetValues());
-      result = result && getPastValuesList()
-          .equals(other.getPastValuesList());
+      result = result && internalGetHistories().equals(
+          other.internalGetHistories());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1334,9 +1392,9 @@ public final class PayrollCoreProtocol {
         hash = (37 * hash) + VALUES_FIELD_NUMBER;
         hash = (53 * hash) + internalGetValues().hashCode();
       }
-      if (getPastValuesCount() > 0) {
-        hash = (37 * hash) + PASTVALUES_FIELD_NUMBER;
-        hash = (53 * hash) + getPastValuesList().hashCode();
+      if (!internalGetHistories().getMap().isEmpty()) {
+        hash = (37 * hash) + HISTORIES_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetHistories().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1453,6 +1511,8 @@ public final class PayrollCoreProtocol {
         switch (number) {
           case 3:
             return internalGetValues();
+          case 4:
+            return internalGetHistories();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -1464,6 +1524,8 @@ public final class PayrollCoreProtocol {
         switch (number) {
           case 3:
             return internalGetMutableValues();
+          case 4:
+            return internalGetMutableHistories();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -1489,7 +1551,6 @@ public final class PayrollCoreProtocol {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getPastValuesFieldBuilder();
         }
       }
       public Builder clear() {
@@ -1499,12 +1560,7 @@ public final class PayrollCoreProtocol {
         dataId_ = "";
 
         internalGetMutableValues().clear();
-        if (pastValuesBuilder_ == null) {
-          pastValues_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-        } else {
-          pastValuesBuilder_.clear();
-        }
+        internalGetMutableHistories().clear();
         return this;
       }
 
@@ -1533,15 +1589,8 @@ public final class PayrollCoreProtocol {
         result.dataId_ = dataId_;
         result.values_ = internalGetValues();
         result.values_.makeImmutable();
-        if (pastValuesBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            pastValues_ = java.util.Collections.unmodifiableList(pastValues_);
-            bitField0_ = (bitField0_ & ~0x00000008);
-          }
-          result.pastValues_ = pastValues_;
-        } else {
-          result.pastValues_ = pastValuesBuilder_.build();
-        }
+        result.histories_ = internalGetHistories();
+        result.histories_.makeImmutable();
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1594,32 +1643,8 @@ public final class PayrollCoreProtocol {
         }
         internalGetMutableValues().mergeFrom(
             other.internalGetValues());
-        if (pastValuesBuilder_ == null) {
-          if (!other.pastValues_.isEmpty()) {
-            if (pastValues_.isEmpty()) {
-              pastValues_ = other.pastValues_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-            } else {
-              ensurePastValuesIsMutable();
-              pastValues_.addAll(other.pastValues_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.pastValues_.isEmpty()) {
-            if (pastValuesBuilder_.isEmpty()) {
-              pastValuesBuilder_.dispose();
-              pastValuesBuilder_ = null;
-              pastValues_ = other.pastValues_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-              pastValuesBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getPastValuesFieldBuilder() : null;
-            } else {
-              pastValuesBuilder_.addAllMessages(other.pastValues_);
-            }
-          }
-        }
+        internalGetMutableHistories().mergeFrom(
+            other.internalGetHistories());
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -1977,79 +2002,101 @@ public final class PayrollCoreProtocol {
         return this;
       }
 
-      private java.util.List<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue> pastValues_ =
-        java.util.Collections.emptyList();
-      private void ensurePastValuesIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          pastValues_ = new java.util.ArrayList<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue>(pastValues_);
-          bitField0_ |= 0x00000008;
-         }
+      private com.google.protobuf.MapField<
+          java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> histories_;
+      private com.google.protobuf.MapField<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History>
+      internalGetHistories() {
+        if (histories_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              HistoriesDefaultEntryHolder.defaultEntry);
+        }
+        return histories_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History>
+      internalGetMutableHistories() {
+        onChanged();;
+        if (histories_ == null) {
+          histories_ = com.google.protobuf.MapField.newMapField(
+              HistoriesDefaultEntryHolder.defaultEntry);
+        }
+        if (!histories_.isMutable()) {
+          histories_ = histories_.copy();
+        }
+        return histories_;
       }
 
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.Builder, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValueOrBuilder> pastValuesBuilder_;
+      public int getHistoriesCount() {
+        return internalGetHistories().getMap().size();
+      }
+      /**
+       * <pre>
+       * list of history values
+       * </pre>
+       *
+       * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
+       */
 
+      public boolean containsHistories(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        return internalGetHistories().getMap().containsKey(key);
+      }
       /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+       * Use {@link #getHistoriesMap()} instead.
        */
-      public java.util.List<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue> getPastValuesList() {
-        if (pastValuesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(pastValues_);
-        } else {
-          return pastValuesBuilder_.getMessageList();
-        }
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> getHistories() {
+        return getHistoriesMap();
       }
       /**
        * <pre>
        * list of history values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+       * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
        */
-      public int getPastValuesCount() {
-        if (pastValuesBuilder_ == null) {
-          return pastValues_.size();
-        } else {
-          return pastValuesBuilder_.getCount();
-        }
+
+      public java.util.Map<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> getHistoriesMap() {
+        return internalGetHistories().getMap();
       }
       /**
        * <pre>
        * list of history values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+       * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
        */
-      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue getPastValues(int index) {
-        if (pastValuesBuilder_ == null) {
-          return pastValues_.get(index);
-        } else {
-          return pastValuesBuilder_.getMessage(index);
-        }
+
+      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History getHistoriesOrDefault(
+          java.lang.String key,
+          com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History defaultValue) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> map =
+            internalGetHistories().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
        * <pre>
        * list of history values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+       * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
        */
-      public Builder setPastValues(
-          int index, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue value) {
-        if (pastValuesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePastValuesIsMutable();
-          pastValues_.set(index, value);
-          onChanged();
-        } else {
-          pastValuesBuilder_.setMessage(index, value);
+
+      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History getHistoriesOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> map =
+            internalGetHistories().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
         }
+        return map.get(key);
+      }
+
+      public Builder clearHistories() {
+        internalGetMutableHistories().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -2057,17 +2104,38 @@ public final class PayrollCoreProtocol {
        * list of history values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+       * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
        */
-      public Builder setPastValues(
-          int index, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.Builder builderForValue) {
-        if (pastValuesBuilder_ == null) {
-          ensurePastValuesIsMutable();
-          pastValues_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          pastValuesBuilder_.setMessage(index, builderForValue.build());
-        }
+
+      public Builder removeHistories(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableHistories().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History>
+      getMutableHistories() {
+        return internalGetMutableHistories().getMutableMap();
+      }
+      /**
+       * <pre>
+       * list of history values
+       * </pre>
+       *
+       * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
+       */
+      public Builder putHistories(
+          java.lang.String key,
+          com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History value) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        if (value == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableHistories().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -2075,218 +2143,14 @@ public final class PayrollCoreProtocol {
        * list of history values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
+       * <code>map&lt;string, .payroll.core.service.proto.History&gt; histories = 4;</code>
        */
-      public Builder addPastValues(com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue value) {
-        if (pastValuesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePastValuesIsMutable();
-          pastValues_.add(value);
-          onChanged();
-        } else {
-          pastValuesBuilder_.addMessage(value);
-        }
+
+      public Builder putAllHistories(
+          java.util.Map<java.lang.String, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.History> values) {
+        internalGetMutableHistories().getMutableMap()
+            .putAll(values);
         return this;
-      }
-      /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-       */
-      public Builder addPastValues(
-          int index, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue value) {
-        if (pastValuesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePastValuesIsMutable();
-          pastValues_.add(index, value);
-          onChanged();
-        } else {
-          pastValuesBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-       */
-      public Builder addPastValues(
-          com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.Builder builderForValue) {
-        if (pastValuesBuilder_ == null) {
-          ensurePastValuesIsMutable();
-          pastValues_.add(builderForValue.build());
-          onChanged();
-        } else {
-          pastValuesBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-       */
-      public Builder addPastValues(
-          int index, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.Builder builderForValue) {
-        if (pastValuesBuilder_ == null) {
-          ensurePastValuesIsMutable();
-          pastValues_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          pastValuesBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-       */
-      public Builder addAllPastValues(
-          java.lang.Iterable<? extends com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue> values) {
-        if (pastValuesBuilder_ == null) {
-          ensurePastValuesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, pastValues_);
-          onChanged();
-        } else {
-          pastValuesBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-       */
-      public Builder clearPastValues() {
-        if (pastValuesBuilder_ == null) {
-          pastValues_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-          onChanged();
-        } else {
-          pastValuesBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-       */
-      public Builder removePastValues(int index) {
-        if (pastValuesBuilder_ == null) {
-          ensurePastValuesIsMutable();
-          pastValues_.remove(index);
-          onChanged();
-        } else {
-          pastValuesBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-       */
-      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.Builder getPastValuesBuilder(
-          int index) {
-        return getPastValuesFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-       */
-      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValueOrBuilder getPastValuesOrBuilder(
-          int index) {
-        if (pastValuesBuilder_ == null) {
-          return pastValues_.get(index);  } else {
-          return pastValuesBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-       */
-      public java.util.List<? extends com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValueOrBuilder> 
-           getPastValuesOrBuilderList() {
-        if (pastValuesBuilder_ != null) {
-          return pastValuesBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(pastValues_);
-        }
-      }
-      /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-       */
-      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.Builder addPastValuesBuilder() {
-        return getPastValuesFieldBuilder().addBuilder(
-            com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-       */
-      public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.Builder addPastValuesBuilder(
-          int index) {
-        return getPastValuesFieldBuilder().addBuilder(
-            index, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       * list of history values
-       * </pre>
-       *
-       * <code>repeated .payroll.core.service.proto.PastValue pastValues = 4;</code>
-       */
-      public java.util.List<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.Builder> 
-           getPastValuesBuilderList() {
-        return getPastValuesFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.Builder, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValueOrBuilder> 
-          getPastValuesFieldBuilder() {
-        if (pastValuesBuilder_ == null) {
-          pastValuesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValue.Builder, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.PastValueOrBuilder>(
-                  pastValues_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
-                  getParentForChildren(),
-                  isClean());
-          pastValues_ = null;
-        }
-        return pastValuesBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3628,10 +3492,10 @@ public final class PayrollCoreProtocol {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_payroll_core_service_proto_PastValue_descriptor;
+    internal_static_payroll_core_service_proto_History_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_payroll_core_service_proto_PastValue_fieldAccessorTable;
+      internal_static_payroll_core_service_proto_History_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_payroll_core_service_proto_Request_descriptor;
   private static final 
@@ -3642,6 +3506,11 @@ public final class PayrollCoreProtocol {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_payroll_core_service_proto_Request_ValuesEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_payroll_core_service_proto_Request_HistoriesEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_payroll_core_service_proto_Request_HistoriesEntry_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_payroll_core_service_proto_Response_descriptor;
   private static final 
@@ -3662,22 +3531,25 @@ public final class PayrollCoreProtocol {
   static {
     java.lang.String[] descriptorData = {
       "\n\017calc-core.proto\022\032payroll.core.service." +
-      "proto\"*\n\tPastValue\022\016\n\006itemId\030\001 \001(\t\022\r\n\005va" +
-      "lue\030\002 \003(\t\"\324\001\n\007Request\022\016\n\006taskId\030\001 \001(\t\022\016\n" +
-      "\006dataId\030\002 \001(\t\022?\n\006values\030\003 \003(\0132/.payroll." +
-      "core.service.proto.Request.ValuesEntry\0229" +
-      "\n\npastValues\030\004 \003(\0132%.payroll.core.servic" +
-      "e.proto.PastValue\032-\n\013ValuesEntry\022\013\n\003key\030" +
-      "\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\260\001\n\010Response\022\022\n" +
-      "\nstatusCode\030\001 \001(\t\022\017\n\007message\030\002 \001(\t\022\016\n\006da" +
-      "taId\030\003 \001(\t\022@\n\006values\030\004 \003(\01320.payroll.cor" +
-      "e.service.proto.Response.ValuesEntry\032-\n\013" +
-      "ValuesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:" +
-      "\0028\0012m\n\022PayrollCoreService\022W\n\006doCalc\022#.pa" +
-      "yroll.core.service.proto.Request\032$.payro" +
-      "ll.core.service.proto.Response(\0010\001B?\n(co" +
-      "m.nobodyhub.payroll.core.service.protoB\023" +
-      "PayrollCoreProtocolb\006proto3"
+      "proto\"(\n\007History\022\016\n\006itemId\030\001 \001(\t\022\r\n\005valu" +
+      "e\030\002 \003(\t\"\267\002\n\007Request\022\016\n\006taskId\030\001 \001(\t\022\016\n\006d" +
+      "ataId\030\002 \001(\t\022?\n\006values\030\003 \003(\0132/.payroll.co" +
+      "re.service.proto.Request.ValuesEntry\022E\n\t" +
+      "histories\030\004 \003(\01322.payroll.core.service.p" +
+      "roto.Request.HistoriesEntry\032-\n\013ValuesEnt" +
+      "ry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032U\n\016Hi" +
+      "storiesEntry\022\013\n\003key\030\001 \001(\t\0222\n\005value\030\002 \001(\013" +
+      "2#.payroll.core.service.proto.History:\0028" +
+      "\001\"\260\001\n\010Response\022\022\n\nstatusCode\030\001 \001(\t\022\017\n\007me" +
+      "ssage\030\002 \001(\t\022\016\n\006dataId\030\003 \001(\t\022@\n\006values\030\004 " +
+      "\003(\01320.payroll.core.service.proto.Respons" +
+      "e.ValuesEntry\032-\n\013ValuesEntry\022\013\n\003key\030\001 \001(" +
+      "\t\022\r\n\005value\030\002 \001(\t:\0028\0012m\n\022PayrollCoreServi" +
+      "ce\022W\n\006doCalc\022#.payroll.core.service.prot" +
+      "o.Request\032$.payroll.core.service.proto.R" +
+      "esponse(\0010\001B?\n(com.nobodyhub.payroll.cor" +
+      "e.service.protoB\023PayrollCoreProtocolb\006pr" +
+      "oto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3691,23 +3563,29 @@ public final class PayrollCoreProtocol {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_payroll_core_service_proto_PastValue_descriptor =
+    internal_static_payroll_core_service_proto_History_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_payroll_core_service_proto_PastValue_fieldAccessorTable = new
+    internal_static_payroll_core_service_proto_History_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_payroll_core_service_proto_PastValue_descriptor,
+        internal_static_payroll_core_service_proto_History_descriptor,
         new java.lang.String[] { "ItemId", "Value", });
     internal_static_payroll_core_service_proto_Request_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_payroll_core_service_proto_Request_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_payroll_core_service_proto_Request_descriptor,
-        new java.lang.String[] { "TaskId", "DataId", "Values", "PastValues", });
+        new java.lang.String[] { "TaskId", "DataId", "Values", "Histories", });
     internal_static_payroll_core_service_proto_Request_ValuesEntry_descriptor =
       internal_static_payroll_core_service_proto_Request_descriptor.getNestedTypes().get(0);
     internal_static_payroll_core_service_proto_Request_ValuesEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_payroll_core_service_proto_Request_ValuesEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_payroll_core_service_proto_Request_HistoriesEntry_descriptor =
+      internal_static_payroll_core_service_proto_Request_descriptor.getNestedTypes().get(1);
+    internal_static_payroll_core_service_proto_Request_HistoriesEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_payroll_core_service_proto_Request_HistoriesEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_payroll_core_service_proto_Response_descriptor =
       getDescriptor().getMessageTypes().get(2);
