@@ -8,3 +8,8 @@ A **extensible** and **scalable** payroll system based on various kinds of items
 1. Proration based on attendence information
 1. Aggregation
 1. Retroactive
+
+## TODOs
+* [X] A Calculation Core to calculate based on the given data and rules
+* [ ] A default data accessor to fetch the data
+* [ ] Different Stub to call the batch synchronously or a asynchronously
