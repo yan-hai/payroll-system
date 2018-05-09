@@ -10,10 +10,8 @@ import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.execution.retro.RetroExecutionContext;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 
 /**
  * @author Ryan
@@ -30,7 +28,7 @@ public class RetroFormula extends Formula {
     public PaymentItem evaluate(List<RetroExecutionContext> retroContexts, Period normalPeriod) throws PayrollCoreException {
         Map<String, BigDecimal> diffValues = Maps.newHashMap();
         for (RetroExecutionContext retroCtx : retroContexts) {
-            Map<String, String> oldValues = retroCtx.getOriginalValues();
+            Map<String, SortedMap<LocalDate, String>> oldValues = retroCtx.getOriginalValues();
             for (String itemId : relatedItemIds) {
                 Item item = retroCtx.get(itemId);
                 if ((item instanceof PaymentItem)
@@ -39,7 +37,7 @@ public class RetroFormula extends Formula {
                     BigDecimal exist = diffValues.get(itemId) == null ?
                             BigDecimal.ZERO : diffValues.get(itemId);
                     exist = exist.add(paymentItem.getSingleValue()
-                            .subtract(new BigDecimal(oldValues.get(itemId))));
+                            .subtract(new BigDecimal(oldValues.get(itemId).get(0))));
                     diffValues.put(itemId, exist);
                 } else {
                     //TODO: log skip non-payment item or non-retro item

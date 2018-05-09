@@ -1,9 +1,12 @@
 package com.nobodyhub.payroll.core.service.client;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.service.common.ServiceConst;
+import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,15 +32,12 @@ public class PayrollCoreClient {
     /**
      * Execute the payroll task with given data
      *
-     * @param taskId id of task to be executed
-     * @param data   the data provided to the task
+     * @param requestList    request list
      * @return
      * @throws InterruptedException
      */
-    public Map<String, Map<String, String>> calculate(String taskId,
-                                                      Map<String, Map<String, String>> data,
-                                                      HistoryData histories) throws InterruptedException, PayrollCoreException {
-        return service.calculate(taskId, data, histories);
+    public Map<String, Map<String, String>> calculate(List<PayrollCoreProtocol.Request> requestList) throws InterruptedException, PayrollCoreException {
+        return service.calculate(requestList);
     }
 
     /**

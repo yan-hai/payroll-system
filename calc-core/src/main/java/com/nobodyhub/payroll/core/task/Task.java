@@ -13,6 +13,7 @@ import com.nobodyhub.payroll.core.task.execution.normal.NormalTaskExecution;
 import com.nobodyhub.payroll.core.task.execution.retro.RetroTaskExecution;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -64,12 +65,14 @@ public abstract class Task {
      * Execute normal task
      *
      * @param dataId
-     * @param valueMap
+     * @param periodValue
      * @throws PayrollCoreException
      */
-    protected void executeNormal(Period period, String dataId, Map<String, String> valueMap) throws PayrollCoreException {
+    protected void executeNormal(String dataId, PayrollCoreProtocol.PeriodValue periodValue) throws PayrollCoreException {
         NormalTaskExecution execution = new NormalTaskExecution(
-                createExecutionContext(period, dataId, valueMap),
+                createExecutionContext(Period.of(periodValue.getStartDate(), periodValue.getEndDate()),
+                        dataId,
+                        periodValue.getItemsList()),
                 normalFormulaContainer,
                 callback);
         executorService.execute(execution);
@@ -79,13 +82,15 @@ public abstract class Task {
      * Execute retro task
      *
      * @param dataId
-     * @param valueMap
+     * @param periodValue
      * @param historyData
      * @throws PayrollCoreException
      */
-    protected void executeRetro(Period period, String dataId, Map<String, String> valueMap, HistoryData historyData) throws PayrollCoreException {
+    protected void executeRetro(String dataId, PayrollCoreProtocol.PeriodValue periodValue, HistoryData historyData) throws PayrollCoreException {
         RetroTaskExecution execution = new RetroTaskExecution(
-                createExecutionContext(period, dataId, valueMap),
+                createExecutionContext(Period.of(periodValue.getStartDate(), periodValue.getEndDate()),
+                        dataId,
+                        periodValue.getItemsList()),
                 historyData,
                 normalFormulaContainer,
                 retroFormulaContainer,
@@ -100,13 +105,13 @@ public abstract class Task {
      * @throws PayrollCoreException
      */
     public void execute(PayrollCoreProtocol.Request value) throws PayrollCoreException {
-        HistoryData historyData = new HistoryData(value.getDataId(), value.getHistoriesMap());
+        HistoryData historyData = new HistoryData(value.getDataId(), value.getPastValuesList());
         if (!historyData.isEmpty()) {
             //retroactive calculation
-            executeRetro(value.getDataId(), value.getValuesMap(), historyData, value.getPeriod());
+            executeRetro(value.getDataId(), value.getCurrentValue(), historyData);
         } else {
             //normal calculation
-            executeNormal(value.getDataId(), value.getValuesMap(), value.getPeriod());
+            executeNormal(value.getDataId(), value.getCurrentValue());
         }
     }
 
@@ -121,13 +126,13 @@ public abstract class Task {
      * create Execution context based on receive message
      *
      * @param dataId
-     * @param valueMap
+     * @param itemValueList
      * @return
      * @throws PayrollCoreException
      */
-    protected NormalExecutionContext createExecutionContext(Period period, String dataId, Map<String, String> valueMap) throws PayrollCoreException {
+    protected NormalExecutionContext createExecutionContext(Period period, String dataId, List<PayrollCoreProtocol.ItemValue> itemValueList) throws PayrollCoreException {
         NormalExecutionContext normalExecutionContext = new NormalExecutionContext(dataId, itemFactory, period);
-        normalExecutionContext.addAll(valueMap);
+        normalExecutionContext.addAll(itemValueList);
         return normalExecutionContext;
     }
 }

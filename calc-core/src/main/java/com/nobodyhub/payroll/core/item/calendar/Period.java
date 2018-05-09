@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.item.calendar;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.util.DateFormatUtils;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -35,13 +36,17 @@ public class Period implements Comparable<Period> {
      * @return
      * @throws PayrollCoreException if not valid period
      */
-    public Period of(LocalDate start, LocalDate end) throws PayrollCoreException {
+    public static Period of(LocalDate start, LocalDate end) throws PayrollCoreException {
         if (end.isBefore(start)) {
             throw new PayrollCoreException(PERIOD_INVALID)
                     .addValue("start", start)
                     .addValue("end", end);
         }
         return new Period(start, end);
+    }
+
+    public static Period of(String start, String end) throws PayrollCoreException {
+        return of(DateFormatUtils.parseDate(start), DateFormatUtils.parseDate(end));
     }
 
     public boolean contains(LocalDate date) {

@@ -2,7 +2,6 @@ package com.nobodyhub.payroll.core.service.client;
 
 import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreServiceGrpc;
 import io.grpc.ManagedChannel;
@@ -10,6 +9,7 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 import lombok.Getter;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -54,12 +54,10 @@ public class PayrollCoreClientService {
      * Synchronous interface to call remote payroll calculation
      * <b>Note:</b> there is no guarrentee on the order of result returned from server
      *
-     * @param taskId      indentifier of the task to be executed
-     * @param data        the data given for the calculation
-     * @param historyData history results
+     * @param requestList a list of request to server
      * @return
      */
-    public Map<String, Map<String, String>> calculate(String taskId, Map<String, Map<String, String>> data, HistoryData historyData) throws InterruptedException, PayrollCoreException {
+    public Map<String, Map<String, String>> calculate(List<PayrollCoreProtocol.Request> requestList) throws InterruptedException, PayrollCoreException {
         final CountDownLatch finishLatch = new CountDownLatch(1);
         Map<String, Map<String, String>> afterVals = Maps.newHashMap();
         StreamObserver<PayrollCoreProtocol.Response> response = new StreamObserver<PayrollCoreProtocol.Response>() {
@@ -80,15 +78,7 @@ public class PayrollCoreClientService {
         };
 
         StreamObserver<PayrollCoreProtocol.Request> request = asyncStub.doCalc(response);
-        for (Map.Entry<String, Map<String, String>> entry : data.entrySet()) {
-            PayrollCoreProtocol.Request reqData = PayrollCoreProtocol.Request.newBuilder()
-                    .setTaskId(taskId)
-                    .setDataId(entry.getKey())
-                    .putAllValues(entry.getValue())
-                    .putAllHistories(historyData.toMessage())
-                    .build();
-            request.onNext(reqData);
-        }
+        requestList.stream().forEach((r) -> request.onNext(r));
         request.onCompleted();
         finishLatch.await();
         return afterVals;
