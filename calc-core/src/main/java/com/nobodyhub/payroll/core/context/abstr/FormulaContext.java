@@ -1,8 +1,9 @@
-package com.nobodyhub.payroll.core.formula.common;
+package com.nobodyhub.payroll.core.context.abstr;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.Set;
  * @author Ryan
  */
 @Getter
-public class FormulaContext<T extends Formula> {
+public abstract class FormulaContext<T extends Formula> {
     /**
      * full formula list involved in this context
      */
