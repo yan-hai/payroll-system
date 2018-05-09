@@ -6,11 +6,34 @@ option java_outer_classname = "PayrollCoreProtocol";
 package payroll.core.service.proto;
 
 /*
- * History value for the past
+ * Values for given item
  */
-message History {
+message ItemValue {
+    /*
+     * the identifier of the Item
+     */
     string itemId = 1;
-    repeated string value = 2;
+    /*
+     * values for different period, yyyymmdd -> value
+     */
+    map<string, string> values = 2;
+}
+/*
+ * Values for a given period
+ */
+message PeriodValue {
+    /*
+     * start date of period
+     */
+    string startDate = 1;
+    /*
+     * end date of period
+     */
+    string endDate = 2;
+    /*
+     * items values
+     */
+    repeated ItemValue items = 3;
 }
 
 /*
@@ -26,13 +49,13 @@ message Request {
      */
     string dataId = 2;
     /*
-     * the data identified by the <code>dataId</code>
+     * values for current period
      */
-    map<string, string> values = 3;
+    PeriodValue currentValue = 3;
     /*
-     * list of history values
+     * values for past period(s)
      */
-    map<string, History> histories = 4;
+    repeated PeriodValue pastValues = 4;
 }
 
 /*
