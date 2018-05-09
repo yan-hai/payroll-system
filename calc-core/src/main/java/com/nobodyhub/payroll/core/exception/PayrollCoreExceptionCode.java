@@ -4,6 +4,7 @@ import com.nobodyhub.payroll.core.formula.common.Comparator;
 import com.nobodyhub.payroll.core.formula.common.Operator;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.payment.PaymentType;
 import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
@@ -60,7 +61,12 @@ public enum PayrollCoreExceptionCode {
     /**
      * Invalid History Data
      */
-    HISTORY_DATA_INVALID(HistoryData.class, "")
+    HISTORY_DATA_INVALID(HistoryData.class, ""),
+    /**
+     * Invalid period
+     */
+    PERIOD_INVALID(Period.class, ""),
+
 
     /**
      * TODO: add more codes
