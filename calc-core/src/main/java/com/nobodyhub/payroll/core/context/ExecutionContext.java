@@ -30,10 +30,6 @@ public class ExecutionContext {
      */
     protected final Map<String, Item> items = Maps.newHashMap();
     /**
-     * the context of the belonging task
-     */
-    protected final TaskContext taskContext;
-    /**
      * Execution Status
      */
     protected final ExecutionStatus executionStatus = new ExecutionStatus();
@@ -42,10 +38,9 @@ public class ExecutionContext {
      */
     protected final ItemFactory itemFactory;
 
-    public ExecutionContext(String dataId, TaskContext taskContext) {
+    public ExecutionContext(String dataId, ItemFactory itemFactory) {
         this.dataId = dataId;
-        this.taskContext = taskContext;
-        this.itemFactory = taskContext.getItemFactory();
+        this.itemFactory = itemFactory;
     }
 
     /**

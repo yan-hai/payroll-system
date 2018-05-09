@@ -3,11 +3,11 @@ package com.nobodyhub.payroll.core.service.common;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.protobuf.ProtocolStringList;
+import com.nobodyhub.payroll.core.context.RetroExecutionContext;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode;
+import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
-import com.nobodyhub.payroll.core.context.TaskContext;
-import com.nobodyhub.payroll.core.context.RetroExecutionContext;
 import lombok.Getter;
 
 import java.util.List;
@@ -22,16 +22,17 @@ import java.util.Set;
 @Getter
 public class HistoryData {
     /**
+     * identifier of the owner of data to be executed
+     */
+    private final String dataId;
+    /**
      * a list of history data, could be HR data, attendence data, payment data, etc.
      * each map element contains the data for one history execution, from ItemId to its value
      */
     private final List<Map<String, String>> histories;
 
-    public HistoryData() {
-        this.histories = Lists.newArrayList();
-    }
-
-    public HistoryData(Map<String, PayrollCoreProtocol.History> data) throws PayrollCoreException {
+    public HistoryData(String dataId, Map<String, PayrollCoreProtocol.History> data) throws PayrollCoreException {
+        this.dataId = dataId;
         this.histories = parseMessage(data);
     }
 
@@ -86,15 +87,14 @@ public class HistoryData {
     /**
      * Generate contexts for Retroactive calculation
      *
-     * @param dataId      identifier of the owner of data to be executed
-     * @param taskContext context of the whole task
+     * @param itemFactory factorty to create items
      * @return
      * @throws PayrollCoreException
      */
-    public List<RetroExecutionContext> toRetroContexts(String dataId, TaskContext taskContext) throws PayrollCoreException {
+    public List<RetroExecutionContext> toRetroContexts(ItemFactory itemFactory) throws PayrollCoreException {
         List<RetroExecutionContext> contexts = Lists.newArrayList();
         for (Map<String, String> history : histories) {
-            RetroExecutionContext context = new RetroExecutionContext(dataId, taskContext);
+            RetroExecutionContext context = new RetroExecutionContext(dataId, itemFactory);
             context.addAll(history);
             contexts.add(context);
         }

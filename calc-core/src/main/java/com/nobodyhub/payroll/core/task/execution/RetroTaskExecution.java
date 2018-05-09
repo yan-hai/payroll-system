@@ -1,15 +1,11 @@
 package com.nobodyhub.payroll.core.task.execution;
 
+import com.nobodyhub.payroll.core.context.*;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.context.NormalFormulaContainer;
-import com.nobodyhub.payroll.core.context.RetroFormulaContainer;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 import com.nobodyhub.payroll.core.service.common.HistoryData;
-import com.nobodyhub.payroll.core.context.TaskContext;
 import com.nobodyhub.payroll.core.task.callback.Callback;
-import com.nobodyhub.payroll.core.context.ExecutionContext;
-import com.nobodyhub.payroll.core.context.RetroExecutionContext;
 
 import java.util.List;
 
@@ -19,47 +15,40 @@ import java.util.List;
  * @author yan_h
  * @since 2018-05-08.
  */
-public class RetroTaskExecution implements Runnable {
+public class RetroTaskExecution extends Execution {
     /**
-     * the execution context for the related normal execution
+     * retroactive formulas
      */
-    private final ExecutionContext executionContext;
-    /**
-     * Task context
-     */
-    private final TaskContext taskContext;
+    protected final RetroFormulaContainer retroFormulaContainer;
     /**
      * The history data
      */
     private final HistoryData historyData;
-    /**
-     * Callback to handle the execution
-     */
-    private final Callback callback;
 
 
-    public RetroTaskExecution(ExecutionContext executionContext, HistoryData historyData, Callback callback) {
-        this.executionContext = executionContext;
-        this.taskContext = executionContext.getTaskContext();
+    public RetroTaskExecution(ExecutionContext executionContext,
+                              HistoryData historyData,
+                              NormalFormulaContainer normalFormulaContainer,
+                              RetroFormulaContainer retroFormulaContainer,
+                              Callback callback) {
+        super(executionContext, normalFormulaContainer, callback);
+        this.retroFormulaContainer = retroFormulaContainer;
         this.historyData = historyData;
-        this.callback = callback;
     }
 
     @Override
     public void run() {
         callback.onStart();
-        NormalFormulaContainer normalFormulaContext = taskContext.getNormalFormulaContext();
-        RetroFormulaContainer retroFormulaContext = taskContext.getRetroFormulaContext();
         try {
             //re-calc past data
-            List<RetroExecutionContext> retroContexts = historyData.toRetroContexts(executionContext.getDataId(), taskContext);
+            List<RetroExecutionContext> retroContexts = historyData.toRetroContexts(executionContext.getItemFactory());
             for (RetroExecutionContext retroContext : retroContexts) {
-                for (NormalFormula formula : normalFormulaContext.getFormulas()) {
+                for (NormalFormula formula : normalFormulaContainer.getFormulas()) {
                     retroContext.add(formula.evaluate(retroContext));
                 }
             }
             //handle diff values
-            for (RetroFormula formula : retroFormulaContext.getFormulas()) {
+            for (RetroFormula formula : retroFormulaContainer.getFormulas()) {
                 executionContext.add(formula.evaluate(retroContexts));
             }
         } catch (PayrollCoreException e) {

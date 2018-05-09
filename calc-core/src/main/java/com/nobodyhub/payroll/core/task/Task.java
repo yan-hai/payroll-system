@@ -1,13 +1,15 @@
 package com.nobodyhub.payroll.core.task;
 
-import com.nobodyhub.payroll.core.context.TaskContext;
+import com.nobodyhub.payroll.core.context.ExecutionContext;
+import com.nobodyhub.payroll.core.context.NormalFormulaContainer;
+import com.nobodyhub.payroll.core.context.RetroFormulaContainer;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.callback.Callback;
 import com.nobodyhub.payroll.core.task.execution.RetroTaskExecution;
 import com.nobodyhub.payroll.core.task.execution.TaskExecution;
-import com.nobodyhub.payroll.core.context.ExecutionContext;
 import lombok.Data;
 
 import java.util.Map;
@@ -26,9 +28,17 @@ public abstract class Task {
      */
     protected final String taskId;
     /**
-     * Task Context
+     * Item factory to provide the item instance
      */
-    protected final TaskContext taskContext;
+    protected final ItemFactory itemFactory;
+    /**
+     * normal formulas
+     */
+    protected final NormalFormulaContainer normalFormulaContainer;
+    /**
+     * retroactive formulas
+     */
+    protected final RetroFormulaContainer retroFormulaContainer;
     /**
      * Callback to handle the execution
      */
@@ -45,8 +55,8 @@ public abstract class Task {
      * setup before task starts
      */
     public void setup() {
-        taskContext.getNormalFormulaContext().prioritize();
-        taskContext.getRetroFormulaContext().prioritize();
+        normalFormulaContainer.prioritize();
+        retroFormulaContainer.prioritize();
     }
 
     /**
@@ -59,6 +69,7 @@ public abstract class Task {
     protected void executeNormal(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
         TaskExecution execution = new TaskExecution(
                 createExecutionContext(dataId, valueMap),
+                normalFormulaContainer,
                 callback);
         executorService.execute(execution);
     }
@@ -75,6 +86,8 @@ public abstract class Task {
         RetroTaskExecution execution = new RetroTaskExecution(
                 createExecutionContext(dataId, valueMap),
                 historyData,
+                normalFormulaContainer,
+                retroFormulaContainer,
                 callback);
         executorService.execute(execution);
     }
@@ -86,7 +99,7 @@ public abstract class Task {
      * @throws PayrollCoreException
      */
     public void execute(PayrollCoreProtocol.Request value) throws PayrollCoreException {
-        HistoryData historyData = new HistoryData(value.getHistoriesMap());
+        HistoryData historyData = new HistoryData(value.getDataId(), value.getHistoriesMap());
         if (!historyData.isEmpty()) {
             //retroactive calculation
             executeRetro(value.getDataId(), value.getValuesMap(), historyData);
@@ -105,13 +118,14 @@ public abstract class Task {
 
     /**
      * create Execution context based on receive message
+     *
      * @param dataId
      * @param valueMap
      * @return
      * @throws PayrollCoreException
      */
     protected ExecutionContext createExecutionContext(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
-        ExecutionContext executionContext = new ExecutionContext(dataId, taskContext);
+        ExecutionContext executionContext = new ExecutionContext(dataId, itemFactory);
         executionContext.addAll(valueMap);
         return executionContext;
     }
