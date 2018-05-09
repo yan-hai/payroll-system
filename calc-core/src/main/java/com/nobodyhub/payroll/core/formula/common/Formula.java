@@ -1,12 +1,8 @@
 package com.nobodyhub.payroll.core.formula.common;
 
-import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.item.ItemFactory;
-import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.time.Period;
 import java.util.Set;
 
@@ -42,18 +38,6 @@ public abstract class Formula implements Comparable<Formula>{
      * Get the instance of various types of items
      */
     protected ItemFactory itemFactory;
-
-    /**
-     * create a new instance of PaymentItem to store the evaluate result
-     *
-     * @return
-     * @throws PayrollCoreException
-     */
-    protected PaymentItem createPaymentItem(BigDecimal value) throws PayrollCoreException {
-        PaymentItem item = (PaymentItem) itemFactory.getItem(targetItemId);
-        item.setValue(value);
-        return item;
-    }
 
     /**
      * Get ids of required items in order to evaluate the formula

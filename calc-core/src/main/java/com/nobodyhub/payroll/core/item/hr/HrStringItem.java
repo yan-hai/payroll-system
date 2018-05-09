@@ -2,6 +2,8 @@ package com.nobodyhub.payroll.core.item.hr;
 
 import com.nobodyhub.payroll.core.item.common.Item;
 
+import java.time.LocalDate;
+
 /**
  * [HR] HR item with String value
  *
@@ -15,8 +17,8 @@ public class HrStringItem extends Item<String, HrStringItem> {
     }
 
     @Override
-    public void setStringValue(String value) {
-        this.value = value;
+    public void setStringValue(LocalDate date, String value) {
+        this.values.put(date, value);
     }
 
     @Override

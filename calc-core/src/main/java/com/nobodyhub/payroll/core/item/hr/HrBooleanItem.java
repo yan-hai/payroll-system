@@ -2,6 +2,8 @@ package com.nobodyhub.payroll.core.item.hr;
 
 import com.nobodyhub.payroll.core.item.common.Item;
 
+import java.time.LocalDate;
+
 /**
  * [HR] HR item with Boolean value
  *
@@ -15,8 +17,8 @@ public class HrBooleanItem extends Item<Boolean, HrBooleanItem> {
     }
 
     @Override
-    public void setStringValue(String value) {
-        this.value = Boolean.valueOf(value);
+    public void setStringValue(LocalDate date, String value) {
+        this.values.put(date, Boolean.valueOf(value));
     }
 
     @Override

@@ -50,7 +50,7 @@ public enum Comparator {
      * @throws PayrollCoreException
      */
     public <T extends Comparable<T>> boolean apply(Item<T, ?> item, T lower, T higher) throws PayrollCoreException {
-        T itemVal = item.getValue();
+        T itemVal = item.getValues();
         switch (this) {
             case NA: {
                 return true;

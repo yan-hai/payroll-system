@@ -22,9 +22,9 @@ public class FormulaExpression {
     public BigDecimal evaluate(ExecutionContext context) throws PayrollCoreException {
         Item<BigDecimal, ?> operand = context.get(operandId);
         if (operator == null || anotherOperand == null) {
-            return operand.getValue();
+            return operand.getValues();
         }
-        return operator.apply(operand.getValue(), anotherOperand.evaluate(context));
+        return operator.apply(operand.getValues(), anotherOperand.evaluate(context));
     }
 
     public void getRequiredItems(Set<String> itemIds) {

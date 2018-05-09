@@ -18,13 +18,13 @@ public class HrDateItem extends Item<LocalDate, HrDateItem> {
     }
 
     @Override
-    public void setStringValue(String value) {
-        this.value = DateFormatUtils.parseDate(value);
+    public String getValueAsString(LocalDate date) {
+        return DateFormatUtils.convertDate(getValue(date));
     }
 
     @Override
-    public String getValueAsString() {
-        return DateFormatUtils.convertDate(this.value);
+    public void setStringValue(LocalDate date, String value) {
+        this.values.put(date, DateFormatUtils.parseDate(value));
     }
 
     @Override

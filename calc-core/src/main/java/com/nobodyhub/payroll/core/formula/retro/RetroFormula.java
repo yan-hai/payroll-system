@@ -31,7 +31,7 @@ public class RetroFormula extends Formula {
                     PaymentItem paymentItem = (PaymentItem) item;
                     BigDecimal exist = diffValues.get(itemId) == null ?
                             BigDecimal.ZERO : diffValues.get(itemId);
-                    exist = exist.add(paymentItem.getValue()
+                    exist = exist.add(paymentItem.getValues()
                             .subtract(new BigDecimal(oldValues.get(itemId))));
                     diffValues.put(itemId, exist);
                 } else {

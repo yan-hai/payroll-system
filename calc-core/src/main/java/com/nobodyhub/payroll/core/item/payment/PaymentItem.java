@@ -6,7 +6,7 @@ import com.nobodyhub.payroll.core.item.payment.rounding.RoundingRule;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
+import java.time.LocalDate;
 
 /**
  * [Payment] Payitem with BigDecimal type
@@ -31,8 +31,8 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
     }
 
     @Override
-    public void setStringValue(String value) {
-        this.value = new BigDecimal(value);
+    public void setStringValue(LocalDate date, String value) {
+        this.values.put(date, new BigDecimal(value));
     }
 
     @Override
@@ -45,17 +45,12 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
         return new PaymentItem(itemId, paymentType, isRetro, roundingRule);
     }
 
-    @Override
-    public BigDecimal getValue() {
-        return roundingRule.round(super.getValue());
-    }
-
     /**
-     * add {@link this#value} to the <code>toAggregate</code>
+     * add {@link this#values} to the <code>toAggregate</code>
      *
      * @param toAggregate
      */
     public BigDecimal aggregate(BigDecimal toAggregate) throws PayrollCoreException {
-        return paymentType.aggregate(value, toAggregate);
+        return paymentType.aggregate(values, toAggregate);
     }
 }
