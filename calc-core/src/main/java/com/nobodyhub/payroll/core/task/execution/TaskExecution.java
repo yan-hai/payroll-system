@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.task.execution;
 
 import com.nobodyhub.payroll.core.formula.NormalFormulaContainer;
+import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.task.callback.Callback;
 import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 import lombok.Data;
@@ -25,4 +26,8 @@ public abstract class TaskExecution implements Runnable {
      * Callback to handle the execution
      */
     protected final Callback callback;
+    /**
+     * Calculation Period
+     */
+    protected final Period period;
 }
