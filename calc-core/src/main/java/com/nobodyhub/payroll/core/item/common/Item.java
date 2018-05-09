@@ -19,10 +19,6 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      */
     protected final String itemId;
     /**
-     * The class of value
-     */
-    protected final Class<VT> valueCls;
-    /**
      * Raw value of item
      */
     protected VT value;

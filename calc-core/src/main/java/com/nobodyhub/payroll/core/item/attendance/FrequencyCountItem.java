@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class FrequencyCountItem extends Item<BigDecimal, FrequencyCountItem> {
 
     public FrequencyCountItem(String itemId) {
-        super(itemId, BigDecimal.class);
+        super(itemId);
     }
 
     @Override

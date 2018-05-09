@@ -14,7 +14,7 @@ import java.time.LocalTime;
 public class HrTimeItem extends Item<LocalTime, HrTimeItem> {
 
     public HrTimeItem(String itemId) {
-        super(itemId, LocalTime.class);
+        super(itemId);
     }
 
     @Override

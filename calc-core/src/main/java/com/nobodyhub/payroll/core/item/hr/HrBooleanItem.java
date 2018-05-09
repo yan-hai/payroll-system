@@ -11,7 +11,7 @@ import com.nobodyhub.payroll.core.item.common.Item;
 public class HrBooleanItem extends Item<Boolean, HrBooleanItem> {
 
     public HrBooleanItem(String itemId) {
-        super(itemId, Boolean.class);
+        super(itemId);
     }
 
     @Override

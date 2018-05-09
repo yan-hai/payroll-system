@@ -24,7 +24,7 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
                        PaymentType paymentType,
                        boolean isRetro,
                        RoundingRule roundingRule) {
-        super(itemId, BigDecimal.class);
+        super(itemId);
         this.paymentType = paymentType;
         this.isRetro = isRetro;
         this.roundingRule = roundingRule;

@@ -11,7 +11,7 @@ import com.nobodyhub.payroll.core.item.common.Item;
 public class HrStringItem extends Item<String, HrStringItem> {
 
     public HrStringItem(String itemId) {
-        super(itemId, String.class);
+        super(itemId);
     }
 
     @Override

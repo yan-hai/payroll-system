@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class DayCountItem extends Item<BigDecimal, DayCountItem> {
 
     public DayCountItem(String itemId) {
-        super(itemId, BigDecimal.class);
+        super(itemId);
     }
 
     @Override

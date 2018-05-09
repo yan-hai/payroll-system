@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class HourCountItem extends Item<BigDecimal, HourCountItem> {
 
     public HourCountItem(String itemId) {
-        super(itemId, BigDecimal.class);
+        super(itemId);
     }
 
     @Override
