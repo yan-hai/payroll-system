@@ -1,6 +1,5 @@
-package com.nobodyhub.payroll.core.task.execution;
+package com.nobodyhub.payroll.core.task.execution.retro;
 
-import com.nobodyhub.payroll.core.context.*;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.NormalFormulaContainer;
 import com.nobodyhub.payroll.core.formula.RetroFormulaContainer;
@@ -8,6 +7,8 @@ import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.task.callback.Callback;
+import com.nobodyhub.payroll.core.task.execution.TaskExecution;
+import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 
 import java.util.List;
 
@@ -28,12 +29,12 @@ public class RetroTaskExecution extends TaskExecution {
     private final HistoryData historyData;
 
 
-    public RetroTaskExecution(ExecutionContext executionContext,
+    public RetroTaskExecution(NormalExecutionContext normalExecutionContext,
                               HistoryData historyData,
                               NormalFormulaContainer normalFormulaContainer,
                               RetroFormulaContainer retroFormulaContainer,
                               Callback callback) {
-        super(executionContext, normalFormulaContainer, callback);
+        super(normalExecutionContext, normalFormulaContainer, callback);
         this.retroFormulaContainer = retroFormulaContainer;
         this.historyData = historyData;
     }
@@ -43,7 +44,7 @@ public class RetroTaskExecution extends TaskExecution {
         callback.onStart();
         try {
             //re-calc past data
-            List<RetroExecutionContext> retroContexts = historyData.toRetroContexts(executionContext.getItemFactory());
+            List<RetroExecutionContext> retroContexts = historyData.toRetroContexts(normalExecutionContext.getItemFactory());
             for (RetroExecutionContext retroContext : retroContexts) {
                 for (NormalFormula formula : normalFormulaContainer.getFormulas()) {
                     retroContext.add(formula.evaluate(retroContext));
@@ -51,11 +52,11 @@ public class RetroTaskExecution extends TaskExecution {
             }
             //handle diff values
             for (RetroFormula formula : retroFormulaContainer.getFormulas()) {
-                executionContext.add(formula.evaluate(retroContexts));
+                normalExecutionContext.add(formula.evaluate(retroContexts));
             }
         } catch (PayrollCoreException e) {
-            callback.onError(e, executionContext);
+            callback.onError(e, normalExecutionContext);
         }
-        callback.onCompleted(executionContext);
+        callback.onCompleted(normalExecutionContext);
     }
 }

@@ -1,6 +1,6 @@
 package com.nobodyhub.payroll.core.task.callback;
 
-import com.nobodyhub.payroll.core.context.ExecutionContext;
+import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 
 /**
  * Callbacks for the execution
@@ -19,12 +19,12 @@ public interface Callback {
      * @param e
      * @param context
      */
-    void onError(Exception e, ExecutionContext context);
+    void onError(Exception e, NormalExecutionContext context);
 
     /**
      * when execution complete without error
      *
      * @param context
      */
-    void onCompleted(ExecutionContext context);
+    void onCompleted(NormalExecutionContext context);
 }

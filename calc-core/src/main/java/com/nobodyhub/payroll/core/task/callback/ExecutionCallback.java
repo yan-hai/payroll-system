@@ -1,7 +1,7 @@
 package com.nobodyhub.payroll.core.task.callback;
 
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
-import com.nobodyhub.payroll.core.context.ExecutionContext;
+import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatusCode;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class ExecutionCallback implements Callback {
     }
 
     @Override
-    public void onError(Exception e, ExecutionContext context) {
+    public void onError(Exception e, NormalExecutionContext context) {
         //TODO: add logger
         //TODO: distinguish SttausCode by the type of Exception
         context.getExecutionStatus().setStatusCode(ExecutionStatusCode.ERROR);
@@ -40,7 +40,7 @@ public class ExecutionCallback implements Callback {
     }
 
     @Override
-    public void onCompleted(ExecutionContext context) {
+    public void onCompleted(NormalExecutionContext context) {
         //TODO: add logger
         responseObserver.onNext(context.toResponse());
         countDown();

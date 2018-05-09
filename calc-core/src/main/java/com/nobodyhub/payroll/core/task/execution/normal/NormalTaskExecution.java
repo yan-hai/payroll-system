@@ -1,10 +1,10 @@
-package com.nobodyhub.payroll.core.task.execution;
+package com.nobodyhub.payroll.core.task.execution.normal;
 
-import com.nobodyhub.payroll.core.context.ExecutionContext;
-import com.nobodyhub.payroll.core.formula.NormalFormulaContainer;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.formula.NormalFormulaContainer;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.task.callback.Callback;
+import com.nobodyhub.payroll.core.task.execution.TaskExecution;
 import lombok.Getter;
 
 /**
@@ -13,10 +13,10 @@ import lombok.Getter;
 @Getter
 public class NormalTaskExecution extends TaskExecution {
 
-    public NormalTaskExecution(ExecutionContext executionContext,
+    public NormalTaskExecution(NormalExecutionContext normalExecutionContext,
                                NormalFormulaContainer normalFormulaContainer,
                                Callback callback) {
-        super(executionContext, normalFormulaContainer, callback);
+        super(normalExecutionContext, normalFormulaContainer, callback);
     }
 
     @Override
@@ -24,11 +24,11 @@ public class NormalTaskExecution extends TaskExecution {
         callback.onStart();
         for (NormalFormula formula : normalFormulaContainer.getFormulas()) {
             try {
-                executionContext.add(formula.evaluate(executionContext));
+                normalExecutionContext.add(formula.evaluate(normalExecutionContext));
             } catch (PayrollCoreException e) {
-                callback.onError(e, executionContext);
+                callback.onError(e, normalExecutionContext);
             }
         }
-        callback.onCompleted(executionContext);
+        callback.onCompleted(normalExecutionContext);
     }
 }

@@ -1,15 +1,15 @@
 package com.nobodyhub.payroll.core.task;
 
-import com.nobodyhub.payroll.core.context.ExecutionContext;
+import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.NormalFormulaContainer;
 import com.nobodyhub.payroll.core.formula.RetroFormulaContainer;
-import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.callback.Callback;
-import com.nobodyhub.payroll.core.task.execution.RetroTaskExecution;
-import com.nobodyhub.payroll.core.task.execution.NormalTaskExecution;
+import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
+import com.nobodyhub.payroll.core.task.execution.normal.NormalTaskExecution;
+import com.nobodyhub.payroll.core.task.execution.retro.RetroTaskExecution;
 import lombok.Data;
 
 import java.util.Map;
@@ -124,9 +124,9 @@ public abstract class Task {
      * @return
      * @throws PayrollCoreException
      */
-    protected ExecutionContext createExecutionContext(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
-        ExecutionContext executionContext = new ExecutionContext(dataId, itemFactory);
-        executionContext.addAll(valueMap);
-        return executionContext;
+    protected NormalExecutionContext createExecutionContext(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
+        NormalExecutionContext normalExecutionContext = new NormalExecutionContext(dataId, itemFactory);
+        normalExecutionContext.addAll(valueMap);
+        return normalExecutionContext;
     }
 }
