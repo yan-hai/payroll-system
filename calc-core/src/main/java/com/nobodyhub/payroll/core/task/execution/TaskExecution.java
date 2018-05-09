@@ -26,8 +26,4 @@ public abstract class TaskExecution implements Runnable {
      * Callback to handle the execution
      */
     protected final Callback callback;
-    /**
-     * Calculation Period
-     */
-    protected final Period period;
 }

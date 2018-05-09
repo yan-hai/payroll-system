@@ -42,15 +42,13 @@ public enum Comparator {
     /**
      * Judge whether the item value satifies the Comparation or not
      *
-     * @param item
      * @param lower
      * @param higher
      * @param <T>
      * @return
      * @throws PayrollCoreException
      */
-    public <T extends Comparable<T>> boolean apply(Item<T, ?> item, T lower, T higher) throws PayrollCoreException {
-        T itemVal = item.getValues();
+    public <T extends Comparable<T>> boolean apply(T itemVal,  T lower, T higher) throws PayrollCoreException {
         switch (this) {
             case NA: {
                 return true;

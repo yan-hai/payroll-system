@@ -2,9 +2,11 @@ package com.nobodyhub.payroll.core.formula.normal.map;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Comparator;
-import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
+
+import java.time.LocalDate;
+import java.util.Set;
 
 /**
  * @author yan_h
@@ -18,9 +20,11 @@ public abstract class FormulaCondition<T extends Comparable<T>> {
     protected T lower;
     protected T higher;
 
-    @SuppressWarnings("unchecked")
-    public boolean evaluate(ExecutionContext context) throws PayrollCoreException {
-        Item<T, ?> item = context.get(itemId);
-        return comparator.apply(item, lower, higher);
+    public boolean matches(ExecutionContext context, LocalDate date) throws PayrollCoreException {
+        return comparator.apply(context.get(itemId, date, clazz), lower, higher);
+    }
+
+    public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
+        return context.get(itemId).getDateSplit();
     }
 }

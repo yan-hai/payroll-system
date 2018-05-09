@@ -3,6 +3,7 @@ package com.nobodyhub.payroll.core.task.execution.retro;
 import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
 
@@ -18,8 +19,8 @@ import java.util.Map;
 public class RetroExecutionContext extends ExecutionContext {
     protected final Map<String, String> originalValues = Maps.newHashMap();
 
-    public RetroExecutionContext(String dataId, ItemFactory itemFactory) {
-        super(dataId, itemFactory);
+    public RetroExecutionContext(String dataId, ItemFactory itemFactory, Period period) {
+        super(dataId, itemFactory, period);
     }
 
     @Override

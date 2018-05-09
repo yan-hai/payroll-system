@@ -5,7 +5,6 @@ import com.nobodyhub.payroll.core.formula.common.Operator;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
-import com.nobodyhub.payroll.core.item.payment.PaymentType;
 import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
@@ -46,10 +45,6 @@ public enum PayrollCoreExceptionCode {
      * Item does not have the required constructor(with one String parameter, as itemId)
      */
     FACTORY_NO_REQUIRED_CONSTRUCTOR(ItemFactory.class, ""),
-    /**
-     * Unimplemented handler for {@link PaymentType}
-     */
-    PAYMENTTYPE_UNIMPLEMENTED(PaymentType.class, ""),
     /**
      * Retroactive formula fail to apply
      */

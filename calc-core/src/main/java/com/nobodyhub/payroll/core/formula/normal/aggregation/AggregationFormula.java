@@ -1,5 +1,6 @@
 package com.nobodyhub.payroll.core.formula.normal.aggregation;
 
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
@@ -7,28 +8,37 @@ import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
+import java.time.LocalDate;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * @author Ryan
  */
-public class AggregationFormula extends NormalFormula {
-    protected Set<String> aggregatedItemIds = Sets.newHashSet();
+public class AggregationFormula extends NormalFormula<Set<String>> {
 
     @Override
-    @SuppressWarnings("unchecked")
     public PaymentItem evaluate(ExecutionContext context) throws PayrollCoreException {
+        TreeMap<LocalDate, BigDecimal> results = Maps.newTreeMap();
         BigDecimal rst = BigDecimal.ZERO;
-        for (String itemId : aggregatedItemIds) {
-            PaymentItem item = (PaymentItem) context.get(itemId);
-            item.aggregate(rst);
+        for (Map.Entry<LocalDate, Set<String>> entry : contents.entrySet()) {
+            LocalDate date = entry.getKey();
+            for (String itemId : entry.getValue()) {
+                BigDecimal value = context.get(itemId, date, BigDecimal.class);
+                rst=rst.add(value);
+            }
+            results.put(entry.getKey(), rst);
         }
-        return createPaymentItem(rst);
+        return createPaymentItem(results);
     }
 
     @Override
     public Set<String> getRequiredItems() {
-        return new HashSet<>(aggregatedItemIds);
+        Set<String> idSet = Sets.newHashSet();
+        for(Set<String> ids: contents.values()) {
+            idSet.addAll(ids);
+        }
+        return idSet;
     }
 }

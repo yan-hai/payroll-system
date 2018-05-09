@@ -4,6 +4,7 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.NormalFormulaContainer;
 import com.nobodyhub.payroll.core.formula.RetroFormulaContainer;
 import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.callback.Callback;
@@ -66,9 +67,9 @@ public abstract class Task {
      * @param valueMap
      * @throws PayrollCoreException
      */
-    protected void executeNormal(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
+    protected void executeNormal(Period period, String dataId, Map<String, String> valueMap) throws PayrollCoreException {
         NormalTaskExecution execution = new NormalTaskExecution(
-                createExecutionContext(dataId, valueMap),
+                createExecutionContext(period, dataId, valueMap),
                 normalFormulaContainer,
                 callback);
         executorService.execute(execution);
@@ -82,9 +83,9 @@ public abstract class Task {
      * @param historyData
      * @throws PayrollCoreException
      */
-    protected void executeRetro(String dataId, Map<String, String> valueMap, HistoryData historyData) throws PayrollCoreException {
+    protected void executeRetro(Period period, String dataId, Map<String, String> valueMap, HistoryData historyData) throws PayrollCoreException {
         RetroTaskExecution execution = new RetroTaskExecution(
-                createExecutionContext(dataId, valueMap),
+                createExecutionContext(period, dataId, valueMap),
                 historyData,
                 normalFormulaContainer,
                 retroFormulaContainer,
@@ -102,10 +103,10 @@ public abstract class Task {
         HistoryData historyData = new HistoryData(value.getDataId(), value.getHistoriesMap());
         if (!historyData.isEmpty()) {
             //retroactive calculation
-            executeRetro(value.getDataId(), value.getValuesMap(), historyData);
+            executeRetro(value.getDataId(), value.getValuesMap(), historyData, value.getPeriod());
         } else {
             //normal calculation
-            executeNormal(value.getDataId(), value.getValuesMap());
+            executeNormal(value.getDataId(), value.getValuesMap(), value.getPeriod());
         }
     }
 
@@ -124,8 +125,8 @@ public abstract class Task {
      * @return
      * @throws PayrollCoreException
      */
-    protected NormalExecutionContext createExecutionContext(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
-        NormalExecutionContext normalExecutionContext = new NormalExecutionContext(dataId, itemFactory);
+    protected NormalExecutionContext createExecutionContext(Period period, String dataId, Map<String, String> valueMap) throws PayrollCoreException {
+        NormalExecutionContext normalExecutionContext = new NormalExecutionContext(dataId, itemFactory, period);
         normalExecutionContext.addAll(valueMap);
         return normalExecutionContext;
     }

@@ -2,10 +2,11 @@ package com.nobodyhub.payroll.core.formula.normal.arithmetic;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Operator;
-import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
+import lombok.Getter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Set;
 
 /**
@@ -13,22 +14,22 @@ import java.util.Set;
  *
  * @author Ryan
  */
+@Getter
 public class FormulaExpression {
     private Operator operator;
-    private String operandId;
+    private String operandItemId;
     private FormulaExpression anotherOperand;
 
-    @SuppressWarnings("unchecked")
-    public BigDecimal evaluate(ExecutionContext context) throws PayrollCoreException {
-        Item<BigDecimal, ?> operand = context.get(operandId);
+    public BigDecimal evaluate(ExecutionContext context, LocalDate date) throws PayrollCoreException {
+        BigDecimal value = context.get(operandItemId, date, BigDecimal.class);
         if (operator == null || anotherOperand == null) {
-            return operand.getValues();
+            return value;
         }
-        return operator.apply(operand.getValues(), anotherOperand.evaluate(context));
+        return operator.apply(value, anotherOperand.evaluate(context, date));
     }
 
     public void getRequiredItems(Set<String> itemIds) {
-        itemIds.add(operandId);
+        itemIds.add(operandItemId);
         if (anotherOperand != null) {
             anotherOperand.getRequiredItems(itemIds);
         }

@@ -4,15 +4,18 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatus;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Set;
 
+import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONTEXT_INCOMPATIBLE;
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONTEXT_NOT_FOUND;
 
 /**
@@ -32,6 +35,10 @@ public abstract class ExecutionContext {
      * the factory of all items
      */
     protected final ItemFactory itemFactory;
+    /**
+     * the target period of execution
+     */
+    protected final Period period;
     /**
      * the context contains all items
      */
@@ -61,7 +68,8 @@ public abstract class ExecutionContext {
             String itemId = entry.getKey();
             String value = entry.getValue();
             Item item = itemFactory.getItem(itemId);
-            item.setStringValue(value);
+            //TODO: remove comments
+//            item.setStringValue(value);
         }
     }
 
@@ -73,7 +81,8 @@ public abstract class ExecutionContext {
     public PayrollCoreProtocol.Response toResponse() {
         Map<String, String> values = Maps.newHashMap();
         for (Item item : items.values()) {
-            values.put(item.getItemId(), item.getValueAsString());
+            //TOOD: remove comments
+//            values.put(item.getItemId(), item.getValueAsString());
         }
         return PayrollCoreProtocol.Response.newBuilder()
                 .setStatusCode(executionStatus.getStatusCode().toString())
@@ -98,6 +107,17 @@ public abstract class ExecutionContext {
         }
         return item;
     }
+
+    public <T> T get(String itemId, LocalDate date, Class<T> cls) throws PayrollCoreException {
+        Object object = get(itemId).getValue(date);
+        if (object.getClass().isAssignableFrom(cls)) {
+            return cls.cast(object);
+        }
+        throw new PayrollCoreException(CONTEXT_INCOMPATIBLE)
+                .addValue("itemId", itemId)
+                .addValue("cls", cls);
+    }
+
 
     /**
      * get ids of all items in the context

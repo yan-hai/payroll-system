@@ -1,6 +1,6 @@
 package com.nobodyhub.payroll.core.formula.normal.map;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
@@ -9,8 +9,11 @@ import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeMap;
 
 /**
  * A Map form of formula, it maps the conditions to a given value.
@@ -25,34 +28,38 @@ import java.util.Set;
  * @since 2018-05-04.
  */
 @RequiredArgsConstructor
-public class MapFormula extends NormalFormula {
-    /**
-     * Cases of the map
-     */
-    protected final List<FormulaCase> cases = Lists.newArrayList();
-    /**
-     * Default value if no Case is matched
-     */
-    protected final BigDecimal defaultValue;
-
+public class MapFormula extends NormalFormula<FormulaCaseSet> {
     @Override
     public PaymentItem evaluate(ExecutionContext context) throws PayrollCoreException {
-        BigDecimal result = defaultValue;
-        for (FormulaCase formulaCase : cases) {
-            if (formulaCase.evaluate(context)) {
-                result = formulaCase.getValue();
-                break;
-            }
+        TreeMap<LocalDate, BigDecimal> results = Maps.newTreeMap();
+        for (Map.Entry<LocalDate, FormulaCaseSet> entry : contents.entrySet()) {
+            FormulaCaseSet caseSet = entry.getValue();
+            LocalDate date = entry.getKey();
+            results.put(date, caseSet.evaluate(context, date));
         }
-        return createPaymentItem(result);
+        SortedSet<LocalDate> dateSet = getDateSplit(context);
+        for (LocalDate date : dateSet) {
+            BigDecimal result = contents.get(date).evaluate(context, date);
+            results.put(date, result);
+        }
+        return createPaymentItem(results);
     }
 
     @Override
     public Set<String> getRequiredItems() {
         Set<String> itemIds = Sets.newHashSet();
-        for (FormulaCase formulaCase : cases) {
-            formulaCase.getRequiredItems(itemIds);
+        for (FormulaCaseSet caseSet : contents.values()) {
+            itemIds.addAll(caseSet.getRequiredItems());
         }
         return itemIds;
+    }
+
+    public SortedSet<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
+        SortedSet<LocalDate> dateSet = Sets.newTreeSet();
+        for (Map.Entry<LocalDate, FormulaCaseSet> entry : contents.entrySet()) {
+            dateSet.add(entry.getKey());
+            dateSet.addAll(entry.getValue().getDateSplit(context));
+        }
+        return dateSet;
     }
 }

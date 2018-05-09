@@ -1,10 +1,14 @@
 package com.nobodyhub.payroll.core.item.common;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -33,8 +37,17 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      * @param date  start date to be effective
      * @param value
      */
-    public void setValue(LocalDate date, VT value) {
+    public void addValue(LocalDate date, VT value) {
         this.values.put(date, value);
+    }
+
+    /**
+     * set the item's raw values
+     *
+     * @param values new value map
+     */
+    public void addValues(Map<LocalDate, VT> values) {
+        this.values.putAll(values);
     }
 
     /**
@@ -77,4 +90,18 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      * @return
      */
     public abstract VT getDefaultValue();
+
+    /**
+     * get the start dates for the {@link this#values}
+     *
+     * @return
+     */
+    public Set<LocalDate> getDateSplit() {
+        return values.keySet();
+    }
+
+    public VT getSingleValue() {
+        List<VT> valueList = Lists.newArrayList(values.values());
+        return valueList.isEmpty() ? null : valueList.get(0);
+    }
 }

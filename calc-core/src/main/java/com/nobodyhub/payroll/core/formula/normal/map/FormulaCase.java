@@ -1,11 +1,13 @@
 package com.nobodyhub.payroll.core.formula.normal.map;
 
+import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -33,10 +35,10 @@ public class FormulaCase implements Comparable<FormulaCase> {
     @Getter
     private final BigDecimal value;
 
-    public boolean evaluate(ExecutionContext context) throws PayrollCoreException {
+    public boolean matches(ExecutionContext context, LocalDate date) throws PayrollCoreException {
         boolean result = true;
         for (FormulaCondition condition : conditions) {
-            result = result && condition.evaluate(context);
+            result = result && condition.matches(context, date);
         }
         return result;
     }
@@ -45,6 +47,14 @@ public class FormulaCase implements Comparable<FormulaCase> {
         for (FormulaCondition condition : conditions) {
             itemIds.add(condition.getItemId());
         }
+    }
+
+    public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
+        Set<LocalDate> dateSet = Sets.newHashSet();
+        for(FormulaCondition condition: conditions) {
+            dateSet.addAll(condition.getDateSplit(context));
+        }
+        return dateSet;
     }
 
     @Override

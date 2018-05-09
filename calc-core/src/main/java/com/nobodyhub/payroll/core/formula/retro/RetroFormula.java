@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
+import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.execution.retro.RetroExecutionContext;
@@ -20,18 +21,24 @@ import java.util.Set;
 public class RetroFormula extends Formula {
     protected Set<String> relatedItemIds = Sets.newHashSet();
 
-    public PaymentItem evaluate(List<RetroExecutionContext> retroContexts) throws PayrollCoreException {
+    /**
+     * @param retroContexts list of past retro calculation result
+     * @param normalPeriod  the period of related NormalExecutionContext
+     * @return
+     * @throws PayrollCoreException
+     */
+    public PaymentItem evaluate(List<RetroExecutionContext> retroContexts, Period normalPeriod) throws PayrollCoreException {
         Map<String, BigDecimal> diffValues = Maps.newHashMap();
-        for (RetroExecutionContext retroCtx: retroContexts) {
+        for (RetroExecutionContext retroCtx : retroContexts) {
             Map<String, String> oldValues = retroCtx.getOriginalValues();
             for (String itemId : relatedItemIds) {
                 Item item = retroCtx.get(itemId);
                 if ((item instanceof PaymentItem)
-                        && ((PaymentItem)item).isRetro()) {
+                        && ((PaymentItem) item).isRetro()) {
                     PaymentItem paymentItem = (PaymentItem) item;
                     BigDecimal exist = diffValues.get(itemId) == null ?
                             BigDecimal.ZERO : diffValues.get(itemId);
-                    exist = exist.add(paymentItem.getValues()
+                    exist = exist.add(paymentItem.getSingleValue()
                             .subtract(new BigDecimal(oldValues.get(itemId))));
                     diffValues.put(itemId, exist);
                 } else {
@@ -43,7 +50,7 @@ public class RetroFormula extends Formula {
         for (BigDecimal val : diffValues.values()) {
             rst = rst.add(val);
         }
-        return createPaymentItem(rst);
+        return createPaymentItem(normalPeriod.getStart(), rst);
     }
 
     @Override

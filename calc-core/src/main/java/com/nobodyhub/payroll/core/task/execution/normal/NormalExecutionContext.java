@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.task.execution.normal;
 
 import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 
 /**
@@ -10,7 +11,7 @@ import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
  */
 public class NormalExecutionContext extends ExecutionContext {
 
-    public NormalExecutionContext(String dataId, ItemFactory itemFactory) {
-        super(dataId, itemFactory);
+    public NormalExecutionContext(String dataId, ItemFactory itemFactory, Period period) {
+        super(dataId, itemFactory, period);
     }
 }

@@ -1,16 +1,21 @@
 package com.nobodyhub.payroll.core.formula.common;
 
+import com.google.common.collect.Maps;
+import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import lombok.Data;
 
-import java.time.Period;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Map;
 import java.util.Set;
 
 /**
  * @author Ryan
  */
 @Data
-public abstract class Formula implements Comparable<Formula>{
+public abstract class Formula implements Comparable<Formula> {
     /**
      * the id of item whose value will be evaluated from this formula
      */
@@ -23,10 +28,6 @@ public abstract class Formula implements Comparable<Formula>{
      * Name of formula
      */
     protected String formulaName;
-    /**
-     * Valid Period
-     */
-    protected Period validPeriod;
     /**
      * The priority which decide the order to evaluate the formula
      * <p>
@@ -50,4 +51,16 @@ public abstract class Formula implements Comparable<Formula>{
     public int compareTo(Formula o) {
         return this.priority - o.priority;
     }
+
+    protected PaymentItem createPaymentItem(Map<LocalDate, BigDecimal> values) throws PayrollCoreException {
+        PaymentItem item = (PaymentItem) itemFactory.getItem(targetItemId);
+        item.addValues(values);
+        return item;
+    }
+
+    protected PaymentItem createPaymentItem(LocalDate date, BigDecimal value) throws PayrollCoreException {
+        Map<LocalDate, BigDecimal> map = Maps.newHashMap();
+        return createPaymentItem(map);
+    }
+
 }

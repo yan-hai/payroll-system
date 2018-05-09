@@ -94,7 +94,7 @@ public class HistoryData {
     public List<RetroExecutionContext> toRetroContexts(ItemFactory itemFactory) throws PayrollCoreException {
         List<RetroExecutionContext> contexts = Lists.newArrayList();
         for (Map<String, String> history : histories) {
-            RetroExecutionContext context = new RetroExecutionContext(dataId, itemFactory);
+            RetroExecutionContext context = new RetroExecutionContext(dataId, itemFactory, period);
             context.addAll(history);
             contexts.add(context);
         }

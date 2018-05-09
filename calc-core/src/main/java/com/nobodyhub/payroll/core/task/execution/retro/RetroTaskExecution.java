@@ -52,7 +52,7 @@ public class RetroTaskExecution extends TaskExecution {
             }
             //handle diff values
             for (RetroFormula formula : retroFormulaContainer.getFormulas()) {
-                normalExecutionContext.add(formula.evaluate(retroContexts));
+                normalExecutionContext.add(formula.evaluate(retroContexts, normalExecutionContext.getPeriod()));
             }
         } catch (PayrollCoreException e) {
             callback.onError(e, normalExecutionContext);
