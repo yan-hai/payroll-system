@@ -9,7 +9,7 @@ import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.callback.Callback;
 import com.nobodyhub.payroll.core.task.execution.RetroTaskExecution;
-import com.nobodyhub.payroll.core.task.execution.TaskExecution;
+import com.nobodyhub.payroll.core.task.execution.NormalTaskExecution;
 import lombok.Data;
 
 import java.util.Map;
@@ -67,7 +67,7 @@ public abstract class Task {
      * @throws PayrollCoreException
      */
     protected void executeNormal(String dataId, Map<String, String> valueMap) throws PayrollCoreException {
-        TaskExecution execution = new TaskExecution(
+        NormalTaskExecution execution = new NormalTaskExecution(
                 createExecutionContext(dataId, valueMap),
                 normalFormulaContainer,
                 callback);

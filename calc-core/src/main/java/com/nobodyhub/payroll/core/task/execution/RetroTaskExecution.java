@@ -15,7 +15,7 @@ import java.util.List;
  * @author yan_h
  * @since 2018-05-08.
  */
-public class RetroTaskExecution extends Execution {
+public class RetroTaskExecution extends TaskExecution {
     /**
      * retroactive formulas
      */
