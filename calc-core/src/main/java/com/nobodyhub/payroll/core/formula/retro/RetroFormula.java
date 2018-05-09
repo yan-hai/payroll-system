@@ -6,7 +6,7 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
-import com.nobodyhub.payroll.core.task.execution.context.RetroExecutionContext;
+import com.nobodyhub.payroll.core.context.RetroExecutionContext;
 
 import java.math.BigDecimal;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package com.nobodyhub.payroll.core.task.execution.context;
+package com.nobodyhub.payroll.core.context;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -6,7 +6,6 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
-import com.nobodyhub.payroll.core.task.TaskContext;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatus;
 import lombok.Getter;
 

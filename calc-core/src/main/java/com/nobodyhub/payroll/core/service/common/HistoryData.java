@@ -6,8 +6,8 @@ import com.google.protobuf.ProtocolStringList;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
-import com.nobodyhub.payroll.core.task.TaskContext;
-import com.nobodyhub.payroll.core.task.execution.context.RetroExecutionContext;
+import com.nobodyhub.payroll.core.context.TaskContext;
+import com.nobodyhub.payroll.core.context.RetroExecutionContext;
 import lombok.Getter;
 
 import java.util.List;

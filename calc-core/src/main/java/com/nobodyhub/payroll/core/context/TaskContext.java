@@ -1,15 +1,10 @@
-package com.nobodyhub.payroll.core.task;
+package com.nobodyhub.payroll.core.context;
 
-import com.nobodyhub.payroll.core.formula.NormalFormulaContext;
-import com.nobodyhub.payroll.core.formula.RetroFormulaContext;
+import com.nobodyhub.payroll.core.context.NormalFormulaContext;
+import com.nobodyhub.payroll.core.context.RetroFormulaContext;
 import com.nobodyhub.payroll.core.item.ItemFactory;
-import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
-import java.math.MathContext;
-
-import static java.math.MathContext.DECIMAL128;
 
 /**
  * Context for task execution

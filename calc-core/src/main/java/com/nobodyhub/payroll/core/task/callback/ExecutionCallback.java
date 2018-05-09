@@ -1,7 +1,7 @@
 package com.nobodyhub.payroll.core.task.callback;
 
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
-import com.nobodyhub.payroll.core.task.execution.context.ExecutionContext;
+import com.nobodyhub.payroll.core.context.ExecutionContext;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatusCode;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
