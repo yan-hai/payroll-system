@@ -6,5 +6,5 @@ import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 /**
  * @author Ryan
  */
-public class RetroFormulaContainer extends FormulaContainer<RetroFormula> {
+public abstract class RetroFormulaContainer extends FormulaContainer<RetroFormula> {
 }

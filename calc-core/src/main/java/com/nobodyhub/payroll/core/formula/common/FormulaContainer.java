@@ -3,7 +3,6 @@ package com.nobodyhub.payroll.core.formula.common;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +20,12 @@ public abstract class FormulaContainer<T extends Formula> {
     /**
      * full formula list involved in this context
      */
-    protected List<T> formulas = Lists.newLinkedList();
+    protected final List<T> formulas = Lists.newLinkedList();
     /**
      * Map from target item id to formula
      * several formulas could be applied to the same items id in different period
      */
-    protected Map<String, List<T>> formulaMap = Maps.newHashMap();
+    protected final Map<String, List<T>> formulaMap = Maps.newHashMap();
 
     /**
      * assign different priority to formula according to inter-dependencies on items

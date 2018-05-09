@@ -6,5 +6,5 @@ import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 /**
  * @author Ryan
  */
-public class NormalFormulaContainer extends FormulaContainer<NormalFormula> {
+public abstract class NormalFormulaContainer extends FormulaContainer<NormalFormula> {
 }
