@@ -1,8 +1,8 @@
 package com.nobodyhub.payroll.core.task.execution;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.context.NormalFormulaContext;
-import com.nobodyhub.payroll.core.context.RetroFormulaContext;
+import com.nobodyhub.payroll.core.context.NormalFormulaContainer;
+import com.nobodyhub.payroll.core.context.RetroFormulaContainer;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 import com.nobodyhub.payroll.core.service.common.HistoryData;
@@ -48,8 +48,8 @@ public class RetroTaskExecution implements Runnable {
     @Override
     public void run() {
         callback.onStart();
-        NormalFormulaContext normalFormulaContext = taskContext.getNormalFormulaContext();
-        RetroFormulaContext retroFormulaContext = taskContext.getRetroFormulaContext();
+        NormalFormulaContainer normalFormulaContext = taskContext.getNormalFormulaContext();
+        RetroFormulaContainer retroFormulaContext = taskContext.getRetroFormulaContext();
         try {
             //re-calc past data
             List<RetroExecutionContext> retroContexts = historyData.toRetroContexts(executionContext.getDataId(), taskContext);

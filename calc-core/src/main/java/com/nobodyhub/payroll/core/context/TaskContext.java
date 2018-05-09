@@ -1,7 +1,5 @@
 package com.nobodyhub.payroll.core.context;
 
-import com.nobodyhub.payroll.core.context.NormalFormulaContext;
-import com.nobodyhub.payroll.core.context.RetroFormulaContext;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +18,9 @@ public abstract class TaskContext {
     /**
      * normal formulas
      */
-    protected final NormalFormulaContext normalFormulaContext;
+    protected final NormalFormulaContainer normalFormulaContext;
     /**
      * retroactive formulas
      */
-    protected final RetroFormulaContext retroFormulaContext;
+    protected final RetroFormulaContainer retroFormulaContext;
 }

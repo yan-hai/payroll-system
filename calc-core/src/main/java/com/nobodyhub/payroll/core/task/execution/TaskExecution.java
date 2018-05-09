@@ -1,7 +1,7 @@
 package com.nobodyhub.payroll.core.task.execution;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.context.NormalFormulaContext;
+import com.nobodyhub.payroll.core.context.NormalFormulaContainer;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.task.callback.Callback;
 import com.nobodyhub.payroll.core.context.ExecutionContext;
@@ -30,7 +30,7 @@ public class TaskExecution implements Runnable {
     @Override
     public void run() {
         callback.onStart();
-        NormalFormulaContext normalFormulaContext = executionContext.getTaskContext().getNormalFormulaContext();
+        NormalFormulaContainer normalFormulaContext = executionContext.getTaskContext().getNormalFormulaContext();
         for (NormalFormula formula : normalFormulaContext.getFormulas()) {
             try {
                 executionContext.add(formula.evaluate(executionContext));
