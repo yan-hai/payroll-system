@@ -1,5 +1,11 @@
 # Payroll Calculation Core
 
+
+## TODOs
+- [X] define task, formula, item
+- [X] handle periods for calculation 
+
+
 ## What `Core` Can Do
 1. Provide a unified definition of the data(Item) and rules(Formula) used during the calculation
 1. Calculate the result based on the given data set and rules 
