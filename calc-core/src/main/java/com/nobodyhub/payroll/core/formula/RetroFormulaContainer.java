@@ -1,6 +1,6 @@
-package com.nobodyhub.payroll.core.context;
+package com.nobodyhub.payroll.core.formula;
 
-import com.nobodyhub.payroll.core.context.abstr.FormulaContainer;
+import com.nobodyhub.payroll.core.formula.common.FormulaContainer;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 
 /**
