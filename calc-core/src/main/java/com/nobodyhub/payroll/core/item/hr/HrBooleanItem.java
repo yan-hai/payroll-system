@@ -17,12 +17,12 @@ public class HrBooleanItem extends Item<Boolean, HrBooleanItem> {
     }
 
     @Override
-    public void setStringValue(LocalDate date, String value) {
+    public void addAsString(LocalDate date, String value) {
         this.values.put(date, Boolean.valueOf(value));
     }
 
     @Override
-    public Boolean getDefaultValue() {
+    public Boolean defaultValue() {
         return false;
     }
 

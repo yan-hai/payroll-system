@@ -1,19 +1,14 @@
 package com.nobodyhub.payroll.core.task.execution.retro;
 
-import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
-import com.nobodyhub.payroll.core.util.DateFormatUtils;
 import lombok.Getter;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-import java.util.SortedMap;
 
 /**
  * Execution Context for retroactive calculation
@@ -23,7 +18,7 @@ import java.util.SortedMap;
  */
 @Getter
 public class RetroExecutionContext extends ExecutionContext {
-    protected final Map<String, SortedMap<LocalDate, String>> originalValues = Maps.newHashMap();
+    protected final OriginalData originalData = new OriginalData();
 
     public RetroExecutionContext(String dataId, ItemFactory itemFactory, Period period, ProrationFactory prorationFactory) {
         super(dataId, itemFactory, period, prorationFactory);
@@ -33,15 +28,7 @@ public class RetroExecutionContext extends ExecutionContext {
     public void addAll(List<PayrollCoreProtocol.ItemValue> itemValues) throws PayrollCoreException {
         for (PayrollCoreProtocol.ItemValue itemValue : itemValues) {
             add(itemValue.getItemId(), itemValue.getValuesMap());
-            addOrigin(itemValue);
+            originalData.add(itemValue);
         }
-    }
-
-    protected void addOrigin(PayrollCoreProtocol.ItemValue itemValue) {
-        SortedMap<LocalDate, String> values = Maps.newTreeMap();
-        for (Map.Entry<String, String> entry : itemValue.getValuesMap().entrySet()) {
-            values.put(DateFormatUtils.parseDate(entry.getKey()), entry.getValue());
-        }
-        originalValues.put(itemValue.getItemId(), values);
     }
 }

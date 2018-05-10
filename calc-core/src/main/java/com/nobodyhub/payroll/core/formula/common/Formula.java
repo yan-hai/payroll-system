@@ -54,7 +54,7 @@ public abstract class Formula implements Comparable<Formula> {
 
     protected PaymentItem createPaymentItem(Map<LocalDate, BigDecimal> values) throws PayrollCoreException {
         PaymentItem item = (PaymentItem) itemFactory.getItem(targetItemId);
-        item.addValues(values);
+        item.addAll(values);
         return item;
     }
 

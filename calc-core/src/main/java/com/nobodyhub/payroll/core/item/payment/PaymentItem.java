@@ -33,12 +33,12 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
     }
 
     @Override
-    public void setStringValue(LocalDate date, String value) {
+    public void addAsString(LocalDate date, String value) {
         this.values.put(date, new BigDecimal(value));
     }
 
     @Override
-    public BigDecimal getDefaultValue() {
+    public BigDecimal defaultValue() {
         return BigDecimal.ZERO;
     }
 

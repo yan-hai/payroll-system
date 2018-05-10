@@ -29,12 +29,12 @@ public class CalendarItem extends Item<BigDecimal, CalendarItem> {
     }
 
     @Override
-    public void setStringValue(LocalDate date, String value) {
+    public void addAsString(LocalDate date, String value) {
         values.put(date, new BigDecimal(value));
     }
 
     @Override
-    public BigDecimal getDefaultValue() {
+    public BigDecimal defaultValue() {
         return BigDecimal.ZERO;
     }
 

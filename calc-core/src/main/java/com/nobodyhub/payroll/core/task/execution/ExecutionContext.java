@@ -67,7 +67,7 @@ public abstract class ExecutionContext {
     public void add(String itemId, Map<String, String> data) throws PayrollCoreException {
         Item item = itemFactory.getItem(itemId);
         for (Map.Entry<String, String> entry : data.entrySet()) {
-            item.setStringValue(DateFormatUtils.parseDate(entry.getKey()), entry.getValue());
+            item.addAsString(DateFormatUtils.parseDate(entry.getKey()), entry.getValue());
         }
     }
 

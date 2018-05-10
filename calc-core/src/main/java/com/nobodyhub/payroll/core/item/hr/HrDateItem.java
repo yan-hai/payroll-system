@@ -23,12 +23,12 @@ public class HrDateItem extends Item<LocalDate, HrDateItem> {
     }
 
     @Override
-    public void setStringValue(LocalDate date, String value) {
+    public void addAsString(LocalDate date, String value) {
         this.values.put(date, DateFormatUtils.parseDate(value));
     }
 
     @Override
-    public LocalDate getDefaultValue() {
+    public LocalDate defaultValue() {
         return LocalDate.now();
     }
 

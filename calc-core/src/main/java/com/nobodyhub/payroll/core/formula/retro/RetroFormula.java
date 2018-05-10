@@ -7,11 +7,14 @@ import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
+import com.nobodyhub.payroll.core.task.execution.retro.OriginalData;
 import com.nobodyhub.payroll.core.task.execution.retro.RetroExecutionContext;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Ryan
@@ -28,7 +31,7 @@ public class RetroFormula extends Formula {
     public PaymentItem evaluate(List<RetroExecutionContext> retroContexts, Period normalPeriod) throws PayrollCoreException {
         Map<String, BigDecimal> diffValues = Maps.newHashMap();
         for (RetroExecutionContext retroCtx : retroContexts) {
-            Map<String, SortedMap<LocalDate, String>> oldValues = retroCtx.getOriginalValues();
+            OriginalData originalData = retroCtx.getOriginalData();
             for (String itemId : relatedItemIds) {
                 Item item = retroCtx.get(itemId);
                 if ((item instanceof PaymentItem)
@@ -36,8 +39,8 @@ public class RetroFormula extends Formula {
                     PaymentItem paymentItem = (PaymentItem) item;
                     BigDecimal exist = diffValues.get(itemId) == null ?
                             BigDecimal.ZERO : diffValues.get(itemId);
-                    exist = exist.add(paymentItem.getSingleValue()
-                            .subtract(new BigDecimal(oldValues.get(itemId).get(0))));
+                    exist = exist.add(paymentItem.getFinalValue(retroCtx)
+                            .subtract(originalData.get(itemId)));
                     diffValues.put(itemId, exist);
                 } else {
                     //TODO: log skip non-payment item or non-retro item

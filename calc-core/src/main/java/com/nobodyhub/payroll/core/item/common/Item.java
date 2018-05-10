@@ -39,7 +39,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      * @param date  start date to be effective
      * @param value
      */
-    public void addValue(LocalDate date, VT value) {
+    public void add(LocalDate date, VT value) {
         this.values.put(date, value);
     }
 
@@ -48,7 +48,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      *
      * @param values new value map
      */
-    public void addValues(Map<LocalDate, VT> values) {
+    public void addAll(Map<LocalDate, VT> values) {
         this.values.putAll(values);
     }
 
@@ -58,7 +58,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      * @param date  start date
      * @param value the string form of the value
      */
-    public abstract void setStringValue(LocalDate date, String value);
+    public abstract void addAsString(LocalDate date, String value);
 
     /**
      * return string form of the value
@@ -83,7 +83,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
                 value = values.get(key);
             }
         }
-        return value != null ? value : getDefaultValue();
+        return value != null ? value : defaultValue();
     }
 
     /**
@@ -91,7 +91,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      *
      * @return
      */
-    public abstract VT getDefaultValue();
+    public abstract VT defaultValue();
 
     /**
      * get the start dates for the {@link this#values}

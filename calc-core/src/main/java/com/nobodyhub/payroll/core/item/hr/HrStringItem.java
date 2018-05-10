@@ -17,12 +17,12 @@ public class HrStringItem extends Item<String, HrStringItem> {
     }
 
     @Override
-    public void setStringValue(LocalDate date, String value) {
+    public void addAsString(LocalDate date, String value) {
         this.values.put(date, value);
     }
 
     @Override
-    public String getDefaultValue() {
+    public String defaultValue() {
         return "";
     }
 

@@ -19,7 +19,7 @@ public class HrDateTimeItem extends Item<LocalDateTime, HrDateTimeItem> {
     }
 
     @Override
-    public void setStringValue(LocalDate date, String value) {
+    public void addAsString(LocalDate date, String value) {
         this.values.put(date, DateFormatUtils.parseDateTime(value));
     }
 
@@ -29,7 +29,7 @@ public class HrDateTimeItem extends Item<LocalDateTime, HrDateTimeItem> {
     }
 
     @Override
-    public LocalDateTime getDefaultValue() {
+    public LocalDateTime defaultValue() {
         return LocalDateTime.now();
     }
 
