@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.calendar.CalendarItem;
 import com.nobodyhub.payroll.core.item.calendar.Period;
+import com.nobodyhub.payroll.core.proration.abstr.Proration;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import com.nobodyhub.payroll.core.util.PayrollCoreConst;
 

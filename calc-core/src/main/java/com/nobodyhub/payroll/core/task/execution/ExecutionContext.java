@@ -6,6 +6,7 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.common.Item;
+import com.nobodyhub.payroll.core.proration.ProrationContainer;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatus;
 import com.nobodyhub.payroll.core.util.DateFormatUtils;
@@ -41,6 +42,10 @@ public abstract class ExecutionContext {
      * the target period of execution
      */
     protected final Period period;
+    /**
+     * Proration rules shared by all executions
+     */
+    protected final ProrationContainer prorationContainer;
     /**
      * the context contains all items
      */

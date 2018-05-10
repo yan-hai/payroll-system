@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
+import com.nobodyhub.payroll.core.proration.ProrationContainer;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.execution.retro.RetroExecutionContext;
 import com.nobodyhub.payroll.core.util.DateFormatUtils;
@@ -72,10 +73,10 @@ public class HistoryData {
      * @return
      * @throws PayrollCoreException
      */
-    public List<RetroExecutionContext> toRetroContexts(ItemFactory itemFactory) throws PayrollCoreException {
+    public List<RetroExecutionContext> toRetroContexts(ItemFactory itemFactory, ProrationContainer prorationContainer) throws PayrollCoreException {
         List<RetroExecutionContext> contexts = Lists.newArrayList();
         for (Period period : histories.keySet()) {
-            RetroExecutionContext context = new RetroExecutionContext(dataId, itemFactory, period);
+            RetroExecutionContext context = new RetroExecutionContext(dataId, itemFactory, period, prorationContainer);
             context.addAll(histories.get(period));
             contexts.add(context);
         }

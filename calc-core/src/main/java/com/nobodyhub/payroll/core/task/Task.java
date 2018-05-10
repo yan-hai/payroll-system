@@ -5,6 +5,7 @@ import com.nobodyhub.payroll.core.formula.NormalFormulaContainer;
 import com.nobodyhub.payroll.core.formula.RetroFormulaContainer;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
+import com.nobodyhub.payroll.core.proration.ProrationContainer;
 import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.callback.Callback;
@@ -14,7 +15,6 @@ import com.nobodyhub.payroll.core.task.execution.retro.RetroTaskExecution;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -41,6 +41,10 @@ public abstract class Task {
      * retroactive formulas
      */
     protected final RetroFormulaContainer retroFormulaContainer;
+    /**
+     * Proration rules
+     */
+    protected final ProrationContainer prorationContainer;
     /**
      * Callback to handle the execution
      */
@@ -131,7 +135,7 @@ public abstract class Task {
      * @throws PayrollCoreException
      */
     protected NormalExecutionContext createExecutionContext(Period period, String dataId, List<PayrollCoreProtocol.ItemValue> itemValueList) throws PayrollCoreException {
-        NormalExecutionContext normalExecutionContext = new NormalExecutionContext(dataId, itemFactory, period);
+        NormalExecutionContext normalExecutionContext = new NormalExecutionContext(dataId, itemFactory, period, prorationContainer);
         normalExecutionContext.addAll(itemValueList);
         return normalExecutionContext;
     }

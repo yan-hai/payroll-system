@@ -1,4 +1,4 @@
-package com.nobodyhub.payroll.core.proration;
+package com.nobodyhub.payroll.core.proration.abstr;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -43,6 +43,12 @@ public abstract class Proration {
      */
     public abstract SortedMap<LocalDate, BigDecimal> prorate(ExecutionContext context,
                                                              SortedMap<LocalDate, BigDecimal> beforeValues) throws PayrollCoreException;
+
+    public BigDecimal getFinalValue(ExecutionContext context,
+                                    SortedMap<LocalDate, BigDecimal> beforeValues) throws PayrollCoreException {
+        SortedMap<LocalDate, BigDecimal> values = prorate(context, beforeValues);
+        return values.values().stream().reduce(BigDecimal.ZERO, (a, b) -> (a.add(b)));
+    }
 
     /**
      * convert {@link LocalDate} based map to {@link Period} based map

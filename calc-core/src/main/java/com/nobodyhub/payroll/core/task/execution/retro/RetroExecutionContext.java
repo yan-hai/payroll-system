@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
+import com.nobodyhub.payroll.core.proration.ProrationContainer;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import com.nobodyhub.payroll.core.util.DateFormatUtils;
@@ -24,8 +25,8 @@ import java.util.SortedMap;
 public class RetroExecutionContext extends ExecutionContext {
     protected final Map<String, SortedMap<LocalDate, String>> originalValues = Maps.newHashMap();
 
-    public RetroExecutionContext(String dataId, ItemFactory itemFactory, Period period) {
-        super(dataId, itemFactory, period);
+    public RetroExecutionContext(String dataId, ItemFactory itemFactory, Period period, ProrationContainer prorationContainer) {
+        super(dataId, itemFactory, period, prorationContainer);
     }
 
     @Override
