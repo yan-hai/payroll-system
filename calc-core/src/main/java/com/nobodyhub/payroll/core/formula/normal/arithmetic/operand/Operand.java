@@ -5,6 +5,7 @@ import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 /**
  * Mark to be oprerand for Formula
@@ -29,4 +30,13 @@ public interface Operand {
      * @return null if not related item
      */
     String getItemId();
+
+    /**
+     * get the split date of all date range of this values
+     *
+     * @param context
+     * @return
+     * @throws PayrollCoreException
+     */
+    Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException;
 }

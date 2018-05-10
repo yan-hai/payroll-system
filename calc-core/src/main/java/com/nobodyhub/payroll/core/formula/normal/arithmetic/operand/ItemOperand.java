@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 /**
  * @author yan_h
@@ -23,5 +24,10 @@ public class ItemOperand implements Operand {
     @Override
     public String getItemId() {
         return itemId;
+    }
+
+    @Override
+    public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
+        return context.get(itemId).getDateSplit();
     }
 }
