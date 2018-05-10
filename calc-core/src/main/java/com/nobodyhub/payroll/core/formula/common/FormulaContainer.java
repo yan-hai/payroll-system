@@ -27,6 +27,16 @@ public abstract class FormulaContainer<T extends Formula> {
      */
     protected final Map<String, List<T>> formulaMap = Maps.newHashMap();
 
+    public void addFormula(T formula) {
+        formulas.add(formula);
+        List<T> formulaList = formulaMap.get(formula.getTargetItemId());
+        if (formulaList == null) {
+            formulaList = Lists.newArrayList();
+        }
+        formulaList.add(formula);
+        formulaMap.put(formula.getTargetItemId(), formulaList);
+    }
+
     /**
      * assign different priority to formula according to inter-dependencies on items
      */
