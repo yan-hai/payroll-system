@@ -2,6 +2,7 @@ package com.nobodyhub.payroll.core.formula.normal.arithmetic;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Operator;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.Operand;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
 
@@ -17,11 +18,11 @@ import java.util.Set;
 @Getter
 public class FormulaExpression {
     private Operator operator;
-    private String operandItemId;
+    private Operand operand;
     private FormulaExpression anotherOperand;
 
     public BigDecimal evaluate(ExecutionContext context, LocalDate date) throws PayrollCoreException {
-        BigDecimal value = context.getItemValue(operandItemId, date, BigDecimal.class);
+        BigDecimal value = operand.getValue(context, date);
         if (operator == null || anotherOperand == null) {
             return value;
         }
@@ -29,9 +30,15 @@ public class FormulaExpression {
     }
 
     public void getRequiredItems(Set<String> itemIds) {
-        itemIds.add(operandItemId);
+        if (operand.getItemId() != null) {
+            itemIds.add(operand.getItemId());
+        }
         if (anotherOperand != null) {
             anotherOperand.getRequiredItems(itemIds);
         }
+    }
+
+    public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
+        return operand.getDateSplit(context);
     }
 }

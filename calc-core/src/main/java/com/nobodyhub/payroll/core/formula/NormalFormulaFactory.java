@@ -1,6 +1,5 @@
 package com.nobodyhub.payroll.core.formula;
 
-import com.nobodyhub.payroll.core.formula.common.FormulaFactory;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 
 /**

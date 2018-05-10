@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
-import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 
@@ -48,8 +47,7 @@ public class ArithmeticFormula extends NormalFormula<FormulaExpression> {
             dateSet.add(entry.getKey());
             FormulaExpression curExpr = entry.getValue();
             while (curExpr != null) {
-                Item item = context.get(curExpr.getOperandItemId());
-                dateSet.addAll(item.getDateSplit());
+                dateSet.addAll(curExpr.getDateSplit(context));
                 curExpr = curExpr.getAnotherOperand();
             }
         }

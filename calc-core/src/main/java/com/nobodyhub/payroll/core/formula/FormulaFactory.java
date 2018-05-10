@@ -1,8 +1,9 @@
-package com.nobodyhub.payroll.core.formula.common;
+package com.nobodyhub.payroll.core.formula;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
