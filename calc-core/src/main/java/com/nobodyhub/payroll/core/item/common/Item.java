@@ -28,6 +28,8 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
     protected final String itemId;
     /**
      * values for different period, from the latest to the oldest
+     * different subclass may parse these values in different value,
+     * e.g. use the LocalDate as start date or use as specific date
      */
     protected TreeMap<LocalDate, VT> values = Maps.newTreeMap((o1, o2) -> (o1.compareTo(o2) * (-1)));
 
