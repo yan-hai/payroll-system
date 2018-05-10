@@ -56,11 +56,15 @@ public class Period implements Comparable<Period> {
 
     public boolean overlaps(Period other) {
         return other.equals(this)
-                || (start.compareTo(other.end) < 0 && other.start.compareTo(end) < 0);
+                || (start.compareTo(other.end) <= 0 && other.start.compareTo(end) <= 0);
     }
 
     public boolean isAfter(LocalDate date) {
         return date.isBefore(start);
+    }
+
+    public boolean isBefore(LocalDate date) {
+        return date.isAfter(end);
     }
 
     @Override
