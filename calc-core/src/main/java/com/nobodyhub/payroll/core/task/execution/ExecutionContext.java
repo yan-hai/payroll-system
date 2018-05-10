@@ -113,14 +113,43 @@ public abstract class ExecutionContext {
         return item;
     }
 
-    public <T> T get(String itemId, LocalDate date, Class<T> cls) throws PayrollCoreException {
-        Object object = get(itemId).getValue(date);
-        if (object.getClass().isAssignableFrom(cls)) {
-            return cls.cast(object);
+    /**
+     * get item with given class and id from the context
+     *
+     * @param itemId
+     * @param itemCls
+     * @param <T>
+     * @return
+     * @throws PayrollCoreException
+     */
+    public <T> T get(String itemId, Class<T> itemCls) throws PayrollCoreException {
+        Item item = get(itemId);
+        if (item.getClass().isAssignableFrom(itemCls)) {
+            return itemCls.cast(item);
         }
         throw new PayrollCoreException(CONTEXT_INCOMPATIBLE)
                 .addValue("itemId", itemId)
-                .addValue("cls", cls);
+                .addValue("itemCls", itemCls);
+    }
+
+    /**
+     * get value from given item from the context
+     *
+     * @param itemId
+     * @param date
+     * @param valueCls
+     * @param <T>
+     * @return
+     * @throws PayrollCoreException
+     */
+    public <T> T getItemValue(String itemId, LocalDate date, Class<T> valueCls) throws PayrollCoreException {
+        Object object = get(itemId).getValue(date);
+        if (object.getClass().isAssignableFrom(valueCls)) {
+            return valueCls.cast(object);
+        }
+        throw new PayrollCoreException(CONTEXT_INCOMPATIBLE)
+                .addValue("itemId", itemId)
+                .addValue("valueCls", valueCls);
     }
 
 

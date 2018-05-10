@@ -25,7 +25,7 @@ public class AggregationFormula extends NormalFormula<Set<String>> {
         for (Map.Entry<LocalDate, Set<String>> entry : contents.entrySet()) {
             LocalDate date = entry.getKey();
             for (String itemId : entry.getValue()) {
-                BigDecimal value = context.get(itemId, date, BigDecimal.class);
+                BigDecimal value = context.getItemValue(itemId, date, BigDecimal.class);
                 rst=rst.add(value);
             }
             results.put(entry.getKey(), rst);

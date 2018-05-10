@@ -21,7 +21,7 @@ public abstract class FormulaCondition<T extends Comparable<T>> {
     protected T higher;
 
     public boolean matches(ExecutionContext context, LocalDate date) throws PayrollCoreException {
-        return comparator.apply(context.get(itemId, date, clazz), lower, higher);
+        return comparator.apply(context.getItemValue(itemId, date, clazz), lower, higher);
     }
 
     public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {

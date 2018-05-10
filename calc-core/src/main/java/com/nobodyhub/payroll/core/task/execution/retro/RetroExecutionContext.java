@@ -28,6 +28,7 @@ public class RetroExecutionContext extends ExecutionContext {
         super(dataId, itemFactory, period);
     }
 
+    @Override
     public void addAll(List<PayrollCoreProtocol.ItemValue> itemValues) throws PayrollCoreException {
         for (PayrollCoreProtocol.ItemValue itemValue : itemValues) {
             add(itemValue.getItemId(), itemValue.getValuesMap());

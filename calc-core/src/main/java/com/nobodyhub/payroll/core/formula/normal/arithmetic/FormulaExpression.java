@@ -21,7 +21,7 @@ public class FormulaExpression {
     private FormulaExpression anotherOperand;
 
     public BigDecimal evaluate(ExecutionContext context, LocalDate date) throws PayrollCoreException {
-        BigDecimal value = context.get(operandItemId, date, BigDecimal.class);
+        BigDecimal value = context.getItemValue(operandItemId, date, BigDecimal.class);
         if (operator == null || anotherOperand == null) {
             return value;
         }
