@@ -48,7 +48,7 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
     }
 
     public BigDecimal getFinalValue(ExecutionContext context) throws PayrollCoreException {
-        Proration proration = context.getProrationContainer().get(prorationId);
+        Proration proration = context.getProrationFactory().get(prorationId);
         return proration.getFinalValue(context, values);
     }
 }

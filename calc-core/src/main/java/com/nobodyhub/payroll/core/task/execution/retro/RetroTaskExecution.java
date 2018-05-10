@@ -1,8 +1,8 @@
 package com.nobodyhub.payroll.core.task.execution.retro;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.formula.NormalFormulaContainer;
-import com.nobodyhub.payroll.core.formula.RetroFormulaContainer;
+import com.nobodyhub.payroll.core.formula.NormalFormulaFactory;
+import com.nobodyhub.payroll.core.formula.RetroFormulaFactory;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 import com.nobodyhub.payroll.core.service.common.HistoryData;
@@ -22,7 +22,7 @@ public class RetroTaskExecution extends TaskExecution {
     /**
      * retroactive formulas
      */
-    protected final RetroFormulaContainer retroFormulaContainer;
+    protected final RetroFormulaFactory retroFormulaFactory;
     /**
      * The history data
      */
@@ -31,11 +31,11 @@ public class RetroTaskExecution extends TaskExecution {
 
     public RetroTaskExecution(NormalExecutionContext normalExecutionContext,
                               HistoryData historyData,
-                              NormalFormulaContainer normalFormulaContainer,
-                              RetroFormulaContainer retroFormulaContainer,
+                              NormalFormulaFactory normalFormulaFactory,
+                              RetroFormulaFactory retroFormulaFactory,
                               Callback callback) {
-        super(normalExecutionContext, normalFormulaContainer, callback);
-        this.retroFormulaContainer = retroFormulaContainer;
+        super(normalExecutionContext, normalFormulaFactory, callback);
+        this.retroFormulaFactory = retroFormulaFactory;
         this.historyData = historyData;
     }
 
@@ -45,14 +45,14 @@ public class RetroTaskExecution extends TaskExecution {
         try {
             //re-calc past data
             List<RetroExecutionContext> retroContexts = historyData.toRetroContexts(normalExecutionContext.getItemFactory(),
-                    normalExecutionContext.getProrationContainer());
+                    normalExecutionContext.getProrationFactory());
             for (RetroExecutionContext retroContext : retroContexts) {
-                for (NormalFormula formula : normalFormulaContainer.getFormulas()) {
+                for (NormalFormula formula : normalFormulaFactory.getFormulas()) {
                     retroContext.add(formula.evaluate(retroContext));
                 }
             }
             //handle diff values
-            for (RetroFormula formula : retroFormulaContainer.getFormulas()) {
+            for (RetroFormula formula : retroFormulaFactory.getFormulas()) {
                 normalExecutionContext.add(formula.evaluate(retroContexts, normalExecutionContext.getPeriod()));
             }
         } catch (PayrollCoreException e) {

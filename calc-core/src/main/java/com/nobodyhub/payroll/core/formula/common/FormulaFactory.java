@@ -16,7 +16,7 @@ import java.util.Set;
  * @author Ryan
  */
 @Getter
-public abstract class FormulaContainer<T extends Formula> {
+public abstract class FormulaFactory<T extends Formula> {
     /**
      * full formula list involved in this context
      */

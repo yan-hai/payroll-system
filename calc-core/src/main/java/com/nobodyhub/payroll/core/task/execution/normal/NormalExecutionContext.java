@@ -2,7 +2,7 @@ package com.nobodyhub.payroll.core.task.execution.normal;
 
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
-import com.nobodyhub.payroll.core.proration.ProrationContainer;
+import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 
 /**
@@ -12,7 +12,7 @@ import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
  */
 public class NormalExecutionContext extends ExecutionContext {
 
-    public NormalExecutionContext(String dataId, ItemFactory itemFactory, Period period, ProrationContainer prorationContainer) {
-        super(dataId, itemFactory, period, prorationContainer);
+    public NormalExecutionContext(String dataId, ItemFactory itemFactory, Period period, ProrationFactory prorationFactory) {
+        super(dataId, itemFactory, period, prorationFactory);
     }
 }

@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author yan_h
  * @since 2018-05-10.
  */
-public abstract class ProrationContainer {
+public abstract class ProrationFactory {
 
     protected Map<String, Proration> prorations = Maps.newHashMap();
 

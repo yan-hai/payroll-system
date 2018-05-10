@@ -1,6 +1,6 @@
 package com.nobodyhub.payroll.core.task.execution;
 
-import com.nobodyhub.payroll.core.formula.NormalFormulaContainer;
+import com.nobodyhub.payroll.core.formula.NormalFormulaFactory;
 import com.nobodyhub.payroll.core.task.callback.Callback;
 import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 import lombok.Data;
@@ -20,7 +20,7 @@ public abstract class TaskExecution implements Runnable {
     /**
      * normal formulas
      */
-    protected final NormalFormulaContainer normalFormulaContainer;
+    protected final NormalFormulaFactory normalFormulaFactory;
     /**
      * Callback to handle the execution
      */

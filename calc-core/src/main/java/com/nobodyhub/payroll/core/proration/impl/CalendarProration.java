@@ -1,4 +1,4 @@
-package com.nobodyhub.payroll.core.proration;
+package com.nobodyhub.payroll.core.proration.impl;
 
 import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
