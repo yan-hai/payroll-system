@@ -20,26 +20,21 @@ public abstract class Formula implements Comparable<Formula>, Identifiable {
     /**
      * the id of item whose value will be evaluated from this formula
      */
-    protected String targetItemId;
+    protected final String targetItemId;
     /**
      * Unique formula id
      */
-    protected String id;
+    protected final String id;
     /**
-     * Name of formula
+     * Get the instance of various types of items
      */
-    protected String formulaName;
+    protected final ItemBuilderFactory itemBuilderFactory;
     /**
      * The priority which decide the order to evaluate the formula
      * <p>
      * A smaller number means A higher priority and evaluated earlier
      */
     protected int priority = 1000;
-
-    /**
-     * Get the instance of various types of items
-     */
-    protected ItemBuilderFactory itemBuilderFactory;
 
     /**
      * Get ids of required items in order to evaluate the formula
