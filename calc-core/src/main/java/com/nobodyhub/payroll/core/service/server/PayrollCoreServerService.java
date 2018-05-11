@@ -35,7 +35,7 @@ public class PayrollCoreServerService extends PayrollCoreServiceGrpc.PayrollCore
                 if (task == null) {
                     Task task = taskFactory.get(value.getTaskId());
                     task.setup();
-                    task.setCallback(callback);
+                    task.setExecutionCallback(callback);
                 }
                 try {
                     task.execute(value);

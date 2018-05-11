@@ -8,7 +8,7 @@ import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
-import com.nobodyhub.payroll.core.task.callback.Callback;
+import com.nobodyhub.payroll.core.task.callback.ExecutionCallback;
 import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 import com.nobodyhub.payroll.core.task.execution.normal.NormalTaskExecution;
 import com.nobodyhub.payroll.core.task.execution.retro.HistoryData;
@@ -51,7 +51,7 @@ public class Task implements Identifiable {
     /**
      * Callback to handle the execution
      */
-    protected Callback callback;
+    protected ExecutionCallback executionCallback;
 
     /**
      * Thread pool, shared by all tasks
@@ -81,7 +81,7 @@ public class Task implements Identifiable {
                         dataId,
                         periodValue.getItemsList()),
                 normalFormulaFactory,
-                callback);
+                executionCallback);
         executorService.execute(execution);
     }
 
@@ -101,7 +101,7 @@ public class Task implements Identifiable {
                 historyData,
                 normalFormulaFactory,
                 retroFormulaFactory,
-                callback);
+                executionCallback);
         executorService.execute(execution);
     }
 
