@@ -21,7 +21,7 @@
 
     <modules>
         <module>calc-core</module>
-        <module>calc-core-sg</module>
+        <module>calc-core-example</module>
     </modules>
 
     <dependencyManagement>
