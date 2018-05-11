@@ -2,15 +2,15 @@ package com.nobodyhub.payroll.core.item.common;
 
 import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.util.DateFormatUtils;
+import com.nobodyhub.payroll.core.util.ValueConverter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.ITEM_VALUE_UNKNOWN;
 
@@ -102,10 +102,6 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
         return results;
     }
 
-    public SortedMap<LocalDate, String> getRawValues() {
-        return values;
-    }
-
     /**
      * Try to convert string {@code value} to the expected class
      *
@@ -114,25 +110,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      * @throws PayrollCoreException if the value can not be converted
      */
     private VT convertFromString(String value) throws PayrollCoreException {
-        Objects.requireNonNull(value);
-        Object rst;
-        if (valueCls == String.class) {
-            rst = value;
-        } else if (valueCls == BigDecimal.class) {
-            rst = new BigDecimal(value);
-        } else if (valueCls == Boolean.class) {
-            rst = Boolean.valueOf(value);
-        } else if (valueCls == LocalDate.class) {
-            rst = DateFormatUtils.parseDate(value);
-        } else if (valueCls == LocalTime.class) {
-            rst = DateFormatUtils.parseTime(value);
-        } else if (valueCls == LocalDateTime.class) {
-            rst = DateFormatUtils.parseDateTime(value);
-        } else {
-            throw new PayrollCoreException(ITEM_VALUE_UNKNOWN)
-                    .addValue("value", value);
-        }
-        return valueCls.cast(rst);
+        return ValueConverter.convertFromString(value, valueCls);
     }
 
     /**
@@ -143,22 +121,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      * @throws PayrollCoreException
      */
     private String convertToString(Object object) throws PayrollCoreException {
-        if (object instanceof String) {
-            return (String) object;
-        } else if (object instanceof BigDecimal) {
-            return ((BigDecimal) object).toPlainString();
-        } else if (object instanceof Boolean) {
-            return ((Boolean) object).toString();
-        } else if (object instanceof LocalDate) {
-            return DateFormatUtils.convertDate((LocalDate) object);
-        } else if (object instanceof LocalTime) {
-            return DateFormatUtils.convertDate((LocalTime) object);
-        } else if (object instanceof LocalDateTime) {
-            return DateFormatUtils.convertDate((LocalDateTime) object);
-        } else {
-            throw new PayrollCoreException(ITEM_VALUE_UNKNOWN)
-                    .addValue("object", object);
-        }
+        return ValueConverter.convertToString(object);
     }
 
     /**

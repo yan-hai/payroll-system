@@ -8,6 +8,7 @@ import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import com.nobodyhub.payroll.core.task.execution.retro.HistoryData;
+import com.nobodyhub.payroll.core.util.ValueConverter;
 import lombok.Getter;
 
 /**
@@ -66,6 +67,11 @@ public enum PayrollCoreExceptionCode {
      * Invalid period
      */
     PERIOD_INVALID(Period.class, ""),
+
+    /**
+     * No converted found
+     */
+    CONVERTER_NOT_FOUND(ValueConverter.class, ""),
 
 
     /**
