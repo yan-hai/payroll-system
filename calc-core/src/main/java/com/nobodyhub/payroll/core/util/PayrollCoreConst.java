@@ -21,5 +21,13 @@ public final class PayrollCoreConst {
      */
     public static final MathContext MATH_CONTEXT = DECIMAL128;
 
+    /**
+     * A very late date
+     */
     public static final LocalDate END_OF_TIME = LocalDate.of(2382, 12, 31);
+
+    /**
+     * Default port of server
+     */
+    public static final int DEFAULT_PORT = 9101;
 }

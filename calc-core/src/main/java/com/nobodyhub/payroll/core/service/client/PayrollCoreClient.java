@@ -1,10 +1,8 @@
 package com.nobodyhub.payroll.core.service.client;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.calendar.Period;
-import com.nobodyhub.payroll.core.service.common.HistoryData;
-import com.nobodyhub.payroll.core.service.common.ServiceConst;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
+import com.nobodyhub.payroll.core.util.PayrollCoreConst;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +20,7 @@ public class PayrollCoreClient {
     private final PayrollCoreClientService service;
 
     public PayrollCoreClient(String host) {
-        this(host, ServiceConst.DEFAULT_PORT);
+        this(host, PayrollCoreConst.DEFAULT_PORT);
     }
 
     public PayrollCoreClient(String host, int port) {
@@ -32,7 +30,7 @@ public class PayrollCoreClient {
     /**
      * Execute the payroll task with given data
      *
-     * @param requestList    request list
+     * @param requestList request list
      * @return
      * @throws InterruptedException
      */

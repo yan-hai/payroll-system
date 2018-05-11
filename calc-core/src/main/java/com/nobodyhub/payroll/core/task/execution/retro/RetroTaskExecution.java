@@ -5,7 +5,6 @@ import com.nobodyhub.payroll.core.formula.NormalFormulaFactory;
 import com.nobodyhub.payroll.core.formula.RetroFormulaFactory;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
-import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.task.callback.Callback;
 import com.nobodyhub.payroll.core.task.execution.TaskExecution;
 import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;

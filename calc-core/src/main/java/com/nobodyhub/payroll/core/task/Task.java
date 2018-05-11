@@ -6,11 +6,11 @@ import com.nobodyhub.payroll.core.formula.RetroFormulaFactory;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
-import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.callback.Callback;
 import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 import com.nobodyhub.payroll.core.task.execution.normal.NormalTaskExecution;
+import com.nobodyhub.payroll.core.task.execution.retro.HistoryData;
 import com.nobodyhub.payroll.core.task.execution.retro.RetroTaskExecution;
 import lombok.Data;
 

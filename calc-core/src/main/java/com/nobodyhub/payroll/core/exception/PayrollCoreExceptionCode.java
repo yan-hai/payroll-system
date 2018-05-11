@@ -6,8 +6,8 @@ import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.common.Item;
-import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
+import com.nobodyhub.payroll.core.task.execution.retro.HistoryData;
 import lombok.Getter;
 
 /**
