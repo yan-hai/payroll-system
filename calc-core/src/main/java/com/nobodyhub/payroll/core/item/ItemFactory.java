@@ -7,6 +7,7 @@ import com.nobodyhub.payroll.core.item.common.ItemBuilder;
 
 import java.util.Map;
 
+import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACTORY_INCOMPATIBLE;
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACTORY_NOT_FOUND;
 
 /**
@@ -31,6 +32,16 @@ public abstract class ItemFactory {
                     .addValue("itemId", itemId);
         }
         return (Item) builder.build();
+    }
+
+    public <T> T getItem(String itemId, Class<T> itemCls) throws PayrollCoreException {
+        Item item = getItem(itemId);
+        if (itemCls.isAssignableFrom(item.getClass())) {
+            return itemCls.cast(item);
+        }
+        throw new PayrollCoreException(FACTORY_INCOMPATIBLE)
+                .addValue("itemId", itemId)
+                .addValue("itemCls", itemCls);
     }
 
     /**

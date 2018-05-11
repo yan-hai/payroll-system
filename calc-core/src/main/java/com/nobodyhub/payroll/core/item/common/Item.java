@@ -102,6 +102,10 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
         return results;
     }
 
+    public SortedMap<LocalDate, String> getRawValues() {
+        return values;
+    }
+
     /**
      * Try to convert string {@code value} to the expected class
      *

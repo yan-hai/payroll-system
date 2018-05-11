@@ -5,11 +5,14 @@ import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
+import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.util.DateFormatUtils;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -25,13 +28,18 @@ public class HistoryData {
      */
     private final String dataId;
     /**
+     * factory to get new instance of item
+     */
+    private final ItemFactory itemFactory;
+    /**
      * a list of history data, could be HR data, attendence data, payment data, etc.
      * each map element contains the data for one history execution, from ItemId to its value
      */
-    private final Map<Period, List<PayrollCoreProtocol.ItemValue>> histories;
+    private final Map<Period, PeriodData> histories;
 
-    public HistoryData(String dataId, List<PayrollCoreProtocol.PeriodValue> data) throws PayrollCoreException {
+    public HistoryData(String dataId, ItemFactory itemFactory, List<PayrollCoreProtocol.PeriodValue> data) throws PayrollCoreException {
         this.dataId = dataId;
+        this.itemFactory = itemFactory;
         this.histories = parseMessage(data);
     }
 
@@ -59,7 +67,7 @@ public class HistoryData {
             messages.add(PayrollCoreProtocol.PeriodValue.newBuilder()
                     .setStartDate(DateFormatUtils.convertDate(period.getStart()))
                     .setEndDate(DateFormatUtils.convertDate(period.getEnd()))
-                    .addAllItems(histories.get(period))
+                    .addAllItems(histories.get(period).toMessage())
                     .build());
         }
         return messages;
@@ -75,7 +83,11 @@ public class HistoryData {
     public List<RetroExecutionContext> toRetroContexts(ItemFactory itemFactory, ProrationFactory prorationFactory) throws PayrollCoreException {
         List<RetroExecutionContext> contexts = Lists.newArrayList();
         for (Period period : histories.keySet()) {
-            RetroExecutionContext context = new RetroExecutionContext(dataId, itemFactory, period, prorationFactory);
+            RetroExecutionContext context = new RetroExecutionContext(dataId,
+                    itemFactory,
+                    prorationFactory,
+                    histories.get(period)
+            );
             context.addAll(histories.get(period));
             contexts.add(context);
         }
@@ -89,12 +101,48 @@ public class HistoryData {
      * @return
      * @throws PayrollCoreException
      */
-    private Map<Period, List<PayrollCoreProtocol.ItemValue>> parseMessage(List<PayrollCoreProtocol.PeriodValue> data) throws PayrollCoreException {
-        Map<Period, List<PayrollCoreProtocol.ItemValue>> histories = Maps.newHashMap();
+    private Map<Period, PeriodData> parseMessage(List<PayrollCoreProtocol.PeriodValue> data) throws PayrollCoreException {
+        Map<Period, PeriodData> histories = Maps.newHashMap();
         for (PayrollCoreProtocol.PeriodValue periodValue : data) {
             Period period = Period.of(periodValue.getStartDate(), periodValue.getEndDate());
-            histories.put(period, periodValue.getItemsList());
+            PeriodData periodData = new PeriodData(period);
+            for (PayrollCoreProtocol.ItemValue itemValue : periodValue.getItemsList()) {
+                periodData.add(itemValue);
+            }
+            histories.put(period, periodData);
         }
         return histories;
+    }
+
+    @RequiredArgsConstructor
+    @Getter
+    public static class PeriodData {
+        private final Period period;
+        private final Map<String, Map<String, String>> itemValues = Maps.newHashMap();
+
+        public void add(PayrollCoreProtocol.ItemValue itemValue) {
+            itemValues.put(itemValue.getItemId(), itemValue.getValuesMap());
+        }
+
+        public List<PayrollCoreProtocol.ItemValue> toMessage() {
+            List<PayrollCoreProtocol.ItemValue> values = Lists.newArrayList();
+            for (Map.Entry<String, Map<String, String>> entry : this.itemValues.entrySet()) {
+                values.add(PayrollCoreProtocol.ItemValue.newBuilder()
+                        .setItemId(entry.getKey())
+                        .putAllValues(entry.getValue())
+                        .build());
+            }
+            return values;
+        }
+
+        public BigDecimal getPayment(String itemId, ItemFactory itemFactory) throws PayrollCoreException {
+            //verify the item related to itemId is PaymentItem
+            itemFactory.getItem(itemId, PaymentItem.class);
+            BigDecimal finalVal = BigDecimal.ZERO;
+            for (String value : itemValues.get(itemId).values()) {
+                finalVal = finalVal.add(new BigDecimal(value));
+            }
+            return finalVal;
+        }
     }
 }

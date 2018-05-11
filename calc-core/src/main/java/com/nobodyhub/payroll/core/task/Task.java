@@ -109,7 +109,7 @@ public abstract class Task {
      * @throws PayrollCoreException
      */
     public void execute(PayrollCoreProtocol.Request value) throws PayrollCoreException {
-        HistoryData historyData = new HistoryData(value.getDataId(), value.getPastValuesList());
+        HistoryData historyData = new HistoryData(value.getDataId(), itemFactory, value.getPastValuesList());
         if (!historyData.isEmpty()) {
             //retroactive calculation
             executeRetro(value.getDataId(), value.getCurrentValue(), historyData);

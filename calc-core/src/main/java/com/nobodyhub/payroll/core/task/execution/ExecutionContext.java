@@ -8,6 +8,7 @@ import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
+import com.nobodyhub.payroll.core.task.execution.retro.HistoryData;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatus;
 import com.nobodyhub.payroll.core.util.DateFormatUtils;
 import lombok.Getter;
@@ -39,13 +40,13 @@ public abstract class ExecutionContext {
      */
     protected final ItemFactory itemFactory;
     /**
-     * the target period of execution
-     */
-    protected final Period period;
-    /**
      * Proration rules shared by all executions
      */
     protected final ProrationFactory prorationFactory;
+    /**
+     * the target period of execution
+     */
+    protected final Period period;
     /**
      * the context contains all items
      */
@@ -81,6 +82,16 @@ public abstract class ExecutionContext {
         for (PayrollCoreProtocol.ItemValue itemValue : itemValueList) {
             add(itemValue.getItemId(), itemValue.getValuesMap());
         }
+    }
+
+    public void addAll(Map<String, Map<String, String>> itemValues) throws PayrollCoreException {
+        for (Map.Entry<String, Map<String, String>> entry : itemValues.entrySet()) {
+            add(entry.getKey(), entry.getValue());
+        }
+    }
+
+    public void addAll(HistoryData.PeriodData periodData) throws PayrollCoreException {
+        addAll(periodData.getItemValues());
     }
 
     /**
