@@ -43,7 +43,7 @@ public class RetroTaskExecution extends TaskExecution {
         callback.onStart();
         try {
             //re-calc past data
-            List<RetroExecutionContext> retroContexts = historyData.toRetroContexts(normalExecutionContext.getItemFactory(),
+            List<RetroExecutionContext> retroContexts = historyData.toRetroContexts(normalExecutionContext.getItemBuilderFactory(),
                     normalExecutionContext.getProrationFactory());
             for (RetroExecutionContext retroContext : retroContexts) {
                 for (NormalFormula formula : normalFormulaFactory.getFormulas()) {

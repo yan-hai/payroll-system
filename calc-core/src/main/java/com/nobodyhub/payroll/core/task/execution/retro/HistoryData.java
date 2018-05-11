@@ -3,7 +3,7 @@ package com.nobodyhub.payroll.core.task.execution.retro;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
@@ -30,16 +30,16 @@ public class HistoryData {
     /**
      * factory to get new instance of item
      */
-    private final ItemFactory itemFactory;
+    private final ItemBuilderFactory itemBuilderFactory;
     /**
      * a list of history data, could be HR data, attendence data, payment data, etc.
      * each map element contains the data for one history execution, from ItemId to its value
      */
     private final Map<Period, PeriodData> histories;
 
-    public HistoryData(String dataId, ItemFactory itemFactory, List<PayrollCoreProtocol.PeriodValue> data) throws PayrollCoreException {
+    public HistoryData(String dataId, ItemBuilderFactory itemBuilderFactory, List<PayrollCoreProtocol.PeriodValue> data) throws PayrollCoreException {
         this.dataId = dataId;
-        this.itemFactory = itemFactory;
+        this.itemBuilderFactory = itemBuilderFactory;
         this.histories = parseMessage(data);
     }
 
@@ -76,15 +76,15 @@ public class HistoryData {
     /**
      * Generate contexts for Retroactive calculation
      *
-     * @param itemFactory factorty to create items
+     * @param itemBuilderFactory factorty to create items
      * @return
      * @throws PayrollCoreException
      */
-    public List<RetroExecutionContext> toRetroContexts(ItemFactory itemFactory, ProrationFactory prorationFactory) throws PayrollCoreException {
+    public List<RetroExecutionContext> toRetroContexts(ItemBuilderFactory itemBuilderFactory, ProrationFactory prorationFactory) throws PayrollCoreException {
         List<RetroExecutionContext> contexts = Lists.newArrayList();
         for (Period period : histories.keySet()) {
             RetroExecutionContext context = new RetroExecutionContext(dataId,
-                    itemFactory,
+                    itemBuilderFactory,
                     prorationFactory,
                     histories.get(period)
             );
@@ -135,9 +135,9 @@ public class HistoryData {
             return values;
         }
 
-        public BigDecimal getPayment(String itemId, ItemFactory itemFactory) throws PayrollCoreException {
+        public BigDecimal getPayment(String itemId, ItemBuilderFactory itemBuilderFactory) throws PayrollCoreException {
             //verify the item related to itemId is PaymentItem
-            itemFactory.getItem(itemId, PaymentItem.class);
+            itemBuilderFactory.getItem(itemId, PaymentItem.class);
             BigDecimal finalVal = BigDecimal.ZERO;
             for (String value : itemValues.get(itemId).values()) {
                 finalVal = finalVal.add(new BigDecimal(value));

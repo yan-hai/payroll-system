@@ -3,7 +3,7 @@ package com.nobodyhub.payroll.core.task.execution;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
@@ -40,7 +40,7 @@ public abstract class ExecutionContext {
     /**
      * the factory of all items
      */
-    protected final ItemFactory itemFactory;
+    protected final ItemBuilderFactory itemBuilderFactory;
     /**
      * Proration rules shared by all executions
      */
@@ -68,7 +68,7 @@ public abstract class ExecutionContext {
     }
 
     public void add(String itemId, Map<String, String> data) throws PayrollCoreException {
-        Item item = itemFactory.getItem(itemId);
+        Item item = itemBuilderFactory.getItem(itemId);
         for (Map.Entry<String, String> entry : data.entrySet()) {
             item.add(DateFormatUtils.parseDate(entry.getKey()), entry.getValue());
         }

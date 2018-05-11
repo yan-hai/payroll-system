@@ -1,7 +1,7 @@
 package com.nobodyhub.payroll.core.task.execution.retro;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
@@ -17,10 +17,10 @@ public class RetroExecutionContext extends ExecutionContext {
     protected final HistoryData.PeriodData periodData;
 
     public RetroExecutionContext(String dataId,
-                                 ItemFactory itemFactory,
+                                 ItemBuilderFactory itemBuilderFactory,
                                  ProrationFactory prorationFactory,
                                  HistoryData.PeriodData periodData) throws PayrollCoreException {
-        super(dataId, itemFactory, prorationFactory, periodData.getPeriod());
+        super(dataId, itemBuilderFactory, prorationFactory, periodData.getPeriod());
         this.periodData = periodData;
         addAll(periodData);
     }

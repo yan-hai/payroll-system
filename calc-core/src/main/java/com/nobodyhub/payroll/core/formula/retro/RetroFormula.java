@@ -40,7 +40,7 @@ public class RetroFormula extends Formula {
                     BigDecimal exist = diffValues.get(itemId) == null ?
                             BigDecimal.ZERO : diffValues.get(itemId);
                     exist = exist.add(paymentItem.getFinalValue(retroCtx)
-                            .subtract(periodData.getPayment(itemId, itemFactory)));
+                            .subtract(periodData.getPayment(itemId, itemBuilderFactory)));
                     diffValues.put(itemId, exist);
                 } else {
                     //TODO: log skip non-payment item or non-retro item

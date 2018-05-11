@@ -4,7 +4,7 @@ import com.nobodyhub.payroll.core.common.Identifiable;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.NormalFormulaFactory;
 import com.nobodyhub.payroll.core.formula.RetroFormulaFactory;
-import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
@@ -35,7 +35,7 @@ public class Task implements Identifiable {
     /**
      * Item factory to provide the item instance
      */
-    protected final ItemFactory itemFactory;
+    protected final ItemBuilderFactory itemBuilderFactory;
     /**
      * normal formulas
      */
@@ -112,7 +112,7 @@ public class Task implements Identifiable {
      * @throws PayrollCoreException
      */
     public void execute(PayrollCoreProtocol.Request value) throws PayrollCoreException {
-        HistoryData historyData = new HistoryData(value.getDataId(), itemFactory, value.getPastValuesList());
+        HistoryData historyData = new HistoryData(value.getDataId(), itemBuilderFactory, value.getPastValuesList());
         if (!historyData.isEmpty()) {
             //retroactive calculation
             executeRetro(value.getDataId(), value.getCurrentValue(), historyData);
@@ -138,7 +138,7 @@ public class Task implements Identifiable {
      * @throws PayrollCoreException
      */
     protected NormalExecutionContext createExecutionContext(Period period, String dataId, List<PayrollCoreProtocol.ItemValue> itemValueList) throws PayrollCoreException {
-        NormalExecutionContext normalExecutionContext = new NormalExecutionContext(dataId, itemFactory, period, prorationFactory);
+        NormalExecutionContext normalExecutionContext = new NormalExecutionContext(dataId, itemBuilderFactory, period, prorationFactory);
         normalExecutionContext.addAll(itemValueList);
         return normalExecutionContext;
     }

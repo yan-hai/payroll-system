@@ -3,7 +3,7 @@ package com.nobodyhub.payroll.core.formula.common;
 import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.common.Identifiable;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import lombok.Data;
 
@@ -39,7 +39,7 @@ public abstract class Formula implements Comparable<Formula>, Identifiable {
     /**
      * Get the instance of various types of items
      */
-    protected ItemFactory itemFactory;
+    protected ItemBuilderFactory itemBuilderFactory;
 
     /**
      * Get ids of required items in order to evaluate the formula
@@ -54,7 +54,7 @@ public abstract class Formula implements Comparable<Formula>, Identifiable {
     }
 
     protected PaymentItem createPaymentItem(Map<LocalDate, BigDecimal> values) throws PayrollCoreException {
-        PaymentItem item = (PaymentItem) itemFactory.getItem(targetItemId);
+        PaymentItem item = (PaymentItem) itemBuilderFactory.getItem(targetItemId);
         item.addAll(values);
         return item;
     }

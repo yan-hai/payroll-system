@@ -13,7 +13,7 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACT
  *
  * @author Ryan
  */
-public abstract class ItemFactory extends Factory<ItemBuilder> {
+public abstract class ItemBuilderFactory extends Factory<ItemBuilder> {
 
     /**
      * Build item instance of given itemId

@@ -2,7 +2,7 @@ package com.nobodyhub.payroll.core;
 
 import com.nobodyhub.payroll.core.formula.NormalFormulaFactory;
 import com.nobodyhub.payroll.core.formula.RetroFormulaFactory;
-import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.service.client.PayrollCoreClient;
 import com.nobodyhub.payroll.core.service.server.PayrollCoreServer;
@@ -36,7 +36,7 @@ public interface PayrollCoreFacade {
      * @return
      * @see com.nobodyhub.payroll.core.item.common.Item
      */
-    ItemFactory itemFactory();
+    ItemBuilderFactory itemFactory();
 
     /**
      * Factory to get proration for items

@@ -3,7 +3,7 @@ package com.nobodyhub.payroll.core.exception;
 import com.nobodyhub.payroll.core.formula.common.Comparator;
 import com.nobodyhub.payroll.core.formula.common.Operator;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
-import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
@@ -42,15 +42,15 @@ public enum PayrollCoreExceptionCode {
     /**
      * Can not find Item class
      */
-    FACTORY_NOT_FOUND(ItemFactory.class, ""),
+    FACTORY_NOT_FOUND(ItemBuilderFactory.class, ""),
     /**
      * Item class found is not compatible with required
      */
-    FACTORY_INCOMPATIBLE(ItemFactory.class, ""),
+    FACTORY_INCOMPATIBLE(ItemBuilderFactory.class, ""),
     /**
      * Item does not have the required constructor(with one String parameter, as itemId)
      */
-    FACTORY_NO_REQUIRED_CONSTRUCTOR(ItemFactory.class, ""),
+    FACTORY_NO_REQUIRED_CONSTRUCTOR(ItemBuilderFactory.class, ""),
     /**
      * Retroactive formula fail to apply
      */

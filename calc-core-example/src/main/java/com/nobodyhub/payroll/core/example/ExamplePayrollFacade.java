@@ -6,7 +6,7 @@ import com.nobodyhub.payroll.core.formula.NormalFormulaFactory;
 import com.nobodyhub.payroll.core.formula.RetroFormulaFactory;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
-import com.nobodyhub.payroll.core.item.ItemFactory;
+import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.proration.abstr.Proration;
@@ -53,8 +53,8 @@ public class ExamplePayrollFacade implements PayrollCoreFacade {
      * @see Item
      */
     @Override
-    public ItemFactory itemFactory() {
-        return new ExampleItemFactory();
+    public ItemBuilderFactory itemFactory() {
+        return new ExampleItemBuilderFactory();
     }
 
     /**
