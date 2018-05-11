@@ -23,6 +23,6 @@ public class CalendarItem extends Item<BigDecimal, CalendarItem> {
 
     @Override
     public CalendarItem build() {
-        return new CalendarItem(itemId);
+        return new CalendarItem(id);
     }
 }

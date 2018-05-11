@@ -25,7 +25,8 @@ public class PayrollCoreServerService extends PayrollCoreServiceGrpc.PayrollCore
 
     @Override
     public StreamObserver<PayrollCoreProtocol.Request> doCalc(StreamObserver<PayrollCoreProtocol.Response> responseObserver) {
-        final ExecutionCallback callback = new ExecutionCallback(responseObserver);
+        final ExecutionCallback callback = new ExecutionCallback();
+        callback.setResponseObserver(responseObserver);
         return new StreamObserver<PayrollCoreProtocol.Request>() {
             Task task = null;
 

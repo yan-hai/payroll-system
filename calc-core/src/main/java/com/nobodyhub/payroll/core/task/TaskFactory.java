@@ -1,16 +1,11 @@
 package com.nobodyhub.payroll.core.task;
 
+import com.nobodyhub.payroll.core.common.Factory;
+
 /**
  * Factory to get the Task definition
  *
  * @author Ryan
  */
-public interface TaskFactory {
-    /**
-     * Get {@link Task} of given <code>taskId</code>
-     *
-     * @param taskId
-     * @return
-     */
-    Task get(String taskId);
+public abstract class TaskFactory extends Factory<Task> {
 }

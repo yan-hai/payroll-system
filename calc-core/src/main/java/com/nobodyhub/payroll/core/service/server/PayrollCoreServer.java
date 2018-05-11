@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.service.server;
 
 import com.nobodyhub.payroll.core.task.TaskFactory;
+import com.nobodyhub.payroll.core.util.PayrollCoreConst;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
@@ -25,6 +26,10 @@ public class PayrollCoreServer {
      * Service provider
      */
     private final PayrollCoreServerService service;
+
+    public PayrollCoreServer(TaskFactory taskFactory) {
+        this(PayrollCoreConst.DEFAULT_PORT, taskFactory);
+    }
 
     public PayrollCoreServer(int port, TaskFactory taskFactory) {
         this.port = port;

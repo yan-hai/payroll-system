@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.formula.common;
 
 import com.google.common.collect.Maps;
+import com.nobodyhub.payroll.core.common.Identifiable;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
@@ -15,7 +16,7 @@ import java.util.Set;
  * @author Ryan
  */
 @Data
-public abstract class Formula implements Comparable<Formula> {
+public abstract class Formula implements Comparable<Formula>, Identifiable {
     /**
      * the id of item whose value will be evaluated from this formula
      */
@@ -23,7 +24,7 @@ public abstract class Formula implements Comparable<Formula> {
     /**
      * Unique formula id
      */
-    protected String formulaId;
+    protected String id;
     /**
      * Name of formula
      */

@@ -28,7 +28,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
     /**
      * Unique item id
      */
-    protected final String itemId;
+    protected final String id;
     /**
      * class of values
      */

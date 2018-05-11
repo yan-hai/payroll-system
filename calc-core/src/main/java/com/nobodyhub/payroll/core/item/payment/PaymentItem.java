@@ -33,7 +33,7 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
 
     @Override
     public PaymentItem build() {
-        return new PaymentItem(itemId, isRetro, prorationId, roundingRule);
+        return new PaymentItem(id, isRetro, prorationId, roundingRule);
     }
 
     public BigDecimal getFinalValue(ExecutionContext context) throws PayrollCoreException {

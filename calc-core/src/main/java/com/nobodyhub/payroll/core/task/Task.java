@@ -1,5 +1,6 @@
 package com.nobodyhub.payroll.core.task;
 
+import com.nobodyhub.payroll.core.common.Identifiable;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.NormalFormulaFactory;
 import com.nobodyhub.payroll.core.formula.RetroFormulaFactory;
@@ -24,11 +25,11 @@ import java.util.concurrent.Executors;
  * @author Ryan
  */
 @Data
-public abstract class Task {
+public abstract class Task implements Identifiable {
     /**
      * Task Id
      */
-    protected final String taskId;
+    protected final String id;
     /**
      * Item factory to provide the item instance
      */

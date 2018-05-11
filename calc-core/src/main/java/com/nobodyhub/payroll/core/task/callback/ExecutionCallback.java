@@ -6,6 +6,7 @@ import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatusCode;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.util.concurrent.Phaser;
 
@@ -19,7 +20,8 @@ public class ExecutionCallback implements Callback {
     /**
      * stream from server to client
      */
-    private final StreamObserver<PayrollCoreProtocol.Response> responseObserver;
+    @Setter
+    private StreamObserver<PayrollCoreProtocol.Response> responseObserver;
     /**
      * Phaser to await all calculation to finish before reply complete the stream
      */

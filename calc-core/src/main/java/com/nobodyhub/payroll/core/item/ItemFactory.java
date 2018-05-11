@@ -1,11 +1,9 @@
 package com.nobodyhub.payroll.core.item;
 
-import com.google.common.collect.Maps;
+import com.nobodyhub.payroll.core.common.Factory;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.common.ItemBuilder;
-
-import java.util.Map;
 
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACTORY_INCOMPATIBLE;
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACTORY_NOT_FOUND;
@@ -15,8 +13,7 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACT
  *
  * @author Ryan
  */
-public abstract class ItemFactory {
-    private Map<String, ItemBuilder> itemBuilders = Maps.newHashMap();
+public abstract class ItemFactory extends Factory<ItemBuilder> {
 
     /**
      * Build item instance of given itemId
@@ -26,7 +23,7 @@ public abstract class ItemFactory {
      * @throws PayrollCoreException
      */
     public Item getItem(String itemId) throws PayrollCoreException {
-        ItemBuilder builder = itemBuilders.get(itemId);
+        ItemBuilder builder = get(itemId);
         if (builder == null) {
             throw new PayrollCoreException(FACTORY_NOT_FOUND)
                     .addValue("itemId", itemId);
@@ -43,9 +40,4 @@ public abstract class ItemFactory {
                 .addValue("itemId", itemId)
                 .addValue("itemCls", itemCls);
     }
-
-    /**
-     * load available builders of items
-     */
-    public abstract void loadBuilders();
 }

@@ -3,6 +3,7 @@ package com.nobodyhub.payroll.core.formula;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.nobodyhub.payroll.core.common.Factory;
 import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import lombok.Getter;
@@ -17,7 +18,7 @@ import java.util.Set;
  * @author Ryan
  */
 @Getter
-public abstract class FormulaFactory<T extends Formula> {
+public abstract class FormulaFactory<T extends Formula> extends Factory<T> {
     /**
      * full formula list involved in this context
      */
@@ -45,15 +46,15 @@ public abstract class FormulaFactory<T extends Formula> {
         Map<String, Node<T>> nodes = Maps.newHashMap();
         for (T curFormula : formulas) {
             Node<T> curNode = new Node<>(curFormula);
-            nodes.put(curFormula.getFormulaId(), curNode);
+            nodes.put(curFormula.getId(), curNode);
             Set<String> requiredItems = curFormula.getRequiredItems();
             for (String itemId : requiredItems) {
                 List<T> precedeFormulas = formulaMap.get(itemId);
                 for (T preFormula : precedeFormulas) {
-                    Node<T> preNode = nodes.get(preFormula.getFormulaId());
+                    Node<T> preNode = nodes.get(preFormula.getId());
                     if (preNode == null) {
                         preNode = new Node<>(preFormula);
-                        nodes.put(preFormula.getFormulaId(), preNode);
+                        nodes.put(preFormula.getId(), preNode);
                     }
                     curNode.addPreNode(preNode);
                     preNode.moveForward();
@@ -65,7 +66,7 @@ public abstract class FormulaFactory<T extends Formula> {
     }
 
     /**
-     * Hash and Equals based on {@link NormalFormula#formulaId}
+     * Hash and Equals based on {@link NormalFormula#id}
      */
     @RequiredArgsConstructor
     private static class Node<T extends Formula> {
@@ -94,12 +95,12 @@ public abstract class FormulaFactory<T extends Formula> {
 
             Node node = (Node) o;
 
-            return formula != null ? formula.getFormulaId().equals(node.formula.getFormulaId()) : node.formula == null;
+            return formula != null ? formula.getId().equals(node.formula.getId()) : node.formula == null;
         }
 
         @Override
         public int hashCode() {
-            return formula != null ? formula.getFormulaId().hashCode() : 0;
+            return formula != null ? formula.getId().hashCode() : 0;
         }
     }
 }

@@ -19,6 +19,10 @@ public class PayrollCoreClient {
      */
     private final PayrollCoreClientService service;
 
+    public PayrollCoreClient() {
+        this("localhost");
+    }
+
     public PayrollCoreClient(String host) {
         this(host, PayrollCoreConst.DEFAULT_PORT);
     }

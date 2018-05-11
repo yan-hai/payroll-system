@@ -23,6 +23,6 @@ public class HrNumberItem extends Item<BigDecimal, HrNumberItem> {
 
     @Override
     public HrNumberItem build() {
-        return new HrNumberItem(itemId);
+        return new HrNumberItem(id);
     }
 }

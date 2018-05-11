@@ -23,6 +23,6 @@ public class HrTimeItem extends Item<LocalTime, HrTimeItem> {
 
     @Override
     public HrTimeItem build() {
-        return new HrTimeItem(itemId);
+        return new HrTimeItem(id);
     }
 }

@@ -21,6 +21,6 @@ public class HrStringItem extends Item<String, HrStringItem> {
 
     @Override
     public HrStringItem build() {
-        return new HrStringItem(itemId);
+        return new HrStringItem(id);
     }
 }

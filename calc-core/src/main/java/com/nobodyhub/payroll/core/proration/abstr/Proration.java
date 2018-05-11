@@ -2,6 +2,7 @@ package com.nobodyhub.payroll.core.proration.abstr;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.nobodyhub.payroll.core.common.Identifiable;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
@@ -23,11 +24,11 @@ import static com.nobodyhub.payroll.core.util.PayrollCoreConst.END_OF_TIME;
  */
 @Getter
 @RequiredArgsConstructor
-public abstract class Proration {
+public abstract class Proration implements Identifiable {
     /**
      * id of this proration
      */
-    protected final String prorationId;
+    protected final String id;
     /**
      * the id of related calendar item
      */

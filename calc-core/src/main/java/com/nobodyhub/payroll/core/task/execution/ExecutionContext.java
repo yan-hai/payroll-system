@@ -64,7 +64,7 @@ public abstract class ExecutionContext {
      * @param item
      */
     public void add(Item item) {
-        items.put(item.getItemId(), item);
+        items.put(item.getId(), item);
     }
 
     public void add(String itemId, Map<String, String> data) throws PayrollCoreException {
@@ -106,7 +106,7 @@ public abstract class ExecutionContext {
         for (Item item : items.values()) {
             if (item instanceof PaymentItem) {
                 PaymentItem paymentItem = (PaymentItem) item;
-                values.put(item.getItemId(), paymentItem.getFinalValue(context).toPlainString());
+                values.put(item.getId(), paymentItem.getFinalValue(context).toPlainString());
             }
         }
         return PayrollCoreProtocol.Response.newBuilder()

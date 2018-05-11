@@ -21,6 +21,6 @@ public class HrBooleanItem extends Item<Boolean, HrBooleanItem> {
 
     @Override
     public HrBooleanItem build() {
-        return new HrBooleanItem(itemId);
+        return new HrBooleanItem(id);
     }
 }
