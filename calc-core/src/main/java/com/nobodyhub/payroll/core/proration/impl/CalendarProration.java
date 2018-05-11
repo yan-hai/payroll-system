@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.SortedMap;
-import java.util.TreeMap;
 
 /**
  * @author yan_h
@@ -31,8 +30,8 @@ public class CalendarProration extends Proration {
         return prorate(item, periodValues);
     }
 
-    protected SortedMap<LocalDate, BigDecimal> prorate(CalendarItem item, SortedMap<Period, BigDecimal> data) {
-        TreeMap<LocalDate, BigDecimal> calendar = item.getValues();
+    protected SortedMap<LocalDate, BigDecimal> prorate(CalendarItem item, SortedMap<Period, BigDecimal> data) throws PayrollCoreException {
+        SortedMap<LocalDate, BigDecimal> calendar = item.getValues();
         BigDecimal totalVal = calendar.values().stream().reduce(BigDecimal.ZERO, (a, b) -> (a.add(b)));
         SortedMap<LocalDate, BigDecimal> resultMap = Maps.newTreeMap();
         for (Period period : data.keySet()) {

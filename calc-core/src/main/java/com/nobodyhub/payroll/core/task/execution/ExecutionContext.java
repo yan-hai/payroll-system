@@ -67,7 +67,7 @@ public abstract class ExecutionContext {
     public void add(String itemId, Map<String, String> data) throws PayrollCoreException {
         Item item = itemFactory.getItem(itemId);
         for (Map.Entry<String, String> entry : data.entrySet()) {
-            item.addAsString(DateFormatUtils.parseDate(entry.getKey()), entry.getValue());
+            item.add(DateFormatUtils.parseDate(entry.getKey()), entry.getValue());
         }
     }
 
@@ -148,15 +148,14 @@ public abstract class ExecutionContext {
      * @throws PayrollCoreException
      */
     public <T> T getItemValue(String itemId, LocalDate date, Class<T> valueCls) throws PayrollCoreException {
-        Object object = get(itemId).getValue(date);
-        if (object.getClass().isAssignableFrom(valueCls)) {
-            return valueCls.cast(object);
+        Item item = get(itemId);
+        if (item.getValueCls() == valueCls) {
+            return valueCls.cast(get(itemId).getValue(date));
         }
         throw new PayrollCoreException(CONTEXT_INCOMPATIBLE)
                 .addValue("itemId", itemId)
-                .addValue("valueCls", valueCls);
+                .addValue("itemCls", valueCls);
     }
-
 
     /**
      * get ids of all items in the context

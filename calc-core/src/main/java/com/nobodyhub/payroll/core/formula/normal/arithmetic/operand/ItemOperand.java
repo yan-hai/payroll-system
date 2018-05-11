@@ -28,6 +28,6 @@ public class ItemOperand implements Operand {
 
     @Override
     public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
-        return context.get(itemId).getDateSplit();
+        return context.get(itemId).getDateSegment();
     }
 }

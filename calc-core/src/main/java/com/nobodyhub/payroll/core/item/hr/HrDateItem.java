@@ -1,7 +1,6 @@
 package com.nobodyhub.payroll.core.item.hr;
 
 import com.nobodyhub.payroll.core.item.common.Item;
-import com.nobodyhub.payroll.core.util.DateFormatUtils;
 
 import java.time.LocalDate;
 
@@ -14,17 +13,7 @@ import java.time.LocalDate;
 public class HrDateItem extends Item<LocalDate, HrDateItem> {
 
     public HrDateItem(String itemId) {
-        super(itemId);
-    }
-
-    @Override
-    public String getValueAsString(LocalDate date) {
-        return DateFormatUtils.convertDate(getValue(date));
-    }
-
-    @Override
-    public void addAsString(LocalDate date, String value) {
-        this.values.put(date, DateFormatUtils.parseDate(value));
+        super(itemId, LocalDate.class);
     }
 
     @Override

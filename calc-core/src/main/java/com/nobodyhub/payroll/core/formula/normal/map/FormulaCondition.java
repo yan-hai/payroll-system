@@ -25,6 +25,6 @@ public abstract class FormulaCondition<T extends Comparable<T>> {
     }
 
     public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
-        return context.get(itemId).getDateSplit();
+        return context.get(itemId).getDateSegment();
     }
 }

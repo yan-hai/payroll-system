@@ -5,6 +5,7 @@ import com.nobodyhub.payroll.core.formula.common.Operator;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
+import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.service.common.HistoryData;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
@@ -17,6 +18,10 @@ import lombok.Getter;
  */
 @Getter
 public enum PayrollCoreExceptionCode {
+    /**
+     * Unknown value type to handle
+     */
+    ITEM_VALUE_UNKNOWN(Item.class, ""),
     /**
      * Unimplemented handler for {@link Comparator}
      */

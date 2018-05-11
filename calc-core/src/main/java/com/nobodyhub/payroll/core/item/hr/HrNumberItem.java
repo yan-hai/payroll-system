@@ -3,7 +3,6 @@ package com.nobodyhub.payroll.core.item.hr;
 import com.nobodyhub.payroll.core.item.common.Item;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 /**
  * [HR] HR item with Numeric(Integer/Decimal) value
@@ -14,12 +13,7 @@ import java.time.LocalDate;
 public class HrNumberItem extends Item<BigDecimal, HrNumberItem> {
 
     public HrNumberItem(String itemId) {
-        super(itemId);
-    }
-
-    @Override
-    public void addAsString(LocalDate date, String value) {
-        this.values.put(date, new BigDecimal(value));
+        super(itemId, BigDecimal.class);
     }
 
     @Override

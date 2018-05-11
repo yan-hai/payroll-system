@@ -8,7 +8,6 @@ import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 /**
  * [Payment] Payitem with BigDecimal type
@@ -26,20 +25,10 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
                        boolean isRetro,
                        String prorationId,
                        RoundingRule roundingRule) {
-        super(itemId);
+        super(itemId, BigDecimal.class);
         this.isRetro = isRetro;
         this.prorationId = prorationId;
         this.roundingRule = roundingRule;
-    }
-
-    @Override
-    public void addAsString(LocalDate date, String value) {
-        this.values.put(date, new BigDecimal(value));
-    }
-
-    @Override
-    public BigDecimal defaultValue() {
-        return BigDecimal.ZERO;
     }
 
     @Override
@@ -49,6 +38,11 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
 
     public BigDecimal getFinalValue(ExecutionContext context) throws PayrollCoreException {
         Proration proration = context.getProrationFactory().get(prorationId);
-        return proration.getFinalValue(context, values);
+        return proration.getFinalValue(context, getValues());
+    }
+
+    @Override
+    public BigDecimal defaultValue() {
+        return BigDecimal.ZERO;
     }
 }
