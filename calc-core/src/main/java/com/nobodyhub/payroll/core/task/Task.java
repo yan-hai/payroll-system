@@ -14,6 +14,7 @@ import com.nobodyhub.payroll.core.task.execution.normal.NormalTaskExecution;
 import com.nobodyhub.payroll.core.task.execution.retro.HistoryData;
 import com.nobodyhub.payroll.core.task.execution.retro.RetroTaskExecution;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -25,7 +26,8 @@ import java.util.concurrent.Executors;
  * @author Ryan
  */
 @Data
-public abstract class Task implements Identifiable {
+@RequiredArgsConstructor
+public class Task implements Identifiable {
     /**
      * Task Id
      */
