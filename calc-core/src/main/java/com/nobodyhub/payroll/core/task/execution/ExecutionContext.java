@@ -6,8 +6,10 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.common.Item;
+import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
+import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 import com.nobodyhub.payroll.core.task.execution.retro.HistoryData;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatus;
 import com.nobodyhub.payroll.core.util.DateFormatUtils;
@@ -99,11 +101,13 @@ public abstract class ExecutionContext {
      *
      * @return
      */
-    public PayrollCoreProtocol.Response toResponse() {
+    public PayrollCoreProtocol.Response toResponse(NormalExecutionContext context) throws PayrollCoreException {
         Map<String, String> values = Maps.newHashMap();
         for (Item item : items.values()) {
-            //TOOD: remove comments
-//            values.put(item.getItemId(), item.getValueAsString());
+            if (item instanceof PaymentItem) {
+                PaymentItem paymentItem = (PaymentItem) item;
+                values.put(item.getItemId(), paymentItem.getFinalValue(context).toPlainString());
+            }
         }
         return PayrollCoreProtocol.Response.newBuilder()
                 .setStatusCode(executionStatus.getStatusCode().toString())
