@@ -1,5 +1,6 @@
 package com.nobodyhub.payroll.core.task.callback;
 
+import com.nobodyhub.payroll.core.common.Identifiable;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
@@ -16,7 +17,7 @@ import java.util.concurrent.Phaser;
  * @author Ryan
  */
 @RequiredArgsConstructor
-public class ExecutionCallback implements Callback {
+public class ExecutionCallback implements Callback, Identifiable {
     /**
      * stream from server to client
      */
@@ -63,5 +64,16 @@ public class ExecutionCallback implements Callback {
 
     public void await() {
         phaser.arriveAndAwaitAdvance();
+    }
+
+    /**
+     * get the unique identifier
+     *
+     * @return unique id
+     */
+    @Override
+    public String getId() {
+        //Execution do not need Id, just to satisfy the Factory interface
+        return "";
     }
 }

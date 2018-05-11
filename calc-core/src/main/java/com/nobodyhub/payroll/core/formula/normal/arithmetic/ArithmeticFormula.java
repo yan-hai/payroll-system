@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
+import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 
@@ -20,6 +21,10 @@ import java.util.TreeMap;
  * @author Ryan
  */
 public class ArithmeticFormula extends NormalFormula<FormulaExpression> {
+
+    public ArithmeticFormula(String id, String targetItemId, ItemBuilderFactory itemBuilderFactory) {
+        super(id, targetItemId, itemBuilderFactory);
+    }
 
     @Override
     public PaymentItem evaluate(ExecutionContext context) throws PayrollCoreException {

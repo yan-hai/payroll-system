@@ -3,13 +3,12 @@ package com.nobodyhub.payroll.core.formula.normal;
 import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
+import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 
 import java.time.LocalDate;
-import java.util.Set;
 import java.util.SortedMap;
-import java.util.SortedSet;
 
 /**
  * NormalFormula applied to PayItems in order to get numeric value
@@ -22,7 +21,11 @@ public abstract class NormalFormula<T> extends Formula {
     /**
      * Contents of formula
      */
-    protected SortedMap<LocalDate, T> contents = Maps.newTreeMap();
+    protected final SortedMap<LocalDate, T> contents = Maps.newTreeMap();
+
+    public NormalFormula(String id, String targetItemId, ItemBuilderFactory itemBuilderFactory) {
+        super(id, targetItemId, itemBuilderFactory);
+    }
 
     /**
      * Calculate the result value of applying the formula

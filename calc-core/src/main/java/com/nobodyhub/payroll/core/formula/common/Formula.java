@@ -18,13 +18,13 @@ import java.util.Set;
 @Data
 public abstract class Formula implements Comparable<Formula>, Identifiable {
     /**
-     * the id of item whose value will be evaluated from this formula
-     */
-    protected final String targetItemId;
-    /**
      * Unique formula id
      */
     protected final String id;
+    /**
+     * the id of item whose value will be evaluated from this formula
+     */
+    protected final String targetItemId;
     /**
      * Get the instance of various types of items
      */

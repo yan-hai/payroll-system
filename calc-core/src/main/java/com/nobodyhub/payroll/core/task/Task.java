@@ -29,7 +29,7 @@ import java.util.concurrent.Executors;
 @RequiredArgsConstructor
 public class Task implements Identifiable {
     /**
-     * Task Id
+     * Task id
      */
     protected final String id;
     /**
@@ -37,15 +37,15 @@ public class Task implements Identifiable {
      */
     protected final ItemBuilderFactory itemBuilderFactory;
     /**
-     * normal formulas
+     * Formula factory to get normal formulas
      */
     protected final NormalFormulaFactory normalFormulaFactory;
     /**
-     * retroactive formulas
+     * Formula factory to get retroactive formulas
      */
     protected final RetroFormulaFactory retroFormulaFactory;
     /**
-     * Proration rules
+     * Proration factory to get proration rules
      */
     protected final ProrationFactory prorationFactory;
     /**

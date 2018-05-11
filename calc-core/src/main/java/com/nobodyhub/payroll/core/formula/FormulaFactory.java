@@ -6,6 +6,7 @@ import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.common.Factory;
 import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
+import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -25,9 +26,18 @@ public abstract class FormulaFactory<T extends Formula> extends Factory<T> {
     protected final List<T> formulas = Lists.newLinkedList();
     /**
      * Map from target item id to formula
+     * TODO: handle several formulas for the same item
      * several formulas could be applied to the same items id in different period
      */
     protected final Map<String, List<T>> formulaMap = Maps.newHashMap();
+    /**
+     * Factory returns builder to generate item instance
+     */
+    protected final ItemBuilderFactory itemBuilderFactory;
+
+    protected FormulaFactory(ItemBuilderFactory itemBuilderFactory) {
+        this.itemBuilderFactory = itemBuilderFactory;
+    }
 
     public void addFormula(T formula) {
         formulas.add(formula);

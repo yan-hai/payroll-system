@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
+import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
@@ -20,7 +21,11 @@ import java.util.Set;
  * @author Ryan
  */
 public class RetroFormula extends Formula {
-    protected Set<String> relatedItemIds = Sets.newHashSet();
+    protected final Set<String> relatedItemIds = Sets.newHashSet();
+
+    public RetroFormula(String id, String targetItemId, ItemBuilderFactory itemBuilderFactory) {
+        super(id, targetItemId, itemBuilderFactory);
+    }
 
     /**
      * @param retroContexts list of past retro calculation result

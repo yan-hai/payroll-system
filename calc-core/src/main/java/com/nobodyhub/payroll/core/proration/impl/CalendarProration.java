@@ -19,8 +19,8 @@ import java.util.SortedMap;
  */
 public class CalendarProration extends Proration {
 
-    public CalendarProration(String prorationId, String calendarItemId) {
-        super(prorationId, calendarItemId);
+    public CalendarProration(String id, String calendarItemId) {
+        super(id, calendarItemId);
     }
 
     @Override
