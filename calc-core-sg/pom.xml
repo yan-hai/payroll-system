@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>calc-core-sg</artifactId>
-    <name>Singapore Extension of Calculation Core</name>
+    <artifactId>calc-core-example</artifactId>
+    <name>Example Extension of Calculation Core</name>
 
     <dependencies>
         <dependency>
