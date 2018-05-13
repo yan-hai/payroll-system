@@ -1,7 +1,7 @@
 package com.nobodyhub.payroll.core.common;
 
 /**
- * Objects that could be indentified by a unique id
+ * Mark objects that could be identified by a unique id
  *
  * @author yan_h
  * @since 2018-05-11
