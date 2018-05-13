@@ -31,6 +31,15 @@ public abstract class ItemBuilderFactory extends Factory<ItemBuilder> {
         return (Item) builder.build();
     }
 
+    /**
+     * get the item of specified class
+     *
+     * @param itemId
+     * @param itemCls
+     * @param <T>
+     * @return
+     * @throws PayrollCoreException
+     */
     public <T> T getItem(String itemId, Class<T> itemCls) throws PayrollCoreException {
         Item item = getItem(itemId);
         if (itemCls.isAssignableFrom(item.getClass())) {

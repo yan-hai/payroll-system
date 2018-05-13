@@ -1,7 +1,5 @@
 package com.nobodyhub.payroll.core.item.payment.rounding;
 
-import com.nobodyhub.payroll.core.item.payment.rounding.abstr.RoundingProcessor;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -19,7 +17,19 @@ public enum RoundingRule {
     /**
      * Precision: 0, Rounding Mode: HALF_UP
      */
-    P0_HALF_UP((before -> before.setScale(0, RoundingMode.HALF_UP)))
+    P0_HALF_UP((before -> before.setScale(0, RoundingMode.HALF_UP))),
+    /**
+     * Precision: 0, Rounding Mode: HALF_DOWN
+     */
+    P0_HALF_DOWN((before -> before.setScale(0, RoundingMode.HALF_DOWN))),
+    /**
+     * Precision: 0, Rounding Mode: HALF_UP
+     */
+    P1_HALF_UP((before -> before.setScale(1, RoundingMode.HALF_UP))),
+    /**
+     * Precision: 0, Rounding Mode: HALF_UP
+     */
+    P3_HALF_DOWN((before -> before.setScale(3, RoundingMode.HALF_DOWN))),
 
     /**
      * TODO: add all existing rounding rules
@@ -38,4 +48,18 @@ public enum RoundingRule {
     public BigDecimal round(BigDecimal before) {
         return processor.round(before);
     }
+
+    /**
+     * interface for a rounding processor
+     */
+    public interface RoundingProcessor {
+        /**
+         * Round value
+         *
+         * @param before
+         * @return
+         */
+        BigDecimal round(BigDecimal before);
+    }
+
 }
