@@ -64,8 +64,6 @@ public class Task implements Identifiable {
      * setup before task starts
      */
     public void setup() {
-        normalFormulaFactory.prioritize();
-        retroFormulaFactory.prioritize();
     }
 
     /**
