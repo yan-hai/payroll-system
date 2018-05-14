@@ -20,5 +20,6 @@ public interface ItemBuilder<IT> extends Identifiable {
      *
      * @return id of instance to be created
      */
+    @Override
     String getId();
 }

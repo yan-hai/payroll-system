@@ -3,6 +3,7 @@ package com.nobodyhub.payroll.core.item.payment;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.rounding.RoundingRule;
+import com.nobodyhub.payroll.core.proration.abstr.Proration;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
 
@@ -23,7 +24,7 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
     /**
      * The prorate rule used to get the final value of this item
      */
-    private final String prorationId;
+    private final Proration proration;
     /**
      * The rounding rule to round the final value
      */
@@ -31,17 +32,17 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
 
     public PaymentItem(String itemId,
                        boolean isRetro,
-                       String prorationId,
+                       Proration proration,
                        RoundingRule roundingRule) {
         super(itemId, BigDecimal.class);
         this.isRetro = isRetro;
-        this.prorationId = prorationId;
+        this.proration = proration;
         this.roundingRule = roundingRule;
     }
 
     @Override
     public PaymentItem build() {
-        return new PaymentItem(id, isRetro, prorationId, roundingRule);
+        return new PaymentItem(id, isRetro, proration, roundingRule);
     }
 
     /**
@@ -52,7 +53,7 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
      * @throws PayrollCoreException
      */
     public BigDecimal getFinalValue(ExecutionContext context) throws PayrollCoreException {
-        BigDecimal proratedVal = context.getProrationFactory().get(prorationId).getFinalValue(context, getValues());
+        BigDecimal proratedVal = proration.getFinalValue(context, getValues());
         return roundingRule.round(proratedVal);
     }
 

@@ -30,7 +30,7 @@ public class ExamplePayrollServerFacade extends PayrollCoreServerFacade {
 
     @Override
     public ItemBuilderFactory initExampleItemBuilderFactory() {
-        return new ExampleItemBuilderFactory();
+        return new ExampleItemBuilderFactory(prorationFactory());
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.nobodyhub.payroll.core.common.Factory;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.common.ItemBuilder;
+import com.nobodyhub.payroll.core.proration.ProrationFactory;
 
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACTORY_INCOMPATIBLE;
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACTORY_NOT_FOUND;
@@ -14,6 +15,11 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACT
  * @author Ryan
  */
 public abstract class ItemBuilderFactory extends Factory<ItemBuilder> {
+    protected final ProrationFactory prorationFactory;
+
+    protected ItemBuilderFactory(ProrationFactory prorationFactory) {
+        this.prorationFactory = prorationFactory;
+    }
 
     /**
      * Build item instance of given itemId
