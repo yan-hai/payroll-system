@@ -2,6 +2,7 @@ package com.nobodyhub.payroll.core.proration.abstr;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.common.Identifiable;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.calendar.Period;
@@ -11,12 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedMap;
-
-import static com.nobodyhub.payroll.core.util.PayrollCoreConst.END_OF_TIME;
+import java.util.*;
 
 /**
  * @author yan_h
@@ -53,39 +49,59 @@ public abstract class Proration implements Identifiable {
 
     /**
      * convert {@link LocalDate} based map to {@link Period} based map
+     * the final periods are all within the given inclusive period
      *
-     * @param beforeValues
+     * @param beforeValues value list
+     * @param period the inclusive period
      * @return
      * @throws PayrollCoreException
      */
-    protected SortedMap<Period, BigDecimal> convertToPeriod(SortedMap<LocalDate, BigDecimal> beforeValues) throws PayrollCoreException {
-        List<Period> periods = convertDateToPeriod(beforeValues.keySet());
+    protected SortedMap<Period, BigDecimal> convertValueToPeriod(Map<LocalDate, BigDecimal> beforeValues,
+                                                                 Period period) throws PayrollCoreException {
+        List<Period> periods = convertDateToPeriod(beforeValues.keySet(), period);
         SortedMap<Period, BigDecimal> result = Maps.newTreeMap();
-        for (Period period : periods) {
-            result.put(period, beforeValues.get(period.getStart()));
+        for (Period sub : periods) {
+            result.put(sub, beforeValues.get(sub.getStart()));
         }
         return result;
     }
 
     /**
-     * convert a set of LocalDates into a Period list
+     * convert a set of LocalDates within the given period into a Period list
      *
-     * @param dates
+     * @param dates  date list
+     * @param period the inclusive period
      * @return
      * @throws PayrollCoreException
      */
-    protected List<Period> convertDateToPeriod(Set<LocalDate> dates) throws PayrollCoreException {
-        List<LocalDate> dateList = Lists.newArrayList(dates);
-        Collections.sort(dateList);
+    protected List<Period> convertDateToPeriod(Set<LocalDate> dates,
+                                               Period period) throws PayrollCoreException {
+        Set<LocalDate> dateWithinPeriod = Sets.newHashSet();
+        for (LocalDate date : dates) {
+            if (period.isAfter(date)) {
+                // before
+                dateWithinPeriod.add(period.getStart());
+            } else if (period.contains(date)) {
+                // in between
+                dateWithinPeriod.add(date);
+            } else {
+                // after
+                continue;
+            }
+        }
+        dateWithinPeriod.add(period.getEnd());
 
+        List<LocalDate> dateList = Lists.newArrayList(dateWithinPeriod);
+        Collections.sort(dateList);
         List<Period> periods = Lists.newArrayList();
-        for (int idx = 0; idx < dateList.size(); idx++) {
-            if (idx < dateList.size() - 1) {
+        for (int idx = 0; idx < dateList.size() - 1; idx++) {
+            if (idx < dateList.size() - 2) {
                 periods.add(Period.of(dateList.get(idx), dateList.get(idx + 1).minusDays(1)));
             } else {
-                periods.add(Period.of(dateList.get(idx), END_OF_TIME));
+                periods.add(Period.of(dateList.get(idx), dateList.get(idx + 1)));
             }
         }
         return periods;
     }
+
 }

@@ -2,10 +2,7 @@ package com.nobodyhub.payroll.core.item.calendar;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.util.DateFormatUtils;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -20,6 +17,7 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.PERI
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode
+@ToString
 public class Period implements Comparable<Period> {
     /**
      * The start date(inclusive)

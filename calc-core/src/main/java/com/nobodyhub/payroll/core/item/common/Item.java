@@ -51,6 +51,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
         if (valueCls.isAssignableFrom(value.getClass())
                 || value.getClass() == String.class) {
             this.values.put(date, convertToString(value));
+            return;
         }
         throw new PayrollCoreException(ITEM_VALUE_UNKNOWN)
                 .addValue("value", value);
