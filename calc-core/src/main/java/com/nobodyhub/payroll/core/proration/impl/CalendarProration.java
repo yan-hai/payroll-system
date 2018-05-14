@@ -24,34 +24,61 @@ public class CalendarProration extends Proration {
     }
 
     @Override
-    public SortedMap<LocalDate, BigDecimal> prorate(ExecutionContext context, SortedMap<LocalDate, BigDecimal> beforeValues) throws PayrollCoreException {
-        SortedMap<Period, BigDecimal> periodValues = convertToPeriod(beforeValues);
+    public SortedMap<LocalDate, BigDecimal> prorate(ExecutionContext context,
+                                                    SortedMap<LocalDate, BigDecimal> beforeValues)
+            throws PayrollCoreException {
+        SortedMap<Period, BigDecimal> periodValues = convertValueToPeriod(beforeValues, context.getPeriod());
         CalendarItem item = context.get(calendarItemId, CalendarItem.class);
-        return prorate(item, periodValues);
+        return proratePeriod(item, periodValues, context.getPeriod());
     }
 
-    protected SortedMap<LocalDate, BigDecimal> prorate(CalendarItem item, SortedMap<Period, BigDecimal> data) throws PayrollCoreException {
-        SortedMap<LocalDate, BigDecimal> calendar = item.getValues();
+    protected SortedMap<LocalDate, BigDecimal> proratePeriod(CalendarItem item,
+                                                             SortedMap<Period, BigDecimal> data,
+                                                             Period period)
+            throws PayrollCoreException {
+        SortedMap<LocalDate, BigDecimal> calendar = unzip(item.getValues(), period);
         BigDecimal totalVal = calendar.values().stream().reduce(BigDecimal.ZERO, (a, b) -> (a.add(b)));
+
+
         SortedMap<LocalDate, BigDecimal> resultMap = Maps.newTreeMap();
-        for (Period period : data.keySet()) {
+        for (Period sub : data.keySet()) {
             BigDecimal periodVal = BigDecimal.ZERO;
             for (Map.Entry<LocalDate, BigDecimal> entry : calendar.entrySet()) {
                 LocalDate sDate = entry.getKey();
-                if (period.isAfter(sDate)) {
+                if (sub.isAfter(sDate)) {
                     // sdate is before period
                     continue;
                 }
-                if (period.contains(sDate)) {
+                if (sub.contains(sDate)) {
                     periodVal = periodVal.add(entry.getValue());
                 } else {
                     // sdate is after period
                     break;
                 }
             }
-            resultMap.put(period.getStart(),
-                    data.get(period).multiply(periodVal).divide(totalVal, PayrollCoreConst.MATH_CONTEXT));
+            resultMap.put(sub.getStart(),
+                    data.get(sub)
+                            .multiply(periodVal)
+                            .divide(totalVal, PayrollCoreConst.MATH_CONTEXT));
         }
         return resultMap;
+    }
+
+    protected SortedMap<LocalDate, BigDecimal> unzip(SortedMap<LocalDate, BigDecimal> values,
+                                                     Period period) {
+        SortedMap<LocalDate, BigDecimal> unzipVals = Maps.newTreeMap();
+        for (Map.Entry<LocalDate, BigDecimal> entry : values.entrySet()) {
+            LocalDate date = entry.getKey();
+            BigDecimal value = entry.getValue();
+            while (period.isAfter(date)) {
+                date = date.plusDays(1);
+                continue;
+            }
+            while (period.contains(date)) {
+                unzipVals.put(date, value);
+                date = date.plusDays(1);
+            }
+        }
+        return unzipVals;
     }
 }

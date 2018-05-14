@@ -23,7 +23,7 @@ public class AfterDateProration extends CalendarProration {
 
     @Override
     public SortedMap<LocalDate, BigDecimal> prorate(ExecutionContext context, SortedMap<LocalDate, BigDecimal> beforeValues) throws PayrollCoreException {
-        SortedMap<Period, BigDecimal> periodValues = convertToPeriod(super.prorate(context, beforeValues));
+        SortedMap<Period, BigDecimal> periodValues = convertValueToPeriod(super.prorate(context, beforeValues), context.getPeriod());
         SortedMap<LocalDate, BigDecimal> result = Maps.newTreeMap();
         for (SortedMap.Entry<Period, BigDecimal> entry : periodValues.entrySet()) {
             Period period = entry.getKey();

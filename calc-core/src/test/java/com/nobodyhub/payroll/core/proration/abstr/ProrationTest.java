@@ -28,18 +28,23 @@ public abstract class ProrationTest<T extends Proration> {
     protected T proration;
 
     @Mock
-    private ExecutionContext executionContext;
+    protected ExecutionContext executionContext;
 
-    private CalendarItem calendarItem = new CalendarItem("calendarId");
+    protected CalendarItem calendarItem = new CalendarItem("calendarId");
+
+    protected Period period;
 
     @Before
     public void setup() throws PayrollCoreException {
         calendarItem.add(LocalDate.of(2018, 5, 1), BigDecimal.ONE);
-        calendarItem.add(LocalDate.of(2018, 5, 10), BigDecimal.ZERO);
-        calendarItem.add(LocalDate.of(2018, 5, 20), BigDecimal.ONE);
+        calendarItem.add(LocalDate.of(2018, 5, 15), BigDecimal.ZERO);
+        calendarItem.add(LocalDate.of(2018, 5, 30), BigDecimal.ONE);
+
+        period = Period.of("20180501", "20180531");
 
         MockitoAnnotations.initMocks(this);
-        Mockito.when(executionContext.get("calendarId")).thenReturn(calendarItem);
+        Mockito.when(executionContext.get("calendarId", CalendarItem.class)).thenReturn(calendarItem);
+        Mockito.when(executionContext.getPeriod()).thenReturn(period);
     }
 
     @Test
