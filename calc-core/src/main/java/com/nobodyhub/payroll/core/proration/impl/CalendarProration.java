@@ -39,7 +39,6 @@ public class CalendarProration extends Proration {
         SortedMap<LocalDate, BigDecimal> calendar = unzip(item.getValues(), period);
         BigDecimal totalVal = calendar.values().stream().reduce(BigDecimal.ZERO, (a, b) -> (a.add(b)));
 
-
         SortedMap<LocalDate, BigDecimal> resultMap = Maps.newTreeMap();
         for (Period sub : data.keySet()) {
             BigDecimal periodVal = BigDecimal.ZERO;

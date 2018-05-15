@@ -14,10 +14,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedMap;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -34,6 +31,8 @@ public abstract class ProrationTest<T extends Proration> {
 
     protected Period period;
 
+    protected SortedMap<LocalDate, BigDecimal> beforeValues = Maps.newTreeMap();
+
     @Before
     public void setup() throws PayrollCoreException {
         calendarItem.add(LocalDate.of(2018, 5, 1), BigDecimal.ONE);
@@ -41,6 +40,10 @@ public abstract class ProrationTest<T extends Proration> {
         calendarItem.add(LocalDate.of(2018, 5, 30), BigDecimal.ONE);
 
         period = Period.of("20180501", "20180531");
+
+        beforeValues.put(LocalDate.of(2018, 5, 2), new BigDecimal("3000"));
+        beforeValues.put(LocalDate.of(2018, 5, 10), new BigDecimal("4000"));
+        beforeValues.put(LocalDate.of(2018, 5, 20), new BigDecimal("5000"));
 
         MockitoAnnotations.initMocks(this);
         Mockito.when(executionContext.get("calendarId", CalendarItem.class)).thenReturn(calendarItem);

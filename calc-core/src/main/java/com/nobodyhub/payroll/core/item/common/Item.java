@@ -35,8 +35,25 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
     protected final Class<VT> valueCls;
     /**
      * values for different period, from the latest to the oldest
-     * different subclass may parse these values in different value,
-     * e.g. use the LocalDate as start date or use as specific date
+     * different subclass may parse these values in different ways,
+     * for example,
+     * <p></p>
+     * - for payment items, monthly salary
+     * 20180401 -> 3000
+     * 20180416 -> 4000
+     * means:
+     * for 0401~0415, monthly salary is 3000 and for 0416 onwards monthly salary is 4000.
+     * which, after prorated by calender day, makes the final actual monthly salary to
+     * 3000*15/30 + 4000* 15/30 = 3500
+     * <p></p>
+     * - for calendar items, working days
+     * 20180401 -> 1
+     * 20180416 -> 0
+     * 20180417 -> 1
+     * means:
+     * 0401~0415 are working days
+     * 0416 is non-working day
+     * 0417 onwards are working days
      */
     protected TreeMap<LocalDate, String> values = Maps.newTreeMap((o1, o2) -> (o1.compareTo(o2) * (-1)));
 
