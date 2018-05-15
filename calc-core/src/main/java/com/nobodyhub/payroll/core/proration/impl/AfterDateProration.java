@@ -25,15 +25,6 @@ public class AfterDateProration extends CalendarProration {
     }
 
     @Override
-    public SortedMap<LocalDate, BigDecimal> prorate(ExecutionContext context,
-                                                    SortedMap<LocalDate, BigDecimal> beforeValues)
-            throws PayrollCoreException {
-        SortedMap<Period, BigDecimal> periodValues = convertValueToPeriod(beforeValues, context.getPeriod());
-        CalendarItem item = context.get(calendarItemId, CalendarItem.class);
-        return proratePeriod(item, periodValues, context.getPeriod());
-    }
-
-    @Override
     protected SortedMap<LocalDate, BigDecimal> proratePeriod(CalendarItem item,
                                                              SortedMap<Period, BigDecimal> data,
                                                              Period period) throws PayrollCoreException {
