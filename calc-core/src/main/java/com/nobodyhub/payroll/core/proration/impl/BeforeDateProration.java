@@ -4,6 +4,8 @@ import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.calendar.CalendarItem;
 import com.nobodyhub.payroll.core.item.calendar.Period;
+import com.nobodyhub.payroll.core.item.hr.HrDateItem;
+import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import com.nobodyhub.payroll.core.util.PayrollCoreConst;
 
 import java.math.BigDecimal;
@@ -17,32 +19,40 @@ import java.util.SortedMap;
  * @author yan_h
  * @since 2018-05-10.
  */
-public class BeforeDateProration extends CalendarProration {
-    /**
-     * end date of effective period, inclusive
-     */
-    protected final LocalDate effectiveDate;
+public class BeforeDateProration extends AfterDateProration {
 
-    public BeforeDateProration(String prorationId, String calendarItemId, LocalDate effectiveDate) {
-        super(prorationId, calendarItemId);
-        this.effectiveDate = effectiveDate;
+    public BeforeDateProration(String prorationId, String calendarItemId, String hrDateItemId) {
+        super(prorationId, calendarItemId, hrDateItemId);
+    }
+
+    @Override
+    public SortedMap<LocalDate, BigDecimal> prorate(ExecutionContext context,
+                                                    SortedMap<LocalDate, BigDecimal> beforeValues)
+            throws PayrollCoreException {
+        SortedMap<Period, BigDecimal> periodValues = convertValueToPeriod(beforeValues, context.getPeriod());
+        CalendarItem calendarItem = context.get(calendarItemId, CalendarItem.class);
+        HrDateItem hrDateItem = context.get(hrDateItemId, HrDateItem.class);
+        return proratePeriod(calendarItem, hrDateItem, periodValues, context.getPeriod());
     }
 
     /**
      * Prorate the data within given period using calender item
-     * Only the values equal or before {@link this#effectiveDate} will be considerred
+     * Only the values equal or before {@link this#hrDateItemId} will be considerred
      *
-     * @param item
+     * @param calendarItem
+     * @param hrDateItem
      * @param data
      * @param period
      * @return
      * @throws PayrollCoreException
      */
     @Override
-    protected SortedMap<LocalDate, BigDecimal> proratePeriod(CalendarItem item,
+    protected SortedMap<LocalDate, BigDecimal> proratePeriod(CalendarItem calendarItem,
+                                                             HrDateItem hrDateItem,
                                                              SortedMap<Period, BigDecimal> data,
                                                              Period period) throws PayrollCoreException {
-        SortedMap<LocalDate, BigDecimal> calendar = unzip(item.getValues(), period);
+        SortedMap<LocalDate, BigDecimal> calendar = unzip(calendarItem.getValues(), period);
+        LocalDate effectiveDate = hrDateItem.getValue(period.getBaseDate());
         BigDecimal totalVal = calendar.values().stream().reduce(BigDecimal.ZERO, (a, b) -> (a.add(b)));
 
         SortedMap<LocalDate, BigDecimal> resultMap = Maps.newTreeMap();

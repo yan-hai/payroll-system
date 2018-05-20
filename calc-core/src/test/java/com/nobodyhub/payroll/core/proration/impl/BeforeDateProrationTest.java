@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.SortedMap;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Ryan
@@ -20,7 +20,7 @@ public class BeforeDateProrationTest extends ProrationTest<BeforeDateProration> 
         super.setup();
         proration = new BeforeDateProration("id",
                 "calendarId",
-                LocalDate.of(2018, 5, 14));
+                "hrDateItemId");
     }
 
     @Test

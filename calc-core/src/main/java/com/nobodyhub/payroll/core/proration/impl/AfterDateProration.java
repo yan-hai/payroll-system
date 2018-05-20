@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.calendar.CalendarItem;
 import com.nobodyhub.payroll.core.item.calendar.Period;
+import com.nobodyhub.payroll.core.item.hr.HrDateItem;
 import com.nobodyhub.payroll.core.util.PayrollCoreConst;
 
 import java.math.BigDecimal;
@@ -17,32 +18,30 @@ import java.util.SortedMap;
  * @author yan_h
  * @since 2018-05-10.
  */
-public class AfterDateProration extends CalendarProration {
-    /**
-     * start date of effective period, inclusive
-     */
-    protected final LocalDate effectiveDate;
+public class AfterDateProration extends DateProration {
 
-    public AfterDateProration(String prorationId, String calendarItemId, LocalDate effectiveDate) {
-        super(prorationId, calendarItemId);
-        this.effectiveDate = effectiveDate;
+    public AfterDateProration(String prorationId, String calendarItemId, String hrDateItemId) {
+        super(prorationId, calendarItemId, hrDateItemId);
     }
 
     /**
      * Prorate the data within given period using calender item
-     * Only the values equal or after {@link this#effectiveDate} will be considerred
+     * Only the values equal or after {@link this#hrDateItemId} will be considerred
      *
-     * @param item
+     * @param calendarItem
+     * @param hrDateItem
      * @param data
      * @param period
      * @return
      * @throws PayrollCoreException
      */
     @Override
-    protected SortedMap<LocalDate, BigDecimal> proratePeriod(CalendarItem item,
+    protected SortedMap<LocalDate, BigDecimal> proratePeriod(CalendarItem calendarItem,
+                                                             HrDateItem hrDateItem,
                                                              SortedMap<Period, BigDecimal> data,
                                                              Period period) throws PayrollCoreException {
-        SortedMap<LocalDate, BigDecimal> calendar = unzip(item.getValues(), period);
+        SortedMap<LocalDate, BigDecimal> calendar = unzip(calendarItem.getValues(), period);
+        LocalDate effectiveDate = hrDateItem.getValue(period.getBaseDate());
         BigDecimal totalVal = calendar.values().stream().reduce(BigDecimal.ZERO, (a, b) -> (a.add(b)));
 
         SortedMap<LocalDate, BigDecimal> resultMap = Maps.newTreeMap();

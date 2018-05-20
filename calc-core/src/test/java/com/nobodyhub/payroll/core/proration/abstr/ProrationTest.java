@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.calendar.CalendarItem;
 import com.nobodyhub.payroll.core.item.calendar.Period;
+import com.nobodyhub.payroll.core.item.hr.HrDateItem;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,10 @@ import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,6 +33,8 @@ public abstract class ProrationTest<T extends Proration> {
 
     protected CalendarItem calendarItem = new CalendarItem("calendarId");
 
+    protected HrDateItem hrDateItem = new HrDateItem("hrDateItemId");
+
     protected Period period;
 
     protected SortedMap<LocalDate, BigDecimal> beforeValues = Maps.newTreeMap();
@@ -39,7 +45,9 @@ public abstract class ProrationTest<T extends Proration> {
         calendarItem.add(LocalDate.of(2018, 5, 15), BigDecimal.ZERO);
         calendarItem.add(LocalDate.of(2018, 5, 30), BigDecimal.ONE);
 
-        period = Period.of("20180501", "20180531");
+        hrDateItem.add(LocalDate.of(2018, 5, 10), LocalDate.of(2018, 5, 14));
+
+        period = Period.of("20180501", "20180531", "20180525");
 
         beforeValues.put(LocalDate.of(2018, 5, 2), new BigDecimal("3000"));
         beforeValues.put(LocalDate.of(2018, 5, 10), new BigDecimal("4000"));
@@ -47,6 +55,7 @@ public abstract class ProrationTest<T extends Proration> {
 
         MockitoAnnotations.initMocks(this);
         Mockito.when(executionContext.get("calendarId", CalendarItem.class)).thenReturn(calendarItem);
+        Mockito.when(executionContext.get("hrDateItemId", HrDateItem.class)).thenReturn(hrDateItem);
         Mockito.when(executionContext.getPeriod()).thenReturn(period);
     }
 

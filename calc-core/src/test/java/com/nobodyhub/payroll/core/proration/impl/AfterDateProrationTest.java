@@ -20,7 +20,7 @@ public class AfterDateProrationTest extends ProrationTest<AfterDateProration> {
         super.setup();
         proration = new AfterDateProration("id",
                 "calendarId",
-                LocalDate.of(2018, 5, 14));
+                "hrDateItemId");
     }
 
     @Test
