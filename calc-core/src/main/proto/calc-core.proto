@@ -31,9 +31,13 @@ message PeriodValue {
      */
     string endDate = 2;
     /*
+     * base date for HR related info
+     */
+    string baseDate = 3;
+    /*
      * items values
      */
-    repeated ItemValue items = 3;
+    repeated ItemValue items = 4;
 }
 
 /*

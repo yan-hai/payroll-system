@@ -1000,10 +1000,28 @@ public final class PayrollCoreProtocol {
 
     /**
      * <pre>
+     * base date for HR related info
+     * </pre>
+     *
+     * <code>string baseDate = 3;</code>
+     */
+    java.lang.String getBaseDate();
+    /**
+     * <pre>
+     * base date for HR related info
+     * </pre>
+     *
+     * <code>string baseDate = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getBaseDateBytes();
+
+    /**
+     * <pre>
      * items values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+     * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
      */
     java.util.List<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue> 
         getItemsList();
@@ -1012,7 +1030,7 @@ public final class PayrollCoreProtocol {
      * items values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+     * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
      */
     com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue getItems(int index);
     /**
@@ -1020,7 +1038,7 @@ public final class PayrollCoreProtocol {
      * items values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+     * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
      */
     int getItemsCount();
     /**
@@ -1028,7 +1046,7 @@ public final class PayrollCoreProtocol {
      * items values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+     * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
      */
     java.util.List<? extends com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValueOrBuilder> 
         getItemsOrBuilderList();
@@ -1037,7 +1055,7 @@ public final class PayrollCoreProtocol {
      * items values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+     * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
      */
     com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValueOrBuilder getItemsOrBuilder(
         int index);
@@ -1061,6 +1079,7 @@ public final class PayrollCoreProtocol {
     private PeriodValue() {
       startDate_ = "";
       endDate_ = "";
+      baseDate_ = "";
       items_ = java.util.Collections.emptyList();
     }
 
@@ -1108,9 +1127,15 @@ public final class PayrollCoreProtocol {
               break;
             }
             case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              baseDate_ = s;
+              break;
+            }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
                 items_ = new java.util.ArrayList<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue>();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000008;
               }
               items_.add(
                   input.readMessage(com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue.parser(), extensionRegistry));
@@ -1124,7 +1149,7 @@ public final class PayrollCoreProtocol {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           items_ = java.util.Collections.unmodifiableList(items_);
         }
         this.unknownFields = unknownFields.build();
@@ -1228,14 +1253,56 @@ public final class PayrollCoreProtocol {
       }
     }
 
-    public static final int ITEMS_FIELD_NUMBER = 3;
+    public static final int BASEDATE_FIELD_NUMBER = 3;
+    private volatile java.lang.Object baseDate_;
+    /**
+     * <pre>
+     * base date for HR related info
+     * </pre>
+     *
+     * <code>string baseDate = 3;</code>
+     */
+    public java.lang.String getBaseDate() {
+      java.lang.Object ref = baseDate_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        baseDate_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * base date for HR related info
+     * </pre>
+     *
+     * <code>string baseDate = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBaseDateBytes() {
+      java.lang.Object ref = baseDate_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        baseDate_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ITEMS_FIELD_NUMBER = 4;
     private java.util.List<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue> items_;
     /**
      * <pre>
      * items values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+     * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
      */
     public java.util.List<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue> getItemsList() {
       return items_;
@@ -1245,7 +1312,7 @@ public final class PayrollCoreProtocol {
      * items values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+     * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
      */
     public java.util.List<? extends com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValueOrBuilder> 
         getItemsOrBuilderList() {
@@ -1256,7 +1323,7 @@ public final class PayrollCoreProtocol {
      * items values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+     * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
      */
     public int getItemsCount() {
       return items_.size();
@@ -1266,7 +1333,7 @@ public final class PayrollCoreProtocol {
      * items values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+     * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
      */
     public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue getItems(int index) {
       return items_.get(index);
@@ -1276,7 +1343,7 @@ public final class PayrollCoreProtocol {
      * items values
      * </pre>
      *
-     * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+     * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
      */
     public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValueOrBuilder getItemsOrBuilder(
         int index) {
@@ -1301,8 +1368,11 @@ public final class PayrollCoreProtocol {
       if (!getEndDateBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, endDate_);
       }
+      if (!getBaseDateBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, baseDate_);
+      }
       for (int i = 0; i < items_.size(); i++) {
-        output.writeMessage(3, items_.get(i));
+        output.writeMessage(4, items_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -1318,9 +1388,12 @@ public final class PayrollCoreProtocol {
       if (!getEndDateBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, endDate_);
       }
+      if (!getBaseDateBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, baseDate_);
+      }
       for (int i = 0; i < items_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, items_.get(i));
+          .computeMessageSize(4, items_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1342,6 +1415,8 @@ public final class PayrollCoreProtocol {
           .equals(other.getStartDate());
       result = result && getEndDate()
           .equals(other.getEndDate());
+      result = result && getBaseDate()
+          .equals(other.getBaseDate());
       result = result && getItemsList()
           .equals(other.getItemsList());
       result = result && unknownFields.equals(other.unknownFields);
@@ -1359,6 +1434,8 @@ public final class PayrollCoreProtocol {
       hash = (53 * hash) + getStartDate().hashCode();
       hash = (37 * hash) + ENDDATE_FIELD_NUMBER;
       hash = (53 * hash) + getEndDate().hashCode();
+      hash = (37 * hash) + BASEDATE_FIELD_NUMBER;
+      hash = (53 * hash) + getBaseDate().hashCode();
       if (getItemsCount() > 0) {
         hash = (37 * hash) + ITEMS_FIELD_NUMBER;
         hash = (53 * hash) + getItemsList().hashCode();
@@ -1501,9 +1578,11 @@ public final class PayrollCoreProtocol {
 
         endDate_ = "";
 
+        baseDate_ = "";
+
         if (itemsBuilder_ == null) {
           items_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000008);
         } else {
           itemsBuilder_.clear();
         }
@@ -1533,10 +1612,11 @@ public final class PayrollCoreProtocol {
         int to_bitField0_ = 0;
         result.startDate_ = startDate_;
         result.endDate_ = endDate_;
+        result.baseDate_ = baseDate_;
         if (itemsBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
             items_ = java.util.Collections.unmodifiableList(items_);
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000008);
           }
           result.items_ = items_;
         } else {
@@ -1592,11 +1672,15 @@ public final class PayrollCoreProtocol {
           endDate_ = other.endDate_;
           onChanged();
         }
+        if (!other.getBaseDate().isEmpty()) {
+          baseDate_ = other.baseDate_;
+          onChanged();
+        }
         if (itemsBuilder_ == null) {
           if (!other.items_.isEmpty()) {
             if (items_.isEmpty()) {
               items_ = other.items_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000008);
             } else {
               ensureItemsIsMutable();
               items_.addAll(other.items_);
@@ -1609,7 +1693,7 @@ public final class PayrollCoreProtocol {
               itemsBuilder_.dispose();
               itemsBuilder_ = null;
               items_ = other.items_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000008);
               itemsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getItemsFieldBuilder() : null;
@@ -1824,12 +1908,101 @@ public final class PayrollCoreProtocol {
         return this;
       }
 
+      private java.lang.Object baseDate_ = "";
+      /**
+       * <pre>
+       * base date for HR related info
+       * </pre>
+       *
+       * <code>string baseDate = 3;</code>
+       */
+      public java.lang.String getBaseDate() {
+        java.lang.Object ref = baseDate_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          baseDate_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * base date for HR related info
+       * </pre>
+       *
+       * <code>string baseDate = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBaseDateBytes() {
+        java.lang.Object ref = baseDate_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          baseDate_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * base date for HR related info
+       * </pre>
+       *
+       * <code>string baseDate = 3;</code>
+       */
+      public Builder setBaseDate(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        baseDate_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * base date for HR related info
+       * </pre>
+       *
+       * <code>string baseDate = 3;</code>
+       */
+      public Builder clearBaseDate() {
+        
+        baseDate_ = getDefaultInstance().getBaseDate();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * base date for HR related info
+       * </pre>
+       *
+       * <code>string baseDate = 3;</code>
+       */
+      public Builder setBaseDateBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        baseDate_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue> items_ =
         java.util.Collections.emptyList();
       private void ensureItemsIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
           items_ = new java.util.ArrayList<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue>(items_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000008;
          }
       }
 
@@ -1841,7 +2014,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public java.util.List<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue> getItemsList() {
         if (itemsBuilder_ == null) {
@@ -1855,7 +2028,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public int getItemsCount() {
         if (itemsBuilder_ == null) {
@@ -1869,7 +2042,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue getItems(int index) {
         if (itemsBuilder_ == null) {
@@ -1883,7 +2056,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public Builder setItems(
           int index, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue value) {
@@ -1904,7 +2077,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public Builder setItems(
           int index, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue.Builder builderForValue) {
@@ -1922,7 +2095,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public Builder addItems(com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue value) {
         if (itemsBuilder_ == null) {
@@ -1942,7 +2115,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public Builder addItems(
           int index, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue value) {
@@ -1963,7 +2136,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public Builder addItems(
           com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue.Builder builderForValue) {
@@ -1981,7 +2154,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public Builder addItems(
           int index, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue.Builder builderForValue) {
@@ -1999,7 +2172,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public Builder addAllItems(
           java.lang.Iterable<? extends com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue> values) {
@@ -2018,12 +2191,12 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public Builder clearItems() {
         if (itemsBuilder_ == null) {
           items_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
           itemsBuilder_.clear();
@@ -2035,7 +2208,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public Builder removeItems(int index) {
         if (itemsBuilder_ == null) {
@@ -2052,7 +2225,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue.Builder getItemsBuilder(
           int index) {
@@ -2063,7 +2236,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValueOrBuilder getItemsOrBuilder(
           int index) {
@@ -2077,7 +2250,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public java.util.List<? extends com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValueOrBuilder> 
            getItemsOrBuilderList() {
@@ -2092,7 +2265,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue.Builder addItemsBuilder() {
         return getItemsFieldBuilder().addBuilder(
@@ -2103,7 +2276,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue.Builder addItemsBuilder(
           int index) {
@@ -2115,7 +2288,7 @@ public final class PayrollCoreProtocol {
        * items values
        * </pre>
        *
-       * <code>repeated .payroll.core.service.proto.ItemValue items = 3;</code>
+       * <code>repeated .payroll.core.service.proto.ItemValue items = 4;</code>
        */
       public java.util.List<com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue.Builder> 
            getItemsBuilderList() {
@@ -2128,7 +2301,7 @@ public final class PayrollCoreProtocol {
           itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValue.Builder, com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol.ItemValueOrBuilder>(
                   items_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           items_ = null;
@@ -4997,23 +5170,24 @@ public final class PayrollCoreProtocol {
       "proto\"\215\001\n\tItemValue\022\016\n\006itemId\030\001 \001(\t\022A\n\006v" +
       "alues\030\002 \003(\01321.payroll.core.service.proto" +
       ".ItemValue.ValuesEntry\032-\n\013ValuesEntry\022\013\n" +
-      "\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"g\n\013PeriodV" +
+      "\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"y\n\013PeriodV" +
       "alue\022\021\n\tstartDate\030\001 \001(\t\022\017\n\007endDate\030\002 \001(\t" +
-      "\0224\n\005items\030\003 \003(\0132%.payroll.core.service.p" +
-      "roto.ItemValue\"\245\001\n\007Request\022\016\n\006taskId\030\001 \001" +
-      "(\t\022\016\n\006dataId\030\002 \001(\t\022=\n\014currentValue\030\003 \001(\013" +
-      "2\'.payroll.core.service.proto.PeriodValu" +
-      "e\022;\n\npastValues\030\004 \003(\0132\'.payroll.core.ser" +
-      "vice.proto.PeriodValue\"\260\001\n\010Response\022\022\n\ns" +
-      "tatusCode\030\001 \001(\t\022\017\n\007message\030\002 \001(\t\022\016\n\006data" +
-      "Id\030\003 \001(\t\022@\n\006values\030\004 \003(\01320.payroll.core." +
-      "service.proto.Response.ValuesEntry\032-\n\013Va" +
-      "luesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028" +
-      "\0012m\n\022PayrollCoreService\022W\n\006doCalc\022#.payr" +
-      "oll.core.service.proto.Request\032$.payroll" +
-      ".core.service.proto.Response(\0010\001B?\n(com." +
-      "nobodyhub.payroll.core.service.protoB\023Pa" +
-      "yrollCoreProtocolb\006proto3"
+      "\022\020\n\010baseDate\030\003 \001(\t\0224\n\005items\030\004 \003(\0132%.payr" +
+      "oll.core.service.proto.ItemValue\"\245\001\n\007Req" +
+      "uest\022\016\n\006taskId\030\001 \001(\t\022\016\n\006dataId\030\002 \001(\t\022=\n\014" +
+      "currentValue\030\003 \001(\0132\'.payroll.core.servic" +
+      "e.proto.PeriodValue\022;\n\npastValues\030\004 \003(\0132" +
+      "\'.payroll.core.service.proto.PeriodValue" +
+      "\"\260\001\n\010Response\022\022\n\nstatusCode\030\001 \001(\t\022\017\n\007mes" +
+      "sage\030\002 \001(\t\022\016\n\006dataId\030\003 \001(\t\022@\n\006values\030\004 \003" +
+      "(\01320.payroll.core.service.proto.Response" +
+      ".ValuesEntry\032-\n\013ValuesEntry\022\013\n\003key\030\001 \001(\t" +
+      "\022\r\n\005value\030\002 \001(\t:\0028\0012m\n\022PayrollCoreServic" +
+      "e\022W\n\006doCalc\022#.payroll.core.service.proto" +
+      ".Request\032$.payroll.core.service.proto.Re" +
+      "sponse(\0010\001B?\n(com.nobodyhub.payroll.core" +
+      ".service.protoB\023PayrollCoreProtocolb\006pro" +
+      "to3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5044,7 +5218,7 @@ public final class PayrollCoreProtocol {
     internal_static_payroll_core_service_proto_PeriodValue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_payroll_core_service_proto_PeriodValue_descriptor,
-        new java.lang.String[] { "StartDate", "EndDate", "Items", });
+        new java.lang.String[] { "StartDate", "EndDate", "BaseDate", "Items", });
     internal_static_payroll_core_service_proto_Request_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_payroll_core_service_proto_Request_fieldAccessorTable = new
