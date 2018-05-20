@@ -56,6 +56,7 @@ public abstract class Formula implements Comparable<Formula>, Identifiable {
 
     protected PaymentItem createPaymentItem(LocalDate date, BigDecimal value) throws PayrollCoreException {
         Map<LocalDate, BigDecimal> map = Maps.newHashMap();
+        map.put(date, value);
         return createPaymentItem(map);
     }
 

@@ -3,6 +3,7 @@ package com.nobodyhub.payroll.core.formula.normal.map;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,7 @@ import java.util.Set;
  * @since 2018-05-04.
  */
 @RequiredArgsConstructor
+@EqualsAndHashCode
 public class FormulaCase implements Comparable<FormulaCase> {
     /**
      * the index of the case
@@ -51,12 +53,18 @@ public class FormulaCase implements Comparable<FormulaCase> {
 
     public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
         Set<LocalDate> dateSet = Sets.newHashSet();
-        for(FormulaCondition condition: conditions) {
+        for (FormulaCondition condition : conditions) {
             dateSet.addAll(condition.getDateSplit(context));
         }
         return dateSet;
     }
 
+    /**
+     * Note: this class has a natural ordering that is inconsistent with equals.
+     *
+     * @param o
+     * @return
+     */
     @Override
     public int compareTo(FormulaCase o) {
         return this.order - o.order;

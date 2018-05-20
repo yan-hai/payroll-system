@@ -29,7 +29,7 @@ public class PayrollCoreServerService extends PayrollCoreServiceGrpc.PayrollCore
             @Override
             public void onNext(PayrollCoreProtocol.Request value) {
                 if (task == null) {
-                    Task task = taskFactory.get(value.getTaskId());
+                    task = taskFactory.get(value.getTaskId());
                     task.setup();
                     task.getExecutionCallback().setResponseObserver(responseObserver);
                 }

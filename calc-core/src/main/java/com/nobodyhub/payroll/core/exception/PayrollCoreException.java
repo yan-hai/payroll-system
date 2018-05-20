@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public final class PayrollCoreException extends Exception {
     private final PayrollCoreExceptionCode code;
-    protected final Map<String, String> values;
+    private final Map<String, String> values;
 
     public PayrollCoreException(PayrollCoreExceptionCode code) {
         super();
@@ -79,7 +79,7 @@ public final class PayrollCoreException extends Exception {
         } else if (object instanceof Map) {
             Map map = (Map) object;
             StringBuilder sb = new StringBuilder();
-            for (Object key : map.keySet()) {
+            for (Object key : map.entrySet()) {
                 sb.append(convertToString(key) + ":" + convertToString(map.get(key)) + ",");
             }
             return sb.toString();
