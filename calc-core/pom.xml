@@ -14,7 +14,7 @@
     <name>Calculation Core</name>
 
     <properties>
-        <sonar.exclusions>PayrollCoreProtocol.java, PayrollCoreServiceGrpc.java</sonar.exclusions>
+        <sonar.exclusions>**/com/nobodyhub/payroll/core/service/proto/**</sonar.exclusions>
     </properties>
 
     <dependencies>
