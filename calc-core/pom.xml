@@ -13,6 +13,10 @@
 
     <name>Calculation Core</name>
 
+    <properties>
+        <sonar.exclusions>PayrollCoreProtocol.java, PayrollCoreServiceGrpc.java</sonar.exclusions>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
