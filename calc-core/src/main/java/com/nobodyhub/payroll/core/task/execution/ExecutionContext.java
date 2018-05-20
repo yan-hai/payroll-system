@@ -50,10 +50,6 @@ public abstract class ExecutionContext {
      */
     protected final Period period;
     /**
-     * basedate used to get the value HR related in some case
-     */
-    protected final LocalDate basedate;
-    /**
      * the context contains all items
      */
     protected final Map<String, Item> items = Maps.newHashMap();

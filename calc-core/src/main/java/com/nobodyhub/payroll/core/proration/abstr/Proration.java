@@ -98,9 +98,9 @@ public abstract class Proration implements Identifiable {
         List<Period> periods = Lists.newArrayList();
         for (int idx = 0; idx < dateList.size() - 1; idx++) {
             if (idx < dateList.size() - 2) {
-                periods.add(Period.of(dateList.get(idx), dateList.get(idx + 1).minusDays(1)));
+                periods.add(Period.of(dateList.get(idx), dateList.get(idx + 1).minusDays(1), null));
             } else {
-                periods.add(Period.of(dateList.get(idx), dateList.get(idx + 1)));
+                periods.add(Period.of(dateList.get(idx), dateList.get(idx + 1), null));
             }
         }
         return periods;

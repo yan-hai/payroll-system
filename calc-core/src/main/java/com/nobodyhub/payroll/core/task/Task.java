@@ -75,7 +75,7 @@ public class Task implements Identifiable {
      */
     protected void executeNormal(String dataId, PayrollCoreProtocol.PeriodValue periodValue) throws PayrollCoreException {
         NormalTaskExecution execution = new NormalTaskExecution(
-                createExecutionContext(Period.of(periodValue.getStartDate(), periodValue.getEndDate()),
+                createExecutionContext(Period.of(periodValue.getStartDate(), periodValue.getEndDate(), periodValue.getBaseDate()),
                         dataId,
                         periodValue.getItemsList()),
                 normalFormulaFactory,
@@ -93,7 +93,7 @@ public class Task implements Identifiable {
      */
     protected void executeRetro(String dataId, PayrollCoreProtocol.PeriodValue periodValue, HistoryData historyData) throws PayrollCoreException {
         RetroTaskExecution execution = new RetroTaskExecution(
-                createExecutionContext(Period.of(periodValue.getStartDate(), periodValue.getEndDate()),
+                createExecutionContext(Period.of(periodValue.getStartDate(), periodValue.getEndDate(), periodValue.getBaseDate()),
                         dataId,
                         periodValue.getItemsList()),
                 historyData,

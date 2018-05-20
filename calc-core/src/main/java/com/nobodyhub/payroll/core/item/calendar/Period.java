@@ -27,26 +27,34 @@ public class Period implements Comparable<Period> {
      * The end date(inclusive)
      */
     private final LocalDate end;
+    /**
+     * The basedate used to get HR information
+     * could be null if used {@link this} used only as a interval of date
+     */
+    private final LocalDate baseDate;
 
     /**
      * Create new Period from start to end
      *
-     * @param start start date(inclusive)
-     * @param end   end date(inclusive)
+     * @param start    start date(inclusive)
+     * @param end      end date(inclusive)
+     * @param baseDate
      * @return
      * @throws PayrollCoreException if not valid period
      */
-    public static Period of(LocalDate start, LocalDate end) throws PayrollCoreException {
+    public static Period of(LocalDate start, LocalDate end, LocalDate baseDate) throws PayrollCoreException {
         if (end.isBefore(start)) {
             throw new PayrollCoreException(PERIOD_INVALID)
                     .addValue("start", start)
                     .addValue("end", end);
         }
-        return new Period(start, end);
+        return new Period(start, end, baseDate);
     }
 
+
     /**
-     * Create new Period from string representative for date in format {@link DateFormatUtils#DATE_FORMAT}
+     * Create new Period from string representative for date in format
+     * {@link DateFormatUtils#DATE_FORMAT}, with null as basedate
      *
      * @param start
      * @param end
@@ -54,7 +62,21 @@ public class Period implements Comparable<Period> {
      * @throws PayrollCoreException
      */
     public static Period of(String start, String end) throws PayrollCoreException {
-        return of(DateFormatUtils.parseDate(start), DateFormatUtils.parseDate(end));
+        return of(DateFormatUtils.parseDate(start), DateFormatUtils.parseDate(end), null);
+    }
+
+
+    /**
+     * Create new Period from string representative for date in format {@link DateFormatUtils#DATE_FORMAT}
+     *
+     * @param start
+     * @param end
+     * @param baseDate
+     * @return
+     * @throws PayrollCoreException
+     */
+    public static Period of(String start, String end, String baseDate) throws PayrollCoreException {
+        return of(DateFormatUtils.parseDate(start), DateFormatUtils.parseDate(end), DateFormatUtils.parseDate(baseDate));
     }
 
     /**

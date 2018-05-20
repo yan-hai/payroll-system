@@ -104,7 +104,7 @@ public class HistoryData {
     private Map<Period, PeriodData> parseMessage(List<PayrollCoreProtocol.PeriodValue> data) throws PayrollCoreException {
         Map<Period, PeriodData> histories = Maps.newHashMap();
         for (PayrollCoreProtocol.PeriodValue periodValue : data) {
-            Period period = Period.of(periodValue.getStartDate(), periodValue.getEndDate());
+            Period period = Period.of(periodValue.getStartDate(), periodValue.getEndDate(), periodValue.getBaseDate());
             PeriodData periodData = new PeriodData(period);
             for (PayrollCoreProtocol.ItemValue itemValue : periodValue.getItemsList()) {
                 periodData.add(itemValue);
