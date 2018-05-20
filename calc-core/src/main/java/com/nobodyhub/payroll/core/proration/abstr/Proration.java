@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 /**
+ * Prorate the values based on the related calendar item
+ *
  * @author yan_h
  * @since 2018-05-10.
  */
@@ -31,7 +33,7 @@ public abstract class Proration implements Identifiable {
     protected final String calendarItemId;
 
     /**
-     * Prorate the given values
+     * Prorate the given values into a final value
      *
      * @param context
      * @param beforeValues
@@ -52,7 +54,7 @@ public abstract class Proration implements Identifiable {
      * the final periods are all within the given inclusive period
      *
      * @param beforeValues value list
-     * @param period the inclusive period
+     * @param period       the inclusive period
      * @return
      * @throws PayrollCoreException
      */

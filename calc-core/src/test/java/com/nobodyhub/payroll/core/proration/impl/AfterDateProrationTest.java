@@ -30,5 +30,6 @@ public class AfterDateProrationTest extends ProrationTest<AfterDateProration> {
         assertEquals(new BigDecimal("0"), result.get(LocalDate.of(2018, 5, 2)));
         assertEquals(new BigDecimal("250"), result.get(LocalDate.of(2018, 5, 10)));
         assertEquals(new BigDecimal("625"), result.get(LocalDate.of(2018, 5, 20)));
+        assertEquals(new BigDecimal("875"), this.proration.getFinalValue(executionContext, beforeValues));
     }
 }

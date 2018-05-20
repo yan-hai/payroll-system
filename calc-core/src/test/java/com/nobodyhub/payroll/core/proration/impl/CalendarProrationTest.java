@@ -31,7 +31,7 @@ public class CalendarProrationTest extends ProrationTest<CalendarProration> {
         assertEquals(new BigDecimal("1500"), result.get(LocalDate.of(2018, 5, 2)));
         assertEquals(new BigDecimal("1250"), result.get(LocalDate.of(2018, 5, 10)));
         assertEquals(new BigDecimal("625"), result.get(LocalDate.of(2018, 5, 20)));
-
+        assertEquals(new BigDecimal("3375"), this.proration.getFinalValue(executionContext, beforeValues));
     }
 
     @Test
