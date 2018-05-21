@@ -9,7 +9,8 @@ import java.time.LocalDate;
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.PERIOD_INVALID;
 
 /**
- * A inclusive period of date
+ * A interval formed by start date and end date.
+ * Both the start and end date are included in the period
  *
  * @author yan_h
  * @since 2018-05-09.
@@ -121,6 +122,14 @@ public class Period implements Comparable<Period> {
         return date.isAfter(end);
     }
 
+    /**
+     * The periods will be sorted by the order of start date
+     * <p>
+     * Note: the a.compareTo(b) == 0 does not comply with a.equals(b)
+     *
+     * @param o
+     * @return
+     */
     @Override
     public int compareTo(Period o) {
         return this.start.compareTo(o.start);
