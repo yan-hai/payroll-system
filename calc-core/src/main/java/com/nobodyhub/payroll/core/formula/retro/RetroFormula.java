@@ -2,10 +2,10 @@ package com.nobodyhub.payroll.core.formula.retro;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
-import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.execution.retro.HistoryData;

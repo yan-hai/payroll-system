@@ -1,11 +1,11 @@
 package com.nobodyhub.payroll.core.task;
 
 import com.nobodyhub.payroll.core.common.Identifiable;
+import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.NormalFormulaFactory;
 import com.nobodyhub.payroll.core.formula.RetroFormulaFactory;
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
-import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.callback.ExecutionCallback;

@@ -2,9 +2,9 @@ package com.nobodyhub.payroll.core.task.execution.retro;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
-import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;

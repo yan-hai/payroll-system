@@ -1,9 +1,9 @@
 package com.nobodyhub.payroll.core.proration.impl;
 
 import com.google.common.collect.Maps;
+import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.calendar.CalendarItem;
-import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.item.hr.HrDateItem;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import com.nobodyhub.payroll.core.util.PayrollCoreConst;

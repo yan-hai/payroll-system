@@ -1,8 +1,8 @@
 package com.nobodyhub.payroll.core.proration.impl;
 
 import com.google.common.collect.Maps;
+import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.calendar.Period;
 import com.nobodyhub.payroll.core.proration.abstr.ProrationTest;
 import org.junit.Before;
 import org.junit.Test;
