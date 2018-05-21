@@ -1,7 +1,6 @@
 package com.nobodyhub.payroll.core.formula.common;
 
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.item.common.Item;
 
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.COMPARATOR_UNIMPLEMENTED;
 
@@ -25,19 +24,19 @@ public enum Comparator {
     /**
      * interval, (start, end)
      */
-    INTERVAL_O_O,
+    O_O,
     /**
      * interval, (start, end]
      */
-    INTERVAL_O_C,
+    O_C,
     /**
      * interval, [start, end)
      */
-    INTERVAL_C_O,
+    C_O,
     /**
      * interval, [start, end]
      */
-    INTERVAL_C_C;
+    C_C;
 
     /**
      * Judge whether the item value satifies the Comparation or not
@@ -59,16 +58,16 @@ public enum Comparator {
             case NE: {
                 return compare(itemVal, lower) != 0;
             }
-            case INTERVAL_O_O: {
+            case O_O: {
                 return (compare(itemVal, lower) > 0) && (compare(itemVal, higher) < 0);
             }
-            case INTERVAL_O_C: {
+            case O_C: {
                 return (compare(itemVal, lower) > 0) && (compare(itemVal, higher) <= 0);
             }
-            case INTERVAL_C_O: {
+            case C_O: {
                 return (compare(itemVal, lower) >= 0) && (compare(itemVal, higher) < 0);
             }
-            case INTERVAL_C_C: {
+            case C_C: {
                 return (compare(itemVal, lower) >= 0) && (compare(itemVal, higher) <= 0);
             }
             default: {
