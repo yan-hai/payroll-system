@@ -5,6 +5,8 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.COMPARATOR_UNIMPLEMENTED;
 
 /**
+ * Comparator used to compare value with another value or interval
+ *
  * @author yan_h
  * @since 2018-05-04.
  */
@@ -47,7 +49,7 @@ public enum Comparator {
      * @return
      * @throws PayrollCoreException
      */
-    public <T extends Comparable<T>> boolean apply(T itemVal,  T lower, T higher) throws PayrollCoreException {
+    public <T extends Comparable<T>> boolean apply(T itemVal, T lower, T higher) throws PayrollCoreException {
         switch (this) {
             case NA: {
                 return true;
