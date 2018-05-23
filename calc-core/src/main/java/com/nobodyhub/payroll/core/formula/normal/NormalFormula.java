@@ -13,15 +13,15 @@ import java.util.SortedMap;
 /**
  * NormalFormula applied to PayItems in order to get numeric value
  *
- * @param <T> formula Content type
+ * @param <CT> type of formula content
  * @author yan_h
  * @since 2018-05-04.
  */
-public abstract class NormalFormula<T> extends Formula {
+public abstract class NormalFormula<CT> extends Formula {
     /**
      * Contents of formula
      */
-    protected final SortedMap<LocalDate, T> contents = Maps.newTreeMap();
+    protected final SortedMap<LocalDate, CT> contents = Maps.newTreeMap();
 
     public NormalFormula(String id, String targetItemId, ItemBuilderFactory itemBuilderFactory) {
         super(id, targetItemId, itemBuilderFactory);
@@ -35,4 +35,14 @@ public abstract class NormalFormula<T> extends Formula {
      * @throws PayrollCoreException
      */
     public abstract PaymentItem evaluate(ExecutionContext context) throws PayrollCoreException;
+
+    /**
+     * add content
+     *
+     * @param date
+     * @param value
+     */
+    public void addContent(LocalDate date, CT value) {
+        contents.put(date, value);
+    }
 }
