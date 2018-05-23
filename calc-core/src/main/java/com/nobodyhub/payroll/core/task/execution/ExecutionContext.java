@@ -173,6 +173,20 @@ public abstract class ExecutionContext {
     }
 
     /**
+     * get value from given item from the context
+     *
+     * @param itemId
+     * @param period   whose start date will be used as the basedate
+     * @param valueCls
+     * @param <T>
+     * @return
+     * @throws PayrollCoreException
+     */
+    public <T> T getItemValue(String itemId, Period period, Class<T> valueCls) throws PayrollCoreException {
+        return getItemValue(itemId, period.getStart(), valueCls);
+    }
+
+    /**
      * get ids of all items in the context
      *
      * @return
