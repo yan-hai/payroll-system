@@ -17,10 +17,10 @@ public class RetroExecutionContext extends ExecutionContext {
     protected final HistoryData.PeriodData periodData;
 
     public RetroExecutionContext(String dataId,
+                                 HistoryData.PeriodData periodData,
                                  ItemBuilderFactory itemBuilderFactory,
-                                 ProrationFactory prorationFactory,
-                                 HistoryData.PeriodData periodData) throws PayrollCoreException {
-        super(dataId, itemBuilderFactory, prorationFactory, periodData.getPeriod());
+                                 ProrationFactory prorationFactory) throws PayrollCoreException {
+        super(dataId, periodData.getPeriod(), itemBuilderFactory, prorationFactory);
         this.periodData = periodData;
         addAll(periodData);
     }

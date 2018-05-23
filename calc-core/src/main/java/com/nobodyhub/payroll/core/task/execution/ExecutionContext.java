@@ -38,6 +38,10 @@ public abstract class ExecutionContext {
      */
     protected final String dataId;
     /**
+     * the target period of execution
+     */
+    protected final Period period;
+    /**
      * the factory of all items
      */
     protected final ItemBuilderFactory itemBuilderFactory;
@@ -45,10 +49,6 @@ public abstract class ExecutionContext {
      * Proration rules shared by all executions
      */
     protected final ProrationFactory prorationFactory;
-    /**
-     * the target period of execution
-     */
-    protected final Period period;
     /**
      * the context contains all items
      */
@@ -165,7 +165,7 @@ public abstract class ExecutionContext {
     public <T> T getItemValue(String itemId, LocalDate date, Class<T> valueCls) throws PayrollCoreException {
         Item item = get(itemId);
         if (item.getValueCls() == valueCls) {
-            return valueCls.cast(get(itemId).getValue(date));
+            return valueCls.cast(item.getValue(date));
         }
         throw new PayrollCoreException(CONTEXT_INCOMPATIBLE)
                 .addValue("itemId", itemId)

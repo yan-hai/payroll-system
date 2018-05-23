@@ -84,9 +84,9 @@ public class HistoryData {
         List<RetroExecutionContext> contexts = Lists.newArrayList();
         for (Period period : histories.keySet()) {
             RetroExecutionContext context = new RetroExecutionContext(dataId,
+                    histories.get(period),
                     itemBuilderFactory,
-                    prorationFactory,
-                    histories.get(period)
+                    prorationFactory
             );
             context.addAll(histories.get(period));
             contexts.add(context);

@@ -136,7 +136,7 @@ public class Task implements Identifiable {
      * @throws PayrollCoreException
      */
     protected NormalExecutionContext createExecutionContext(Period period, String dataId, List<PayrollCoreProtocol.ItemValue> itemValueList) throws PayrollCoreException {
-        NormalExecutionContext normalExecutionContext = new NormalExecutionContext(dataId, itemBuilderFactory, period, prorationFactory);
+        NormalExecutionContext normalExecutionContext = new NormalExecutionContext(dataId, period, itemBuilderFactory, prorationFactory);
         normalExecutionContext.addAll(itemValueList);
         return normalExecutionContext;
     }
