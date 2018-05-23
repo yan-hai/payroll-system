@@ -85,10 +85,11 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
             if (valueCls.isAssignableFrom(entry.getValue().getClass())
                     || entry.getValue().getClass() == String.class) {
                 this.values.put(entry.getKey(), convertToString(entry.getValue()));
+            } else {
+                throw new PayrollCoreException(ITEM_VALUE_UNKNOWN)
+                        .addValue("value", values);
             }
         }
-        throw new PayrollCoreException(ITEM_VALUE_UNKNOWN)
-                .addValue("value", values);
     }
 
     /**
@@ -102,6 +103,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
         for (LocalDate key : values.keySet()) {
             if (key.compareTo(date) <= 0) {
                 value = values.get(key);
+                break;
             }
         }
         return value != null ? convertFromString(value) : defaultValue();
