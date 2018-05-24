@@ -46,7 +46,7 @@ public class ItemOperand implements Operand {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
+    public Set<LocalDate> getDateSegment(ExecutionContext context) throws PayrollCoreException {
         return context.get(itemId).getDateSegment();
     }
 }

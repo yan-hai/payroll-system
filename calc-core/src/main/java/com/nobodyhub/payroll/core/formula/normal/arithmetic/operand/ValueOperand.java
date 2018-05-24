@@ -55,7 +55,7 @@ public class ValueOperand implements Operand {
     }
 
     @Override
-    public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
+    public Set<LocalDate> getDateSegment(ExecutionContext context) throws PayrollCoreException {
         return Sets.newHashSet(context.getPeriod().getStart());
     }
 }

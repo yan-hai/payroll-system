@@ -38,5 +38,5 @@ public interface Operand {
      * @return
      * @throws PayrollCoreException
      */
-    Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException;
+    Set<LocalDate> getDateSegment(ExecutionContext context) throws PayrollCoreException;
 }
