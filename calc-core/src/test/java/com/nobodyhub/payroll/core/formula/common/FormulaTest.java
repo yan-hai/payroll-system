@@ -4,6 +4,7 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -24,8 +25,10 @@ public abstract class FormulaTest<T extends Formula> {
         MockitoAnnotations.initMocks(this);
     }
 
+    @Test
     public abstract void testCompareTo();
 
+    @Test
     public abstract void testEvaluate() throws PayrollCoreException;
 
 }

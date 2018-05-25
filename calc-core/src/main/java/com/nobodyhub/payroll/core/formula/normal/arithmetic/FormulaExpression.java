@@ -6,6 +6,7 @@ import com.nobodyhub.payroll.core.formula.common.Operator;
 import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.abstr.Operand;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -21,19 +22,20 @@ import java.util.Set;
  * @author Ryan
  */
 @Getter
+@RequiredArgsConstructor
 public class FormulaExpression {
-    /**
-     * the first operand
-     */
-    private Operand operand;
     /**
      * the operator
      */
-    private Operator operator;
+    private final Operator operator;
+    /**
+     * the first operand
+     */
+    private final Operand operand;
     /**
      * another operand
      */
-    private FormulaExpression anotherOperand;
+    private final FormulaExpression anotherOperand;
 
     /**
      * Evaluate the Expression
