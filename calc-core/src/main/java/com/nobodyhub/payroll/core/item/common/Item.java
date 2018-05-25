@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.item.common;
 
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.util.ValueConverter;
 import lombok.Getter;
@@ -157,6 +158,6 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      * @return
      */
     public Set<LocalDate> getDateSegment() {
-        return values.keySet();
+        return Sets.newHashSet(values.keySet());
     }
 }
