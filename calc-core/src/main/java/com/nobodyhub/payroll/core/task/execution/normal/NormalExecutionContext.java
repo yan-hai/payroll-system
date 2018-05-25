@@ -12,7 +12,10 @@ import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
  */
 public class NormalExecutionContext extends ExecutionContext {
 
-    public NormalExecutionContext(String dataId, Period period, ItemBuilderFactory itemBuilderFactory, ProrationFactory prorationFactory) {
+    public NormalExecutionContext(String dataId,
+                                  Period period,
+                                  ItemBuilderFactory itemBuilderFactory,
+                                  ProrationFactory prorationFactory) {
         super(dataId, period, itemBuilderFactory, prorationFactory);
     }
 }
