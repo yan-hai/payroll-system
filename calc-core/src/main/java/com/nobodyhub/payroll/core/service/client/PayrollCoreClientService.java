@@ -78,7 +78,7 @@ public class PayrollCoreClientService {
         };
 
         StreamObserver<PayrollCoreProtocol.Request> request = asyncStub.doCalc(response);
-        requestList.stream().forEach((r) -> request.onNext(r));
+        requestList.stream().forEach(request::onNext);
         request.onCompleted();
         finishLatch.await();
         return afterVals;
