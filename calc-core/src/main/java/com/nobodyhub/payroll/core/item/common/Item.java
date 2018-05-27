@@ -8,10 +8,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.ITEM_VALUE_UNKNOWN;
 
@@ -58,6 +55,8 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      */
     protected TreeMap<LocalDate, String> values = Maps.newTreeMap((o1, o2) -> (o1.compareTo(o2) * (-1)));
 
+    private static final String IMPOSSIBLE_VALUE = "$$IMPOSSIBLE_VALUE$$";
+
     /**
      * set the item value
      *
@@ -69,6 +68,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
         if (valueCls.isAssignableFrom(value.getClass())
                 || value.getClass() == String.class) {
             this.values.put(date, convertToString(value));
+            mergeValues();
             return;
         }
         throw new PayrollCoreException(ITEM_VALUE_UNKNOWN)
@@ -91,6 +91,27 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
                         .addValue("value", values);
             }
         }
+        mergeValues();
+    }
+
+    /**
+     * merge the same values in adjacent keys, use the earlier date as key
+     */
+    private void mergeValues() {
+        //change the order from earliest to latest
+        SortedSet<LocalDate> dates = Sets.newTreeSet(values.keySet());
+        Iterator<LocalDate> iter = dates.iterator();
+        String preValue = IMPOSSIBLE_VALUE;
+        while (iter.hasNext()) {
+            LocalDate key = iter.next();
+            String value = values.get(key);
+            if (value.compareTo(preValue) == 0) {
+                iter.remove();
+            } else {
+                preValue = value;
+            }
+        }
+        values.keySet().retainAll(dates);
     }
 
     /**
