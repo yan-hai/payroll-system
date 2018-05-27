@@ -38,17 +38,17 @@ public class FormulaCaseSet {
 
     public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
         Set<LocalDate> dateSet = Sets.newHashSet();
-        for(FormulaCase formulaCase: cases) {
+        for (FormulaCase formulaCase : cases) {
             dateSet.addAll(formulaCase.getDateSplit(context));
         }
         return dateSet;
     }
 
-     public Set<String> getRequiredItems() {
-         Set<String> itemIds = Sets.newHashSet();
-         for (FormulaCase formulaCase : cases) {
-             formulaCase.getRequiredItems(itemIds);
-         }
-         return itemIds;
-     }
+    public Set<String> getRequiredItems() {
+        Set<String> itemIds = Sets.newHashSet();
+        for (FormulaCase formulaCase : cases) {
+            itemIds.addAll(formulaCase.getRequiredItems());
+        }
+        return itemIds;
+    }
 }

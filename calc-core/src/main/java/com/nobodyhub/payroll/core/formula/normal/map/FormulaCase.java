@@ -45,10 +45,12 @@ public class FormulaCase implements Comparable<FormulaCase> {
         return result;
     }
 
-    public void getRequiredItems(Set<String> itemIds) {
+    public Set<String> getRequiredItems() {
+        Set<String> itemIds = Sets.newHashSet();
         for (FormulaCondition condition : conditions) {
-            itemIds.add(condition.getItemId());
+            itemIds.addAll(condition.getRequireIds());
         }
+        return itemIds;
     }
 
     @SuppressWarnings("unchecked")

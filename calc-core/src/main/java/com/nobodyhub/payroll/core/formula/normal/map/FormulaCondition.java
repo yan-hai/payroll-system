@@ -1,7 +1,9 @@
 package com.nobodyhub.payroll.core.formula.normal.map;
 
+import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Comparator;
+import com.nobodyhub.payroll.core.formula.normal.map.operand.ConditionOperand;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
 
@@ -17,15 +19,31 @@ public abstract class FormulaCondition<T extends Comparable<T>> {
     protected Class<T> clazz;
     protected String itemId;
     protected Comparator comparator;
-    protected T lower;
-    protected T higher;
+    protected ConditionOperand<T> lower;
+    protected ConditionOperand<T> higher;
 
     public boolean matches(ExecutionContext context, LocalDate date) throws PayrollCoreException {
-        return comparator.apply(context.getItemValue(itemId, date, clazz), lower, higher);
+        return comparator.apply(context.getItemValue(itemId, date, clazz),
+                lower.getValue(context, date),
+                higher.getValue(context, date));
     }
 
     @SuppressWarnings("unchecked")
     public Set<LocalDate> getDateSegment(ExecutionContext context) throws PayrollCoreException {
-        return context.get(itemId).getDateSegment();
+        Set<LocalDate> segments = context.get(itemId).getDateSegment();
+        segments.addAll(lower.getDateSegment(context));
+        segments.addAll(higher.getDateSegment(context));
+        return segments;
+    }
+
+    public Set<String> getRequireIds() {
+        Set<String> itemIds = Sets.newHashSet(itemId);
+        if (lower.getItemId() != null) {
+            itemIds.add(lower.getItemId());
+        }
+        if (higher.getItemId() != null) {
+            itemIds.add(higher.getItemId());
+        }
+        return itemIds;
     }
 }
