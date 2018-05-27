@@ -1,15 +1,9 @@
 package com.nobodyhub.payroll.core.formula.normal.arithmetic.operand;
 
-import com.google.common.collect.Sets;
-import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.formula.common.operand.ValueOperand;
 import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.abstr.ArithmeticOperand;
-import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Set;
 
 /**
  * The operand that contains a decimal value
@@ -17,12 +11,11 @@ import java.util.Set;
  * @author yan_h
  * @since 2018-05-10
  */
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class ValueArithmeticOperand implements ArithmeticOperand {
-    /**
-     * the values for the whole period
-     */
-    private final BigDecimal value;
+public class ValueArithmeticOperand extends ValueOperand<BigDecimal> implements ArithmeticOperand {
+
+    public ValueArithmeticOperand(BigDecimal value) {
+        super(value);
+    }
 
     /**
      * contruct operand from a {@link BigDecimal}
@@ -42,20 +35,5 @@ public class ValueArithmeticOperand implements ArithmeticOperand {
      */
     public static ValueArithmeticOperand of(String value) {
         return new ValueArithmeticOperand(new BigDecimal(value));
-    }
-
-    @Override
-    public BigDecimal getValue(ExecutionContext context, LocalDate date) {
-        return value;
-    }
-
-    @Override
-    public String getItemId() {
-        return null;
-    }
-
-    @Override
-    public Set<LocalDate> getDateSegment(ExecutionContext context) throws PayrollCoreException {
-        return Sets.newHashSet(context.getPeriod().getStart());
     }
 }

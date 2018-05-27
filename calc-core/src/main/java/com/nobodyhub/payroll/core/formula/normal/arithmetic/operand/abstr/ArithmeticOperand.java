@@ -1,6 +1,6 @@
 package com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.abstr;
 
-import com.nobodyhub.payroll.core.formula.normal.common.Operand;
+import com.nobodyhub.payroll.core.formula.common.operand.Operand;
 
 import java.math.BigDecimal;
 
