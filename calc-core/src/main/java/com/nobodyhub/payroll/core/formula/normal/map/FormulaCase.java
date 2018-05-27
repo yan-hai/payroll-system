@@ -51,10 +51,11 @@ public class FormulaCase implements Comparable<FormulaCase> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
         Set<LocalDate> dateSet = Sets.newHashSet();
         for (FormulaCondition condition : conditions) {
-            dateSet.addAll(condition.getDateSplit(context));
+            dateSet.addAll(condition.getDateSegment(context));
         }
         return dateSet;
     }

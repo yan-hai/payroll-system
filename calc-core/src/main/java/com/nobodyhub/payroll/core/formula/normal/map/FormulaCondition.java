@@ -24,7 +24,8 @@ public abstract class FormulaCondition<T extends Comparable<T>> {
         return comparator.apply(context.getItemValue(itemId, date, clazz), lower, higher);
     }
 
-    public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
+    @SuppressWarnings("unchecked")
+    public Set<LocalDate> getDateSegment(ExecutionContext context) throws PayrollCoreException {
         return context.get(itemId).getDateSegment();
     }
 }
