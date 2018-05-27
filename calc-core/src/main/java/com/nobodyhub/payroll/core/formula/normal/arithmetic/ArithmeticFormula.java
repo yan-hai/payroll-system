@@ -32,7 +32,7 @@ public class ArithmeticFormula extends NormalFormula<FormulaExpression> {
         TreeMap<LocalDate, BigDecimal> results = Maps.newTreeMap();
         SortedSet<LocalDate> dateSet = getDateSegment(context);
         for (LocalDate date : dateSet) {
-            BigDecimal result = contents.get(date).evaluate(context, date);
+            BigDecimal result = getContent(date).evaluate(context, date);
             results.put(date, result);
         }
         return createPaymentItem(results);
