@@ -13,7 +13,7 @@ import java.util.Set;
  * @author yan_h
  * @since 2018-05-10
  */
-public interface Operand {
+public interface ArithmeticOperand {
     /**
      * Return the value of the operand
      *
@@ -25,7 +25,7 @@ public interface Operand {
     BigDecimal getValue(ExecutionContext context, LocalDate date) throws PayrollCoreException;
 
     /**
-     * get item id related with this Operand,
+     * get item id related with this ArithmeticOperand,
      *
      * @return null if not related item
      */

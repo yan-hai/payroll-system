@@ -2,7 +2,7 @@ package com.nobodyhub.payroll.core.formula.normal.arithmetic.operand;
 
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
-import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.abstr.Operand;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.abstr.ArithmeticOperand;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ import java.util.Set;
  * @since 2018-05-10
  */
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class ValueOperand implements Operand {
+public class ValueArithmeticOperand implements ArithmeticOperand {
     /**
      * the values for the whole period
      */
@@ -30,8 +30,8 @@ public class ValueOperand implements Operand {
      * @param value
      * @return
      */
-    public static ValueOperand of(BigDecimal value) {
-        return new ValueOperand(value);
+    public static ValueArithmeticOperand of(BigDecimal value) {
+        return new ValueArithmeticOperand(value);
     }
 
     /**
@@ -40,8 +40,8 @@ public class ValueOperand implements Operand {
      * @param value
      * @return
      */
-    public static ValueOperand of(String value) {
-        return new ValueOperand(new BigDecimal(value));
+    public static ValueArithmeticOperand of(String value) {
+        return new ValueArithmeticOperand(new BigDecimal(value));
     }
 
     @Override

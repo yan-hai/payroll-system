@@ -3,9 +3,9 @@ package com.nobodyhub.payroll.core.formula.normal.arithmetic;
 import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Operator;
-import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.ItemOperand;
-import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.ValueOperand;
-import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.abstr.Operand;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.ItemArithmeticOperand;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.ValueArithmeticOperand;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.abstr.ArithmeticOperand;
 import com.nobodyhub.payroll.core.item.hr.HrNumberItem;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
@@ -27,9 +27,9 @@ import static org.junit.Assert.assertEquals;
  * @since 24/05/2018
  */
 public class FormulaExpressionTest {
-    private Operand valueOperand;
-    private Operand itemOperand1;
-    private Operand itemOperand2;
+    private ArithmeticOperand valueOperand;
+    private ArithmeticOperand itemOperand1;
+    private ArithmeticOperand itemOperand2;
     private FormulaExpression expression1;
     private FormulaExpression expression2;
     private FormulaExpression expression3;
@@ -39,9 +39,9 @@ public class FormulaExpressionTest {
 
     @Before
     public void setup() throws PayrollCoreException {
-        valueOperand = ValueOperand.of("123.45");
-        itemOperand1 = ItemOperand.of("hrNumberItem");
-        itemOperand2 = ItemOperand.of("paymentItem");
+        valueOperand = ValueArithmeticOperand.of("123.45");
+        itemOperand1 = ItemArithmeticOperand.of("hrNumberItem");
+        itemOperand2 = ItemArithmeticOperand.of("paymentItem");
         expression3 = new FormulaExpression(null, itemOperand2, null);
         expression2 = new FormulaExpression(Operator.ADD, valueOperand, expression3);
         expression1 = new FormulaExpression(Operator.MUL, itemOperand1, expression2);

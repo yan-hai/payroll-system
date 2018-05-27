@@ -3,9 +3,9 @@ package com.nobodyhub.payroll.core.formula.normal.arithmetic;
 import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Operator;
-import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.ItemOperand;
-import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.ValueOperand;
-import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.abstr.Operand;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.ItemArithmeticOperand;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.ValueArithmeticOperand;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.abstr.ArithmeticOperand;
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.item.hr.HrNumberItem;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
@@ -36,15 +36,15 @@ public class ArithmeticFormulaTest {
     private ItemBuilderFactory itemBuilderFactory;
 
     private FormulaExpression expression1;
-    private Operand operand1;
+    private ArithmeticOperand operand1;
     private FormulaExpression expression11;
-    private Operand operand11;
+    private ArithmeticOperand operand11;
     private FormulaExpression expression12;
-    private Operand operand12;
+    private ArithmeticOperand operand12;
     private FormulaExpression expression2;
-    private Operand operand2;
+    private ArithmeticOperand operand2;
     private FormulaExpression expression21;
-    private Operand operand21;
+    private ArithmeticOperand operand21;
     private ExecutionContext executionContext;
 
     @Before
@@ -53,11 +53,11 @@ public class ArithmeticFormulaTest {
         PaymentItem result = new PaymentItem("targetItemId", false, null, null);
         Mockito.when(itemBuilderFactory.getItem("targetItemId", PaymentItem.class)).thenReturn(result);
 
-        operand1 = ItemOperand.of("item1");
-        operand11 = ItemOperand.of("item11");
-        operand12 = ValueOperand.of("3");
-        operand2 = ItemOperand.of("item2");
-        operand21 = ItemOperand.of("item21");
+        operand1 = ItemArithmeticOperand.of("item1");
+        operand11 = ItemArithmeticOperand.of("item11");
+        operand12 = ValueArithmeticOperand.of("3");
+        operand2 = ItemArithmeticOperand.of("item2");
+        operand21 = ItemArithmeticOperand.of("item21");
 
         expression12 = new FormulaExpression(null, operand12, null);
         expression11 = new FormulaExpression(Operator.DIV, operand11, expression12);

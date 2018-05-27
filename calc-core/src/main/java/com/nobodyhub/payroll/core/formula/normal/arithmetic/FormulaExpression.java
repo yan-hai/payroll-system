@@ -3,7 +3,7 @@ package com.nobodyhub.payroll.core.formula.normal.arithmetic;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Operator;
-import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.abstr.Operand;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.abstr.ArithmeticOperand;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class FormulaExpression {
     /**
      * the first operand
      */
-    private final Operand operand;
+    private final ArithmeticOperand operand;
     /**
      * another operand
      */
