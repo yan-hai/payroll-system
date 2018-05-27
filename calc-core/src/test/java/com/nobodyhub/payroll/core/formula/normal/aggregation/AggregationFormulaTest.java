@@ -73,7 +73,7 @@ public class AggregationFormulaTest extends FormulaTest<AggregationFormula> {
         this.executionContext.add(this.item3);
 
         this.resultItem = new PaymentItem("aggr_target_id", false, null, null);
-        Mockito.when(this.itemBuilderFactory.getItem("aggr_target_id")).thenReturn(resultItem);
+        Mockito.when(this.itemBuilderFactory.getItem("aggr_target_id", PaymentItem.class)).thenReturn(resultItem);
     }
 
 
