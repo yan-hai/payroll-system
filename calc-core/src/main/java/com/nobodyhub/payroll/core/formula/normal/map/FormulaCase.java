@@ -45,6 +45,7 @@ public class FormulaCase implements Comparable<FormulaCase> {
         return result;
     }
 
+    @SuppressWarnings("unchecked")
     public Set<String> getRequiredItems() {
         Set<String> itemIds = Sets.newHashSet();
         for (FormulaCondition condition : conditions) {

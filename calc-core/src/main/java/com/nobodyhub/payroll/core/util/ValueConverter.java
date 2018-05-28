@@ -42,6 +42,9 @@ public final class ValueConverter {
     }
 
     public static String convertToString(Object object) throws PayrollCoreException {
+        if (object == null) {
+            return null;
+        }
         if (object instanceof String) {
             return (String) object;
         } else if (object instanceof BigDecimal) {

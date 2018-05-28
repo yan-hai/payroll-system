@@ -78,7 +78,7 @@ public enum Comparator {
         }
     }
 
-    protected <T extends Comparable<? super T>> int compare(T value1, T value2) {
+    public static <T extends Comparable<? super T>> int compare(T value1, T value2) {
         if (value1 == null) {
             if (value2 == null) {
                 return 0;

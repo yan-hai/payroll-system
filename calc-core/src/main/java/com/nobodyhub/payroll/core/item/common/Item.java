@@ -3,6 +3,7 @@ package com.nobodyhub.payroll.core.item.common;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.formula.common.Comparator;
 import com.nobodyhub.payroll.core.util.ValueConverter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -65,7 +66,8 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      * @throws PayrollCoreException if can not be handled by {@link this#convertToString}
      */
     public void add(LocalDate date, VT value) throws PayrollCoreException {
-        if (valueCls.isAssignableFrom(value.getClass())
+        if (value == null
+                || valueCls.isAssignableFrom(value.getClass())
                 || value.getClass() == String.class) {
             this.values.put(date, convertToString(value));
             mergeValues();
@@ -105,7 +107,7 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
         while (iter.hasNext()) {
             LocalDate key = iter.next();
             String value = values.get(key);
-            if (value.compareTo(preValue) == 0) {
+            if (Comparator.compare(value, preValue) == 0) {
                 iter.remove();
             } else {
                 preValue = value;

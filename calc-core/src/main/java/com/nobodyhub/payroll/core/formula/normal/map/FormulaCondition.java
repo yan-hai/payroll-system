@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Comparator;
 import com.nobodyhub.payroll.core.formula.normal.map.operand.ConditionOperand;
+import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import lombok.Getter;
 
@@ -15,27 +16,38 @@ import java.util.Set;
  * @since 2018-05-04.
  */
 @Getter
-public abstract class FormulaCondition<T extends Comparable<? super T>> {
+public class FormulaCondition<T extends Comparable<? super T>> {
     /**
      * The Class of item value
      */
-    protected Class<T> clazz;
+    protected final Class<T> clazz;
     /**
      * Item id
      */
-    protected String itemId;
+    protected final String itemId;
     /**
      * Comparator for item value and bounds(consist of {@link this#lower} and {@link this#higher})
      */
-    protected Comparator comparator;
+    protected final Comparator comparator;
     /**
      * the lower bound
      */
-    protected ConditionOperand<T> lower;
+    protected final ConditionOperand<T> lower;
     /**
      * the higher bound
      */
-    protected ConditionOperand<T> higher;
+    protected final ConditionOperand<T> higher;
+
+    public FormulaCondition(Item<T, ?> item,
+                            Comparator comparator,
+                            ConditionOperand<T> lower,
+                            ConditionOperand<T> higher) {
+        this.clazz = item.getValueCls();
+        this.itemId = item.getId();
+        this.comparator = comparator;
+        this.lower = lower;
+        this.higher = higher;
+    }
 
     /**
      * Check whether the item value on given date matcher the given bound or not
