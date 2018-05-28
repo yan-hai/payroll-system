@@ -12,7 +12,7 @@ import java.util.Set;
  * @author yan_h
  * @since 27/05/2018
  */
-public interface Operand<T extends Comparable<T>> {
+public interface Operand<T extends Comparable<? super T>> {
     /**
      * Return the value of the operand
      *

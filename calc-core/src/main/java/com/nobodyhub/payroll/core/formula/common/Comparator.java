@@ -49,7 +49,7 @@ public enum Comparator {
      * @return
      * @throws PayrollCoreException
      */
-    public <T extends Comparable<T>> boolean apply(T itemVal, T lower, T higher) throws PayrollCoreException {
+    public <T extends Comparable<? super T>> boolean apply(T itemVal, T lower, T higher) throws PayrollCoreException {
         switch (this) {
             case NA: {
                 return true;
@@ -78,7 +78,7 @@ public enum Comparator {
         }
     }
 
-    protected <T extends Comparable<T>> int compare(T value1, T value2) {
+    protected <T extends Comparable<? super T>> int compare(T value1, T value2) {
         if (value1 == null) {
             if (value2 == null) {
                 return 0;

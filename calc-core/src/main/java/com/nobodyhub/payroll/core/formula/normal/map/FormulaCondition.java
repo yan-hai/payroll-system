@@ -15,19 +15,49 @@ import java.util.Set;
  * @since 2018-05-04.
  */
 @Getter
-public abstract class FormulaCondition<T extends Comparable<T>> {
+public abstract class FormulaCondition<T extends Comparable<? super T>> {
+    /**
+     * The Class of item value
+     */
     protected Class<T> clazz;
+    /**
+     * Item id
+     */
     protected String itemId;
+    /**
+     * Comparator for item value and bounds(consist of {@link this#lower} and {@link this#higher})
+     */
     protected Comparator comparator;
+    /**
+     * the lower bound
+     */
     protected ConditionOperand<T> lower;
+    /**
+     * the higher bound
+     */
     protected ConditionOperand<T> higher;
 
+    /**
+     * Check whether the item value on given date matcher the given bound or not
+     *
+     * @param context
+     * @param date
+     * @return
+     * @throws PayrollCoreException
+     */
     public boolean matches(ExecutionContext context, LocalDate date) throws PayrollCoreException {
         return comparator.apply(context.getItemValue(itemId, date, clazz),
                 lower.getValue(context, date),
                 higher.getValue(context, date));
     }
 
+    /**
+     * Get the date segment in the period
+     *
+     * @param context
+     * @return
+     * @throws PayrollCoreException
+     */
     @SuppressWarnings("unchecked")
     public Set<LocalDate> getDateSegment(ExecutionContext context) throws PayrollCoreException {
         Set<LocalDate> segments = context.get(itemId).getDateSegment();
@@ -36,6 +66,11 @@ public abstract class FormulaCondition<T extends Comparable<T>> {
         return segments;
     }
 
+    /**
+     * Get the item ids, if any, involved in this condition
+     *
+     * @return
+     */
     public Set<String> getRequireIds() {
         Set<String> itemIds = Sets.newHashSet(itemId);
         if (lower.getItemId() != null) {

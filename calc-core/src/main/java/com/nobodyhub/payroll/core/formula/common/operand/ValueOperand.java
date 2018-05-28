@@ -14,7 +14,7 @@ import java.util.Set;
  * @since 27/05/2018
  */
 @RequiredArgsConstructor
-public class ValueOperand<T extends Comparable<T>> implements Operand<T> {
+public class ValueOperand<T extends Comparable<? super T>> implements Operand<T> {
     /**
      * the values for the whole period
      */
