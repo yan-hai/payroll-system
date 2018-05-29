@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Objects;
 
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONVERTER_NOT_FOUND;
 
@@ -19,7 +18,9 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.CONV
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ValueConverter {
     public static <T> T convertFromString(String value, Class<T> cls) throws PayrollCoreException {
-        Objects.requireNonNull(value);
+        if (value == null) {
+            return null;
+        }
         Object rst;
         if (cls == String.class) {
             rst = value;

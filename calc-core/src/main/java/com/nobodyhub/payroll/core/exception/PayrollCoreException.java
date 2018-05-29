@@ -2,6 +2,7 @@ package com.nobodyhub.payroll.core.exception;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -17,6 +18,7 @@ public final class PayrollCoreException extends Exception {
     public static final String KEY_CLASS = "Class";
     public static final String KEY_METHOD = "Method";
 
+    @Getter
     private final PayrollCoreExceptionCode code;
     private final Map<String, String> values;
 
