@@ -43,7 +43,8 @@ public class RetroTaskExecution extends TaskExecution {
         callback.onStart();
         try {
             //re-calc past data
-            List<RetroExecutionContext> retroContexts = historyData.toRetroContexts(normalExecutionContext.getItemBuilderFactory(),
+            List<RetroExecutionContext> retroContexts = historyData.toRetroContexts(
+                    normalExecutionContext.getItemBuilderFactory(),
                     normalExecutionContext.getProrationFactory());
             for (RetroExecutionContext retroContext : retroContexts) {
                 for (NormalFormula formula : normalFormulaFactory.getFormulas()) {
@@ -52,7 +53,9 @@ public class RetroTaskExecution extends TaskExecution {
             }
             //handle diff values
             for (RetroFormula formula : retroFormulaFactory.getFormulas()) {
-                normalExecutionContext.add(formula.evaluate(retroContexts, normalExecutionContext.getPeriod()));
+                normalExecutionContext.add(
+                        formula.evaluate(retroContexts, normalExecutionContext.getPeriod())
+                );
             }
         } catch (PayrollCoreException e) {
             callback.onError(e, normalExecutionContext);
