@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.FormulaTest;
+import com.nobodyhub.payroll.core.item.hr.HrDateItem;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 import org.junit.Before;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.RETRO_FORMULA_INVALID;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -107,5 +109,24 @@ public class AggregationFormulaTest extends FormulaTest<AggregationFormula> {
         assertEquals(LocalDate.of(2018, 4, 11), dateList.get(2));
         assertEquals(LocalDate.of(2018, 4, 16), dateList.get(3));
         assertEquals(LocalDate.of(2018, 4, 21), dateList.get(4));
+    }
+
+    @Test
+    public void testValidate() throws PayrollCoreException {
+        Mockito.when(this.itemBuilderFactory.getItem("item1")).thenReturn(item1);
+        Mockito.when(this.itemBuilderFactory.getItem("item2")).thenReturn(item2);
+        Mockito.when(this.itemBuilderFactory.getItem("item3")).thenReturn(item3);
+        this.formula.validate();
+        this.formula.addContent(LocalDate.of(2018, 4, 20),
+                Sets.newHashSet("item_bad"));
+        Mockito.when(this.itemBuilderFactory.getItem("item_bad"))
+                .thenReturn(new HrDateItem("item_bad"));
+        try {
+            this.formula.validate();
+        } catch (PayrollCoreException e) {
+            assertEquals("Items with following ids are not payment items: [item_bad]",
+                    e.getValue(PayrollCoreException.KEY_ERROR_MESSAGE));
+            assertEquals(RETRO_FORMULA_INVALID, e.getCode());
+        }
     }
 }

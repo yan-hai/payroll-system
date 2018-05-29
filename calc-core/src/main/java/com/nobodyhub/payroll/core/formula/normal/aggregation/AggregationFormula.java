@@ -89,7 +89,7 @@ public class AggregationFormula extends NormalFormula<Set<String>> {
         }
         throw new PayrollCoreException(RETRO_FORMULA_INVALID)
                 .addMessage(
-                        String.format("Items with Ids are not payment items: [%s]",
+                        String.format("Items with following ids are not payment items: [%s]",
                                 Joiner.on(",").join(invalidIds))
                 );
     }

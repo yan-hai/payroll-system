@@ -5,7 +5,6 @@ import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.common.Operator;
 import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.abstr.ArithmeticOperand;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
@@ -21,7 +20,6 @@ import java.util.Set;
  *
  * @author Ryan
  */
-@Getter
 @RequiredArgsConstructor
 public class FormulaExpression {
     /**

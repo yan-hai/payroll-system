@@ -34,6 +34,6 @@ public class ValueArithmeticOperand extends ValueOperand<BigDecimal> implements 
      * @return
      */
     public static ValueArithmeticOperand of(String value) {
-        return new ValueArithmeticOperand(new BigDecimal(value));
+        return ValueArithmeticOperand.of(new BigDecimal(value));
     }
 }
