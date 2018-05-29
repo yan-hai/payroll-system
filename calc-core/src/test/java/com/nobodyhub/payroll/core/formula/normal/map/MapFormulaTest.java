@@ -89,6 +89,8 @@ public class MapFormulaTest {
 
         Mockito.when(itemBuilderFactory.getItem("targetItemId", PaymentItem.class))
                 .thenReturn(paymentItem);
+        Mockito.when(itemBuilderFactory.getItem("targetItemId"))
+                .thenReturn(paymentItem);
 
         mapFormula = new MapFormula("mapFormulaId", "targetItemId", itemBuilderFactory);
         mapFormula.addContent(LocalDate.of(2018, 5, 1), content1);

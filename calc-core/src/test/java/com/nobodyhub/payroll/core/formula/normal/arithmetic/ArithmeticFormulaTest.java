@@ -47,11 +47,14 @@ public class ArithmeticFormulaTest {
     private ArithmeticOperand operand21;
     private ExecutionContext executionContext;
 
+    private PaymentItem result;
+
     @Before
     public void setup() throws PayrollCoreException {
         MockitoAnnotations.initMocks(this);
-        PaymentItem result = new PaymentItem("targetItemId", false, null, null);
+        result = new PaymentItem("targetItemId", false, null, null);
         Mockito.when(itemBuilderFactory.getItem("targetItemId", PaymentItem.class)).thenReturn(result);
+        Mockito.when(itemBuilderFactory.getItem("targetItemId")).thenReturn(result);
 
         operand1 = ItemArithmeticOperand.of("item1");
         operand11 = ItemArithmeticOperand.of("item11");
@@ -77,19 +80,23 @@ public class ArithmeticFormulaTest {
         item1.add(LocalDate.of(2018, 3, 20), new BigDecimal("300"));
         item1.add(LocalDate.of(2018, 4, 10), new BigDecimal("330"));
         item1.add(LocalDate.of(2018, 4, 20), new BigDecimal("360"));
+        Mockito.when(itemBuilderFactory.getItem("item1")).thenReturn(item1);
         executionContext.add(item1);
         HrNumberItem item11 = new HrNumberItem("item11");
         item11.add(LocalDate.of(2018, 4, 1), new BigDecimal("200"));
         item11.add(LocalDate.of(2018, 4, 15), new BigDecimal("220"));
+        Mockito.when(itemBuilderFactory.getItem("item11")).thenReturn(item11);
         executionContext.add(item11);
         HrNumberItem item2 = new HrNumberItem("item2");
         item2.add(LocalDate.of(2018, 4, 1), new BigDecimal("100"));
         item2.add(LocalDate.of(2018, 4, 30), new BigDecimal("110"));
+        Mockito.when(itemBuilderFactory.getItem("item2")).thenReturn(item2);
         executionContext.add(item2);
         HrNumberItem item21 = new HrNumberItem("item21");
         item21.add(LocalDate.of(2018, 4, 1), new BigDecimal("50"));
         item21.add(LocalDate.of(2018, 4, 5), new BigDecimal("55"));
         item21.add(LocalDate.of(2018, 5, 5), new BigDecimal("60"));
+        Mockito.when(itemBuilderFactory.getItem("item21")).thenReturn(item21);
         executionContext.add(item21);
     }
 
@@ -119,7 +126,7 @@ public class ArithmeticFormulaTest {
     @Test
     public void testEvaluate() throws PayrollCoreException {
         PaymentItem item = this.formula.evaluate(executionContext);
-        assertEquals("targetItemId", item.getId());
+        assertEquals(true, item == result);
         assertEquals(5, item.getValues().size());
         assertEquals(new BigDecimal("366.6666666666666666666666666666667"), item.getValue(LocalDate.of(2018, 4, 1)));
         assertEquals(new BigDecimal("396.6666666666666666666666666666667"), item.getValue(LocalDate.of(2018, 4, 10)));

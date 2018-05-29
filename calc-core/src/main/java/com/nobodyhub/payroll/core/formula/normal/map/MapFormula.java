@@ -39,6 +39,7 @@ public class MapFormula extends NormalFormula<FormulaCaseSet> {
      */
     @Override
     public PaymentItem evaluate(ExecutionContext context) throws PayrollCoreException {
+        validate();
         Map<LocalDate, BigDecimal> results = Maps.newHashMap();
         Set<LocalDate> dateSet = getDateSegment(context);
         for (LocalDate date : dateSet) {

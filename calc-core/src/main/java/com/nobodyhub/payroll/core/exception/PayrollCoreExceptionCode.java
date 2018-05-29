@@ -56,6 +56,10 @@ public enum PayrollCoreExceptionCode {
      */
     RETRO_FORMULA_FAIL(RetroFormula.class, ""),
     /**
+     * items involved in Retro Formula are invalid
+     */
+    RETRO_FORMULA_INVALID(RetroFormula.class, ""),
+    /**
      * Format of History values is wrong
      */
     HISTORY_DATA_MALFORMED(HistoryData.class, ""),

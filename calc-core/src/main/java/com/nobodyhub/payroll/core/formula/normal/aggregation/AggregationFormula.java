@@ -1,11 +1,14 @@
 package com.nobodyhub.payroll.core.formula.normal.aggregation;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
+import com.nobodyhub.payroll.core.item.common.Item;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import com.nobodyhub.payroll.core.util.PeriodUtils;
@@ -15,6 +18,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.RETRO_FORMULA_INVALID;
 
 /**
  * Aggregate a list of payitems
@@ -64,5 +69,28 @@ public class AggregationFormula extends NormalFormula<Set<String>> {
             idSet.addAll(ids);
         }
         return idSet;
+    }
+
+    @Override
+    protected void validate() throws PayrollCoreException {
+        super.validate();
+        List<String> invalidIds = Lists.newArrayList();
+        Set<String> itemIds = getRequiredItems();
+        for (String itemId : itemIds) {
+            Item item = itemBuilderFactory.getItem(itemId);
+            if (item instanceof PaymentItem) {
+                // pass validate
+            } else {
+                invalidIds.add(itemId);
+            }
+        }
+        if (invalidIds.isEmpty()) {
+            return;
+        }
+        throw new PayrollCoreException(RETRO_FORMULA_INVALID)
+                .addMessage(
+                        String.format("Items with Ids are not payment items: [%s]",
+                                Joiner.on(",").join(invalidIds))
+                );
     }
 }
