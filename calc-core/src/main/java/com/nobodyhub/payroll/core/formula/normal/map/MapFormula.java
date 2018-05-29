@@ -12,8 +12,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeMap;
 
 /**
  * A Map form of formula, it maps the conditions to a given value.
@@ -32,22 +30,29 @@ public class MapFormula extends NormalFormula<FormulaCaseSet> {
         super(id, targetItemId, itemBuilderFactory);
     }
 
+    /**
+     * Evaluate the result into a payment item of {@link this#targetItemId}
+     *
+     * @param context context contains all items
+     * @return a payment item of {@link this#targetItemId} containing values
+     * @throws PayrollCoreException
+     */
     @Override
     public PaymentItem evaluate(ExecutionContext context) throws PayrollCoreException {
-        TreeMap<LocalDate, BigDecimal> results = Maps.newTreeMap();
-        for (Map.Entry<LocalDate, FormulaCaseSet> entry : contents.entrySet()) {
-            FormulaCaseSet caseSet = entry.getValue();
-            LocalDate date = entry.getKey();
-            results.put(date, caseSet.evaluate(context, date));
-        }
-        SortedSet<LocalDate> dateSet = getDateSplit(context);
+        Map<LocalDate, BigDecimal> results = Maps.newHashMap();
+        Set<LocalDate> dateSet = getDateSegment(context);
         for (LocalDate date : dateSet) {
-            BigDecimal result = contents.get(date).evaluate(context, date);
+            BigDecimal result = getContent(date).evaluate(context, date);
             results.put(date, result);
         }
         return createPaymentItem(results);
     }
 
+    /**
+     * Get involved item ids
+     *
+     * @return
+     */
     @Override
     public Set<String> getRequiredItems() {
         Set<String> itemIds = Sets.newHashSet();
@@ -57,8 +62,15 @@ public class MapFormula extends NormalFormula<FormulaCaseSet> {
         return itemIds;
     }
 
-    public SortedSet<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
-        SortedSet<LocalDate> dateSet = Sets.newTreeSet();
+    /**
+     * Get date segments
+     *
+     * @param context
+     * @return
+     * @throws PayrollCoreException
+     */
+    public Set<LocalDate> getDateSegment(ExecutionContext context) throws PayrollCoreException {
+        Set<LocalDate> dateSet = Sets.newHashSet();
         for (Map.Entry<LocalDate, FormulaCaseSet> entry : contents.entrySet()) {
             dateSet.add(entry.getKey());
             dateSet.addAll(entry.getValue().getDateSegment(context));

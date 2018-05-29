@@ -85,7 +85,8 @@ public abstract class Item<VT, IT> implements ItemBuilder<IT> {
      */
     public void addAll(Map<LocalDate, VT> values) throws PayrollCoreException {
         for (Map.Entry<LocalDate, VT> entry : values.entrySet()) {
-            if (valueCls.isAssignableFrom(entry.getValue().getClass())
+            if (entry.getValue() == null
+                    || valueCls.isAssignableFrom(entry.getValue().getClass())
                     || entry.getValue().getClass() == String.class) {
                 this.values.put(entry.getKey(), convertToString(entry.getValue()));
             } else {
