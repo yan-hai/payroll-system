@@ -1,5 +1,6 @@
 package com.nobodyhub.payroll.core.formula.normal.map;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
@@ -30,21 +31,38 @@ public class FormulaCase implements Comparable<FormulaCase> {
     /**
      * the restrict conditions
      */
-    private final List<FormulaCondition> conditions;
+    private final List<FormulaCondition> conditions = Lists.newArrayList();
     /**
      * the corresponding value when this case matches
      */
     @Getter
     private final BigDecimal value;
 
+    /**
+     * Check whether this case matches or not
+     * <p>
+     * Short-circuit evaluation applied.
+     *
+     * @param context
+     * @param date
+     * @return
+     * @throws PayrollCoreException
+     */
     public boolean matches(ExecutionContext context, LocalDate date) throws PayrollCoreException {
-        boolean result = true;
         for (FormulaCondition condition : conditions) {
-            result = result && condition.matches(context, date);
+            boolean result = condition.matches(context, date);
+            if (!result) {
+                return false;
+            }
         }
-        return result;
+        return true;
     }
 
+    /**
+     * Get involved item ids
+     *
+     * @return
+     */
     @SuppressWarnings("unchecked")
     public Set<String> getRequiredItems() {
         Set<String> itemIds = Sets.newHashSet();
@@ -54,13 +72,29 @@ public class FormulaCase implements Comparable<FormulaCase> {
         return itemIds;
     }
 
+    /**
+     * Get date segments
+     *
+     * @param context
+     * @return
+     * @throws PayrollCoreException
+     */
     @SuppressWarnings("unchecked")
-    public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
+    public Set<LocalDate> getDateSegment(ExecutionContext context) throws PayrollCoreException {
         Set<LocalDate> dateSet = Sets.newHashSet();
         for (FormulaCondition condition : conditions) {
             dateSet.addAll(condition.getDateSegment(context));
         }
         return dateSet;
+    }
+
+    /**
+     * add condition
+     *
+     * @param condition
+     */
+    public void addCondition(FormulaCondition condition) {
+        this.conditions.add(condition);
     }
 
     /**

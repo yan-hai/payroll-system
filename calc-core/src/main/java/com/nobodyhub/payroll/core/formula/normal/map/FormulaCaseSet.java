@@ -39,7 +39,7 @@ public class FormulaCaseSet {
     public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
         Set<LocalDate> dateSet = Sets.newHashSet();
         for (FormulaCase formulaCase : cases) {
-            dateSet.addAll(formulaCase.getDateSplit(context));
+            dateSet.addAll(formulaCase.getDateSegment(context));
         }
         return dateSet;
     }
