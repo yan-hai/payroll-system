@@ -13,6 +13,10 @@ import java.util.Map;
  * @since 2018-05-04.
  */
 public final class PayrollCoreException extends Exception {
+    public static final String KEY_ERROR_MESSAGE = "Error Message";
+    public static final String KEY_CLASS = "Class";
+    public static final String KEY_METHOD = "Method";
+
     private final PayrollCoreExceptionCode code;
     private final Map<String, String> values;
 
@@ -40,15 +44,19 @@ public final class PayrollCoreException extends Exception {
     }
 
     public PayrollCoreException addMessage(String message) {
-        return addValue("Error Message", message);
+        return addValue(KEY_ERROR_MESSAGE, message);
+    }
+
+    public String getValue(String key) {
+        return values.get(key);
     }
 
     public PayrollCoreException addClass(Class<?> clazz) {
-        return addValue("Class", clazz.getSimpleName());
+        return addValue(KEY_CLASS, clazz.getSimpleName());
     }
 
     public PayrollCoreException addMethod(String methodName) {
-        return addValue("Method", methodName);
+        return addValue(KEY_METHOD, methodName);
     }
 
     @Override
