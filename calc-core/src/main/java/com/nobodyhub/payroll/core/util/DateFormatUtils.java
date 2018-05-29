@@ -1,5 +1,8 @@
 package com.nobodyhub.payroll.core.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -7,8 +10,10 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Date format utilities
+ *
  * @author Ryan
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DateFormatUtils {
     /**
      * Date Format
@@ -25,6 +30,7 @@ public final class DateFormatUtils {
 
     /**
      * Parse date from String
+     *
      * @param date
      * @return
      */
@@ -34,6 +40,7 @@ public final class DateFormatUtils {
 
     /**
      * Parse time from String
+     *
      * @param date
      * @return
      */
@@ -43,6 +50,7 @@ public final class DateFormatUtils {
 
     /**
      * Parse datetime from String
+     *
      * @param date
      * @return
      */
@@ -52,6 +60,7 @@ public final class DateFormatUtils {
 
     /**
      * convert date to String
+     *
      * @param date
      * @return
      */
@@ -61,19 +70,21 @@ public final class DateFormatUtils {
 
     /**
      * convert time to String
+     *
      * @param date
      * @return
      */
-    public static String convertDate(LocalTime date) {
+    public static String convertTime(LocalTime date) {
         return date.format(TIME_FORMAT);
     }
 
     /**
      * convert datetime to String
+     *
      * @param date
      * @return
      */
-    public static String convertDate(LocalDateTime date) {
+    public static String convertDateTime(LocalDateTime date) {
         return date.format(DATETIME_FORMAT);
     }
 }

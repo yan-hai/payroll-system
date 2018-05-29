@@ -54,9 +54,9 @@ public final class ValueConverter {
         } else if (object instanceof LocalDate) {
             return DateFormatUtils.convertDate((LocalDate) object);
         } else if (object instanceof LocalTime) {
-            return DateFormatUtils.convertDate((LocalTime) object);
+            return DateFormatUtils.convertTime((LocalTime) object);
         } else if (object instanceof LocalDateTime) {
-            return DateFormatUtils.convertDate((LocalDateTime) object);
+            return DateFormatUtils.convertDateTime((LocalDateTime) object);
         } else {
             throw new PayrollCoreException(CONVERTER_NOT_FOUND)
                     .addValue("object", object);
