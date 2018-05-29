@@ -25,18 +25,33 @@ public class FormulaCaseSet {
      */
     protected final BigDecimal defaultValue;
 
+    /**
+     * Evaluate cases included in this CaseSet
+     * <p>
+     * Short-circuit evaluation applied.
+     *
+     * @param context
+     * @param date
+     * @return
+     * @throws PayrollCoreException
+     */
     public BigDecimal evaluate(ExecutionContext context, LocalDate date) throws PayrollCoreException {
-        BigDecimal result = defaultValue;
         for (FormulaCase formulaCase : cases) {
             if (formulaCase.matches(context, date)) {
-                result = formulaCase.getValue();
-                break;
+                return formulaCase.getValue();
             }
         }
-        return result;
+        return defaultValue;
     }
 
-    public Set<LocalDate> getDateSplit(ExecutionContext context) throws PayrollCoreException {
+    /**
+     * Get date segments
+     *
+     * @param context
+     * @return
+     * @throws PayrollCoreException
+     */
+    public Set<LocalDate> getDateSegment(ExecutionContext context) throws PayrollCoreException {
         Set<LocalDate> dateSet = Sets.newHashSet();
         for (FormulaCase formulaCase : cases) {
             dateSet.addAll(formulaCase.getDateSegment(context));
@@ -44,11 +59,25 @@ public class FormulaCaseSet {
         return dateSet;
     }
 
+    /**
+     * Get involved item ids
+     *
+     * @return
+     */
     public Set<String> getRequiredItems() {
         Set<String> itemIds = Sets.newHashSet();
         for (FormulaCase formulaCase : cases) {
             itemIds.addAll(formulaCase.getRequiredItems());
         }
         return itemIds;
+    }
+
+    /**
+     * Add case to CaseSet
+     *
+     * @param formulaCase
+     */
+    public void addCase(FormulaCase formulaCase) {
+        this.cases.add(formulaCase);
     }
 }

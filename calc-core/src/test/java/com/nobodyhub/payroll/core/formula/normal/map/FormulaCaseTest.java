@@ -98,5 +98,10 @@ public class FormulaCaseTest {
                 formulaCase.matches(executionContext, LocalDate.of(2018, 5, 20)));
     }
 
-
+    @Test
+    public void testCompareTo() {
+        assertEquals(true, this.formulaCase.compareTo(new FormulaCase(-1, new BigDecimal("100"))) > 0);
+        assertEquals(true, this.formulaCase.compareTo(new FormulaCase(0, new BigDecimal("100"))) == 0);
+        assertEquals(true, this.formulaCase.compareTo(new FormulaCase(1, new BigDecimal("100"))) < 0);
+    }
 }

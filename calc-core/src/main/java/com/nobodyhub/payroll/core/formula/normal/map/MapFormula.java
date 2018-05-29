@@ -61,7 +61,7 @@ public class MapFormula extends NormalFormula<FormulaCaseSet> {
         SortedSet<LocalDate> dateSet = Sets.newTreeSet();
         for (Map.Entry<LocalDate, FormulaCaseSet> entry : contents.entrySet()) {
             dateSet.add(entry.getKey());
-            dateSet.addAll(entry.getValue().getDateSplit(context));
+            dateSet.addAll(entry.getValue().getDateSegment(context));
         }
         return dateSet;
     }

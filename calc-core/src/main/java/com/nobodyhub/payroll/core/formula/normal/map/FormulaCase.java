@@ -26,6 +26,8 @@ import java.util.Set;
 public class FormulaCase implements Comparable<FormulaCase> {
     /**
      * the index of the case
+     * <p>
+     * the smaller, the higer priority
      */
     private final int order;
     /**
