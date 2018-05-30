@@ -19,3 +19,8 @@ Build with command:
 ```bash
 mvn clean jacoco:prepare-agent install jacoco:report sonar:sonar
 ```
+
+## Architechture
+
+### Calc Core
+![Architecture](calc-core/doc/pics/architecture.png)

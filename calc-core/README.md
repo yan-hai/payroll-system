@@ -23,4 +23,4 @@
 
 > https://drive.google.com/file/d/1tM96jXBHbzjGYEemqEuiHBpjgKdTb2tw/view?usp=sharing
 
-![Architecture](https://drive.google.com/file/d/18cF2Ky1CYl77F7XNaDHLlJWeFJLoDU0R/view?usp=sharing)
+![Architecture](doc/pics/architecture.png)
