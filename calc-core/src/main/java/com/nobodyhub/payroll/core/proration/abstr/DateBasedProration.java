@@ -1,9 +1,10 @@
-package com.nobodyhub.payroll.core.proration.impl;
+package com.nobodyhub.payroll.core.proration.abstr;
 
 import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.calendar.CalendarItem;
 import com.nobodyhub.payroll.core.item.hr.HrDateItem;
+import com.nobodyhub.payroll.core.proration.impl.CalendarProration;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 
 import java.math.BigDecimal;
@@ -13,14 +14,14 @@ import java.util.SortedMap;
 /**
  * @author Ryan
  */
-public abstract class DateProration extends CalendarProration {
+public abstract class DateBasedProration extends CalendarProration {
     /**
      * id of related {@link HrDateItem}
      * which stands for start or end date of effective period, inclusive
      */
     protected final String hrDateItemId;
 
-    public DateProration(String prorationId, String calendarItemId, String hrDateItemId) {
+    public DateBasedProration(String prorationId, String calendarItemId, String hrDateItemId) {
         super(prorationId, calendarItemId);
         this.hrDateItemId = hrDateItemId;
     }

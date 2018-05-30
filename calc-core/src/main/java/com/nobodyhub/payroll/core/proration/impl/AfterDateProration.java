@@ -5,6 +5,7 @@ import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.calendar.CalendarItem;
 import com.nobodyhub.payroll.core.item.hr.HrDateItem;
+import com.nobodyhub.payroll.core.proration.abstr.DateBasedProration;
 import com.nobodyhub.payroll.core.util.PayrollCoreConst;
 
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ import java.util.SortedMap;
  * @author yan_h
  * @since 2018-05-10.
  */
-public class AfterDateProration extends DateProration {
+public class AfterDateProration extends DateBasedProration {
 
     public AfterDateProration(String prorationId, String calendarItemId, String hrDateItemId) {
         super(prorationId, calendarItemId, hrDateItemId);
