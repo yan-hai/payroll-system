@@ -3,7 +3,7 @@ package com.nobodyhub.payroll.core.item.payment;
 import com.google.common.collect.Maps;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.payment.rounding.RoundingRule;
-import com.nobodyhub.payroll.core.proration.impl.CalendarProration;
+import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class PaymentItemTest {
     @Mock
-    private CalendarProration proration;
+    private ProrationFactory prorationFactory;
     @Mock
     private ExecutionContext executionContext;
 
@@ -31,12 +31,19 @@ public class PaymentItemTest {
         MockitoAnnotations.initMocks(this);
         paymentItem = new PaymentItem("itemId",
                 false,
-                proration,
+                null,
                 RoundingRule.P1_HALF_UP
         );
 
-        Mockito.when(proration.getFinalValue(executionContext, Maps.newTreeMap()))
-                .thenReturn(new BigDecimal("3.45"));
+        Mockito.when(
+                prorationFactory.prorate(
+                        null,
+                        executionContext,
+                        Maps.newTreeMap())
+        ).thenReturn(new BigDecimal("3.45"));
+        Mockito.when(
+                executionContext.getProrationFactory()
+        ).thenReturn(prorationFactory);
     }
 
     @Test
