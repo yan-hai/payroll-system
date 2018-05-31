@@ -13,6 +13,8 @@ public class ExampleProrationFactory extends ProrationFactory {
      */
     @Override
     public void initContents() {
-        add(new CalendarProration("Proration_1", "Calender_1"));
+        add(new CalendarProration("workday_prorated", "workday_item"));
+        add(new CalendarProration("calendarday_prorated", "calendarday_item"));
+        add(new CalendarProration("calendarday_prorated", "overtime_item"));
     }
 }

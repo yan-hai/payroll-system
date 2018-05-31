@@ -1,6 +1,7 @@
 package com.nobodyhub.payroll.core.example.facade;
 
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
+import com.nobodyhub.payroll.core.item.calendar.CalendarItem;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.item.payment.rounding.RoundingRule;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
@@ -19,6 +20,28 @@ public class ExampleItemBuilderFactory extends ItemBuilderFactory {
      */
     @Override
     public void initContents() {
-        add(new PaymentItem("Payment_1", true, prorationFactory.get("Proration_1"), RoundingRule.NA));
+        addPaymentItems();
+        addCalendarItems();
     }
+
+    private void addPaymentItems() {
+        add(new PaymentItem("fix_salary",
+                true,
+                "calendarday_prorated",
+                RoundingRule.NA));
+        add(new PaymentItem("unfix_salary",
+                true,
+                "workday_prorated",
+                RoundingRule.NA));
+        add(new PaymentItem("OT_allowance",
+                true,
+                "workday_prorated",
+                RoundingRule.NA));
+    }
+
+    private void addCalendarItems() {
+        add(new CalendarItem("workday_item"));
+        add(new CalendarItem("calendarday_item"));
+    }
+
 }
