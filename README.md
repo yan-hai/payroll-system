@@ -20,7 +20,7 @@ Build with command:
 mvn clean jacoco:prepare-agent install jacoco:report sonar:sonar
 ```
 
-## Architechture
+## Overview
 
 ### Calc Core
-![Architecture](calc-core/doc/pics/architecture.png)
+![Overview](calc-core/doc/pics/overview.png)

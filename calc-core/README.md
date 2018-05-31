@@ -19,8 +19,8 @@
 1. Workflow control
 1. Task scheduler
 
-## Architecture
+## Overview
 
 > [Google Drive](https://drive.google.com/file/d/1tM96jXBHbzjGYEemqEuiHBpjgKdTb2tw/view?usp=sharing)
 
-![Architecture](doc/pics/architecture.png)
+![overview](doc/pics/overview.png)
