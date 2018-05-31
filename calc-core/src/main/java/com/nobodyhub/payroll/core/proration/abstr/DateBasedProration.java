@@ -9,6 +9,7 @@ import com.nobodyhub.payroll.core.task.execution.ExecutionContext;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.SortedMap;
 
 /**
@@ -28,7 +29,7 @@ public abstract class DateBasedProration extends CalendarProration {
 
     @Override
     public SortedMap<LocalDate, BigDecimal> prorate(ExecutionContext context,
-                                                    SortedMap<LocalDate, BigDecimal> beforeValues)
+                                                    Map<LocalDate, BigDecimal> beforeValues)
             throws PayrollCoreException {
         SortedMap<Period, BigDecimal> periodValues = convertValueToPeriod(beforeValues, context.getPeriod());
         CalendarItem calendarItem = context.get(calendarItemId, CalendarItem.class);

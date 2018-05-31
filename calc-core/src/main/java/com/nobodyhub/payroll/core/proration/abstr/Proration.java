@@ -42,10 +42,10 @@ public abstract class Proration implements Identifiable {
      * @throws PayrollCoreException
      */
     public abstract SortedMap<LocalDate, BigDecimal> prorate(ExecutionContext context,
-                                                             SortedMap<LocalDate, BigDecimal> beforeValues) throws PayrollCoreException;
+                                                             Map<LocalDate, BigDecimal> beforeValues) throws PayrollCoreException;
 
     public BigDecimal getFinalValue(ExecutionContext context,
-                                    SortedMap<LocalDate, BigDecimal> beforeValues) throws PayrollCoreException {
+                                    Map<LocalDate, BigDecimal> beforeValues) throws PayrollCoreException {
         SortedMap<LocalDate, BigDecimal> values = prorate(context, beforeValues);
         return values.values().stream().reduce(BigDecimal.ZERO, (a, b) -> (a.add(b)));
     }
