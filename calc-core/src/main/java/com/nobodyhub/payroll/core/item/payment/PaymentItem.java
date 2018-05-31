@@ -40,6 +40,15 @@ public class PaymentItem extends Item<BigDecimal, PaymentItem> {
         this.roundingRule = roundingRule;
     }
 
+    public PaymentItem(String itemId,
+                       boolean isRetro,
+                       Proration proration) {
+        super(itemId, BigDecimal.class);
+        this.isRetro = isRetro;
+        this.proration = proration;
+        this.roundingRule = RoundingRule.NA;
+    }
+
     @Override
     public PaymentItem build() {
         return new PaymentItem(id, isRetro, proration, roundingRule);
