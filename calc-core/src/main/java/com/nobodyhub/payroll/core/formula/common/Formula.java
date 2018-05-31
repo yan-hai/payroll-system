@@ -61,6 +61,7 @@ public abstract class Formula<CT> implements Comparable<Formula>, Identifiable {
 
     /**
      * validate whether the contents is valid for formula
+     * - target item should be a payment item
      *
      * @throws PayrollCoreException
      */

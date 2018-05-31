@@ -38,9 +38,7 @@ public abstract class ProrationTest<T extends Proration> {
 
     @Before
     public void setup() throws PayrollCoreException {
-        calendarItem.add(LocalDate.of(2018, 5, 1), BigDecimal.ONE);
-        calendarItem.add(LocalDate.of(2018, 5, 15), BigDecimal.ZERO);
-        calendarItem.add(LocalDate.of(2018, 5, 30), BigDecimal.ONE);
+        initCalendarItem();
 
         hrDateItem.add(LocalDate.of(2018, 5, 10), LocalDate.of(2018, 5, 14));
 
@@ -68,5 +66,24 @@ public abstract class ProrationTest<T extends Proration> {
         assertEquals(BigDecimal.ONE, result.get(Period.of("20180502", "20180509")));
         assertEquals(BigDecimal.ZERO, result.get(Period.of("20180510", "20180519")));
         assertEquals(BigDecimal.ONE, result.get(Period.of("20180520", "20180531")));
+    }
+
+    private void initCalendarItem() throws PayrollCoreException {
+        LocalDate date = LocalDate.of(2018, 5, 1);
+        //1~14
+        for (int idx = 1; idx <= 14; idx++) {
+            calendarItem.add(date, BigDecimal.ONE);
+            date = date.plusDays(1);
+        }
+        //15~29
+        for (int idx = 15; idx <= 29; idx++) {
+            calendarItem.add(date, BigDecimal.ZERO);
+            date = date.plusDays(1);
+        }
+        //30
+        for (int idx = 30; idx <= 31; idx++) {
+            calendarItem.add(date, BigDecimal.ONE);
+            date = date.plusDays(1);
+        }
     }
 }

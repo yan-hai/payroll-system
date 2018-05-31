@@ -102,12 +102,8 @@ public class CalendarProration extends Proration {
         for (Map.Entry<LocalDate, BigDecimal> entry : values.entrySet()) {
             LocalDate date = entry.getKey();
             BigDecimal value = entry.getValue();
-            while (period.isAfter(date)) {
-                date = date.plusDays(1);
-            }
-            while (period.contains(date)) {
+            if (period.contains(date)) {
                 unzipVals.put(date, value);
-                date = date.plusDays(1);
             }
         }
         return unzipVals;

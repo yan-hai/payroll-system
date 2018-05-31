@@ -52,11 +52,27 @@ public class CalendarProrationTest extends ProrationTest<CalendarProration> {
     @Test
     public void testUnzip() throws PayrollCoreException {
         SortedMap<LocalDate, BigDecimal> data = Maps.newTreeMap();
-        data.put(LocalDate.of(2018, 4, 20), BigDecimal.ONE);
-        data.put(LocalDate.of(2018, 4, 30), BigDecimal.ZERO);
-        data.put(LocalDate.of(2018, 5, 2), BigDecimal.ONE);
-        data.put(LocalDate.of(2018, 5, 10), BigDecimal.ZERO);
-        data.put(LocalDate.of(2018, 5, 20), BigDecimal.ONE);
+        LocalDate date = LocalDate.of(2018, 4, 20);
+        for (int idx = 20; idx <= 29; idx++) {
+            data.put(date, BigDecimal.ONE);
+            date = date.plusDays(1);
+        }
+        data.put(date, BigDecimal.ZERO);
+        date = date.plusDays(1);
+        data.put(date, BigDecimal.ZERO);
+        date = date.plusDays(1);
+        for (int idx = 2; idx <= 9; idx++) {
+            data.put(date, BigDecimal.ONE);
+            date = date.plusDays(1);
+        }
+        for (int idx = 10; idx <= 19; idx++) {
+            data.put(date, BigDecimal.ZERO);
+            date = date.plusDays(1);
+        }
+        for (int idx = 20; idx <= 31; idx++) {
+            data.put(date, BigDecimal.ONE);
+            date = date.plusDays(1);
+        }
         SortedMap<LocalDate, BigDecimal> result = proration.unzip(data,
                 Period.of("20180501", "20180531"));
         assertEquals(31, result.size());

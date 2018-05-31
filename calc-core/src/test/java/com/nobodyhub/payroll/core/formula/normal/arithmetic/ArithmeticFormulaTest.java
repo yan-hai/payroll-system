@@ -127,11 +127,13 @@ public class ArithmeticFormulaTest {
     public void testEvaluate() throws PayrollCoreException {
         PaymentItem item = this.formula.evaluate(executionContext);
         assertEquals(true, item == result);
-        assertEquals(5, item.getValues().size());
+        assertEquals(7, item.getValues().size());
         assertEquals(new BigDecimal("366.6666666666666666666666666666667"), item.getValue(LocalDate.of(2018, 4, 1)));
+        assertEquals(new BigDecimal("366.6666666666666666666666666666667"), item.getValue(LocalDate.of(2018, 4, 5)));
         assertEquals(new BigDecimal("396.6666666666666666666666666666667"), item.getValue(LocalDate.of(2018, 4, 10)));
         assertEquals(new BigDecimal("403.3333333333333333333333333333333"), item.getValue(LocalDate.of(2018, 4, 15)));
         assertEquals(new BigDecimal("5500"), item.getValue(LocalDate.of(2018, 4, 18)));
+        assertEquals(new BigDecimal("5500"), item.getValue(LocalDate.of(2018, 4, 20)));
         assertEquals(new BigDecimal("6050"), item.getValue(LocalDate.of(2018, 4, 30)));
     }
 }

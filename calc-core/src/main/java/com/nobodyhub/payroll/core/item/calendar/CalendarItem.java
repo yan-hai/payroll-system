@@ -5,7 +5,9 @@ import com.nobodyhub.payroll.core.item.common.Item;
 import java.math.BigDecimal;
 
 /**
- * Calender item for the calculation period
+ * Calender item for the calculation period.
+ * The {@link this#values} contains values for each date in the period,
+ * instead of a interval after the date.
  *
  * @author yan_h
  * @since 2018-05-09.
