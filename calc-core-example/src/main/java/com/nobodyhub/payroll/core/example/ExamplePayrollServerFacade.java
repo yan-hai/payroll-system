@@ -7,7 +7,7 @@ import com.nobodyhub.payroll.core.formula.RetroFormulaFactory;
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.service.server.PayrollCoreServer;
-import com.nobodyhub.payroll.core.task.ExecutionCallbackFactory;
+import com.nobodyhub.payroll.core.task.ExecutionCallbackBuilderFactory;
 import com.nobodyhub.payroll.core.task.TaskFactory;
 
 /**
@@ -50,8 +50,8 @@ public class ExamplePayrollServerFacade extends PayrollCoreServerFacade {
     }
 
     @Override
-    public ExecutionCallbackFactory initExecutionCallbackFactory() {
-        return new ExecutionCallbackFactory();
+    public ExecutionCallbackBuilderFactory initExecutionCallbackFactory() {
+        return new ExecutionCallbackBuilderFactory();
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 public class ExampleRetroFormulaFactory extends RetroFormulaFactory {
     public ExampleRetroFormulaFactory(ItemBuilderFactory itemBuilderFactory) {
         super(itemBuilderFactory);
+        initContents();
     }
 
     /**

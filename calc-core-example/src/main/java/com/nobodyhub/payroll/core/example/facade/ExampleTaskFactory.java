@@ -4,9 +4,11 @@ import com.nobodyhub.payroll.core.formula.NormalFormulaFactory;
 import com.nobodyhub.payroll.core.formula.RetroFormulaFactory;
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
-import com.nobodyhub.payroll.core.task.ExecutionCallbackFactory;
+import com.nobodyhub.payroll.core.task.ExecutionCallbackBuilderFactory;
 import com.nobodyhub.payroll.core.task.Task;
 import com.nobodyhub.payroll.core.task.TaskFactory;
+
+import static com.nobodyhub.payroll.core.example.facade.ExampleConst.TASK_ID;
 
 /**
  * @author yan_h
@@ -18,29 +20,23 @@ public class ExampleTaskFactory extends TaskFactory {
                               NormalFormulaFactory normalFormulaFactory,
                               RetroFormulaFactory retroFormulaFactory,
                               ProrationFactory prorationFactory,
-                              ExecutionCallbackFactory executionCallbackFactory) {
-        super(itemBuilderFactory, normalFormulaFactory, retroFormulaFactory, prorationFactory, executionCallbackFactory);
+                              ExecutionCallbackBuilderFactory executionCallbackBuilderFactory) {
+        super(itemBuilderFactory,
+                normalFormulaFactory,
+                retroFormulaFactory,
+                prorationFactory,
+                executionCallbackBuilderFactory);
+        initContents();
     }
 
-    /**
-     * get Proration from container
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public Task get(String id) {
-        Task task = super.get(id);
-        task.setExecutionCallback(executionCallbackFactory.get());
-        return task;
-    }
+
 
     /**
      * initialize the contents
      */
     @Override
     public void initContents() {
-        add(new Task("Task_1",
+        add(new Task(TASK_ID,
                 itemBuilderFactory,
                 normalFormulaFactory,
                 retroFormulaFactory,
