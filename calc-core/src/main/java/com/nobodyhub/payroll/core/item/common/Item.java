@@ -25,7 +25,7 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.ITEM
  */
 @Getter
 @RequiredArgsConstructor
-public abstract class Item<VT, IT> implements ItemBuilder<IT> {
+public abstract class Item<VT, IT> implements Builder<IT> {
     /**
      * Unique item id
      */

@@ -2,8 +2,8 @@ package com.nobodyhub.payroll.core.item;
 
 import com.nobodyhub.payroll.core.common.Factory;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.item.common.Builder;
 import com.nobodyhub.payroll.core.item.common.Item;
-import com.nobodyhub.payroll.core.item.common.ItemBuilder;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 
 import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACTORY_INCOMPATIBLE;
@@ -14,7 +14,7 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FACT
  *
  * @author Ryan
  */
-public abstract class ItemBuilderFactory extends Factory<ItemBuilder> {
+public abstract class ItemBuilderFactory extends Factory<Builder> {
     protected final ProrationFactory prorationFactory;
 
     protected ItemBuilderFactory(ProrationFactory prorationFactory) {
@@ -29,7 +29,7 @@ public abstract class ItemBuilderFactory extends Factory<ItemBuilder> {
      * @throws PayrollCoreException
      */
     public Item getItem(String itemId) throws PayrollCoreException {
-        ItemBuilder builder = get(itemId);
+        Builder builder = get(itemId);
         if (builder == null) {
             throw new PayrollCoreException(FACTORY_NOT_FOUND)
                     .addValue("itemId", itemId);
