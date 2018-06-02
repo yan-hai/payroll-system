@@ -6,7 +6,7 @@ import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.service.client.PayrollCoreClient;
 import com.nobodyhub.payroll.core.service.server.PayrollCoreServer;
-import com.nobodyhub.payroll.core.task.ExecutionCallbackFactory;
+import com.nobodyhub.payroll.core.task.ExecutionCallbackBuilderFactory;
 import com.nobodyhub.payroll.core.task.TaskFactory;
 
 /**
@@ -46,7 +46,7 @@ public abstract class PayrollCoreServerFacade {
      * @see com.nobodyhub.payroll.core.task.callback.Callback
      * @see com.nobodyhub.payroll.core.service.server.PayrollCoreServerService
      */
-    protected ExecutionCallbackFactory executionCallbackFactory;
+    protected ExecutionCallbackBuilderFactory executionCallbackBuilderFactory;
 
     /**
      * For task
@@ -112,11 +112,11 @@ public abstract class PayrollCoreServerFacade {
     protected abstract ProrationFactory initProrationFactory();
 
 
-    public ExecutionCallbackFactory executionCallbackFactory() {
-        if (executionCallbackFactory == null) {
-            executionCallbackFactory = initExecutionCallbackFactory();
+    public ExecutionCallbackBuilderFactory executionCallbackFactory() {
+        if (executionCallbackBuilderFactory == null) {
+            executionCallbackBuilderFactory = initExecutionCallbackFactory();
         }
-        return executionCallbackFactory;
+        return executionCallbackBuilderFactory;
     }
 
     /**
@@ -124,7 +124,7 @@ public abstract class PayrollCoreServerFacade {
      *
      * @return
      */
-    protected abstract ExecutionCallbackFactory initExecutionCallbackFactory();
+    protected abstract ExecutionCallbackBuilderFactory initExecutionCallbackFactory();
 
     public TaskFactory taskFactory() {
         if (taskFactory == null) {

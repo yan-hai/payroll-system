@@ -16,12 +16,12 @@ public abstract class TaskFactory extends Factory<Task> {
                        NormalFormulaFactory normalFormulaFactory,
                        RetroFormulaFactory retroFormulaFactory,
                        ProrationFactory prorationFactory,
-                       ExecutionCallbackFactory executionCallbackFactory) {
+                       ExecutionCallbackBuilderFactory executionCallbackBuilderFactory) {
         this.itemBuilderFactory = itemBuilderFactory;
         this.normalFormulaFactory = normalFormulaFactory;
         this.retroFormulaFactory = retroFormulaFactory;
         this.prorationFactory = prorationFactory;
-        this.executionCallbackFactory = executionCallbackFactory;
+        this.executionCallbackBuilderFactory = executionCallbackBuilderFactory;
     }
 
     /**
@@ -43,5 +43,18 @@ public abstract class TaskFactory extends Factory<Task> {
     /**
      * For execution callback
      */
-    protected final ExecutionCallbackFactory executionCallbackFactory;
+    protected final ExecutionCallbackBuilderFactory executionCallbackBuilderFactory;
+
+    /**
+     * get Proration from container
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Task get(String id) {
+        Task task = super.get(id).build();
+        task.setExecutionCallback(executionCallbackBuilderFactory.get());
+        return task;
+    }
 }
