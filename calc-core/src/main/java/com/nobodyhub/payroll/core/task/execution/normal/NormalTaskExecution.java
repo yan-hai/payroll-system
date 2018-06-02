@@ -21,7 +21,7 @@ public class NormalTaskExecution extends TaskExecution {
 
     @Override
     public void run() {
-        callback.onStart();
+        callback.onStart(normalExecutionContext);
         for (NormalFormula formula : normalFormulaFactory.getFormulas()) {
             try {
                 normalExecutionContext.add(formula.evaluate(normalExecutionContext));

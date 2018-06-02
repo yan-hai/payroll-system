@@ -1,7 +1,7 @@
 package com.nobodyhub.payroll.core.task.callback;
 
-import com.nobodyhub.payroll.core.common.Identifiable;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.item.common.Builder;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatusCode;
@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.concurrent.Phaser;
+import java.util.logging.Logger;
 
 /**
  * The callback for the payroll calculation execution
@@ -17,53 +18,56 @@ import java.util.concurrent.Phaser;
  * @author Ryan
  */
 @RequiredArgsConstructor
-public class ExecutionCallback implements Callback, Identifiable {
+public class ExecutionCallback implements Callback, Builder<ExecutionCallback> {
+    private static Logger logger = Logger.getLogger(
+            ExecutionCallback.class.getName());
     /**
      * stream from server to client
      */
     @Setter
     private StreamObserver<PayrollCoreProtocol.Response> responseObserver;
-    /**
-     * Phaser to await all calculation to finish before reply complete the stream
-     */
-    private final Phaser phaser = new Phaser(1);
+
+    @Setter
+    private Phaser phaser;
+
 
     @Override
-    public void onStart() {
-        //TODO: add logger
-        countUp();
+    public void onStart(NormalExecutionContext context) {
+        logger.info(context + " Starts! ");
     }
 
     @Override
     public void onError(Exception e, NormalExecutionContext context) {
         //TODO: add logger
         //TODO: distinguish StausCode by the type of Exception
-        context.getExecutionStatus().setStatusCode(ExecutionStatusCode.ERROR);
-        context.getExecutionStatus().setMessage(e.getMessage());
+        handleError(e, context);
         onCompleted(context);
     }
 
     @Override
     public void onCompleted(NormalExecutionContext context) {
-        //TODO: add logger
+        logger.info(context + " Complete! ");
+        PayrollCoreProtocol.Response response = null;
         try {
-            responseObserver.onNext(context.toResponse(context));
+            response = context.toResponse();
         } catch (PayrollCoreException e) {
-            onError(e, context);
+            handleError(e, context);
         }
+        responseObserver.onNext(response);
+
         countDown();
     }
 
-    public void countUp() {
-        phaser.register();
+    private void handleError(Exception e, NormalExecutionContext context) {
+        logger.severe(context + " Error! ");
+        e.printStackTrace();
+        context.getExecutionStatus().setStatusCode(ExecutionStatusCode.ERROR);
+        context.getExecutionStatus().setMessage(e.getMessage());
     }
+
 
     public void countDown() {
         phaser.arriveAndDeregister();
-    }
-
-    public void await() {
-        phaser.arriveAndAwaitAdvance();
     }
 
     /**
@@ -75,5 +79,10 @@ public class ExecutionCallback implements Callback, Identifiable {
     public String getId() {
         //Execution do not need Id, just to satisfy the Factory interface
         return "";
+    }
+
+    @Override
+    public ExecutionCallback build() {
+        return new ExecutionCallback();
     }
 }

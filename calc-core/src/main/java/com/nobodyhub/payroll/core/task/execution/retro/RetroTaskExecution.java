@@ -40,7 +40,7 @@ public class RetroTaskExecution extends TaskExecution {
 
     @Override
     public void run() {
-        callback.onStart();
+        callback.onStart(normalExecutionContext);
         try {
             //re-calc past data
             List<RetroExecutionContext> retroContexts = historyData.toRetroContexts(

@@ -10,8 +10,10 @@ import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 public interface Callback {
     /**
      * Before execution start
+     *
+     * @param context
      */
-    void onStart();
+    void onStart(NormalExecutionContext context);
 
     /**
      * when execution results in error
