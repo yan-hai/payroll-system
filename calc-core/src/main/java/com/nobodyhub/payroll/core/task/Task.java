@@ -1,11 +1,11 @@
 package com.nobodyhub.payroll.core.task;
 
-import com.nobodyhub.payroll.core.common.Identifiable;
 import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.formula.NormalFormulaFactory;
 import com.nobodyhub.payroll.core.formula.RetroFormulaFactory;
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
+import com.nobodyhub.payroll.core.item.common.Builder;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.task.callback.ExecutionCallback;
@@ -13,12 +13,14 @@ import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 import com.nobodyhub.payroll.core.task.execution.normal.NormalTaskExecution;
 import com.nobodyhub.payroll.core.task.execution.retro.HistoryData;
 import com.nobodyhub.payroll.core.task.execution.retro.RetroTaskExecution;
+import io.grpc.stub.StreamObserver;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Phaser;
 
 /**
  * Need to be Thread-Safe
@@ -27,7 +29,7 @@ import java.util.concurrent.Executors;
  */
 @Data
 @RequiredArgsConstructor
-public class Task implements Identifiable {
+public class Task implements Builder<Task> {
     /**
      * Task id
      */
@@ -52,6 +54,10 @@ public class Task implements Identifiable {
      * Callback to handle the execution
      */
     protected ExecutionCallback executionCallback;
+    /**
+     * Phaser to await all calculation to finish before reply complete the stream
+     */
+    private final Phaser phaser = new Phaser(1);
 
     /**
      * Thread pool, shared by all tasks
@@ -61,9 +67,11 @@ public class Task implements Identifiable {
             = Executors.newFixedThreadPool(5);
 
     /**
-     * setup before task starts
+     * setup before task starts, if necessary
      */
-    public void setup() {
+    public void setup(StreamObserver<PayrollCoreProtocol.Response> responseObserver) {
+        this.executionCallback.setResponseObserver(responseObserver);
+        this.executionCallback.setPhaser(phaser);
     }
 
     /**
@@ -110,6 +118,7 @@ public class Task implements Identifiable {
      * @throws PayrollCoreException
      */
     public void execute(PayrollCoreProtocol.Request value) throws PayrollCoreException {
+        countUp();
         HistoryData historyData = new HistoryData(value.getDataId(), itemBuilderFactory, value.getPastValuesList());
         if (!historyData.isEmpty()) {
             //retroactive calculation
@@ -139,5 +148,29 @@ public class Task implements Identifiable {
         NormalExecutionContext normalExecutionContext = new NormalExecutionContext(dataId, period, itemBuilderFactory, prorationFactory);
         normalExecutionContext.addAll(itemValueList);
         return normalExecutionContext;
+    }
+
+    @Override
+    public Task build() {
+        return new Task(id,
+                itemBuilderFactory,
+                normalFormulaFactory,
+                retroFormulaFactory,
+                prorationFactory
+        );
+    }
+
+    /**
+     * wait all thread to finish
+     */
+    public void await() {
+        phaser.arriveAndAwaitAdvance();
+    }
+
+    /**
+     * Register a execution
+     */
+    public void countUp() {
+        phaser.register();
     }
 }

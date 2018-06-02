@@ -26,12 +26,12 @@ public class PayrollCoreServerService extends PayrollCoreServiceGrpc.PayrollCore
     public StreamObserver<PayrollCoreProtocol.Request> doCalc(StreamObserver<PayrollCoreProtocol.Response> responseObserver) {
         return new StreamObserver<PayrollCoreProtocol.Request>() {
             Task task = null;
+
             @Override
             public void onNext(PayrollCoreProtocol.Request value) {
                 if (task == null) {
                     task = taskFactory.get(value.getTaskId());
-                    task.setup();
-                    task.getExecutionCallback().setResponseObserver(responseObserver);
+                    task.setup(responseObserver);
                 }
                 try {
                     task.execute(value);
@@ -42,12 +42,12 @@ public class PayrollCoreServerService extends PayrollCoreServiceGrpc.PayrollCore
 
             @Override
             public void onError(Throwable t) {
-                //TODO: client send error
+                responseObserver.onError(t);
             }
 
             @Override
             public void onCompleted() {
-                task.getExecutionCallback().await();
+                task.await();
                 responseObserver.onCompleted();
                 task.cleanup();
             }
