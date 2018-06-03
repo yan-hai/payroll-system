@@ -1,12 +1,15 @@
 package com.nobodyhub.payroll.core.example.facade;
 
+import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.formula.NormalFormulaFactory;
 import com.nobodyhub.payroll.core.formula.common.Comparator;
 import com.nobodyhub.payroll.core.formula.common.Function;
 import com.nobodyhub.payroll.core.formula.common.Operator;
+import com.nobodyhub.payroll.core.formula.normal.aggregation.AggregationFormula;
 import com.nobodyhub.payroll.core.formula.normal.arithmetic.ArithmeticFormula;
 import com.nobodyhub.payroll.core.formula.normal.arithmetic.FormulaExpression;
 import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.ItemArithmeticOperand;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.ValueArithmeticOperand;
 import com.nobodyhub.payroll.core.formula.normal.map.FormulaCase;
 import com.nobodyhub.payroll.core.formula.normal.map.FormulaCaseSet;
 import com.nobodyhub.payroll.core.formula.normal.map.FormulaCondition;
@@ -36,24 +39,9 @@ public class ExampleNormalFormulaFactory extends NormalFormulaFactory {
     public void initContents() {
         basicSalary();
         dailySalary();
-
-//        ArithmeticFormula unpaidLeave = new ArithmeticFormula(
-//                FOR_UNPAID_LEAVE,
-//                PAY_UNPAID_LEAVE,
-//                itemBuilderFactory);
-//        add(unpaidLeave);
-//
-//        ArithmeticFormula overtimeAlloance = new ArithmeticFormula(
-//                FOR_OVERTIME_ALLOWANCE,
-//                PAY_OVERTIME_ALLOWANCE,
-//                itemBuilderFactory);
-//        add(overtimeAlloance);
-//
-//        AggregationFormula totalSalary = new AggregationFormula(
-//                FOR_TOTAL_SALARY,
-//                PAY_TOTAL_SALARY,
-//                itemBuilderFactory);
-//        add(totalSalary);
+        unpaidLeave();
+        overtimeAllowance();
+        totalSalary();
     }
 
     public void basicSalary() {
@@ -116,5 +104,71 @@ public class ExampleNormalFormulaFactory extends NormalFormulaFactory {
         dailySalary.addContent(LocalDate.of(2018, 5, 1),
                 expression);
         add(dailySalary);
+    }
+
+    public void unpaidLeave() {
+        ArithmeticFormula unpaidLeave = new ArithmeticFormula(
+                FOR_UNPAID_LEAVE,
+                PAY_UNPAID_LEAVE,
+                itemBuilderFactory);
+        FormulaExpression mul2 = new FormulaExpression(
+                null,
+                ItemArithmeticOperand.of(CAL_UNPAID_LEAVE, Function.COUNT),
+                null
+        );
+
+        FormulaExpression mul1 = new FormulaExpression(
+                Operator.MUL,
+                ItemArithmeticOperand.of(PAY_DAILY_SALARY),
+                mul2
+        );
+
+        FormulaExpression expression = new FormulaExpression(
+                Operator.MUL,
+                ValueArithmeticOperand.of("-1"),
+                mul1
+        );
+
+        unpaidLeave.addContent(LocalDate.of(2018, 5, 1),
+                expression);
+        add(unpaidLeave);
+    }
+
+    public void overtimeAllowance() {
+        ArithmeticFormula overtimeAllowance = new ArithmeticFormula(
+                FOR_OVERTIME_ALLOWANCE,
+                PAY_OVERTIME_ALLOWANCE,
+                itemBuilderFactory);
+
+        FormulaExpression multiplier = new FormulaExpression(
+                null,
+                ItemArithmeticOperand.of(CAL_OVERTIME, Function.SUM),
+                null
+        );
+
+        FormulaExpression expression = new FormulaExpression(
+                Operator.MUL,
+                ItemArithmeticOperand.of(PAY_DAILY_SALARY),
+                multiplier
+        );
+
+        overtimeAllowance.addContent(LocalDate.of(2018, 5, 1),
+                expression);
+        add(overtimeAllowance);
+    }
+
+    public void totalSalary() {
+        AggregationFormula totalSalary = new AggregationFormula(
+                FOR_TOTAL_SALARY,
+                PAY_TOTAL_SALARY,
+                itemBuilderFactory);
+
+        totalSalary.addContent(LocalDate.of(2018, 5, 1),
+                Sets.newHashSet(
+                        PAY_BASIC_SALARY,
+                        PAY_UNPAID_LEAVE,
+                        PAY_OVERTIME_ALLOWANCE
+                ));
+        add(totalSalary);
     }
 }
