@@ -13,23 +13,22 @@ import static org.junit.Assert.assertEquals;
 public class ComparatorTest {
     @Test
     public void testCompare() {
-        assertEquals(0, Comparator.NA.compare(null, null));
-        assertEquals(-1, Comparator.NA.compare(null, ""));
-        assertEquals(-1, Comparator.NA.compare(null, 1));
-        assertEquals(-1, Comparator.NA.compare(null, LocalDate.of(2018, 5, 21)));
+        assertEquals(0, Comparator.EQ.compare(null, null));
+        assertEquals(-1, Comparator.EQ.compare(null, ""));
+        assertEquals(-1, Comparator.EQ.compare(null, 1));
+        assertEquals(-1, Comparator.EQ.compare(null, LocalDate.of(2018, 5, 21)));
 
-        assertEquals(1, Comparator.NA.compare("", null));
-        assertEquals(1, Comparator.NA.compare(1, null));
-        assertEquals(1, Comparator.NA.compare(LocalDate.of(2018, 5, 21), null));
+        assertEquals(1, Comparator.EQ.compare("", null));
+        assertEquals(1, Comparator.EQ.compare(1, null));
+        assertEquals(1, Comparator.EQ.compare(LocalDate.of(2018, 5, 21), null));
 
-        assertEquals(0, Comparator.NA.compare("", ""));
-        assertEquals(-1, Comparator.NA.compare(1, 2));
-        assertEquals(1, Comparator.NA.compare(LocalDate.of(2018, 5, 21), LocalDate.of(2018, 5, 20)));
+        assertEquals(0, Comparator.EQ.compare("", ""));
+        assertEquals(-1, Comparator.EQ.compare(1, 2));
+        assertEquals(1, Comparator.EQ.compare(LocalDate.of(2018, 5, 21), LocalDate.of(2018, 5, 20)));
     }
 
     @Test
     public void testApply() throws PayrollCoreException {
-        assertEquals(true, Comparator.NA.apply(2, 100, 101));
         assertEquals(true, Comparator.EQ.apply(2, 2, null));
         assertEquals(true, Comparator.NE.apply(2, 3, null));
 

@@ -12,10 +12,6 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.COMP
  */
 public enum Comparator {
     /**
-     * No comparator will be applied
-     */
-    NA,
-    /**
      * Equal
      */
     EQ,
@@ -51,9 +47,6 @@ public enum Comparator {
      */
     public <T extends Comparable<? super T>> boolean apply(T itemVal, T lower, T higher) throws PayrollCoreException {
         switch (this) {
-            case NA: {
-                return true;
-            }
             case EQ: {
                 return compare(itemVal, lower) == 0;
             }
