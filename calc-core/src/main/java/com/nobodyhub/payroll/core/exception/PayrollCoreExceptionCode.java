@@ -2,6 +2,7 @@ package com.nobodyhub.payroll.core.exception;
 
 import com.nobodyhub.payroll.core.common.Period;
 import com.nobodyhub.payroll.core.formula.common.Comparator;
+import com.nobodyhub.payroll.core.formula.common.Function;
 import com.nobodyhub.payroll.core.formula.common.Operator;
 import com.nobodyhub.payroll.core.formula.retro.RetroFormula;
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
@@ -31,6 +32,10 @@ public enum PayrollCoreExceptionCode {
      * Unimplemented handler for {@link Operator}
      */
     OPERATOR_UNIMPLEMENTED(Operator.class, ""),
+    /**
+     * Unimplemented handler for {@link Function}
+     */
+    FUNCTION_UNIMPLEMENTED(Function.class, ""),
     /**
      * Can not find required item in the context
      */

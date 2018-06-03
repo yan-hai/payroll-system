@@ -64,20 +64,20 @@ public class FormulaFactoryTest {
 
         formula4 = new AggregationFormula(
                 UUID.randomUUID().toString(),
-                "item5",
+                "item4",
                 itemBuilderFactory);
         formula4.addContent(LocalDate.of(2018, 6, 1),
                 Sets.newHashSet(
-                        "item1", "item2"
+                        "item1", "item3"
                 ));
 
         formula5 = new AggregationFormula(
                 UUID.randomUUID().toString(),
-                "item4",
+                "item5",
                 itemBuilderFactory);
         formula5.addContent(LocalDate.of(2018, 6, 1),
                 Sets.newHashSet(
-                        "item3", "item5"
+                        "item3", "item4"
                 ));
 
         normalFormulaFactory = new NormalFormulaFactory(itemBuilderFactory) {
