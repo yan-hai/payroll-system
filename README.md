@@ -1,18 +1,18 @@
 # A Item-based Payroll System
 
-A **extensible** and **scalable** payroll system based on various kinds of items and related rules.
+A **extensible** and **scalable** payroll system based on items and related rules.
 
-## Scenarios
-1. Fixed Salary + Unfixed Salary
-1. Link Fixed Salary with HR information, like position
-1. Proration based on attendence information
-1. Aggregation
-1. Retroactive
+## Overview
 
-## TODOs
-* [X] A Calculation Core to calculate based on the given data and rules
-* [ ] A default data accessor to fetch the data
-* [ ] Different Stub to call the batch synchronously or a asynchronously
+* [X] Calc Core
+    The core functions and components related to the calculation.
+    ![Overview](calc-core/doc/pics/overview.png)
+* [X] Component Storage
+    The accessor of components from persistent storage.
+* [ ] Service Controller
+    A centerlized controller to manage all servers and tasks running on it.
+* [ ] UI
+    How user interact with this system.
 
 ## Build
 Build with command:
@@ -20,7 +20,3 @@ Build with command:
 mvn clean jacoco:prepare-agent install jacoco:report sonar:sonar
 ```
 
-## Overview
-
-### Calc Core
-![Overview](calc-core/doc/pics/overview.png)
