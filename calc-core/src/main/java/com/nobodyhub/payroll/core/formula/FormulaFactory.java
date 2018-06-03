@@ -59,16 +59,18 @@ public abstract class FormulaFactory<T extends Formula> extends Factory<T> {
             for (String itemId : requiredItems) {
                 // those formulas are precede formulas
                 List<T> preFormulas = formulaMap.get(itemId);
-                for (T preFormula : preFormulas) {
-                    // add precede formula to preNodes
-                    Node<T> preNode = nodes.get(preFormula.getId());
-                    if (preNode == null) {
-                        preNode = new Node<>(preFormula);
-                        nodes.put(preFormula.getId(), preNode);
+                if (preFormulas != null) {
+                    for (T preFormula : preFormulas) {
+                        // add precede formula to preNodes
+                        Node<T> preNode = nodes.get(preFormula.getId());
+                        if (preNode == null) {
+                            preNode = new Node<>(preFormula);
+                            nodes.put(preFormula.getId(), preNode);
+                        }
+                        curNode.addPreNode(preNode);
+                        // set a higher priority for preNode
+                        preNode.moveForward();
                     }
-                    curNode.addPreNode(preNode);
-                    // set a higher priority for preNode
-                    preNode.moveForward();
                 }
             }
         }

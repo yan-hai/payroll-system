@@ -59,8 +59,15 @@ public class FormulaCondition<T extends Comparable<? super T>> {
      */
     public boolean matches(ExecutionContext context, LocalDate date) throws PayrollCoreException {
         return comparator.apply(context.getItemValue(itemId, date, clazz),
-                lower.getValue(context, date),
-                higher.getValue(context, date));
+                getValue(lower, context, date),
+                getValue(higher, context, date));
+    }
+
+    private T getValue(ConditionOperand<T> operand, ExecutionContext context, LocalDate date) throws PayrollCoreException {
+        if (operand == null) {
+            return null;
+        }
+        return operand.getValue(context, date);
     }
 
     /**
@@ -73,8 +80,12 @@ public class FormulaCondition<T extends Comparable<? super T>> {
     @SuppressWarnings("unchecked")
     public Set<LocalDate> getDateSegment(ExecutionContext context) throws PayrollCoreException {
         Set<LocalDate> segments = context.get(itemId).getDateSegment();
-        segments.addAll(lower.getDateSegment(context));
-        segments.addAll(higher.getDateSegment(context));
+        if (lower != null) {
+            segments.addAll(lower.getDateSegment(context));
+        }
+        if (higher != null) {
+            segments.addAll(higher.getDateSegment(context));
+        }
         return segments;
     }
 
@@ -85,10 +96,10 @@ public class FormulaCondition<T extends Comparable<? super T>> {
      */
     public Set<String> getRequireIds() {
         Set<String> itemIds = Sets.newHashSet(itemId);
-        if (lower.getItemId() != null) {
+        if (lower != null && lower.getItemId() != null) {
             itemIds.add(lower.getItemId());
         }
-        if (higher.getItemId() != null) {
+        if (higher != null && higher.getItemId() != null) {
             itemIds.add(higher.getItemId());
         }
         return itemIds;
