@@ -71,7 +71,7 @@ public class Task implements Builder<Task> {
      */
     public void setup(StreamObserver<PayrollCoreProtocol.Response> responseObserver) {
         this.executionCallback.setResponseObserver(responseObserver);
-        this.executionCallback.setPhaser(phaser);
+        this.executionCallback.setTask(this);
     }
 
     /**
@@ -117,16 +117,23 @@ public class Task implements Builder<Task> {
      * @param value
      * @throws PayrollCoreException
      */
-    public void execute(PayrollCoreProtocol.Request value) throws PayrollCoreException {
+    public void execute(PayrollCoreProtocol.Request value) {
         countUp();
-        HistoryData historyData = new HistoryData(value.getDataId(), itemBuilderFactory, value.getPastValuesList());
-        if (!historyData.isEmpty()) {
-            //retroactive calculation
-            executeRetro(value.getDataId(), value.getCurrentValue(), historyData);
-        } else {
-            //normal calculation
-            executeNormal(value.getDataId(), value.getCurrentValue());
+        try {
+            HistoryData historyData = new HistoryData(value.getDataId(), itemBuilderFactory, value.getPastValuesList());
+            if (!historyData.isEmpty()) {
+                //retroactive calculation
+                executeRetro(value.getDataId(), value.getCurrentValue(), historyData);
+            } else {
+                //normal calculation
+                executeNormal(value.getDataId(), value.getCurrentValue());
+            }
+        } catch (PayrollCoreException e) {
+            //TODO: add logger and handler
+            e.printStackTrace();
+            countDown();
         }
+
     }
 
     /**
@@ -172,5 +179,12 @@ public class Task implements Builder<Task> {
      */
     public void countUp() {
         phaser.register();
+    }
+
+    /**
+     * Deregister a execution
+     */
+    public void countDown() {
+        phaser.arriveAndDeregister();
     }
 }

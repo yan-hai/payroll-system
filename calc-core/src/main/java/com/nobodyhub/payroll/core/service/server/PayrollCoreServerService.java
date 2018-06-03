@@ -1,6 +1,5 @@
 package com.nobodyhub.payroll.core.service.server;
 
-import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreServiceGrpc;
 import com.nobodyhub.payroll.core.task.Task;
@@ -33,16 +32,13 @@ public class PayrollCoreServerService extends PayrollCoreServiceGrpc.PayrollCore
                     task = taskFactory.get(value.getTaskId());
                     task.setup(responseObserver);
                 }
-                try {
-                    task.execute(value);
-                } catch (PayrollCoreException e) {
-                    onError(e);
-                }
+                task.execute(value);
             }
 
             @Override
             public void onError(Throwable t) {
                 responseObserver.onError(t);
+                task.countDown();
             }
 
             @Override

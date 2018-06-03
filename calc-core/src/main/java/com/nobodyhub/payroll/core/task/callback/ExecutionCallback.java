@@ -3,13 +3,13 @@ package com.nobodyhub.payroll.core.task.callback;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
 import com.nobodyhub.payroll.core.item.common.Builder;
 import com.nobodyhub.payroll.core.service.proto.PayrollCoreProtocol;
+import com.nobodyhub.payroll.core.task.Task;
 import com.nobodyhub.payroll.core.task.execution.normal.NormalExecutionContext;
 import com.nobodyhub.payroll.core.task.status.ExecutionStatusCode;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.util.concurrent.Phaser;
 import java.util.logging.Logger;
 
 /**
@@ -28,7 +28,7 @@ public class ExecutionCallback implements Callback, Builder<ExecutionCallback> {
     private StreamObserver<PayrollCoreProtocol.Response> responseObserver;
 
     @Setter
-    private Phaser phaser;
+    private Task task;
 
 
     @Override
@@ -55,19 +55,14 @@ public class ExecutionCallback implements Callback, Builder<ExecutionCallback> {
         }
         responseObserver.onNext(response);
 
-        countDown();
+        task.countDown();
     }
 
     private void handleError(Exception e, NormalExecutionContext context) {
         logger.severe(context + " Error! ");
-        e.printStackTrace();
+        logger.severe(e.getMessage());
         context.getExecutionStatus().setStatusCode(ExecutionStatusCode.ERROR);
         context.getExecutionStatus().setMessage(e.getMessage());
-    }
-
-
-    public void countDown() {
-        phaser.arriveAndDeregister();
     }
 
     /**

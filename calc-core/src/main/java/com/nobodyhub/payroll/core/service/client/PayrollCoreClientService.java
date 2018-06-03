@@ -68,7 +68,8 @@ public class PayrollCoreClientService {
 
             @Override
             public void onError(Throwable t) {
-                //TODO: add logger and pass error
+                //TODO: add logger and handler
+                t.printStackTrace();
             }
 
             @Override
