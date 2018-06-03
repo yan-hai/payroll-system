@@ -3,6 +3,7 @@ package com.nobodyhub.payroll.core.item.common;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.nobodyhub.payroll.core.exception.PayrollCoreException;
+import com.nobodyhub.payroll.core.item.calendar.CalendarItem;
 import com.nobodyhub.payroll.core.util.ValueConverter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -160,6 +161,10 @@ public abstract class Item<VT, IT> implements Builder<IT> {
      * @return
      */
     public Set<LocalDate> getDateSegment() {
+        if (this instanceof CalendarItem) {
+            //ignore calendar item segment
+            return Sets.newHashSet();
+        }
         return Sets.newHashSet(values.keySet());
     }
 }

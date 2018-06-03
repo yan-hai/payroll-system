@@ -39,7 +39,7 @@ public class ExamplePayrollClientFacadeTest extends ExamplePayrollServerFacadeTe
                         .setEndDate("20180531")
                         .setBaseDate("20180525");
 
-        addPaymentItem(currentValueBuilder);
+        addHrItems(currentValueBuilder);
         addCalendarItem(currentValueBuilder);
 
         PayrollCoreProtocol.Request request
@@ -54,6 +54,7 @@ public class ExamplePayrollClientFacadeTest extends ExamplePayrollServerFacadeTe
         ));
         assertEquals(1, results.size());
         assertEquals("6666.667", results.get("Employee ID1").get(PAY_BASIC_SALARY));
+        assertEquals("370.370", results.get("Employee ID1").get(PAY_DAILY_SALARY));
     }
 
     @After
@@ -62,7 +63,7 @@ public class ExamplePayrollClientFacadeTest extends ExamplePayrollServerFacadeTe
         client.shutdown();
     }
 
-    private void addPaymentItem(
+    private void addHrItems(
             PayrollCoreProtocol.PeriodValue.Builder currentValueBuilder) {
         PayrollCoreProtocol.ItemValue itemValue =
                 PayrollCoreProtocol.ItemValue.newBuilder()
@@ -77,43 +78,46 @@ public class ExamplePayrollClientFacadeTest extends ExamplePayrollServerFacadeTe
 
     private void addCalendarItem(
             PayrollCoreProtocol.PeriodValue.Builder currentValueBuilder) {
-        PayrollCoreProtocol.ItemValue.Builder itemValueBuilder =
+        PayrollCoreProtocol.ItemValue.Builder workingDays =
                 PayrollCoreProtocol.ItemValue.newBuilder()
                         .setItemId(CAL_WORK_DAY);
-        //20180501~20180510, 4 out of 10 are working days
-        itemValueBuilder.putValues("20180501", "1");// working day
-        itemValueBuilder.putValues("20180502", "1");// working day
-        itemValueBuilder.putValues("20180503", "1");// working day
-        itemValueBuilder.putValues("20180504", "1");// working day
-        itemValueBuilder.putValues("20180505", "0");
-        itemValueBuilder.putValues("20180506", "0");
-        itemValueBuilder.putValues("20180507", "0");
-        itemValueBuilder.putValues("20180508", "0");
-        itemValueBuilder.putValues("20180509", "0");
-        itemValueBuilder.putValues("20180510", "0");
-        //20180511~20180531, 14 out of 21 are working days
-        itemValueBuilder.putValues("20180511", "1");// working day
-        itemValueBuilder.putValues("20180512", "1");// working day
-        itemValueBuilder.putValues("20180513", "1");// working day
-        itemValueBuilder.putValues("20180514", "1");// working day
-        itemValueBuilder.putValues("20180515", "1");// working day
-        itemValueBuilder.putValues("20180516", "0");
-        itemValueBuilder.putValues("20180517", "0");
-        itemValueBuilder.putValues("20180518", "0");
-        itemValueBuilder.putValues("20180519", "0");
-        itemValueBuilder.putValues("20180520", "1");// working day
-        itemValueBuilder.putValues("20180521", "1");// working day
-        itemValueBuilder.putValues("20180522", "1");// working day
-        itemValueBuilder.putValues("20180523", "1");// working day
-        itemValueBuilder.putValues("20180524", "1");// working day
-        itemValueBuilder.putValues("20180525", "0");
-        itemValueBuilder.putValues("20180526", "0");
-        itemValueBuilder.putValues("20180527", "1");// working day
-        itemValueBuilder.putValues("20180528", "1");// working day
-        itemValueBuilder.putValues("20180529", "1");// working day
-        itemValueBuilder.putValues("20180530", "1");// working day
-        itemValueBuilder.putValues("20180531", "0");
+        addWorkInfo(workingDays);
+        currentValueBuilder.addItems(workingDays.build());
+    }
 
-        currentValueBuilder.addItems(itemValueBuilder.build());
+    private void addWorkInfo(PayrollCoreProtocol.ItemValue.Builder workingDays) {
+        //20180501~20180510, 4 out of 10 are working days
+        workingDays.putValues("20180501", "1");// working day
+        workingDays.putValues("20180502", "1");// working day
+        workingDays.putValues("20180503", "1");// working day
+        workingDays.putValues("20180504", "1");// working day
+        workingDays.putValues("20180505", "0");
+        workingDays.putValues("20180506", "0");
+        workingDays.putValues("20180507", "0");
+        workingDays.putValues("20180508", "0");
+        workingDays.putValues("20180509", "0");
+        workingDays.putValues("20180510", "0");
+        //20180511~20180531, 14 out of 21 are working days
+        workingDays.putValues("20180511", "1");// working day
+        workingDays.putValues("20180512", "1");// working day
+        workingDays.putValues("20180513", "1");// working day
+        workingDays.putValues("20180514", "1");// working day
+        workingDays.putValues("20180515", "1");// working day
+        workingDays.putValues("20180516", "0");
+        workingDays.putValues("20180517", "0");
+        workingDays.putValues("20180518", "0");
+        workingDays.putValues("20180519", "0");
+        workingDays.putValues("20180520", "1");// working day
+        workingDays.putValues("20180521", "1");// working day
+        workingDays.putValues("20180522", "1");// working day
+        workingDays.putValues("20180523", "1");// working day
+        workingDays.putValues("20180524", "1");// working day
+        workingDays.putValues("20180525", "0");
+        workingDays.putValues("20180526", "0");
+        workingDays.putValues("20180527", "1");// working day
+        workingDays.putValues("20180528", "1");// working day
+        workingDays.putValues("20180529", "1");// working day
+        workingDays.putValues("20180530", "1");// working day
+        workingDays.putValues("20180531", "0");
     }
 }

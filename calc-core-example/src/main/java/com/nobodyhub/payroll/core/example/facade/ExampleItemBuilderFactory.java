@@ -45,8 +45,8 @@ public class ExampleItemBuilderFactory extends ItemBuilderFactory {
                 RoundingRule.NA));
         add(new PaymentItem(PAY_DAILY_SALARY,
                 true,
-                null,
-                RoundingRule.NA));
+                PRO_WORKDAY,
+                RoundingRule.P3_HALF_DOWN));
         add(new PaymentItem(PAY_OVERTIME_ALLOWANCE,
                 true,
                 null,

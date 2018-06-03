@@ -2,6 +2,11 @@ package com.nobodyhub.payroll.core.example.facade;
 
 import com.nobodyhub.payroll.core.formula.NormalFormulaFactory;
 import com.nobodyhub.payroll.core.formula.common.Comparator;
+import com.nobodyhub.payroll.core.formula.common.Function;
+import com.nobodyhub.payroll.core.formula.common.Operator;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.ArithmeticFormula;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.FormulaExpression;
+import com.nobodyhub.payroll.core.formula.normal.arithmetic.operand.ItemArithmeticOperand;
 import com.nobodyhub.payroll.core.formula.normal.map.FormulaCase;
 import com.nobodyhub.payroll.core.formula.normal.map.FormulaCaseSet;
 import com.nobodyhub.payroll.core.formula.normal.map.FormulaCondition;
@@ -30,13 +35,8 @@ public class ExampleNormalFormulaFactory extends NormalFormulaFactory {
     @Override
     public void initContents() {
         basicSalary();
+        dailySalary();
 
-//        ArithmeticFormula dailySalary = new ArithmeticFormula(
-//                FOR_DAILY_SALARY,
-//                PAY_DAILY_SALARY,
-//                itemBuilderFactory);
-//        add(dailySalary);
-//
 //        ArithmeticFormula unpaidLeave = new ArithmeticFormula(
 //                FOR_UNPAID_LEAVE,
 //                PAY_UNPAID_LEAVE,
@@ -58,7 +58,7 @@ public class ExampleNormalFormulaFactory extends NormalFormulaFactory {
 
     public void basicSalary() {
         MapFormula basicSalary = new MapFormula(
-                FOR_DAILY_SALARY,
+                FOR_BASIC_SALARY,
                 PAY_BASIC_SALARY,
                 itemBuilderFactory);
 
@@ -93,5 +93,28 @@ public class ExampleNormalFormulaFactory extends NormalFormulaFactory {
 
         basicSalary.addContent(LocalDate.of(2018, 5, 1), formulaCaseSet);
         add(basicSalary);
+    }
+
+    public void dailySalary() {
+        ArithmeticFormula dailySalary = new ArithmeticFormula(
+                FOR_DAILY_SALARY,
+                PAY_DAILY_SALARY,
+                itemBuilderFactory);
+
+        FormulaExpression divisor = new FormulaExpression(
+                null,
+                ItemArithmeticOperand.of(CAL_WORK_DAY, Function.COUNT),
+                null
+        );
+
+        FormulaExpression expression = new FormulaExpression(
+                Operator.DIV,
+                ItemArithmeticOperand.of(PAY_BASIC_SALARY),
+                divisor
+        );
+
+        dailySalary.addContent(LocalDate.of(2018, 5, 1),
+                expression);
+        add(dailySalary);
     }
 }
