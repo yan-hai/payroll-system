@@ -128,7 +128,7 @@ public class Task implements Builder<Task> {
                 //normal calculation
                 executeNormal(value.getDataId(), value.getCurrentValue());
             }
-        } catch (PayrollCoreException e) {
+        } catch (Exception e) {
             //TODO: add logger and handler
             e.printStackTrace();
             countDown();
