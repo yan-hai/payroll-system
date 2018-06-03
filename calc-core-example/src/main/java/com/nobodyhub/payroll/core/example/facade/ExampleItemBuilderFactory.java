@@ -2,6 +2,7 @@ package com.nobodyhub.payroll.core.example.facade;
 
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
 import com.nobodyhub.payroll.core.item.calendar.CalendarItem;
+import com.nobodyhub.payroll.core.item.hr.HrOptionItem;
 import com.nobodyhub.payroll.core.item.payment.PaymentItem;
 import com.nobodyhub.payroll.core.item.payment.rounding.RoundingRule;
 import com.nobodyhub.payroll.core.proration.ProrationFactory;
@@ -29,9 +30,11 @@ public class ExampleItemBuilderFactory extends ItemBuilderFactory {
     public void initContents() {
         addPaymentItems();
         addCalendarItems();
+        addHrItems();
     }
 
     private void addPaymentItems() {
+
         add(new PaymentItem(PAY_BASIC_SALARY,
                 true,
                 PRO_WORKDAY,
@@ -58,5 +61,9 @@ public class ExampleItemBuilderFactory extends ItemBuilderFactory {
         add(new CalendarItem(CAL_WORK_DAY));
         add(new CalendarItem(CAL_UNPAID_LEAVE));
         add(new CalendarItem(CAL_OVERTIME));
+    }
+
+    private void addHrItems() {
+        add(new HrOptionItem(HR_POSITION));
     }
 }

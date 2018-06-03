@@ -53,7 +53,7 @@ public class ExamplePayrollClientFacadeTest extends ExamplePayrollServerFacadeTe
                 request
         ));
         assertEquals(1, results.size());
-        assertEquals("5333.333", results.get("Employee ID1").get(PAY_BASIC_SALARY));
+        assertEquals("6666.667", results.get("Employee ID1").get(PAY_BASIC_SALARY));
     }
 
     @After
@@ -66,9 +66,10 @@ public class ExamplePayrollClientFacadeTest extends ExamplePayrollServerFacadeTe
             PayrollCoreProtocol.PeriodValue.Builder currentValueBuilder) {
         PayrollCoreProtocol.ItemValue itemValue =
                 PayrollCoreProtocol.ItemValue.newBuilder()
-                        .setItemId(PAY_BASIC_SALARY)
-                        .putValues("20180501", "3000")
-                        .putValues("20180511", "6000")
+                        .setItemId(HR_POSITION)
+                        .putValues("20180501", "lvl1")
+                        .putValues("20180511", "lvl2")
+                        .putValues("20180521", "lvl3")
                         .build();
         currentValueBuilder.addItems(itemValue);
     }
@@ -96,10 +97,10 @@ public class ExamplePayrollClientFacadeTest extends ExamplePayrollServerFacadeTe
         itemValueBuilder.putValues("20180513", "1");// working day
         itemValueBuilder.putValues("20180514", "1");// working day
         itemValueBuilder.putValues("20180515", "1");// working day
-        itemValueBuilder.putValues("20180516", "1");// working day
-        itemValueBuilder.putValues("20180517", "1");// working day
-        itemValueBuilder.putValues("20180518", "1");// working day
-        itemValueBuilder.putValues("20180519", "1");// working day
+        itemValueBuilder.putValues("20180516", "0");
+        itemValueBuilder.putValues("20180517", "0");
+        itemValueBuilder.putValues("20180518", "0");
+        itemValueBuilder.putValues("20180519", "0");
         itemValueBuilder.putValues("20180520", "1");// working day
         itemValueBuilder.putValues("20180521", "1");// working day
         itemValueBuilder.putValues("20180522", "1");// working day
@@ -107,10 +108,10 @@ public class ExamplePayrollClientFacadeTest extends ExamplePayrollServerFacadeTe
         itemValueBuilder.putValues("20180524", "1");// working day
         itemValueBuilder.putValues("20180525", "0");
         itemValueBuilder.putValues("20180526", "0");
-        itemValueBuilder.putValues("20180527", "0");
-        itemValueBuilder.putValues("20180528", "0");
-        itemValueBuilder.putValues("20180529", "0");
-        itemValueBuilder.putValues("20180530", "0");
+        itemValueBuilder.putValues("20180527", "1");// working day
+        itemValueBuilder.putValues("20180528", "1");// working day
+        itemValueBuilder.putValues("20180529", "1");// working day
+        itemValueBuilder.putValues("20180530", "1");// working day
         itemValueBuilder.putValues("20180531", "0");
 
         currentValueBuilder.addItems(itemValueBuilder.build());

@@ -66,6 +66,11 @@ public final class ExampleConst {
      */
     public static final String CAL_OVERTIME = "cal_overtime";
 
+    /**
+     * hr position information
+     */
+    public static final String HR_POSITION = "hr_position";
+
     /*
      *proration
      */
@@ -77,7 +82,12 @@ public final class ExampleConst {
 
     /*
      * normal formula
+     *
      */
+    /**
+     * Formua for basic salary
+     */
+    public static final String FOR_BASIC_SALARY = "for_basic_salary";
     /**
      * Formula for daily salary
      */
@@ -85,14 +95,14 @@ public final class ExampleConst {
     /**
      * Formula for unpaid leave
      */
-    public static final String FOR_UNPAID_LEAVE = "for_daily_salary";
+    public static final String FOR_UNPAID_LEAVE = "for_unpaid_learve";
     /**
      * Formula for overtime allowances
      */
-    public static final String FOR_OVERTIME_ALLOWANCE = "for_daily_salary";
+    public static final String FOR_OVERTIME_ALLOWANCE = "for_overtime_allowance";
     /**
      * Formula for total salary
      */
-    public static final String FOR_TOTAL_SALARY = "for_daily_salary";
+    public static final String FOR_TOTAL_SALARY = "for_total_salary";
 
 }
