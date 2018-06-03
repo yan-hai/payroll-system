@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * Service provider for {@link PayrollCoreClient}
@@ -21,6 +22,8 @@ import java.util.concurrent.TimeUnit;
  * @since 2018-05-07.
  */
 public class PayrollCoreClientService {
+    private static final Logger logger =
+            Logger.getLogger(PayrollCoreClientService.class.getName());
     /**
      * Server host
      */
@@ -68,8 +71,8 @@ public class PayrollCoreClientService {
 
             @Override
             public void onError(Throwable t) {
-                //TODO: add logger and handler
-                t.printStackTrace();
+                //TODO: add handler
+                logger.severe(t.getMessage());
             }
 
             @Override

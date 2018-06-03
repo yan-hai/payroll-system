@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Phaser;
+import java.util.logging.Logger;
 
 /**
  * Need to be Thread-Safe
@@ -30,6 +31,7 @@ import java.util.concurrent.Phaser;
 @Data
 @RequiredArgsConstructor
 public class Task implements Builder<Task> {
+    private static final Logger logger = Logger.getLogger(Task.class.getName());
     /**
      * Task id
      */
@@ -130,7 +132,7 @@ public class Task implements Builder<Task> {
             }
         } catch (Exception e) {
             //TODO: add logger and handler
-            e.printStackTrace();
+            logger.severe(e.getMessage());
             countDown();
         }
 
