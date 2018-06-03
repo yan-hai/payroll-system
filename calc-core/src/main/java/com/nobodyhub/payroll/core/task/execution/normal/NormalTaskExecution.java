@@ -22,7 +22,7 @@ public class NormalTaskExecution extends TaskExecution {
     @Override
     public void run() {
         callback.onStart(normalExecutionContext);
-        for (NormalFormula formula : normalFormulaFactory.getFormulas()) {
+        for (NormalFormula formula : normalFormulaFactory.getPrioritizedFormulas()) {
             try {
                 normalExecutionContext.add(formula.evaluate(normalExecutionContext));
             } catch (PayrollCoreException e) {

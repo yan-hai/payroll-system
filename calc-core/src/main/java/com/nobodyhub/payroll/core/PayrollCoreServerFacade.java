@@ -85,7 +85,6 @@ public abstract class PayrollCoreServerFacade {
     public NormalFormulaFactory normFormulaFactory() {
         if (normalFormulaFactory == null) {
             normalFormulaFactory = initNormalFormulaFactory();
-            normalFormulaFactory.prioritize();
         }
         return normalFormulaFactory;
     }
@@ -95,7 +94,6 @@ public abstract class PayrollCoreServerFacade {
     public RetroFormulaFactory retroFormulaFacotry() {
         if (retroFormulaFactory == null) {
             retroFormulaFactory = initRetroFormulaFactory();
-            retroFormulaFactory.prioritize();
         }
         return retroFormulaFactory;
     }

@@ -7,7 +7,6 @@ import com.nobodyhub.payroll.core.common.Factory;
 import com.nobodyhub.payroll.core.formula.common.Formula;
 import com.nobodyhub.payroll.core.formula.normal.NormalFormula;
 import com.nobodyhub.payroll.core.item.ItemBuilderFactory;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collections;
@@ -18,18 +17,7 @@ import java.util.Set;
 /**
  * @author Ryan
  */
-@Getter
 public abstract class FormulaFactory<T extends Formula> extends Factory<T> {
-    /**
-     * full formula list involved in this context
-     */
-    protected final List<T> formulas = Lists.newLinkedList();
-    /**
-     * Map from target item id to formula
-     * TODO: handle several formulas for the same item
-     * several formulas could be applied to the same items id in different period
-     */
-    protected final Map<String, List<T>> formulaMap = Maps.newHashMap();
     /**
      * Factory returns builder to generate item instance
      */
@@ -37,42 +25,56 @@ public abstract class FormulaFactory<T extends Formula> extends Factory<T> {
 
     protected FormulaFactory(ItemBuilderFactory itemBuilderFactory) {
         this.itemBuilderFactory = itemBuilderFactory;
-    }
-
-    public void addFormula(T formula) {
-        formulas.add(formula);
-        List<T> formulaList = formulaMap.get(formula.getTargetItemId());
-        if (formulaList == null) {
-            formulaList = Lists.newArrayList();
-        }
-        formulaList.add(formula);
-        formulaMap.put(formula.getTargetItemId(), formulaList);
+        initContents();
     }
 
     /**
-     * assign different priority to formula according to inter-dependencies on items
+     * get a list of formulas whose order is based on the interdependence of
+     * target items
+     *
+     * @return
      */
-    public void prioritize() {
+    @SuppressWarnings("unchecked")
+    public List<T> getPrioritizedFormulas() {
+        List<T> formulas = Lists.newArrayList();
+        //Map from target item id to formula
+        Map<String, List<T>> formulaMap = Maps.newHashMap();
+
+        for (T formula : contents.values()) {
+            formulas.add(formula);
+            List<T> formulaList = formulaMap.get(formula.getTargetItemId());
+            if (formulaList == null) {
+                formulaList = Lists.newArrayList();
+            }
+            formulaList.add(formula);
+            formulaMap.put(formula.getTargetItemId(), formulaList);
+        }
+        //assign different priority to formula
         Map<String, Node<T>> nodes = Maps.newHashMap();
         for (T curFormula : formulas) {
             Node<T> curNode = new Node<>(curFormula);
             nodes.put(curFormula.getId(), curNode);
             Set<String> requiredItems = curFormula.getRequiredItems();
+            // find if any formula for required items
             for (String itemId : requiredItems) {
-                List<T> precedeFormulas = formulaMap.get(itemId);
-                for (T preFormula : precedeFormulas) {
+                // those formulas are precede formulas
+                List<T> preFormulas = formulaMap.get(itemId);
+                for (T preFormula : preFormulas) {
+                    // add precede formula to preNodes
                     Node<T> preNode = nodes.get(preFormula.getId());
                     if (preNode == null) {
                         preNode = new Node<>(preFormula);
                         nodes.put(preFormula.getId(), preNode);
                     }
                     curNode.addPreNode(preNode);
+                    // set a higher priority for preNode
                     preNode.moveForward();
                 }
             }
         }
         //sort based on the priority
         Collections.sort(formulas);
+        return formulas;
     }
 
     /**

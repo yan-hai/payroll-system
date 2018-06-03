@@ -47,12 +47,12 @@ public class RetroTaskExecution extends TaskExecution {
                     normalExecutionContext.getItemBuilderFactory(),
                     normalExecutionContext.getProrationFactory());
             for (RetroExecutionContext retroContext : retroContexts) {
-                for (NormalFormula formula : normalFormulaFactory.getFormulas()) {
+                for (NormalFormula formula : normalFormulaFactory.getPrioritizedFormulas()) {
                     retroContext.add(formula.evaluate(retroContext));
                 }
             }
             //handle diff values
-            for (RetroFormula formula : retroFormulaFactory.getFormulas()) {
+            for (RetroFormula formula : retroFormulaFactory.getPrioritizedFormulas()) {
                 normalExecutionContext.add(
                         formula.evaluate(retroContexts, normalExecutionContext.getPeriod())
                 );
