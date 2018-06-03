@@ -11,7 +11,6 @@ import static com.nobodyhub.payroll.core.exception.PayrollCoreExceptionCode.FUNC
 
 /**
  * The aggregation function
- * //TODO: not every function can be apply to all data types
  *
  * @author yan_h
  * @since 2018/6/3
