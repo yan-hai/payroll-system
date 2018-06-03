@@ -43,6 +43,9 @@ public abstract class Formula<CT> implements Comparable<Formula>, Identifiable {
      * The priority which decide the order to evaluate the formula
      * <p>
      * A smaller number means A higher priority and evaluated earlier
+     * <b>Note:</b>
+     * if formulas have the same priority, the order is uncertain, although it
+     * would affect the execution result
      */
     protected int priority = 1000;
 
