@@ -52,8 +52,11 @@ public abstract class FormulaFactory<T extends Formula> extends Factory<T> {
         //assign different priority to formula
         Map<String, Node<T>> nodes = Maps.newHashMap();
         for (T curFormula : formulas) {
-            Node<T> curNode = new Node<>(curFormula);
-            nodes.put(curFormula.getId(), curNode);
+            Node<T> curNode = nodes.get(curFormula.getId());
+            if (curNode == null) {
+                curNode = new Node<>(curFormula);
+                nodes.put(curFormula.getId(), curNode);
+            }
             Set<String> requiredItems = curFormula.getRequiredItems();
             // find if any formula for required items
             for (String itemId : requiredItems) {
@@ -68,10 +71,13 @@ public abstract class FormulaFactory<T extends Formula> extends Factory<T> {
                             nodes.put(preFormula.getId(), preNode);
                         }
                         curNode.addPreNode(preNode);
-                        // set a higher priority for preNode
-                        preNode.moveForward();
                     }
                 }
+            }
+        }
+        for (Node<T> node : nodes.values()) {
+            for (Node<T> preNode : node.preNodes) {
+                preNode.moveForward();
             }
         }
         //sort based on the priority
@@ -79,13 +85,14 @@ public abstract class FormulaFactory<T extends Formula> extends Factory<T> {
         return formulas;
     }
 
+
     /**
      * Hash and Equals based on {@link NormalFormula#id}
      */
     @RequiredArgsConstructor
     private static class Node<T extends Formula> {
         final T formula;
-        Set<Node> preNodes = Sets.newHashSet();
+        Set<Node<T>> preNodes = Sets.newHashSet();
 
         public void moveForward() {
             formula.setPriority(formula.getPriority() - 1);
@@ -94,7 +101,7 @@ public abstract class FormulaFactory<T extends Formula> extends Factory<T> {
             }
         }
 
-        public void addPreNode(Node preNode) {
+        public void addPreNode(Node<T> preNode) {
             preNodes.add(preNode);
         }
 
