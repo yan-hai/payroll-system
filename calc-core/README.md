@@ -15,7 +15,7 @@ the scalability to the whole syste.
 
 Client and server communicate using the stream interface provided by gRPC w/ ProtoBuffer.
 
-For more details, please refer the [calc-core.proto](/src/main/proto/calc-core.proto)
+For more details, please refer the [calc-core.proto](src/main/proto/calc-core.proto)
 
 ## Task
 Task means a type of a job. A server is able to execute different tasks based on the 
@@ -91,8 +91,8 @@ The retroactive formula are evaluated before the normal execution based on the g
 and the difference values will be used in the later execution.
 
 ## TODO
-1. convert Runnable to Callable
-2. add load balance between client and server
+* [ ] convert Runnable to Callable
+* [ ] add load balance between client and server
 
 
 ## What Core Can Not Do

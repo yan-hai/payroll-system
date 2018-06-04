@@ -4,14 +4,14 @@ A **extensible** and **scalable** payroll system based on items and related rule
 
 ## Overview
 
-* [X] [Calc Core](/calc-core/README.md)
+* [X] [Calc Core](/calc-core/README.md), 
     The core functions and components related to the calculation.
     ![Overview](calc-core/doc/pics/overview.png)
-* [X] Component Storage
+* [ ] Component Storage, 
     The accessor of components from persistent storage.
-* [ ] Service Controller
+* [ ] Service Controller, 
     A centerlized controller to manage all servers and tasks running on it.
-* [ ] UI
+* [ ] UI, 
     How user interact with this system.
 
 ## Build
