@@ -4,7 +4,7 @@ A **extensible** and **scalable** payroll system based on items and related rule
 
 ## Overview
 
-* [X] Calc Core
+* [X] [Calc Core](/calc-core/README.md)
     The core functions and components related to the calculation.
     ![Overview](calc-core/doc/pics/overview.png)
 * [X] Component Storage
